@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">  
+      <parent>
+      <groupId>org.jboss</groupId>
+      <artifactId>jboss-parent</artifactId>
+      <version>7</version>
+    </parent>  
+   <!-- parent>
+		<groupId>org.jboss.teiid</groupId>
+		<artifactId>teiid-parent</artifactId>
+    	<version>8.2.0.Beta2-SNAPSHOT</version>
+   </parent--> 
+   <modelVersion>4.0.0</modelVersion>
+   <groupId>org.jboss.teiid.quickstart</groupId>
+   <artifactId>teiid-quickstart-parent</artifactId>
+   <packaging>pom</packaging>
+   <version>0.0.1-SNAPSHOT</version>
+   <name>Teiid Quickstart Parent</name>
+   <description>Quickstarts for the Teiid project</description>
+   
+   <url>http://jboss.org/teiid</url>
+   <licenses>
+      <license>
+         <name>GNU Lesser General Public License</name>
+         <url>http://www.gnu.org/copyleft/lesser.html</url>
+         <distribution>repo</distribution>
+         <comments>A business-friendly OSS license</comments>
+      </license>
+   </licenses>
+       
+   <modules>
+      <module>infinispan-local-cache</module>
+   </modules>
+    
+    <properties>
+        <!-- Explicitly declaring the source encoding eliminates the following 
+         message: -->
+        <!-- [WARNING] Using platform encoding (UTF-8 actually) to copy filtered 
+         resources, i.e. build is platform dependent! -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        
+        <version.teiid>8.2.0.Beta1-SNAPSHOT</version.teiid>
+        <version.jboss.as>7.1.1.Final</version.jboss.as>
+        <version.jboss.javaee.web>2.0.0.Final</version.jboss.javaee.web>
+        <version.infinispan>5.1.4.FINAL</version.infinispan>
+        <version.hibernate.search>4.1.1.Final</version.hibernate.search>
+        <version.javax.annotation>1.0.1.Final</version.javax.annotation>
+        <version.javax.spec>1.0.2.Final</version.javax.spec>
+        <version.javax.enterprise>1.1-20120918</version.javax.enterprise>
+        <version.jboss.logging>3.1.2.GA</version.jboss.logging>
+    </properties>
+    
+    <dependencyManagement>
+        <dependencies>
+            <!-- Define the version of JBoss' Java EE 6 APIs we want to use -->
+            <!-- JBoss distributes a complete set of Java EE 6 APIs including 
+             a Bill of Materials (BOM). A BOM specifies the versions of a "stack" (or 
+             a collection) of artifacts. We use this here so that we always get the correct 
+             versions of artifacts. Here we use the jboss-javaee-web-6.0 stack (you can 
+             read this as the JBoss stack of the Java EE 6 Web Profile APIs), and we use 
+             version 2.0.0.Final which is the latest release of the stack. You can actually 
+             use this stack with any version of JBoss AS that implements Java EE 6, not 
+             just JBoss AS 7! -->
+        <dependency>
+            <groupId>org.jboss.spec</groupId>
+            <artifactId>jboss-javaee-web-6.0</artifactId>
+            <version>${version.jboss.javaee.web}</version>
+            <type>pom</type>
+            <scope>import</scope>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.jboss.teiid</groupId>
+            <artifactId>teiid-parent</artifactId>
+            <version>${version.teiid}</version>
+            <type>pom</type>
+            <scope>import</scope>
+        </dependency>
+       
+        <dependency>
+            <groupId>org.jboss.teiid</groupId>
+            <artifactId>teiid-api</artifactId>
+            <version>${version.teiid}</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.jboss.teiid.connectors</groupId>
+            <artifactId>translator-object</artifactId>
+            <version>${version.teiid}</version>
+        </dependency> 
+        
+        <dependency>
+            <groupId>org.jboss.teiid.connectors</groupId>
+            <artifactId>connector-infinispan</artifactId>
+            <version>${version.teiid}</version>
+            <classifier>lib</classifier>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.jboss.teiid.connectors</groupId>
+            <artifactId>connector-infinispan</artifactId>
+            <version>${version.teiid}</version>
+            <type>rar</type>
+        </dependency>
+        
+        <!-- Infinispan dependencies -->
+        <dependency>
+            <groupId>org.infinispan</groupId>
+            <artifactId>infinispan-core</artifactId>
+            <version>${version.infinispan}</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.infinispan</groupId>
+            <artifactId>infinispan-cdi</artifactId>
+            <version>${version.infinispan}</version>
+        </dependency>
+        
+	 	 <dependency>
+	 		 <groupId>org.infinispan</groupId>
+	  		<artifactId>infinispan-query</artifactId>
+	 		<version>${version.infinispan}</version>
+	 	 </dependency>          
+        
+        <!-- Import the Common Annotations API (JSR-250), we use provided scope 
+         as the API is included in JBoss AS 7 -->
+        <dependency>
+            <groupId>org.jboss.spec.javax.annotation</groupId>
+            <artifactId>jboss-annotations-api_1.1_spec</artifactId>
+            <version>${version.javax.annotation}</version>
+        </dependency>
+        
+        <!-- Import the Servlet API, we use provided scope as the API is included 
+         in JBoss AS 7 -->
+        <dependency>
+            <groupId>org.jboss.spec.javax.servlet</groupId>
+            <artifactId>jboss-servlet-api_3.0_spec</artifactId>
+            <version>${version.javax.spec}</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.jboss.spec.javax.ejb</groupId>
+            <artifactId>jboss-ejb-api_3.1_spec</artifactId>
+            <version>${version.javax.spec}</version>
+        </dependency>  
+        
+        <dependency>
+			  <groupId>javax.resource</groupId>
+			  <artifactId>connector-api</artifactId>
+			  <version>1.5</version>
+		</dependency>      
+   
+        <dependency>
+            <groupId>org.jboss.logging</groupId>
+            <artifactId>jboss-logging</artifactId>
+            <version>${version.jboss.logging}</version>      
+        </dependency>     
+        
+		<dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-search</artifactId>
+            <version>${version.hibernate.search}</version>
+		</dependency>        
+    </dependencies>
+
+   </dependencyManagement>
+   
+</project>

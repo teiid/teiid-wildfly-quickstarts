@@ -1,0 +1,496 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<parent>
+		<artifactId>teiid-quickstart-parent</artifactId>
+		<groupId>org.jboss.teiid.quickstart</groupId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>infinispan-local-cache</artifactId>
+	<packaging>war</packaging>
+
+	<name>Accessing Infinispan Local Cache Quickstart</name>
+	<description>This quickstart demonstrates how access a local Infinispan cache thru Teiid</description>
+
+
+	<dependencies>
+
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-search</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jboss.teiid</groupId>
+			<artifactId>teiid-common-core</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jboss.teiid</groupId>
+			<artifactId>teiid-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jboss.teiid.connectors</groupId>
+			<artifactId>connector-infinispan</artifactId>
+			<scope>provided</scope>
+			<classifier>lib</classifier>
+		</dependency>
+
+
+		<dependency>
+			<groupId>org.jboss.teiid.connectors</groupId>
+			<artifactId>translator-object</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.infinispan</groupId>
+			<artifactId>infinispan-core</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- Infinispan dependency -->
+		<dependency>
+			<groupId>org.infinispan</groupId>
+			<artifactId>infinispan-cdi</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.infinispan</groupId>
+			<artifactId>infinispan-query</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.resource</groupId>
+			<artifactId>connector-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- Import the Common Annotations API (JSR-250), we use provided scope 
+			as the API is included in JBoss AS 7 -->
+		<dependency>
+			<groupId>org.jboss.spec.javax.annotation</groupId>
+			<artifactId>jboss-annotations-api_1.1_spec</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- Import the Servlet API, we use provided scope as the API is included 
+			in JBoss AS 7 -->
+		<dependency>
+			<groupId>org.jboss.spec.javax.servlet</groupId>
+			<artifactId>jboss-servlet-api_3.0_spec</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jboss.spec.javax.ejb</groupId>
+			<artifactId>jboss-ejb-api_3.1_spec</artifactId>
+			<scope>provided</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+
+		<!-- Set the name of the war, used as the context root when the app is 
+			deployed -->
+		<finalName>infinispan-quickstart</finalName>
+		<plugins>
+			<!-- add the vdb to the repo -->
+
+			<!-- plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-install-plugin</artifactId> 
+				<executions> <execution> <id>com.ibm.db2:db2jcc</id> <phase>verify</phase> 
+				<goals> <goal>install-file</goal> </goals> <configuration> <groupId>org.jboss.teiid.quickstart</groupId> 
+				<artifactId>infinispan-vdb</artifactId> <version>1.0.0</version> <packaging>xml</packaging> 
+				<file>${basedir}/src/vdb/infinispancache-vdb.xml</file> <createChecksum>false</createChecksum> 
+				<generatePom>false</generatePom> </configuration> </execution> </executions> 
+				</plugin -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>${version.jar.plugin}</version>
+				<configuration>
+					<finalName>infinispan-quickstart-pojos</finalName>
+					<includes>
+						<include>**/pojo/*</include>
+					</includes>
+				</configuration>
+				<executions>
+					<execution>
+						<id>make-a-jar</id>
+						<phase>compile</phase>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.1.1</version>
+				<configuration>
+					<!-- Use this to include a selection of jars that will be included in 
+						the WAR -->
+					<packagingExcludes>**/pojo/*.class</packagingExcludes>
+					<!-- archive> <manifest> <addClasspath>true</addClasspath> <classpathPrefix>lib/</classpathPrefix> 
+						</manifest> </archive -->
+
+					<!-- Java EE 6 doesn't require web.xml, Maven needs to catch up! -->
+					<failOnMissingWebXml>false</failOnMissingWebXml>
+					<archive>
+						<manifestEntries>
+							<Dependencies>org.infinispan export,
+								org.jboss.teiid.translator.object export,
+								org.jboss.teiid.translator.object.jars export</Dependencies>
+						</manifestEntries>
+					</archive>
+				</configuration>
+			</plugin>
+
+			<!-- Compiler plugin enforces Java 1.6 compatibility and activates annotation 
+				processors -->
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3.2</version>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+				</configuration>
+			</plugin>
+
+
+
+		</plugins>
+
+
+	</build>
+
+	<profiles>
+		<profile>
+			<id>jboss-public-repository</id>
+			<activation>
+				<property>
+					<name>jboss-public-repository</name>
+					<value>!false</value>
+				</property>
+			</activation>
+			<repositories>
+				<repository>
+					<id>jboss-public-repository-group</id>
+					<name>JBoss Public Maven Repository Group</name>
+					<url>http://repository.jboss.org/nexus/content/groups/public</url>
+					<releases>
+						<enabled>true</enabled>
+						<updatePolicy>never</updatePolicy>
+					</releases>
+					<snapshots>
+						<enabled>true</enabled>
+						<updatePolicy>never</updatePolicy>
+					</snapshots>
+				</repository>
+			</repositories>
+			<pluginRepositories>
+				<pluginRepository>
+					<id>jboss-public-repository-group</id>
+					<name>JBoss Public Maven Repository Group</name>
+					<url>http://repository.jboss.org/nexus/content/groups/public</url>
+					<releases>
+						<enabled>true</enabled>
+						<updatePolicy>never</updatePolicy>
+					</releases>
+					<snapshots>
+						<enabled>false</enabled>
+						<updatePolicy>never</updatePolicy>
+					</snapshots>
+				</pluginRepository>
+			</pluginRepositories>
+		</profile>
+
+		<!-- This optional profile fixes the compilation error encountered with 
+			'javax.annotation' and Java 6. Java 6 embeds an older version of 'javax.annotation' 
+			that the one defined by Java EE 6 (e.g. @Resource has no lookup attribute) -->
+		<profile>
+			<id>jdk6</id>
+			<activation>
+				<jdk>1.6</jdk>
+			</activation>
+			<build>
+				<plugins>
+					<!-- Here we copy the lib which has to be included in the compilation -->
+					<!-- This lib contains the new 'javax.annotation' package version -->
+					<plugin>
+						<artifactId>maven-dependency-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>copy-endorsed-lib</id>
+								<phase>generate-sources</phase>
+								<goals>
+									<goal>copy</goal>
+								</goals>
+							</execution>
+						</executions>
+						<configuration>
+							<outputDirectory>${project.build.directory}/endorsed</outputDirectory>
+							<artifactItems>
+								<artifactItem>
+									<groupId>org.jboss.spec.javax.annotation</groupId>
+									<artifactId>jboss-annotations-api_1.1_spec</artifactId>
+								</artifactItem>
+							</artifactItems>
+						</configuration>
+					</plugin>
+
+					<!-- Here we specify the directory containing the endorsed lib -->
+					<plugin>
+						<artifactId>maven-compiler-plugin</artifactId>
+						<version>2.3.2</version>
+						<configuration>
+							<compilerArgument>-Djava.endorsed.dirs=${project.build.directory}/endorsed</compilerArgument>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>install-module</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<properties>
+				<maven.test.skip>true</maven.test.skip>
+			</properties>
+
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-antrun-plugin</artifactId>
+						<version>1.7</version>
+						<dependencies>
+							<dependency>
+								<groupId>org.apache.ant</groupId>
+								<artifactId>ant</artifactId>
+								<version>1.7.0</version>
+							</dependency>
+						</dependencies>
+						<executions>
+							<execution>
+								<id>install-module</id>
+								<phase>package</phase>
+								<configuration>
+									<target>
+										<echo message="Installing module to ${jbossas-server-dir}" />
+										<path id="jboss.as.root">
+											<pathelement location="${jbossas-server-dir}" />
+										</path>
+
+										<fail message="=====  ${jbossas-server-dir} is not valid ======">
+											<condition>
+												<not>
+													<resourcecount refid="jboss.as.root" when="gt"
+														count="0" />
+												</not>
+											</condition>
+
+										</fail>
+
+										<copy
+											todir="${jbossas-server-dir}/modules/org/jboss/teiid/translator/object">
+											<fileset dir="${basedir}/src/module/" />
+										</copy>
+										<copy file="${basedir}/target/infinispan-quickstart-pojos.jar"
+											todir="${jbossas-server-dir}/modules/org/jboss/teiid/translator/object/jars/main" />
+
+										<echo
+											message="Installed module to ${jbossas-server-dir}/modules/org/jboss/teiid/translator/object" />
+									</target>
+								</configuration>
+								<goals>
+									<goal>run</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>setup-cache</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.jboss.as.plugins</groupId>
+						<artifactId>jboss-as-maven-plugin</artifactId>
+						<version>${version.jboss.as}</version>
+						<configuration>
+							<address>subsystem=infinispan,cache-container=teiid-infinispan-quickstart</address>
+							<resources>
+								<resource>
+									<properties>
+										<start>EAGER</start>
+										<default-cache>local-quickstart-cache</default-cache>
+									</properties>
+								</resource>
+								<resource>
+									<address>local-cache=local-quickstart-cache</address>
+									<properties>
+										<start>EAGER</start>
+									</properties>
+								</resource>
+							</resources>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>setup-datasource</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.jboss.as.plugins</groupId>
+						<artifactId>jboss-as-maven-plugin</artifactId>
+						<version>${version.jboss.as}</version>
+
+						<configuration>
+							<address>subsystem=resource-adapters,resource-adapter=infinispanCacheDS</address>
+							<resources>
+								<resource>
+									<properties>
+										<archive>teiid-connector-infinispan.rar</archive>
+										<transaction-support>NoTransaction</transaction-support>
+									</properties>
+								</resource>
+								<resource>
+									<address>connection-definitions=infinispanCacheDS</address>
+									<properties>
+										<jndi-name>java:jboss/eis/teiid-infinispan</jndi-name>
+										<class-name>org.teiid.resource.adapter.infinispan.InfinispanManagedConnectionFactory</class-name>
+										<enabled>true</enabled>
+										<use-java-context>true</use-java-context>
+									</properties>
+								</resource>
+								<resource>
+									<address>connection-definitions=infinispanCacheDS,config-properties=CacheTypeMap</address>
+									<properties>
+										<value>local-quickstart-cache:org.jboss.teiid.quickstart.infinispancache.pojo.Order</value>
+									</properties>
+								</resource>								
+								<resource>
+									<address>connection-definitions=infinispanCacheDS,config-properties=module</address>
+									<properties>
+										<value>org.jboss.teiid.translator.object.jars</value>
+									</properties>
+								</resource>
+								<resource>
+									<address>connection-definitions=infinispanCacheDS,config-properties=CacheJndiName</address>
+									<properties>
+										<value>java:jboss/infinispan/container/teiid-infinispan-quickstart</value>
+									</properties>
+								</resource>
+							</resources>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>deploy-artifacts</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<properties>
+				<maven.test.skip>true</maven.test.skip>
+			</properties>
+
+			<build>
+				<plugins>
+					<!-- plugin> <groupId>org.jboss.as.plugins</groupId> <artifactId>jboss-as-maven-plugin</artifactId> 
+						<version>${version.jboss.as}</version> <executions> <execution> <id>deploy-vdb-xml</id> 
+						<phase>install</phase> <goals> <goal>deploy-artifact</goal> </goals> <configuration> 
+						<groupId>org.jboss.teiid.quickstart</groupId> <artifactId>infinispan-vdb</artifactId> 
+						<name>infinispancache-vdb.xml</name> </configuration> </execution> </executions> 
+						</plugin -->
+
+
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-antrun-plugin</artifactId>
+						<version>1.7</version>
+						<dependencies>
+							<dependency>
+								<groupId>org.apache.ant</groupId>
+								<artifactId>ant</artifactId>
+								<version>1.7.0</version>
+							</dependency>
+						</dependencies>
+						<executions>
+							<execution>
+								<id>deploy-vdb-xml</id>
+								<phase>package</phase>
+								<configuration>
+									<target>
+										<echo message="Installing VDB to ${jbossas-server-dir}" />
+										<path id="jboss.as.root">
+											<pathelement location="${jbossas-server-dir}" />
+										</path>
+
+										<fail message="=====  ${jbossas-server-dir} is not valid ======">
+											<condition>
+												<not>
+													<resourcecount refid="jboss.as.root" when="gt"
+														count="0" />
+												</not>
+											</condition>
+
+										</fail>
+
+										<copy todir="${jbossas-server-dir}/standalone/deployments">
+											<fileset dir="${basedir}/src/vdb" />
+										</copy>
+										<echo
+											message="Installed vdb to ${jbossas-server-dir}/standalone/deployments" />
+									</target>
+								</configuration>
+								<goals>
+									<goal>run</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+
+					<!-- JBoss AS plugin to deploy war -->
+					<plugin>
+						<groupId>org.jboss.as.plugins</groupId>
+						<artifactId>jboss-as-maven-plugin</artifactId>
+						<version>${version.jboss.as}</version>
+						<executions>
+							<execution>
+								<id>deploy-war</id>
+								<phase>package</phase>
+								<goals>
+									<goal>deploy</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+
+</project>

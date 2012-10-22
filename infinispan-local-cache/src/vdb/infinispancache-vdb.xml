@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<vdb name="orders" version="1">
+
+    <description>Shows how to call an Infinispan local cache</description>
+    
+    <property name="UseConnectorMetadata" value="cached" />
+    <model name="Orders" visible="false">
+        <source name="objsource" translator-name="infinispan1" connection-jndi-name="java:jboss/eis/teiid-infinispan" />
+        <metadata type="DDL"><![CDATA[
+            CREATE FOREIGN TABLE Orders (OrderObject Object OPTIONS (NAMEINSOURCE 'this', SEARCHABLE 'Unsearchable')) OPTIONS (NAMEINSOURCE 'local-quickstart-cache') ;
+         ]]> </metadata>
+    </model>
+    <model name="OrdersView" type="VIRTUAL">
+        <metadata type="DDL"><![CDATA[
+            CREATE VIEW OrdersView (
+            OrderNum integer PRIMARY KEY,
+            OrderDate date,
+            OrderedBy   varchar(100)
+            )
+            AS
+            SELECT o.OrderNum, o.OrderDate, o.OrderedBy  FROM Orders as T, OBJECTTABLE( 'x' PASSING T.OrderObject AS x COLUMNS OrderNum integer 'teiid_row.id',  OrderDate date 'teiid_row.orderDate', OrderedBy string 'teiid_row.person') as o;
+            
+        ]]> </metadata>
+    </model>
+    <translator name="infinispan1" type="infinispan-cache">
+        <!--property name="CacheJndiName" value="java:/eis/teiid-infinispan"/-->
+        <property name="SupportsLuceneSearching" value="false"/>
+        
+        <!--  optional properties for obtaining the RemoteCacheManager  -->
+        <!--
+         <property name="ConfigurationFileName" value="<dir>/infinispan-config.xml"/>
+         -->
+
+    </translator>
+</vdb>
