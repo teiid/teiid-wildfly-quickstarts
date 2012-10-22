@@ -6,24 +6,21 @@ This quickstart demonstrates how create a simple cache on *JBoss AS 7.1* and acc
 The example can be deployed using Maven from the command line or from Eclipse using
 JBoss Tools.
 
-For more information, including how to set up Maven or JBoss Tools in Eclipse,
-refer to the [Getting Started Guide](https://docs.jboss.org/author/display/ISPN/Getting+Started+Guide+-+JBoss+AS+7).
-
 ### Steps to setup and run the quickstart ###
-The following are the steps to setup and run the quickstart.  These can be done either manually or using maven. 
+The following are the steps to setup and run the quickstart.  These can be done either manually or using maven (see the appropriate section) 
 
 Assumptions:
 -  Teiid has been deployed to your jboss as server.
 
 
-1).  shutdown jbossas server
-2).  run:  mvn clean install
-3).  deploy the pojo's as a module to the jboss as server, before the server is started
-4).  setup infinispan cache
-5).  setup infinispan as a datasource
-6).  deploy quickstart war - used it initialize cache and view contents
-7).  deploy quickstart vdb
-8).  run query test
+-  shutdown jbossas server
+-  run:  mvn clean install
+-  deploy the pojo's as a module to the jboss as server, before the server is started
+-  setup infinispan cache
+-  setup infinispan as a datasource
+-  deploy quickstart war - used it initialize cache and view contents
+-  deploy quickstart vdb
+-  run query test
 	 
 #########################################
 ### Setup manually
@@ -84,8 +81,19 @@ Assumptions:
 
 	* copy infinispancache-vdb.xml and infinispancache-vdb.xml.dodeploy to {jbossas.server.dir}/standalone/deployments	
 
-8) Open a browser to:  http://localhost:8080/infinispan-quickstart/home.jsf
+8) security:
+
+-  to add the administrative user and password run: bin/adduser.sh   
+-  setup Teiid user:  edit standalone/configuration/teiid-security-users.properties and add your user and password
+
+9) Open a browser to:  http://localhost:8080/infinispan-quickstart/home.jsf
 This should present a list of 10 Orders that were loaded into the cache.
+
+10) Use a sql tool, like SQuirreL, to connect and issue following example query:
+
+-  connect:  jdbc:teiid:orders@mm://localhost:31000
+-  query: select * from OrdersView
+
 
 
 #########################################
@@ -100,22 +108,33 @@ This should present a list of 10 Orders that were loaded into the cache.
 
 	*  mvn -Pinstall-module install -Djbossas-server-dir={jbossas.server.dir}
 
+
 4) Start the server
 
 	*  run:  ./standalone.sh -c standalone-teiid.xml
+	
+5) security:
 
-5) setup the Infinispan Cache
+-  to add the administrative user and password run: bin/adduser.sh   
+-  setup Teiid user:  edit standalone/configuration/teiid-security-users.properties and add your user and password
+	
+
+6) setup the Infinispan Cache
 
     * `mvn -Psetup-cache jboss-as:add-resource` 
     
-6) setup Infinispan as a datasource
+7) setup Infinispan as a datasource
     
     * `mvn -Psetup-datasource jboss-as:add-resource`  
     
-7) deploy the sample application infinispan-quickstart.war and the infinispan-vdb.xml artifacts
+8) deploy the sample application infinispan-quickstart.war and the infinispan-vdb.xml artifacts
 
 	* `mvn install -Pdeploy-artifacts -Djbossas-server-dir={jbossas.server.dir} 
 	
-8) Open a browser to:  http://localhost:8080/infinispan-quickstart/home.jsf
-This should present a list of 10 Orders that were loaded into the cache.
+9) Open a browser to:  http://localhost:8080/infinispan-quickstart/home.jsf
+   This should present a list of 10 Orders that were loaded into the cache.
 
+10) Use a sql tool, like SQuirreL, to connect and issue following example query:
+
+-  connect:  jdbc:teiid:orders@mm://localhost:31000
+-  query: select * from OrdersView
