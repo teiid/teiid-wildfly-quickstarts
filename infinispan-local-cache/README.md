@@ -31,8 +31,8 @@ Assumptions:
 2) run:  mvn clean install
 
 3) setup the module that contains the infinispan-quickstart-pojos.jar.
-	-	under  src/module,  copy 'jars' directory to <jbossas-dir>/modules/org/jboss/teiid/translator/object
-	-   under  target, copy  infinispan-quickstart-pojos.jar to <jbossas-dir>/modules/org/jboss/teiid/translator/object/jars/main
+	-	under  src/module,  copy 'com' directory to <jbossas-dir>/modules/
+	-   under  target, copy  infinispan-quickstart-pojos.jar to <jbossas-dir>/modules/com/client/quickstart/pojos/main
 
 4) setup Infinispan cache
 
@@ -53,15 +53,15 @@ Assumptions:
                     </archive>
                     <transaction-support>NoTransaction</transaction-support>
                     <connection-definitions>
-                        <connection-definition class-name="org.teiid.resource.adapter.infinispan.InfinispanManagedConnectionFactory" jndi-name="java:jboss/eis/teiid-infinispan" enabled="true" use-java-context="true" pool-name="infinispanCacheDS">
+                        <connection-definition class-name="org.teiid.resource.adapter.infinispan.InfinispanManagedConnectionFactory" jndi-name="java:/infinispanTest" enabled="true" use-java-context="true" pool-name="java:/infinispanTest">
                             <config-property name="CacheTypeMap">
-                                local-quickstart-cache:org.jboss.teiid.quickstart.infinispancache.pojo.Order
+                                local-quickstart-cache:com.client.quickstart.pojo.Order
                             </config-property>
                             <config-property name="CacheJndiName">
                                 java:jboss/infinispan/container/teiid-infinispan-quickstart
                             </config-property>
                             <config-property name="module">
-                                org.jboss.teiid.translator.object.jars
+                                com.client.quickstart.pojos
                             </config-property>
                         </connection-definition>
                     </connection-definitions>
@@ -84,7 +84,9 @@ Assumptions:
 8) security:
 
 -  to add the administrative user and password run: bin/adduser.sh   
--  setup Teiid user:  edit standalone/configuration/teiid-security-users.properties and add your user and password
+-  [optional] setup Teiid user:  edit standalone/configuration/teiid-security-users.properties and add your user and password
+
+	the default is username=user   password=user
 
 9) Open a browser to:  http://localhost:8080/infinispan-quickstart/home.jsf
 This should present a list of 10 Orders that were loaded into the cache.
@@ -115,8 +117,10 @@ This should present a list of 10 Orders that were loaded into the cache.
 	
 5) security:
 
--  to add the administrative user and password run: bin/adduser.sh   
--  setup Teiid user:  edit standalone/configuration/teiid-security-users.properties and add your user and password
+-  to add the administrative user and password run: bin/add-user.sh   
+-  [optional] setup Teiid user:  edit standalone/configuration/teiid-security-users.properties and add your user and password
+
+	the default is username=user   password=user
 	
 
 6) setup the Infinispan Cache
@@ -131,10 +135,13 @@ This should present a list of 10 Orders that were loaded into the cache.
 
 	* `mvn install -Pdeploy-artifacts -Djbossas-server-dir={jbossas.server.dir} 
 	
-9) Open a browser to:  http://localhost:8080/infinispan-quickstart/home.jsf
+9) RESTART the jboss as server.  Without using CLI to configure the resources, the resource isn't activated.  
+		Therefore, jboss-as requires a restart.
+	
+10) Open a browser to:  http://localhost:8080/infinispan-quickstart/home.jsf
    This should present a list of 10 Orders that were loaded into the cache.
 
-10) Use a sql tool, like SQuirreL, to connect and issue following example query:
+11) Use a sql tool, like SQuirreL, to connect and issue following example query:
 
 -  connect:  jdbc:teiid:orders@mm://localhost:31000
 -  query: select * from OrdersView

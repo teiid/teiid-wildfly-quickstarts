@@ -19,7 +19,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
  * 02110-1301 USA.
  */
-package org.jboss.teiid.quickstart.infinispancache.pojo;
+package com.client.quickstart.pojo;
 
 import org.hibernate.search.bridge.StringBridge;
 

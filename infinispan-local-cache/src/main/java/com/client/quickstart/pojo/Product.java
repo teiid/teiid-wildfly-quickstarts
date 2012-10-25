@@ -19,11 +19,12 @@
  * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
-package org.jboss.teiid.quickstart.infinispancache.pojo;
+package com.client.quickstart.pojo;
 
-
+import java.math.BigDecimal;
 
 import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Index;
 import org.hibernate.search.annotations.Indexed;
 import org.hibernate.search.annotations.ProvidedId;
 
@@ -32,31 +33,29 @@ import org.hibernate.search.annotations.ProvidedId;
  */
 
 @Indexed @ProvidedId
-public class LineItem implements java.io.Serializable {
+public class Product implements java.io.Serializable {
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -1921968291712892230L;
-	private @Field int id;
-	private Product product;
-	private @Field int quantity;
+	private static final long serialVersionUID = 1L;
+	private int id;
+	private  @Field(index=Index.YES) String name;
+    private BigDecimal price;
 
-
-	public LineItem() {
+	public Product() {
 	}
 
-	public LineItem(int id) {
+	public Product(int id) {
 		this.id = id;
 	}
-
-	public LineItem(int id, Product product, int quantity) {
+    
+	public Product(int id, String name, double price) {
 		this.id = id;
-		this.product = product;
-        this.quantity = quantity;
-	}
+		this.name = name;
+		this.price = new BigDecimal(price);
+	}    
 
-	@Field
 	public int getId() {
 		return this.id;
 	}
@@ -64,27 +63,24 @@ public class LineItem implements java.io.Serializable {
 	public void setId(int id) {
 		this.id = id;
 	}
+
+	public String getName() {
+		return this.name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public BigDecimal getPrice() {
+		return this.price;
+	}
+	
+	public void setPrice(BigDecimal price) {
+		this.price = price;
+	}	
     
-	@Field
-	public int getQuantity() {
-		return this.quantity;
-	}
-    
-	public void setQuantity(int cnt) {
-		this.quantity = cnt;
-	}    
-
-	@Field
-	public Product getProduct() {
-		return this.product;
-	}
-
-	public void setProduct(Product product) {
-		this.product = product;
-	}
-
 	public String toString() {
-		return "Product (id) " + getId() + " (product) " + getProduct() +   " (quantity) " + getQuantity();  //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		return "ProductInfo: (id) " + getId() + " (name) " + getName() + " (price) " + getPrice() ;  //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ 
 	}
-
 }

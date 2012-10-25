@@ -19,7 +19,7 @@
  * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
-package org.jboss.teiid.quickstart.infinispancache;
+package com.client.quickstart;
 
 import java.util.Iterator;
 import java.util.Set;
@@ -31,7 +31,8 @@ import javax.inject.Named;
 
 import org.infinispan.Cache;
 import org.jboss.logging.Logger;
-import org.jboss.teiid.quickstart.infinispancache.pojo.Order;
+
+import com.client.quickstart.pojo.Order;
 /**
  * 
  */

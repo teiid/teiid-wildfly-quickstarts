@@ -20,7 +20,7 @@
  * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
-package org.jboss.teiid.quickstart.infinispancache;
+package com.client.quickstart;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -40,12 +40,13 @@ import javax.resource.ResourceException;
 import org.infinispan.Cache;
 import org.infinispan.manager.CacheContainer;
 import org.infinispan.manager.EmbeddedCacheManager;
-import org.jboss.teiid.quickstart.infinispancache.pojo.LineItem;
-import org.jboss.teiid.quickstart.infinispancache.pojo.Order;
-import org.jboss.teiid.quickstart.infinispancache.pojo.Product;
 import org.teiid.resource.spi.WrappedConnection;
 import org.teiid.translator.TranslatorException;
 import org.teiid.translator.object.ObjectConnection;
+
+import com.client.quickstart.pojo.LineItem;
+import com.client.quickstart.pojo.Order;
+import com.client.quickstart.pojo.Product;
 
 /**
  * Note:  the @Resource(lookup..)  will look like its invalid in Eclipse, but will build using maven.
