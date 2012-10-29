@@ -84,6 +84,12 @@
         </dependency>
         
         <dependency>
+  			<groupId>org.jboss.teiid</groupId>
+  			<artifactId>teiid-client</artifactId>
+  			<version>${version.teiid}</version>
+		</dependency>
+        
+        <dependency>
             <groupId>org.jboss.teiid.connectors</groupId>
             <artifactId>translator-object</artifactId>
             <version>${version.teiid}</version>
