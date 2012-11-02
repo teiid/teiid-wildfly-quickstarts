@@ -100,11 +100,12 @@ Copy the following files to the "<jboss.home>/standalone/deployments" directory
 
 ==== Using the simpleclient example ====
 
-1) Change your working directory to teiid-examples/simpleclient
+1) Change your working directory to "<quickstart.install.dir>/simpleclient"
 
-2) Use the simpleclient example run script, using the following format
+2) Use the simpleclient example to run the following queries:
 
-$./run.sh localhost 31000 dynamicportfolio "example query" 
+Example:   mvn install -Dvdb="portfolio" -Dsql="example query"
+
 
 
 example queries:
