@@ -1,26 +1,19 @@
-Infinispan JBoss AS 7 Quickstart
+Infinispan Local-Cache Quickstart
 ================================
 
-This quickstart demonstrates how create a simple cache on *JBoss AS 7.1* and access it from Teiid.
+This quickstart demonstrates how Teiid can access a cache of Java Objects.
 
 The example can be deployed using Maven from the command line or from Eclipse using
 JBoss Tools.
 
 ### Steps to setup and run the quickstart ###
-The following are the steps to setup and run the quickstart.  These can be done either manually or using maven (see the appropriate section) 
+These can be done either manually (see Setup manually) or using maven (see Setup using the JBoss AS Maven plugin) 
 
 Assumptions:
 -  Teiid has been deployed to your jboss as server.
 
 
--  shutdown jbossas server
--  run:  mvn clean install
--  deploy the pojo's as a module to the jboss as server, before the server is started
--  setup infinispan cache
--  setup infinispan as a datasource
--  deploy quickstart war - used it initialize cache and view contents
--  deploy quickstart vdb
--  run query test
+mvn install -Dvdb="twitter" -Dsql="select * from tweet where query= 'jboss'"
 	 
 #########################################
 ### Setup manually

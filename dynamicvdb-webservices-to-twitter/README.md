@@ -1,4 +1,4 @@
-Dynamicvdb-webservices-to-twitter demonstrates using the WS Translter to call web services.
+Dynamicvdb-webservices-to-twitter demonstrates using the WS Translator to call web services.
 This example also shows how to define view tables in dynamic vdbs.
 
 See https://dev.twitter.com/docs/api for information on the Twitter's SOAP/REST services. 
@@ -69,11 +69,11 @@ Copy the following files to the "<jboss.home>/standalone/deployments" directory
 
 ==== Using the simpleclient example ====
 
-1) Change your working directory to teiid-examples/simpleclient
+1) Change your working directory to "<quickstart.install.dir>/simpleclient"
 
-2) Use the simpleclient example run script, run the following:
+2) Use the simpleclient example to run the following queries:
 
-$./run.sh localhost 31000 twitter  "select * from tweet where query= 'jboss'"
+Example:   mvn install -Dvdb="twitter" -Dsql="select * from tweet where query= 'jboss'"
 
 
 NOTE - depending on your OS/Shell the quoting/escaping required to run the example can be
