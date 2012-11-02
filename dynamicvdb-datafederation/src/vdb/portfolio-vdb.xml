@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<vdb name="DynamicPortfolio" version="1">
+<vdb name="Portfolio" version="1">
 
-    <description>A Dynamic VDB</description>
+    <description>The Portfolio Dynamic VDB</description>
     
     <!-- 
       Setting to use connector supplied metadata. Can be "true" or "cached".  
@@ -17,15 +17,14 @@
       The name of the model will be used as a top level schema name
       for all of the metadata imported from the connector.
     
-      NOTE: Multiple model, with different import settings, can be bound to 
+      NOTE: Multiple models, with different import settings, can be bound to 
       the same connector binding and will be treated as the same source at
       runtime. 
     --> 
     <model name="MarketData">
         <!-- 
             Each source represents a translator and data source. There are 
-            pre-defined translators, or you can create one. ConnectionFactories 
-            or DataSources in JBoss AS they are typically defined using "xxx-ds.xml" files. 
+            pre-defined translators, or you can create one.
         -->
         <source name="text-connector" translator-name="file" connection-jndi-name="java:/marketdata-file"/>
     </model>
