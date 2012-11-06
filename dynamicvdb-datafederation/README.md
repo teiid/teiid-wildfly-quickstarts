@@ -59,7 +59,7 @@ Copy the following files to the "<jboss.home>/standalone/deployments" directory
 
 2) copy the vdb and teiidfiles support files
 
-	*  mvn install -Pcopy-files -Djbossas-server-dir=={jbossas.home}
+	*  mvn install -Pcopy-files -Djbossas-server-dir={jbossas.home}
 	
 3) setup the datasource
 
