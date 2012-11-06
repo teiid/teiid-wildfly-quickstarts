@@ -26,7 +26,6 @@
 
 	<modules>
 		<module>infinispan-local-cache</module>
-		<module>simpleclient</module>
 	</modules>
 
 	<properties>
