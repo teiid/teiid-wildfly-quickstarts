@@ -21,8 +21,6 @@
  */
 package com.client.quickstart.pojo;
 
-
-
 import org.hibernate.search.annotations.Field;
 import org.hibernate.search.annotations.Indexed;
 import org.hibernate.search.annotations.ProvidedId;
@@ -31,17 +29,19 @@ import org.hibernate.search.annotations.ProvidedId;
  * 
  */
 
-@Indexed @ProvidedId
+@Indexed
+@ProvidedId
 public class LineItem implements java.io.Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -1921968291712892230L;
-	private @Field int id;
+	private @Field
+	int id;
 	private Product product;
-	private @Field int quantity;
-
+	private @Field
+	int quantity;
 
 	public LineItem() {
 	}
@@ -53,7 +53,7 @@ public class LineItem implements java.io.Serializable {
 	public LineItem(int id, Product product, int quantity) {
 		this.id = id;
 		this.product = product;
-        this.quantity = quantity;
+		this.quantity = quantity;
 	}
 
 	@Field
@@ -64,15 +64,15 @@ public class LineItem implements java.io.Serializable {
 	public void setId(int id) {
 		this.id = id;
 	}
-    
+
 	@Field
 	public int getQuantity() {
 		return this.quantity;
 	}
-    
+
 	public void setQuantity(int cnt) {
 		this.quantity = cnt;
-	}    
+	}
 
 	@Field
 	public Product getProduct() {
@@ -84,7 +84,7 @@ public class LineItem implements java.io.Serializable {
 	}
 
 	public String toString() {
-		return "Product (id) " + getId() + " (product) " + getProduct() +   " (quantity) " + getQuantity();  //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		return "Product (id) " + getId() + " (product) " + getProduct() + " (quantity) " + getQuantity(); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 	}
 
 }

@@ -32,7 +32,8 @@ import org.hibernate.search.annotations.ProvidedId;
  * 
  */
 
-@Indexed @ProvidedId
+@Indexed
+@ProvidedId
 public class Product implements java.io.Serializable {
 
 	/**
@@ -40,8 +41,9 @@ public class Product implements java.io.Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private int id;
-	private  @Field(index=Index.YES) String name;
-    private BigDecimal price;
+	private @Field(index = Index.YES)
+	String name;
+	private BigDecimal price;
 
 	public Product() {
 	}
@@ -49,12 +51,12 @@ public class Product implements java.io.Serializable {
 	public Product(int id) {
 		this.id = id;
 	}
-    
+
 	public Product(int id, String name, double price) {
 		this.id = id;
 		this.name = name;
 		this.price = new BigDecimal(price);
-	}    
+	}
 
 	public int getId() {
 		return this.id;
@@ -75,12 +77,12 @@ public class Product implements java.io.Serializable {
 	public BigDecimal getPrice() {
 		return this.price;
 	}
-	
+
 	public void setPrice(BigDecimal price) {
 		this.price = price;
-	}	
-    
+	}
+
 	public String toString() {
-		return "ProductInfo: (id) " + getId() + " (name) " + getName() + " (price) " + getPrice() ;  //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ 
+		return "ProductInfo: (id) " + getId() + " (name) " + getName() + " (price) " + getPrice(); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ 
 	}
 }

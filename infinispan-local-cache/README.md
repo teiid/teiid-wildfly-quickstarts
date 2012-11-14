@@ -12,8 +12,13 @@ These can be done either manually (see Setup manually) or using maven (see Setup
 Assumptions:
 -  Teiid has been deployed to your jboss as server.
 
+-------------------
+System requirements
+-------------------
 
-mvn install -Dvdb="twitter" -Dsql="select * from tweet where query= 'jboss'"
+If you have not done so, please review the System Requirements (../README.md)
+
+
 	 
 #########################################
 ### Setup manually
@@ -101,7 +106,7 @@ This should present a list of 10 Orders that were loaded into the cache.
 
 3) install the pojo.jar as a module
 
-	*  mvn -Pinstall-module install -Djbossas-server-dir={jbossas.server.dir}
+	*  `mvn install -Pinstall-module`
 
 
 4) Start the server
@@ -126,7 +131,7 @@ This should present a list of 10 Orders that were loaded into the cache.
     
 8) deploy the sample application infinispan-quickstart.war and the infinispan-vdb.xml artifacts
 
-	* `mvn install -Pdeploy-artifacts -Djbossas-server-dir={jbossas.server.dir} 
+	* `mvn install -Pdeploy-artifacts`
 	
 9) RESTART the jboss as server.  Without using CLI to configure the resources, the resource isn't activated.  
 		Therefore, jboss-as requires a restart.

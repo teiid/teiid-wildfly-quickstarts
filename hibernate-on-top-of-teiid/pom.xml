@@ -1,0 +1,308 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<parent>
+		<artifactId>teiid-quickstart-parent</artifactId>
+		<groupId>org.jboss.teiid.quickstart</groupId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>hibernate-on-top-of-teiid</artifactId>
+	<packaging>war</packaging>
+
+	<name>Hibernate Quickstart Using Teiid to Federate Data Sources</name>
+	<description>hibernate4: This quickstart demonstrates how hibernate can federate data through a single relationally mapped object.</description>
+
+   <properties>
+      <!-- Explicitly declaring the source encoding eliminates the following 
+         message: -->
+      <!-- [WARNING] Using platform encoding (UTF-8 actually) to copy filtered 
+         resources, i.e. build is platform dependent! -->
+      <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+      <!-- Define the version of JBoss' Java EE 6 APIs and Tools we want to import.  -->
+      <jboss.bom.version>1.0.0.M11</jboss.bom.version>
+      <!-- Alternatively, comment out the above line, and un-comment the line below to
+         use version 1.0.1.Final-redhat-1 which is a release certified
+         to work with JBoss EAP 6. It requires you have access to the JBoss EAP 6 maven repository. -->
+      <!--jboss.bom.version>1.0.1.Final-redhat-1</jboss.bom.version-->
+   </properties>
+   
+   <dependencyManagement>
+      <dependencies>
+         <!-- JBoss distributes a complete set of Java EE 6 APIs including 
+            a Bill of Materials (BOM). A BOM specifies the versions of a "stack" (or 
+            a collection) of artifacts. We use this here so that we always get the correct 
+            versions of artifacts. Here we use the jboss-javaee-6.0-with-hibernate stack 
+            (you can read this as the JBoss stack of the Java EE Web Profile 6 APIs with 
+            extras from the Hibernate family of projects) -->
+          <dependency>
+              <groupId>org.jboss.bom</groupId>
+              <artifactId>jboss-javaee-6.0-with-tools</artifactId>
+              <version>${jboss.bom.version}</version>
+              <type>pom</type>
+              <scope>import</scope>
+          </dependency>
+        <dependency>
+            <groupId>org.jboss.bom</groupId>
+            <artifactId>jboss-javaee-6.0-with-hibernate</artifactId>
+            <version>${jboss.bom.version}</version>
+            <type>pom</type>
+            <scope>import</scope>
+        </dependency>
+      </dependencies>
+   </dependencyManagement>
+
+   <dependencies>
+
+      <!-- First declare the APIs we depend on and need for compilation. 
+         All of them are provided by JBoss AS 7 -->
+
+      <!-- Import the CDI API, we use provided scope as the API is included 
+         in JBoss AS 7 -->
+      <dependency>
+         <groupId>javax.enterprise</groupId>
+         <artifactId>cdi-api</artifactId>
+         <scope>provided</scope>
+      </dependency>
+
+      <!-- Import the Common Annotations API (JSR-250), we use provided scope 
+         as the API is included in JBoss AS 7 -->
+      <dependency>
+         <groupId>org.jboss.spec.javax.annotation</groupId>
+         <artifactId>jboss-annotations-api_1.1_spec</artifactId>
+         <scope>provided</scope>
+      </dependency>
+      
+      <!-- Import the JAX-RS API, we use provided scope as the API is included 
+         in JBoss AS 7 -->
+      <dependency>
+         <groupId>org.jboss.spec.javax.ws.rs</groupId>
+         <artifactId>jboss-jaxrs-api_1.1_spec</artifactId>
+         <scope>provided</scope>
+      </dependency>
+
+      <!-- Import the JPA API, we use provided scope as the API is included 
+         in JBoss AS 7 -->
+      <dependency>
+         <groupId>org.hibernate.javax.persistence</groupId>
+         <artifactId>hibernate-jpa-2.0-api</artifactId>
+         <scope>provided</scope>
+      </dependency>
+
+      <!-- Import the EJB API, we use provided scope as the API is included 
+         in JBoss AS 7 -->
+      <dependency>
+         <groupId>org.jboss.spec.javax.ejb</groupId>
+         <artifactId>jboss-ejb-api_3.1_spec</artifactId>
+         <scope>provided</scope>
+      </dependency>
+
+      <!-- JSR-303 (Bean Validation) Implementation -->
+      <!-- Provides portable constraints such as @Email -->
+      <!-- Hibernate Validator is shipped in JBoss AS 7 -->
+      <dependency>
+         <groupId>org.hibernate</groupId>
+         <artifactId>hibernate-validator</artifactId>
+         <scope>provided</scope>
+         <exclusions>
+            <exclusion>
+               <groupId>org.slf4j</groupId>
+               <artifactId>slf4j-api</artifactId>
+            </exclusion>
+         </exclusions>
+      </dependency>
+      
+      <!--Import dependencies to hibernate packages(eg. hibernate-core) depending on features you want to use like Hibernate Session used in the 	quickstart-->
+      <!--please note that scope is provided as these jars are shipped with as7-->
+      <dependency>
+         <groupId>org.hibernate</groupId>
+         <artifactId>hibernate-core</artifactId>
+         <scope>provided</scope>
+      </dependency>
+      
+      <!-- Now we declare any tools needed -->
+
+      <!-- Needed for running tests (you may also use TestNG) -->
+      <dependency>
+         <groupId>junit</groupId>
+         <artifactId>junit</artifactId>
+         <version>4.10</version>
+         <scope>test</scope>
+      </dependency>
+
+      <!-- Optional, but highly recommended -->
+      <!-- Arquillian allows you to test enterprise code such as EJBs and 
+         Transactional(JTA) JPA from JUnit/TestNG -->
+      <dependency>
+         <groupId>org.jboss.arquillian.junit</groupId>
+         <artifactId>arquillian-junit-container</artifactId>
+         <scope>test</scope>
+      </dependency>
+      
+      <dependency>
+         <groupId>org.jboss.arquillian.protocol</groupId>
+         <artifactId>arquillian-protocol-servlet</artifactId>
+         <scope>test</scope>               
+      </dependency>
+
+   </dependencies>
+
+   <build>
+      <!-- Maven will append the version to the finalName (which is the name 
+         given to the generated war, and hence the context root) -->
+      <finalName>${project.artifactId}</finalName>
+      <plugins>
+         <!-- Compiler plugin enforces Java 1.6 compatibility and activates 
+            annotation processors -->
+         <plugin>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>2.3.1</version>
+            <configuration>
+               <source>1.6</source>
+               <target>1.6</target>
+            </configuration>
+         </plugin>
+         <plugin>
+            <artifactId>maven-war-plugin</artifactId>
+            <version>2.1.1</version>
+            <configuration>
+               <!-- Java EE 6 doesn't require web.xml, Maven needs to catch up! -->
+               <failOnMissingWebXml>false</failOnMissingWebXml>
+               <!-- org.jboss.teiid export,   -->
+   					<archive>
+						<manifestEntries>
+						<!-- 
+						The  deployment.<vdb-filename> export  is needed so that when the server is RESTARTED, the Hibernate persistence will be delayed until the VDB is deployed.
+						Other, you will see login exceptions in the server log caused by the Hibernate persistance trying to validate the datasource.
+						 -->
+							<Dependencies>org.jboss.teiid.client export, deployment.portfolio-vdb.xml export</Dependencies>
+						</manifestEntries>
+					</archive>            
+            </configuration>
+         </plugin>
+         <!-- The JBoss AS plugin deploys your war to a local JBoss AS container -->
+         <!-- To use, set the JBOSS_HOME environment variable and run: mvn 
+            package jboss-as:deploy -->
+         <plugin>
+            <groupId>org.jboss.as.plugins</groupId>
+            <artifactId>jboss-as-maven-plugin</artifactId>
+            <version>7.3.Final</version>
+         </plugin>
+      </plugins>
+   </build>
+
+   <profiles>
+      <profile>
+         <id>default</id>
+         <activation>
+            <activeByDefault>true</activeByDefault>
+         </activation>
+         <build>
+            <plugins>
+               <plugin>
+                  <artifactId>maven-surefire-plugin</artifactId>
+                  <version>2.4.3</version>
+                  <configuration>
+                     <skip>true</skip>
+                  </configuration>
+               </plugin>
+            </plugins>
+         </build>
+      </profile>
+  		<profile>
+			<id>deploy-vdb</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-antrun-plugin</artifactId>
+						<version>1.7</version>
+						<dependencies>
+							<dependency>
+								<groupId>org.apache.ant</groupId>
+								<artifactId>ant</artifactId>
+								<version>1.7.0</version>
+							</dependency>
+						</dependencies>
+						<executions>
+							<execution>
+								<id>copyvdb</id>
+								<phase>package</phase>
+								<configuration>
+									<target>
+										<echo message="Installing vdb to ${JBOSS_HOME}" />
+
+										<available file="${JBOSS_HOME}" type="dir"
+											property="jboss.present" />
+
+										<fail unless="jboss.present"
+											message="===== JBOSS_HOME variable must be set ======" />
+
+										<copy todir="${JBOSS_HOME}/standalone/deployments" overwrite="true">
+											<fileset dir="${basedir}/src/main/vdb/" />
+										</copy>
+										<echo message="Deployed vdb to server" />
+									</target>
+								</configuration>
+								<goals>
+									<goal>run</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+   		<profile>
+			<id>undeploy-vdb</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-antrun-plugin</artifactId>
+						<version>1.7</version>
+						<dependencies>
+							<dependency>
+								<groupId>org.apache.ant</groupId>
+								<artifactId>ant</artifactId>
+								<version>1.7.0</version>
+							</dependency>
+						</dependencies>
+						<executions>
+							<execution>
+								<id>copyvdb</id>
+								<phase>package</phase>
+								<configuration>
+									<target>
+										<echo message="Undeploying vdb from ${JBOSS_HOME}" />
+
+										<available file="${JBOSS_HOME}" type="dir"
+											property="jboss.present" />
+
+										<fail unless="jboss.present"
+											message="===== JBOSS_HOME variable must be set and the directory must exist ======" />
+
+										<delete>
+   											 <fileset dir="${JBOSS_HOME}/standalone/deployments" includes="portfolio-vdb*"/>
+  										</delete>
+										<echo message="Undeployed vdb from server" />
+									</target>
+								</configuration>
+								<goals>
+									<goal>run</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>     
+	</profiles>
+</project>

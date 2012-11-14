@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<vdb name="Portfolio" version="1">
+
+    <description>The Portfolio Dynamic VDB</description>
+    
+    <!-- 
+      Setting to use connector supplied metadata. Can be "true" or "cached".  
+      "true" will obtain metadata once for every launch of Teiid. 
+      "cached" will save a file containing the metadata into 
+      the deploy/<vdb name>/<vdb version/META-INF directory
+    -->
+    <property name="UseConnectorMetadata" value="true" />
+
+
+    <!-- 
+      Each model represents a access to one or more sources.
+      The name of the model will be used as a top level schema name
+      for all of the metadata imported from the connector.
+    
+      NOTE: Multiple models, with different import settings, can be bound to 
+      the same connector binding and will be treated as the same source at
+      runtime. 
+    --> 
+    <model name="MarketData">
+        <!-- 
+            Each source represents a translator and data source. There are 
+            pre-defined translators, or you can create one.
+        -->
+        <source name="text-connector" translator-name="file" connection-jndi-name="java:/marketdata-file"/>
+    </model>
+
+    <model name="Accounts">
+        <!-- 
+          JDBC Import settings 
+          
+          importer.useFullSchemaName directs the importer to drop the source 
+          schema from the Teiid object name, so that the Teiid fully qualified name
+          will be in the form of <model name>.<table name>
+        -->
+        <property name="importer.useFullSchemaName" value="false"/>
+           
+         <!--
+            This connector is defined to reference the H2 localDS" 
+          -->
+        <source name="h2-connector" translator-name="h2" connection-jndi-name="java:/accounts-ds"/>
+    </model>
+
+    <model name="ProductPricingModel" type="VIRTUAL">
+         <metadata type="DDL"><![CDATA[
+            CREATE VIEW ProductInfo (id integer OPTIONS(UPDATABLE 'TRUE'), symbol varchar(10) OPTIONS(UPDATABLE 'TRUE'), companyName varchar(100) OPTIONS(UPDATABLE 'TRUE'), price decimal OPTIONS(UPDATABLE 'FALSE') ) OPTIONS (UPDATABLE 'TRUE'  ) AS 
+select P.id, P.symbol, P.company_name, S.price from Accounts.product as P, (call MarketData.getTextFiles('*.txt')) f, TEXTTABLE(f.file COLUMNS symbol string, price bigdecimal HEADER) as S where P.symbol=S.symbol;
+ 
+ 			CREATE TRIGGER ON ProductInfo INSTEAD OF INSERT AS
+ 			   FOR EACH ROW
+ 			   BEGIN ATOMIC
+ 			      INSERT INTO Accounts.Product VALUES (NEW.id, NEW.symbol,NEW.companyName);
+ 			   END;
+        ]]> </metadata>
+    </model>   
+</vdb>

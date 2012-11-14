@@ -12,6 +12,12 @@ to users with "superuser" JAAS role. (use user called "portfolio" to login with 
 See the portfolio-vdb.xml for extra xml elements defined for define the above roles. For more information check out
 Reference Guide's Data Roles chapter.
 
+-------------------
+System requirements
+-------------------
+
+If you have not done so, please review the System Requirements (../README.md)
+
 
 ### Steps to setup and run the quickstart ###
 These can be done either manually (see Setup manually) or using maven (see Setup using the JBoss AS Maven plugin) 
@@ -73,7 +79,7 @@ Copy the following files to the "<jboss.home>/standalone/deployments" directory
 
 2) copy the vdb, teiidfiles and security files
 
-	*  mvn install -Pcopy-files -Djbossas-server-dir={jbossas.home}
+	*  mvn install -Pcopy-files
 	
 3) setup the datasource
 
