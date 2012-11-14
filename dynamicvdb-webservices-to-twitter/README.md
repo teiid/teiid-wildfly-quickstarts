@@ -6,6 +6,12 @@ See https://dev.twitter.com/docs/api for information on the Twitter's SOAP/REST 
 ### Steps to setup and run the quickstart ###
 These can be done either manually (see Setup manually) or using maven (see Setup using the JBoss AS Maven plugin) 
 
+-------------------
+System requirements
+-------------------
+
+If you have not done so, please review the System Requirements (../README.md)
+
 
 #########################################
 ### Setup manually
@@ -51,7 +57,7 @@ Copy the following files to the "<jboss.home>/standalone/deployments" directory
 
 3) copy the vdb files to the server
 
-	*  mvn install -Pcopy-vdb -Djbossas-server-dir={jbossas.home}    
+	*  mvn install -Pcopy-vdb 
     	
 4) RESTART the jboss as server.  Without using CLI to configure the resources, the resource isn't activated.  
 		Therefore, jboss-as requires a restart.	

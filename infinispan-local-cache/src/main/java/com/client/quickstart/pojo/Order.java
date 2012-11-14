@@ -40,37 +40,38 @@ import org.hibernate.search.annotations.Resolution;
  * @ProvidedId
  */
 @Entity
-@Indexed(index = "Order" ) 
+@Indexed(index = "Order")
 public class Order implements java.io.Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -5155172202224249683L;
-	
-	private static DateFormat dateFormat=new SimpleDateFormat("M/dd/yyyy"); //$NON-NLS-1$
+
+	private static DateFormat dateFormat = new SimpleDateFormat("M/dd/yyyy"); //$NON-NLS-1$
 
 	private int id;
 	private Date orderDate;
-	private  String person;
-    private  List<LineItem> lineItems;
-//@IndexedEmbedded
+	private String person;
+	private List<LineItem> lineItems;
+
+	// @IndexedEmbedded
 	public Order() {
 	}
 
 	public Order(int id) {
 		this.id = id;
 	}
-    
+
 	public Order(int id, Date date, String person, List<LineItem> items) {
 		this.id = id;
 		this.orderDate = date;
 		this.person = person;
 		this.lineItems = items;
-	}    
+	}
 
-	 @Id
-	 @DocumentId
+	@Id
+	@DocumentId
 	public int getId() {
 		return this.id;
 	}
@@ -82,17 +83,18 @@ public class Order implements java.io.Serializable {
 	public String getOrderDateString() {
 		return dateFormat.format(orderDate);
 	}
-	
-	@Field @DateBridge(resolution=Resolution.MINUTE) 
+
+	@Field
+	@DateBridge(resolution = Resolution.MINUTE)
 	public Date getOrderDate() {
-		return  this.orderDate;
+		return this.orderDate;
 	}
 
 	public void setOrderDate(Date orderDate) {
 		this.orderDate = orderDate;
 	}
 
-	@Field(index=Index.YES) 
+	@Field(index = Index.YES)
 	public String getPerson() {
 		return this.person;
 	}
@@ -100,24 +102,22 @@ public class Order implements java.io.Serializable {
 	public void setPerson(String person) {
 		this.person = person;
 	}
-	
+
 	public int getNumberOfItems() {
 		return getLineItems().size();
-		
+
 	}
-	
-//	@IndexedEmbedded
-    public List<LineItem> getLineItems() {
+
+	// @IndexedEmbedded
+	public List<LineItem> getLineItems() {
 		return this.lineItems;
 	}
-    
+
 	public void setLineItems(List<LineItem> lineItems) {
 		this.lineItems = lineItems;
 	}
-    
 
-    
 	public String toString() {
-		return "OrderID: (id) " + getId() + " (Person) " + getPerson() + " (OrderDate) " + getOrderDate() + " (#LineItems) " + (getLineItems() != null ? getLineItems().size() : "0");  //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ 
+		return "OrderID: (id) " + getId() + " (Person) " + getPerson() + " (OrderDate) " + getOrderDate() + " (#LineItems) " + (getLineItems() != null ? getLineItems().size() : "0"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ 
 	}
 }

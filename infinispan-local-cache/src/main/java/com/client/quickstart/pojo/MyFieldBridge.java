@@ -26,8 +26,8 @@ import org.hibernate.search.bridge.StringBridge;
 //The bride for Product bridge
 public class MyFieldBridge implements StringBridge {
 
-    @Override
-    public String objectToString(final Object object) {
-        return object.toString();
-    }
+	@Override
+	public String objectToString(final Object object) {
+		return object.toString();
+	}
 }

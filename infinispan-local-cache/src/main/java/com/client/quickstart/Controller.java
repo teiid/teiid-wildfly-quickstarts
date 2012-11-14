@@ -33,6 +33,7 @@ import org.infinispan.Cache;
 import org.jboss.logging.Logger;
 
 import com.client.quickstart.pojo.Order;
+
 /**
  * 
  */
@@ -41,17 +42,19 @@ import com.client.quickstart.pojo.Order;
 @Named
 public class Controller implements java.io.Serializable {
 	private static Logger log = Logger.getLogger(Controller.class);
-    /**
+	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 7276160166278313350L;
-	
-	@Inject @Default
+
+	@Inject
+	@Default
 	private Cache<Object, Object> cache;
-	
+
 	private Order[] orders = null;
-	
-	public Controller () {}
+
+	public Controller() {
+	}
 
 	public Order[] getOrderList() {
 		if (orders == null) {
@@ -62,10 +65,10 @@ public class Controller implements java.io.Serializable {
 				Order v = (Order) cache.get(it.next());
 				orders[i] = v;
 				++i;
-			}	
+			}
 			log.info("--- Controller has orders: " + i); //$NON-NLS-1$
 		}
 		return orders;
-        
+
 	}
 }

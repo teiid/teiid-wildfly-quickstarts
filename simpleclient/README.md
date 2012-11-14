@@ -20,6 +20,14 @@ the pom.xml:
 Notice that the <host> and <port> are preset. To point to a different server and/or port, 
 change "localhost" and/or "31000" arguments, respectively, in the pom.xml.
 
+-------------------
+System requirements
+-------------------
+
+If you have not done so, please review the System Requirements (../README.md)
+
+
+
 #############
 #  Execution
 #############
