@@ -49,16 +49,18 @@ import com.client.quickstart.pojo.Order;
 import com.client.quickstart.pojo.Product;
 
 /**
- * Note:  the @Resource(lookup..)  will look like its invalid in Eclipse, but will build using maven.
- * This is because "lookup" in Java 6 endorsed lib, and not part of the classpath.
+ * Note: the @Resource(lookup..) will look like its invalid in Eclipse, but will
+ * build using maven. This is because "lookup" in Java 6 endorsed lib, and not
+ * part of the classpath.
+ * 
  * @author vhalbert
- *
+ * 
  */
 @Singleton
 public class Resources {
 	private static Logger log = Logger.getLogger(Resources.class.getName());
-	
-	private static final String CACHE_NAME="local-quickstart-cache";
+
+	private static final String CACHE_NAME = "local-quickstart-cache";
 
 	@SuppressWarnings("unused")
 	@Produces

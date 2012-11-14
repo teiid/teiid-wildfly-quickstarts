@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- JBoss, Home of Professional Open Source Copyright 2012, Red Hat, Inc. 
+    and/or its affiliates, and individual contributors by the @authors tag. See 
+    the copyright.txt in the distribution for a full listing of individual contributors. 
+    Licensed under the Apache License, Version 2.0 (the "License"); you may not 
+    use this file except in compliance with the License. You may obtain a copy 
+    of the License at http://www.apache.org/licenses/LICENSE-2.0 Unless required 
+    by applicable law or agreed to in writing, software distributed under the 
+    License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS 
+    OF ANY KIND, either express or implied. See the License for the specific 
+    language governing permissions and limitations under the License. -->
+<!-- This is an unmanaged datasource. It should be used for proofs of concept 
+   or testing only. It uses H2, an in memory database that ships with JBoss 
+   AS. -->
+<datasources xmlns="http://www.jboss.org/ironjacamar/schema"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://www.jboss.org/ironjacamar/schema http://docs.jboss.org/ironjacamar/schema/datasources_1_0.xsd">
+   <!-- The datasource is bound into JNDI at this location. We reference 
+      this in META-INF/persistence.xml -->
+   <!-- datasource jndi-name="java:jboss/datasources/Hibernate4TeiidQuickstartDS"
+      pool-name="hibernate4-quickstart" enabled="true"
+      use-java-context="true">
+        <connection-url>jdbc:teiid:portfolio</connection-url>
+        <driver>teiid-local</driver>
+        <pool>
+            <prefill>false</prefill>
+            <use-strict-min>false</use-strict-min>
+            <flush-strategy>FailingConnectionOnly</flush-strategy>
+        </pool>
+        <security>
+            <user-name>user</user-name>
+            <password>user</password>
+        </security>
+    </datasource-->         
+    
+    
+    <xa-datasource jndi-name="java:/jboss/datasources/Hibernate4TeiidQuickstartDS" pool-name="hibernateTeiidDS" enabled="true" use-java-context="true" use-ccm="true">
+    
+        <xa-datasource-property name="PortNumber">31000</xa-datasource-property>
+        <xa-datasource-property name="DatabaseName">Portfolio</xa-datasource-property>
+        <xa-datasource-property name="ServerName">localhost</xa-datasource-property>        
+        
+        <xa-datasource-property name="User">user</xa-datasource-property>
+		<xa-datasource-property name="Password">user</xa-datasource-property>
+        
+        <driver>teiid</driver>
+                 
+        <xa-pool>
+            <min-pool-size>10</min-pool-size>
+            <max-pool-size>20</max-pool-size>
+            <is-same-rm-override>true</is-same-rm-override>
+            <!-- prefill>false</prefill-->
+            <!-- use-strict-min>false</use-strict-min-->
+            <!-- flush-strategy>FailingConnectionOnly</flush-strategy-->
+            <!-- no-tx-separate-pools/-->
+        </xa-pool>
+
+
+         
+    </xa-datasource>          
+</datasources>
+ 

@@ -39,18 +39,18 @@
 								<phase>package</phase>
 								<configuration>
 									<target>
-										<echo message="Installing module to ${jbossas-server-dir}" />
+										<echo message="Installing teiidfiles and vdb to ${JBOSS_HOME}" />
 
-										<available file="${jbossas-server-dir}" type="dir"
+										<available file="${JBOSS_HOME}" type="dir"
 											property="jboss.present" />
 
 										<fail unless="jboss.present"
-											message="===== pass in -Djbossas-server-dir={location} ======" />
+											message="===== JBOSS_HOME variable must be set and the directory must exist ======" />
 
-										<copy todir="${jbossas-server-dir}/teiidfiles">
+										<copy todir="${JBOSS_HOME}/teiidfiles">
 											<fileset dir="${basedir}/src/teiidfiles/" />
 										</copy>
-										<copy todir="${jbossas-server-dir}/standalone/deployments">
+										<copy todir="${JBOSS_HOME}/standalone/deployments">
 											<fileset dir="${basedir}/src/vdb/" />
 										</copy>
 										<echo message="Copied teiidfiles and vdb to server" />
@@ -152,6 +152,53 @@
 				</plugins>
 			</build>
 		</profile>
+  		<profile>
+			<id>undeploy-vdb</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-antrun-plugin</artifactId>
+						<version>1.7</version>
+						<dependencies>
+							<dependency>
+								<groupId>org.apache.ant</groupId>
+								<artifactId>ant</artifactId>
+								<version>1.7.0</version>
+							</dependency>
+						</dependencies>
+						<executions>
+							<execution>
+								<id>copyvdb</id>
+								<phase>package</phase>
+								<configuration>
+									<target>
+										<echo message="Undeploying vdb from ${JBOSS_HOME}" />
+
+										<available file="${JBOSS_HOME}" type="dir"
+											property="jboss.present" />
+
+										<fail unless="jboss.present"
+											message="===== JBOSS_HOME variable must be set ======" />
+
+										<delete>
+   											 <fileset dir="${JBOSS_HOME}/standalone/deployments" includes="portfolio-vdb*"/>
+  										</delete>
+										<echo message="Undeployed vdb from server" />
+									</target>
+								</configuration>
+								<goals>
+									<goal>run</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>   		
 	</profiles>
 
 </project>

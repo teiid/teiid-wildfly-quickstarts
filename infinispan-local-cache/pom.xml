@@ -272,30 +272,23 @@
 								<phase>package</phase>
 								<configuration>
 									<target>
-										<echo message="Installing module to ${jbossas-server-dir}" />
-										<path id="jboss.as.root">
-											<pathelement location="${jbossas-server-dir}" />
-										</path>
+										<echo message="Installing module to ${JBOSS_HOME}" />
 
-										<fail message="=====  ${jbossas-server-dir} is not valid ======">
-											<condition>
-												<not>
-													<resourcecount refid="jboss.as.root" when="gt"
-														count="0" />
-												</not>
-											</condition>
+										<available file="${JBOSS_HOME}" type="dir"
+											property="jboss.present" />
 
-										</fail>
+										<fail unless="jboss.present"
+											message="===== JBOSS_HOME variable must be set and the directory must exist ======" />
 
 										<copy
-											todir="${jbossas-server-dir}/modules">
+											todir="${JBOSS_HOME}/modules">
 											<fileset dir="${basedir}/src/module/" />
 										</copy>
 										<copy file="${basedir}/target/infinispan-quickstart-pojos.jar"
-											todir="${jbossas-server-dir}/modules/com/client/quickstart/pojos/main" />
+											todir="${JBOSS_HOME}/modules/com/client/quickstart/pojos/main" />
 
 										<echo
-											message="Installed module to ${jbossas-server-dir}/modules/org/jboss/teiid/translator/object" />
+											message="Installed module to ${JBOSS_HOME}/modules/org/jboss/teiid/translator/object" />
 									</target>
 								</configuration>
 								<goals>
@@ -447,26 +440,19 @@
 								<phase>package</phase>
 								<configuration>
 									<target>
-										<echo message="Installing VDB to ${jbossas-server-dir}" />
-										<path id="jboss.as.root">
-											<pathelement location="${jbossas-server-dir}" />
-										</path>
+										<echo message="Installing vdb to ${JBOSS_HOME}" />
 
-										<fail message="=====  ${jbossas-server-dir} is not valid ======">
-											<condition>
-												<not>
-													<resourcecount refid="jboss.as.root" when="gt"
-														count="0" />
-												</not>
-											</condition>
+										<available file="${JBOSS_HOME}" type="dir"
+											property="jboss.present" />
 
-										</fail>
+										<fail unless="jboss.present"
+											message="===== JBOSS_HOME variable must be set and the directory must exist ======" />
 
-										<copy todir="${jbossas-server-dir}/standalone/deployments">
+										<copy todir="${JBOSS_HOME}/standalone/deployments">
 											<fileset dir="${basedir}/src/vdb" />
 										</copy>
 										<echo
-											message="Installed vdb to ${jbossas-server-dir}/standalone/deployments" />
+											message="Installed vdb to ${JBOSS_HOME}/standalone/deployments" />
 									</target>
 								</configuration>
 								<goals>

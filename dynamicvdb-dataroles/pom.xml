@@ -39,21 +39,21 @@
 								<phase>package</phase>
 								<configuration>
 									<target>
-										<echo message="Installing module to ${jbossas-server-dir}" />
+										<echo message="Installing teiidfiles and vdb to ${JBOSS_HOME}" />
 
-										<available file="${jbossas-server-dir}" type="dir"
+										<available file="${JBOSS_HOME}" type="dir"
 											property="jboss.present" />
 
 										<fail unless="jboss.present"
-											message="===== need to pass in -Djbossas-server-dir={location} or ${jbossas-server-dir} doesnt exist ======" />
+											message="===== JBOSS_HOME variable must be set and the directory must exist ======" />
 
-										<copy todir="${jbossas-server-dir}/teiidfiles">
+										<copy todir="${JBOSS_HOME}/teiidfiles">
 											<fileset dir="${basedir}/src/teiidfiles/" />
 										</copy>
-										<copy todir="${jbossas-server-dir}/standalone/deployments">
+										<copy todir="${JBOSS_HOME}/standalone/deployments">
 											<fileset dir="${basedir}/src/vdb/" />
 										</copy>
-										<copy todir="${jbossas-server-dir}/modules/org/jboss/teiid/conf/">
+										<copy todir="${JBOSS_HOME}/modules/org/jboss/teiid/conf/">
 											<fileset dir="${basedir}/src/security/" />
 										</copy>										
 										<echo message="Copied teiidfiles and vdb to server" />
