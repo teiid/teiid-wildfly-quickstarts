@@ -6,9 +6,6 @@ This quickstart demonstrates how Teiid can access a cache of Java Objects.
 The example can be deployed using Maven from the command line or from Eclipse using
 JBoss Tools.
 
-### Steps to setup and run the quickstart ###
-These can be done either manually (see Setup manually) or using maven (see Setup using the JBoss AS Maven plugin) 
-
 Assumptions:
 -  Teiid has been deployed to your jboss as server.
 
@@ -19,9 +16,15 @@ System requirements
 If you have not done so, please review the System Requirements (../README.md)
 
 
-	 
+####################
+#   Setup
+####################
+
+Setup can be done either manually (see Manual Setup) or using maven (see Setup using the JBoss AS Maven plugin) 
+
+
 #########################################
-### Setup manually
+### Manual setup
 #########################################
 
 1) shutdown jbossas server

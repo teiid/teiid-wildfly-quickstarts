@@ -11,9 +11,15 @@ System requirements
 
 If you have not done so, please review the System Requirements (../README.md)
 
+####################
+#   Setup
+####################
+
+Setup can be done either manually (see Manual Setup) or using maven (see Setup using the JBoss AS Maven plugin) 
+
 
 #########################################
-### Setup manually
+### Manual setup
 #########################################
 
 1) shutdown jbossas server
