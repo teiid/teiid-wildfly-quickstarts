@@ -12,8 +12,40 @@ You can find the documentation at https://docs.jboss.org/author/display/TEIID/Qu
 
 The 'dist' folder contains the Maven scripts to build the quick start zip of the quickstarts.
 
+Be sure to read this entire document before you attempt to work with the quickstarts. It contains the following information:
+
+* [Available Quickstarts](#availableQuickstarts): List of the available quickstarts, a description and demonstrated features for each one.
+
+* [System Requirements](#systemrequirements): List of software required to run the quickstarts.
+
+* [Run the Quickstarts](#runningquickstarts): General instructions for building, deploying, and running the quickstarts.
+
 
 -------------------
+<a id="availableQuickstarts"></a>
+Available Quickstarts 
+---------------------
+
+The following is a list of the currently available quickstarts. The table lists each quickstart name, the features it demonstrates, and it gives a brief description of the quickstart. For more detailed information about a quickstart, click on the quickstart name.
+
+Some quickstarts are designed to enhance or extend other quickstarts. These are noted in the **Prerequisites** column. If a quickstart lists prerequisites, those must be installed or deployed before working with the quickstart.
+
+Quickstarts with tutorials in the [Quick Start Guide](https://docs.jboss.org/author/display/TEIID/Quick+Start+Guide "Quick Start Guide") are noted with two asterisks ( ** ) following the quickstart name. 
+
+| **Quickstart Name** | **Features Demonstrated** | **Description** | **Prerequisites** |
+|:-----------|:-----------|:-----------|:-----------|:-----------|
+| [datafederation](dynamicvdb-datafederation/README.md "data-federation") | Data Federation, TEXTTABLE | Shows how to expose multiple data sources as a single source | None |
+| [dataroles](dynamicvdb-dataroles/README.md "data-roles") | Data roles | Shows how to control Read/Write data access using data roles | None |
+| [consume-webservices](dynamicvdb-webservices-to-twitter/README.md "consume-webservices") | 'ws' Translator, Define View Tables | Demonstrates the use of the 'ws' translator to read a web services data source | None |
+| [hibernate](hibernate-on-top-of-teiid/README.md "hibernate") | Hibernate Integration, Create VIEW, Create Trigger, TEXTTABLE | Demonstrates how a Hibernate application can add data federation capabilities at the data layer| None |
+| [infinispan-cache](infinispan-local-cache/README.md "infinispan-cache") | 'infinispan' Object Translator, OBJECTTABLE | Demonstrates the 'infinispan' object translator which enables reading an object cache  | dynamicvdb-datafederation |
+| [simpleclient](simpleclient/README.md "simpleclient") | Teiid JDBC Connection | Demonstrates how to make a jdbc connection to Teiid using the Teiid JDBC Driver and DataSource  | None |
+
+
+
+
+-------------------
+<a id="systemrequirements"></a>
 System Requirements 
 -------------------
 
@@ -39,6 +71,7 @@ To run these quickstarts with the provided build scripts, you need the following
 
 
 ------------------
+<a id="runningquickstarts"></a>
 Run the Quick Starts
 ------------------
 
