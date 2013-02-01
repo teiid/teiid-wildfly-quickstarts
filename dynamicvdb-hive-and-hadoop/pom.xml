@@ -4,19 +4,19 @@
 	<parent>
 		<artifactId>teiid-quickstart-parent</artifactId>
 		<groupId>org.jboss.teiid.quickstart</groupId>
-		<version>1.0.0-Beta</version>
+		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 
 	<modelVersion>4.0.0</modelVersion>
-	<artifactId>dynamicvdb-datafederation</artifactId>
+	<artifactId>dynamicvdb-hive-and-hadoop</artifactId>
 	<packaging>pom</packaging>
 
-	<name>DynamicVDB Data Federation Quickstart</name>
-	<description>This quickstart demonstrates how to federate data from a relational data source with a text file-based data source.</description>
+	<name>DynamicVDB Hive and Haddop Quickstart</name>
+	<description>This quickstart demonstrates using the hive translator to access a hadoop data source.</description>
 
 	<profiles>
 		<profile>
-			<id>copy-files</id>
+			<id>get-hadoop</id>
 			<activation>
 				<activeByDefault>false</activeByDefault>
 			</activation>
@@ -35,25 +35,21 @@
 						</dependencies>
 						<executions>
 							<execution>
-								<id>copyfiles</id>
-								<phase>package</phase>
+								<id>download-file</id>
+								<phase>install</phase>
 								<configuration>
 									<target>
-										<echo message="Installing teiidfiles and vdb to ${JBOSS_HOME}" />
+										<echo message="Downloading Hadoop tar kit" />
 
-										<available file="${JBOSS_HOME}" type="dir"
-											property="jboss.present" />
+										<!-- get src="http://www.mirrorservice.org/sites/ftp.apache.org/hadoop/common/hadoop-1.1.0/hadoop-1.1.0.tar.gz" 
+										    dest="kits/hadoop-1.1.0.tar.gz" 
+										    verbose="true"
+										    usetimestamp="true"/-->
+										    
+										    <gunzip src="kits/hadoop-1.1.0.tar.gz" dest="kits"/>
+										    
+										    <untar src="kits/hadoop-1.1.0.tar" dest="kits"/>
 
-										<fail unless="jboss.present"
-											message="===== JBOSS_HOME variable must be set and the directory must exist ======" />
-
-										<copy todir="${JBOSS_HOME}/teiidfiles">
-											<fileset dir="${basedir}/src/teiidfiles/" />
-										</copy>
-										<copy todir="${JBOSS_HOME}/standalone/deployments">
-											<fileset dir="${basedir}/src/vdb/" />
-										</copy>
-										<echo message="Copied teiidfiles and vdb to server" />
 									</target>
 								</configuration>
 								<goals>
@@ -65,6 +61,94 @@
 				</plugins>
 			</build>
 		</profile>
+		<profile>
+			<id>get-hive</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-antrun-plugin</artifactId>
+						<version>1.7</version>
+						<dependencies>
+							<dependency>
+								<groupId>org.apache.ant</groupId>
+								<artifactId>ant</artifactId>
+								<version>1.7.0</version>
+							</dependency>
+						</dependencies>
+						<executions>
+							<execution>
+								<id>download-file</id>
+								<phase>install</phase>
+								<configuration>
+									<target>
+										<echo message="Download Hive tar kit" />
+
+										<get src="http://apache.mirror.anlx.net/hive/stable/hive-0.8.1-bin.tar.gz" 
+										    dest="kits/hive-0.8.1.tar.gz" 
+										    verbose="true"
+										    usetimestamp="true"/>
+										    
+										<gunzip src="kits/hive-0.8.1.tar.gz" dest="kits"/>
+										
+										<untar src="kits/hive-0.8.1.tar" dest="kits"/>
+
+									</target>
+								</configuration>
+								<goals>
+									<goal>run</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>	
+		<profile>
+			<id>do</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-antrun-plugin</artifactId>
+						<version>1.7</version>
+						<dependencies>
+							<dependency>
+								<groupId>org.apache.ant</groupId>
+								<artifactId>ant</artifactId>
+								<version>1.7.0</version>
+							</dependency>
+						</dependencies>
+						<executions>
+							<execution>
+								<id>download-file</id>
+								<phase>install</phase>
+								<configuration>
+									<target>
+										<echo message="Downloading Hadoop tar kit" />
+
+										<untar src="kits/hadoop-1.1.0.tar" dest="kits"/>
+										    
+										<untar src="kits/hive-0.8.1.tar" dest="kits"/>
+
+									</target>
+								</configuration>
+								<goals>
+									<goal>run</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+			
 		<profile>
 			<id>setup-datasource</id>
 			<activation>
@@ -152,53 +236,6 @@
 				</plugins>
 			</build>
 		</profile>
-  		<profile>
-			<id>undeploy-vdb</id>
-			<activation>
-				<activeByDefault>false</activeByDefault>
-			</activation>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-antrun-plugin</artifactId>
-						<version>1.7</version>
-						<dependencies>
-							<dependency>
-								<groupId>org.apache.ant</groupId>
-								<artifactId>ant</artifactId>
-								<version>1.7.0</version>
-							</dependency>
-						</dependencies>
-						<executions>
-							<execution>
-								<id>copyvdb</id>
-								<phase>package</phase>
-								<configuration>
-									<target>
-										<echo message="Undeploying vdb from ${JBOSS_HOME}" />
-
-										<available file="${JBOSS_HOME}" type="dir"
-											property="jboss.present" />
-
-										<fail unless="jboss.present"
-											message="===== JBOSS_HOME variable must be set ======" />
-
-										<delete>
-   											 <fileset dir="${JBOSS_HOME}/standalone/deployments" includes="portfolio-vdb*"/>
-  										</delete>
-										<echo message="Undeployed vdb from server" />
-									</target>
-								</configuration>
-								<goals>
-									<goal>run</goal>
-								</goals>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>   		
 	</profiles>
 
 </project>
