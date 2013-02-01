@@ -4,7 +4,7 @@
    <modelVersion>4.0.0</modelVersion>
    <artifactId>teiid-quickstart-dist</artifactId>
    <groupId>org.jboss.teiid.quickstart</groupId>
-   <version>0.0.1-SNAPSHOT</version>
+   <version>1.0.0-Beta</version>
    <packaging>pom</packaging>
    <name>Teiid Quickstart Distribution</name>
 
