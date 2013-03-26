@@ -86,7 +86,7 @@
 									</properties>
 								</resource>
 								<resource>
-									<address>resource-adapter=twitterDS,connection-definitions=websericeDS</address>
+									<address>resource-adapter=twitterDS,connection-definitions=webserviceDS</address>
 									<properties>
 										<jndi-name>java:/twitterDS</jndi-name>
 										<class-name>org.teiid.resource.adapter.ws.WSManagedConnectionFactory</class-name>
@@ -95,7 +95,7 @@
 									</properties>
 								</resource>
 								<resource>
-									<address>resource-adapter=twitterDS,connection-definitions=websericeDS,config-properties=EndPoint</address>
+									<address>resource-adapter=twitterDS,connection-definitions=webserviceDS,config-properties=EndPoint</address>
 									<properties>
 										<value>http://search.twitter.com/search.json</value>
 									</properties>
