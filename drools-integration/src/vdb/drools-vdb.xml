@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<vdb name="PortfolioBR" version="1">
+
+    <description>Shows how to integrate drools rules with Teiid</description>
+       
+    <property name="lib" value="org.jboss.teiid.businessrules.udf"></property>
+        
+    <import-vdb name="Portfolio" version="1" import-data-policies="false"/> 
+    <model name="Stocks" type="VIRTUAL">
+        <metadata type="DDL"><![CDATA[
+        
+        CREATE VIRTUAL FUNCTION performRuleOnData(className string, returnMethodName string, returnIfNull string, VARIADIC z object ) RETURNS string OPTIONS (JAVA_CLASS 'org.jboss.teiid.businessrules.udf.RulesUDF',  JAVA_METHOD 'performRuleOnData', VARARGS 'true');
+        
+        CREATE VIEW StockPrices (
+            symbol string,
+            price bigdecimal
+            )
+            AS  
+               SELECT SP.symbol, SP.price
+                FROM (EXEC MarketData.getTextFiles('*.txt')) AS f, 
+                    TEXTTABLE(f.file COLUMNS symbol string, price bigdecimal HEADER) AS SP;
+        
+        
+        CREATE VIEW Stock (
+            symbol string,
+            price bigdecimal,
+            company_name   varchar(256)
+            )
+            AS
+                SELECT  S.symbol, S.price, A.COMPANY_NAME
+                    FROM StockPrices AS S, Accounts.PRODUCT AS A
+                    WHERE S.symbol = A.SYMBOL;
+
+                    
+        CREATE VIRTUAL PROCEDURE StockValidation() RETURNS (companyname varchar(256), symbol string(10), price bigdecimal, message varchar(256) )
+           AS 
+        BEGIN
+            DECLARE String VARIABLES.msg;
+            CREATE LOCAL TEMPORARY TABLE TEMP (companyname string, symbol string, price bigdecimal, message string);
+            LOOP ON (SELECT Stock.symbol, Stock.price, Stock.company_name FROM Stock) AS txncursor
+            BEGIN
+                VARIABLES.msg = Stocks.performRuleOnData('org.jboss.teiid.quickstart.data.MarketData', 'getInvalidMessage', 'noMsg', txncursor.company_name, txncursor.symbol, txncursor.price);
+                IF(VARIABLES.msg <> 'NoMsg')
+                BEGIN
+                    INSERT INTO TEMP (TEMP.companyname, TEMP.symbol, TEMP.price, TEMP.message) VALUES (txncursor.COMPANY_NAME, txncursor.symbol, txncursor.price, VARIABLES.msg);
+                END
+            END
+            SELECT TEMP.companyname, TEMP.symbol, TEMP.price, TEMP.message FROM TEMP;
+        END
+                 
+        ]]> </metadata>
+    </model>
+</vdb>

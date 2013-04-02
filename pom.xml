@@ -35,7 +35,7 @@
 			resources, i.e. build is platform dependent! -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-		<version.teiid>8.2.0.Beta1-SNAPSHOT</version.teiid>
+		<version.teiid>8.3.0.Beta2-SNAPSHOT</version.teiid>
 		<version.jboss.as>7.1.1.Final</version.jboss.as>
 		<version.jboss.javaee.web>2.0.0.Final</version.jboss.javaee.web>
 		<version.infinispan>5.1.4.FINAL</version.infinispan>
@@ -44,7 +44,24 @@
 		<version.javax.spec>1.0.2.Final</version.javax.spec>
 		<version.javax.enterprise>1.1-20120918</version.javax.enterprise>
 		<version.jboss.logging>3.1.2.GA</version.jboss.logging>
+		
+		<version.junit>4.10</version.junit>
 	</properties>
+	
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${version.junit}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-all</artifactId>
+			<version>1.9.0</version>
+			<scope>test</scope>
+		</dependency>		
+	</dependencies>
 
 	<dependencyManagement>
 		<dependencies>
@@ -166,5 +183,81 @@
 		</dependencies>
 
 	</dependencyManagement>
+    <build>
+        <plugins>
+	  <!-- Specify the compiler options and settings -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${version.compiler.plugin}</version>
+				<configuration>
+					<source>${maven.compiler.source}</source>
+					<target>${maven.compiler.target}</target>
+					<showDeprecation>false</showDeprecation>
+					<showWarnings>false</showWarnings>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>${version.surefire.plugin}</version>
+				<configuration>
+					<includes>
+						<include>**/*TestCase.java</include>
+						<include>**/*Test.java</include>
+						<include>**/Test*.java</include>
+					</includes>
+					<excludes>
+						<exclude>**/Abstract*TestCase.java</exclude>
+			<!-- hack to prevent anonymous inner classes in Tests from being run as tests -->
+						<include>**/Test*$*.java</include>
+					</excludes>
+					<systemPropertyVariables>
+						<user.dir>${basedir}/target</user.dir>
+						<java.io.tmpdir>${basedir}/target</java.io.tmpdir>
+					</systemPropertyVariables>
+				</configuration>
+			</plugin>
+      <!-- 
+      Build a test-jar for each project, so that src/test/* resources and classes can be used
+      in other projects.  Also customize how the jar files are assembled.
+      -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<executions>
+					<execution>
+						<goals>
+							<goal>test-jar</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<archive>
+						<manifest>
+							<addDefaultSpecificationEntries> true</addDefaultSpecificationEntries>
+							<addDefaultImplementationEntries> true</addDefaultImplementationEntries>
+						</manifest>
+						<manifestEntries>
+							<Implementation-URL>${project.url}</Implementation-URL>
+						</manifestEntries>
+					</archive>
+				</configuration>
+			</plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>${version.source.plugin}</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+		</plugins>
+	</build>
+
 
 </project>

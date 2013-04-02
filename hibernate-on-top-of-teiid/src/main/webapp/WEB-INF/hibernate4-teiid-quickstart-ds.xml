@@ -20,7 +20,7 @@
    <!-- datasource jndi-name="java:jboss/datasources/Hibernate4TeiidQuickstartDS"
       pool-name="hibernate4-quickstart" enabled="true"
       use-java-context="true">
-        <connection-url>jdbc:teiid:portfolio</connection-url>
+        <connection-url>jdbc:teiid:portfolio;waitForLoad=100000</connection-url>
         <driver>teiid-local</driver>
         <pool>
             <prefill>false</prefill>
@@ -31,8 +31,8 @@
             <user-name>user</user-name>
             <password>user</password>
         </security>
-    </datasource-->         
-    
+    </datasource-->   
+                
     
     <xa-datasource jndi-name="java:/jboss/datasources/Hibernate4TeiidQuickstartDS" pool-name="hibernateTeiidDS" enabled="true" use-java-context="true" use-ccm="true">
     
