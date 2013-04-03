@@ -4,7 +4,7 @@
 	<parent>
 		<artifactId>teiid-quickstart-parent</artifactId>
 		<groupId>org.jboss.teiid.quickstart</groupId>
-		<version>1.0.0-GA</version>
+		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 
 	<modelVersion>4.0.0</modelVersion>
@@ -14,34 +14,169 @@
 	<name>Drools Integration</name>
 	<description>The Drools integration demonstrates how to use rules to transform your federated data.</description>
 
+    <properties>
+			<version.drools>5.5.0.Final</version.drools>
+	</properties>
 	<dependencies>
+		<dependency>
+			<groupId>org.jboss.teiid</groupId>
+			<artifactId>teiid-common-core</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.teiid</groupId>
+			<artifactId>teiid-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.jboss.teiid</groupId>
+			<artifactId>teiid-admin</artifactId>
+			<scope>provided</scope>
+		</dependency>
+				
 		<dependency>
 			<groupId>org.drools</groupId>
 			<artifactId>drools-core</artifactId>
-			<version>5.5.0.Final</version>
+			<version>${version.drools}</version>
 			<type>jar</type>
-			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.drools</groupId>
 			<artifactId>drools-compiler</artifactId>
-			<version>5.5.0.Final</version>
+			<version>${version.drools}</version>
 			<type>jar</type>
-			<scope>compile</scope>
 		</dependency>
 	</dependencies>
 
-	<build>
-		<plugins>
-			<plugin>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>2.3.2</version>
-<!-- 				<configuration>
-					<source>1.6</source>
-					<target>1.6</target>
-				</configuration>
- -->
- 			</plugin>
-		</plugins>
-	</build>
+  <build>
+  	<finalName>teiiddrools-udf</finalName>
+        <plugins>
+          <plugin>
+            <artifactId>maven-assembly-plugin</artifactId>
+            <configuration>
+              <descriptors>
+                <descriptor>assembly/jar-with-dependencies.xml</descriptor>
+                <descriptor>assembly/module-dist.xml</descriptor>
+              </descriptors>
+            </configuration>
+
+            <executions>
+              <execution>
+                <id>create-assemblies</id>
+                <phase>package</phase>
+                <goals>
+                  <goal>single</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+         </plugins>
+  </build>
+  
+  <profiles>
+  		<profile>
+			<id>deploy</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-antrun-plugin</artifactId>
+						<version>1.7</version>
+						<dependencies>
+							<dependency>
+								<groupId>org.apache.ant</groupId>
+								<artifactId>ant</artifactId>
+								<version>1.7.0</version>
+							</dependency>
+						</dependencies>
+						<executions>
+							<execution>
+								<id>copyfiles</id>
+								<phase>package</phase>
+								<configuration>
+									<target>
+										<echo message="Copying vdb to ${JBOSS_HOME}" />
+
+										<available file="${JBOSS_HOME}" type="dir"
+											property="jboss.present" />
+
+										<fail unless="jboss.present"
+											message="===== JBOSS_HOME variable must be set and the directory must exist ======" />
+
+										<copy todir="${JBOSS_HOME}/standalone/deployments">
+											<fileset dir="${basedir}/src/vdb/" />
+										</copy>
+										<echo message="Copying vdb to server" />
+                                        
+                                        <echo message="Deploying modules to ${JBOSS_HOME}" />
+                                        
+                                        <unzip src="${basedir}/target/teiiddrools-udf-module-dist.zip" dest="${JBOSS_HOME}/modules/system/layers/base"/>
+ 
+                                        <echo message="Deployed modules to ${JBOSS_HOME}" />
+									</target>
+								</configuration>
+								<goals>
+									<goal>run</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>undeploy</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-antrun-plugin</artifactId>
+						<version>1.7</version>
+						<dependencies>
+							<dependency>
+								<groupId>org.apache.ant</groupId>
+								<artifactId>ant</artifactId>
+								<version>1.7.0</version>
+							</dependency>
+						</dependencies>
+						<executions>
+							<execution>
+								<id>copyvdb</id>
+								<phase>package</phase>
+								<configuration>
+									<target>
+										<echo message="Undeploying drools quickstart files from ${JBOSS_HOME}" />
+
+										<available file="${JBOSS_HOME}" type="dir"
+											property="jboss.present" />
+
+										<fail unless="jboss.present"
+											message="===== JBOSS_HOME variable must be set ======" />
+
+										<delete>
+   											 <fileset dir="${JBOSS_HOME}/standalone/deployments" includes="drools-vdb*"/>
+  										</delete>
+                                        
+                                        <delete dir="${JBOSS_HOME}/modules/system/layers/base/org/jboss/teiid/businessrules"/>
+										<echo message="Undeployed drools quickstart files from server" />
+									</target>
+								</configuration>
+								<goals>
+									<goal>run</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>   		
+
+  </profiles>
 </project>
