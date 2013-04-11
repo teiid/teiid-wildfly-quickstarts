@@ -4,15 +4,15 @@
 	<parent>
 		<artifactId>teiid-quickstart-parent</artifactId>
 		<groupId>org.jboss.teiid.quickstart</groupId>
-		<version>1.0.0-Beta</version>
+		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 
 	<modelVersion>4.0.0</modelVersion>
-	<artifactId>drools-integration</artifactId>
+	<artifactId>persisting-costing-statistics</artifactId>
 	<packaging>jar</packaging>
 
-	<name>Drools Integration</name>
-	<description>The Drools integration demonstrates how to use rules to transform your federated data.</description>
+	<name>Persisting Costing Statistics</name>
+	<description>This demonstrates how to persist costing statistics and then refresh</description>
 
     <properties>
 			<version.drools>5.5.0.Final</version.drools>
