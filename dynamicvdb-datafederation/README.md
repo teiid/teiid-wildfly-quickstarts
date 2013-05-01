@@ -1,7 +1,11 @@
-Dynamicvdb-datafederation demonstrates how to federate data from a relational data source with a
-text file-based data source.  This example uses the H2 database, which is referenced as 
-the "accouts-ds" data source in the server, but the creation SQL could be adapted to another 
-database if you choose.
+Dynamicvdb-datafederation is the 'Hellow World' example for Teiid.  
+
+
+This will demonstrate how to federate data from a relational data source with a text file-based data source.
+This example uses the H2 database, which is referenced as the "accounts-ds" data source in the server, 
+but the creation SQL could be adapted to another database if you choose.
+
+Note:  this example provides the base setup for which other quick starts depend upon.
 
 ### Steps to setup and run the quickstart ###
 These can be done either manually (see Setup manually) or using maven (see Setup using the JBoss AS Maven plugin) 
@@ -70,28 +74,25 @@ Copy the following files to the "<jboss.home>/standalone/deployments" directory
 
 	For Linux:   ./standalone.sh -c standalone-teiid.xml	
 	for Windows: standalone.bat -c standalone-teiid.xml
-
-2) copy the vdb and teiidfiles support files
-
-	*  mvn install -Pcopy-files
 	
-3) setup the datasource
+2) setup the datasource
 
     * `mvn -Psetup-datasource jboss-as:add-resource` 
 	
-4) setup the resource adapter
+3) setup the resource adapter
 
     * `mvn -Psetup-rar jboss-as:add-resource`
-    
-    	
-5) RESTART the jboss as server.  Without using CLI to configure the resources, the resource isn't activated.  
-		Therefore, jboss-as requires a restart.	
 
-6)  Open the admin console to make sure the VDB is deployed
+4) copy the vdb and teiidfiles support files
 
-	*  open a browser to http://localhost:9990/console 	
+    *  `mvn install -Pcopy-files1
 
-7)  See "Query Demonstrations" below to demonstrate data federation.
+5)  Open the admin console to make sure the VDB is deployed
+
+    *  open a browser to http://localhost:9990/console 	
+
+6)  See "Query Demonstrations" below to demonstrate data federation.
+
 
 ##################################
 #  Undeploy artifacts
@@ -118,18 +119,22 @@ NOTE: There currently isn't a JBoss AS plugin option for undeploying the rar and
 Example:   mvn install -Dvdb="portfolio" -Dsql="example query"
 
 
-example queries:
-
-1	select * from product
-2	select stock.* from (call MarketData.getTextFiles('*.txt')) f, TEXTTABLE(f.file COLUMNS symbol string, price bigdecimal HEADER) stock
-3.	select product.symbol, stock.price, company_name from product, (call MarketData.getTextFiles('*.txt')) f, TEXTTABLE(f.file COLUMNS symbol string, price bigdecimal HEADER) stock where product.symbol=stock.symbol
+#################
+# Example queries:
+#################
 
 Example 1 queries the relational source
 
 Example 2 queries the text file-based source
 
-Example 3 queries both the relational and the text file-based sources.  The files returned from the getTextFiles procedure are 
-passed to the TEXTTABLE table function (via the nested table correlated reference f.file).  The TEXTTABLE function expects a 
+Example 3 performs a join between the relational source and the text file-based source.  The files returned from the getTextFiles procedure are passed to the TEXTTABLE table function (via the nested table correlated reference f.file).  The TEXTTABLE function expects a 
 text file with a HEADER containing entries for at least symbol and price columns. 
+
+Example 4 Issue query that contains a NATIVE sql call that will be directly issued against the H2 database.  This is useful if the function isn't supported by the translator (check the documentation for the types of translators that support NATIVE sql).   Note that the translator override in the vdb xml enabling support for native queries has to be set.
+
+1	select * from product
+2	select stock.* from (call MarketData.getTextFiles('*.txt')) f, TEXTTABLE(f.file COLUMNS symbol string, price bigdecimal HEADER) stock
+3.	select product.symbol, stock.price, company_name from product, (call MarketData.getTextFiles('*.txt')) f, TEXTTABLE(f.file COLUMNS symbol string, price bigdecimal HEADER) stock where product.symbol=stock.symbol
+4 	select x.* FROM (call native('select Shares_Count, MONTHNAME(Purchase_Date) from Holdings')) w, ARRAYTABLE(w.tuple COLUMNS "Shares_Count" integer, "MonthPurchased" string ) AS x
 
 
