@@ -31,30 +31,30 @@ Setup can be done either manually (see Manual Setup) or using maven (see Setup u
 ### Manual setup
 #########################################
 
-1. shutdown jbossas server
+1) shutdown the jbossas server
 
-2.  Data Source(s) setup:
+2)  Data Source(s) setup:
 
     Edit the contents of "standalone-teiid.xml" file, and add contents of following files to create H2, CSV data sources
 
 	* src/datasources/portfolio-ds.xml.xml - under "datasources" subsystem element
 	* src/datasources/marketdata-file-ds.xml - under "resource-adapter" subsystem
 	
-    Copy the "teiidfiles" directory to the "&lt;jboss.home&gt;/" directory.  The teiidfiles directory should contain:
+    Copy the "teiidfiles" directory to the "<jboss.home>/" directory.  The teiidfiles directory should contain:
 	* customer-schema.sql
 	* customer-schema-drop.sql
 	* data/marketdata-price.txt
 	* data/marketdata-price1.txt
 	
-    when completed, you should see &lt;jboss.home&gt;/teiidfiles
+    when completed, you should see <jboss.home>/teiidfiles
 
 3.  Security setup
 
-    Copy the files in the src/security directory to "&lt;jboss.home&gt;/modules/org/jboss/teiid/conf" directory
+    Copy the files in the src/security directory to "<jboss.home>/standalone/configuration" directory
 	
 4.  Teiid Deployment:
 
-    Copy the following files to the "&lt;jboss.home&gt;/standalone/deployments" directory
+    Copy the following files to the "<jboss.home>/standalone/deployments" directory
 
      * src/vdb/portfolio-vdb.xml
      * src/vdb/portfolio-vdb.xml.dodeploy
