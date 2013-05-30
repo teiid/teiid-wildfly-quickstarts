@@ -20,50 +20,79 @@
 
         <permission>
             <resource-name>Accounts</resource-name>
-            <allow-create>false</allow-create>
             <allow-read>true</allow-read>
-            <allow-update>false</allow-update>
         </permission>
         
         <permission>
             <resource-name>MarketData</resource-name>
-            <allow-create>false</allow-create>
             <allow-read>true</allow-read>
-            <allow-update>false</allow-update>
+        </permission>        
+	
+	<!-- can see any state Account but New York -->
+	<permission>
+            <resource-name>Accounts.Customer</resource-name>
+	    <condition>state &lt;&gt; 'New York'</condition>
+        </permission>
+
+	<!-- not allowed to see SSN -->
+       	<permission>
+            <resource-name>Accounts.Customer.SSN</resource-name>
+            <mask>null</mask>
         </permission>
         
-        <!-- 
-            Since any-authenticated is set to true above, any user who has login credentials to access the VDB
-            will be given this role. No explicit mapping to a JAAS role is not needed.
-        -->
-        <mapped-role-name>anyuser</mapped-role-name>
+	<permission>
+            <resource-name>Accounts.Account.SSN</resource-name>
+            <mask>null</mask>
+        </permission>
+	
     </data-role>
     
     <data-role name="ReadWrite">
-        <description>Allow Reads and Writes to tables and procedures</description>
+        <description>Allow Reads and Writes</description>
 
         <permission>
             <resource-name>Accounts</resource-name>
-            <allow-create>false</allow-create>
+            <allow-create>true</allow-create>
             <allow-read>true</allow-read>
             <allow-update>true</allow-update>
+	    <allow-delete>true</allow-delete>
         </permission>
         
         <permission>
             <resource-name>MarketData</resource-name>
-            <allow-create>false</allow-create>
+            <allow-create>true</allow-create>
             <allow-read>true</allow-read>
             <allow-update>true</allow-update>
+	    <allow-delete>true</allow-delete>
+        </permission>
+	
+	<!-- can see all rows -->
+	<permission>
+            <resource-name>Accounts.Customer</resource-name>
+	    <condition>true</condition>
+        </permission>
+
+	<!-- allowed to see SSN, note the use of the order attribute
+	     to indicate that these masks have precedence -->
+       	<permission>
+            <resource-name>Accounts.Customer.SSN</resource-name>
+            <mask order="1">SSN</mask>
+        </permission>
+        
+	<permission>
+            <resource-name>Accounts.Account.SSN</resource-name>
+            <mask order="1">SSN</mask>
         </permission>
         
         <!--
-            This role must defined in the JAAS security domain, the sample UserRolesLoginModules based roles file provided 
-            in this sample directory. copy these "teiid-security-roles.properties" and "teiid-security-users.proeprties" 
-            into "<jboss-install>/modules/org/jboss/teiid/conf" directory and replace the old ones.
+            This mapped role must defined in the JAAS security domain. Use the
+	    sample UserRolesLoginModules based roles file provided in this 
+	    sample directory. Copy the "teiid-security-roles.properties" and 
+	    "teiid-security-users.proeprties" into 
+	    "<jboss-install>/modules/org/jboss/teiid/conf" directory and 
+	    replace the old ones.
         -->
-        <mapped-role-name>supervisor</mapped-role-name>
+        <mapped-role-name>superuser</mapped-role-name>
     </data-role>    
-    
-    
 
 </vdb>
