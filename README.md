@@ -58,8 +58,8 @@ To run these quickstarts with the provided build scripts, you need the following
 
             mvn --version 
 
-3. The JBoss Enterprise Application Platform 6 distribution ZIP or the JBoss AS 7 distribution ZIP.
-    * For information on how to install and run JBoss, refer to the product documentation.
+3. The JBoss Enterprise Application Platform (EAP) 6 Alpha distribution ZIP or the JBoss AS 7 distribution ZIP.
+    * For information on how to install and run JBoss, refer to the server documentation.
 
 4.  Set JBOSS_HOME to the root directory location of your application server, the scripts use this variable to
 	determine where to deploy to.
