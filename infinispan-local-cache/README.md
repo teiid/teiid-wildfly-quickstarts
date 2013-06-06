@@ -35,45 +35,15 @@ Setup can be done either manually (see Manual Setup) or using maven (see Setup u
 	-	under  src/module,  copy 'com' directory to <jbossas-dir>/modules/
 	-   under  target, copy  infinispan-quickstart-pojos.jar to <jbossas-dir>/modules/com/client/quickstart/pojos/main
 
-4) setup Infinispan cache
-
-* Edit `standalone/configuration/standalone-teiid.xml` and add a cache
-
-            <cache-container name="teiid-infinispan-quickstart" default-cache="local-quickstart-cache" start="EAGER">
-                <local-cache name="local-quickstart-cache" start="EAGER"/>
-            </cache-container>
-            
-5) setup Infinispan as a datasource
-
-* Edit `standalone/configuration/standalone-teiid.xml` and add resource-adapter
-
-             <resource-adapters>
-                <resource-adapter>
-                    <archive>
-                        teiid-connector-infinispan.rar
-                    </archive>
-                    <transaction-support>NoTransaction</transaction-support>
-                    <connection-definitions>
-                        <connection-definition class-name="org.teiid.resource.adapter.infinispan.InfinispanManagedConnectionFactory" jndi-name="java:/infinispanTest" enabled="true" use-java-context="true" pool-name="java:/infinispanTest">
-                            <config-property name="CacheTypeMap">
-                                local-quickstart-cache:com.client.quickstart.pojo.Order
-                            </config-property>
-                            <config-property name="CacheJndiName">
-                                java:jboss/infinispan/container/teiid-infinispan-quickstart
-                            </config-property>
-                            <config-property name="module">
-                                com.client.quickstart.pojos
-                            </config-property>
-                        </connection-definition>
-                    </connection-definitions>
-                </resource-adapter>
-            </resource-adapters>
-
-            
-5) Start the server
+4) Start the server
 
 	*  run:  ./standalone.sh -c standalone-teiid.xml
 
+5) run the setup.cli  script to setup Infinispan cache and resource adapter for Infinispan connector
+
+	-	cd to the ${JBOSS_HOME}/bin directory
+	-	execute:  ./jboss-cli.sh --connect --file={path}/infinispan-local-cache/src/scripts/setup.cli 
+            
 6) deploy the sample application using the management console at http://localhost:9990
 
 	* use the management console at http://localhost:9990 to deploy infinispan-quickstart.war from the target directory
@@ -89,8 +59,8 @@ Setup can be done either manually (see Manual Setup) or using maven (see Setup u
 
 	the default is username=user   password=user
 
-9) Open a browser to:  http://localhost:8080/infinispan-quickstart/home.jsf
-This should present a list of 10 Orders that were loaded into the cache.
+9) [Required] Open a browser to:  http://localhost:8080/infinispan-quickstart/home.jsf
+This will trigger the loading of the 10 Orders and then present that list on the page.
 
 10) Use a sql tool, like SQuirreL, to connect and issue following example query:
 
@@ -139,8 +109,8 @@ This should present a list of 10 Orders that were loaded into the cache.
 9) RESTART the jboss as server.  Without using CLI to configure the resources, the resource isn't activated.  
 		Therefore, jboss-as requires a restart.
 	
-10) Open a browser to:  http://localhost:8080/infinispan-quickstart/home.jsf
-   This should present a list of 10 Orders that were loaded into the cache.
+10) [Required] Open a browser to:  http://localhost:8080/infinispan-quickstart/home.jsf
+This will trigger the loading of the 10 Orders and then present that list on the page.
 
 11) Use a sql tool, like SQuirreL, to connect and issue following example query:
 
