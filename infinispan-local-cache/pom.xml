@@ -372,15 +372,16 @@
 							<address>subsystem=resource-adapters</address>
 							<resources>
 								<resource>
-									<address>resource-adapter=infinispanTest</address>
+									<address>resource-adapter=infinispan</address>
+									
 									<properties>
 										<enable-resource>true</enable-resource>
-										<archive>teiid-connector-infinispan.rar</archive>
+										<module>org.jboss.teiid.resource-adapter.infinispan</module>
 										<transaction-support>NoTransaction</transaction-support>
 									</properties>
 								</resource>
 								<resource>
-									<address>resource-adapter=infinispanTest,connection-definitions=infinispanTest</address>
+									<address>resource-adapter=infinispan,connection-definitions=infinispanTest</address>
 									<properties>
 										<jndi-name>java:/infinispanTest</jndi-name>
 										<class-name>org.teiid.resource.adapter.infinispan.InfinispanManagedConnectionFactory</class-name>
@@ -389,19 +390,19 @@
 									</properties>
 								</resource>
 								<resource>
-									<address>resource-adapter=infinispanTest,connection-definitions=infinispanTest,config-properties=CacheTypeMap</address>
+									<address>resource-adapter=infinispan,connection-definitions=infinispanTest,config-properties=CacheTypeMap</address>
 									<properties>
 										<value>local-quickstart-cache:com.client.quickstart.pojo.Order</value>
 									</properties>
 								</resource>								
 								<resource>
-									<address>resource-adapter=infinispanTest,connection-definitions=infinispanTest,config-properties=module</address>
+									<address>resource-adapter=infinispan,connection-definitions=infinispanTest,config-properties=module</address>
 									<properties>
 										<value>com.client.quickstart.pojos</value>
 									</properties>
 								</resource>
 								<resource>
-									<address>resource-adapter=infinispanTest,connection-definitions=infinispanTest,config-properties=CacheJndiName</address>
+									<address>resource-adapter=infinispan,connection-definitions=infinispanTest,config-properties=CacheJndiName</address>
 									<properties>
 										<value>java:jboss/infinispan/container/teiid-infinispan-quickstart</value>
 									</properties>

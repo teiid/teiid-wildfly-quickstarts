@@ -1,0 +1,10 @@
+/subsystem=infinispan/cache-container=teiid-infinispan-quickstart:add(default-cache=local-quickstart-cache, start=EAGER)
+/subsystem=infinispan/cache-container=teiid-infinispan-quickstart/local-cache=local-quickstart-cache:add(start=EAGER)
+
+/subsystem=resource-adapters/resource-adapter=infinispan/connection-definitions=infinispanDS:add(jndi-name=java:/infinispanTest, class-name=org.teiid.resource.adapter.infinispan.InfinispanManagedConnectionFactory, enabled=true, use-java-context=true)
+/subsystem=resource-adapters/resource-adapter=infinispan/connection-definitions=infinispanDS/config-properties=Module:add(value=com.client.quickstart.pojos)
+/subsystem=resource-adapters/resource-adapter=infinispan/connection-definitions=infinispanDS/config-properties=CacheTypeMap:add(value=local-quickstart-cache:com.client.quickstart.pojo.Order)
+/subsystem=resource-adapters/resource-adapter=infinispan/connection-definitions=infinispanDS/config-properties=CacheJndiName:add(value=java:jboss/infinispan/container/teiid-infinispan-quickstart)
+/subsystem=resource-adapters/resource-adapter=infinispan:activate
+
+/:reload
