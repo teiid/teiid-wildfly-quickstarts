@@ -84,61 +84,38 @@ public class JDBCClient {
 	}
 	
 	public static boolean execute(Connection connection, String sql) throws Exception {
-		String sql_lower = sql.toLowerCase().trim();
-		if (sql_lower.startsWith("insert") || sql_lower.startsWith("update") || sql_lower.startsWith("delete")) {
-			executeUpdate(connection, sql);
-			return false;
-		} else {
-			executeQuery(connection, sql);
-			return true;
-		}
-		
-	}
-	public static void executeQuery(Connection connection, String sql) throws Exception {
 		try {
 			Statement statement = connection.createStatement();
 			
-			ResultSet results = statement.executeQuery(sql);
+			boolean hasRs = statement.execute(sql);
 			
-			ResultSetMetaData metadata = results.getMetaData();
-			int columns = metadata.getColumnCount();
-			System.out.println("Results");
-			for (int row = 1; results.next(); row++) {
-				System.out.print(row + ": ");
-				for (int i = 0; i < columns; i++) {
-					if (i > 0) {
-						System.out.print(",");
+			if (!hasRs) {
+				int cnt = statement.getUpdateCount();
+				System.out.println("----------------\r");
+				System.out.println("Updated #rows: " + cnt);
+				System.out.println("----------------\r");
+			} else {
+				ResultSet results = statement.getResultSet();
+				ResultSetMetaData metadata = results.getMetaData();
+				int columns = metadata.getColumnCount();
+				System.out.println("Results");
+				for (int row = 1; results.next(); row++) {
+					System.out.print(row + ": ");
+					for (int i = 0; i < columns; i++) {
+						if (i > 0) {
+							System.out.print(",");
+						}
+						System.out.print(results.getString(i+1));
 					}
-					System.out.print(results.getString(i+1));
+					System.out.println();
 				}
-				System.out.println();
+				results.close();
 			}
 			System.out.println("Query Plan");
 			System.out.println(statement.unwrap(TeiidStatement.class).getPlanDescription());
 			
-			results.close();
 			statement.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			if (connection != null) {
-				connection.close();
-			}
-		}		
-	}
-	
-	public static void executeUpdate(Connection connection, String sql) throws Exception {
-		try {
-			Statement statement = connection.createStatement();
-			
-			int cnt = statement.executeUpdate(sql);
-			
-			
-			System.out.println("----------------\r");
-			System.out.println("Updated #rows: " + cnt);
-			System.out.println("----------------\r");
-			
-			statement.close();
+			return hasRs;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
