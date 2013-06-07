@@ -1,0 +1,5 @@
+/subsystem=resource-adapters/resource-adapter=webservice/connection-definitions=wsDS:add(jndi-name=java:/twitterDS, class-name=org.teiid.resource.adapter.ws.WSManagedConnectionFactory, enabled=true, use-java-context=true)
+/subsystem=resource-adapters/resource-adapter=webservice/connection-definitions=wsDS/config-properties=EndPoint:add(value=http://search.twitter.com/search.json)
+/subsystem=resource-adapters/resource-adapter=webservice:activate
+
+/:reload

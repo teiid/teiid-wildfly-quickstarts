@@ -47,7 +47,7 @@
 										<fail unless="jboss.present"
 											message="===== JBOSS_HOME variable must be set and the directory must exist ======" />
 
-										<copy todir="${JBOSS_HOME}/standalone/deployments">
+										<copy todir="${JBOSS_HOME}/standalone/deployments" overwrite="true">
 											<fileset dir="${basedir}/src/vdb/" />
 										</copy>
 								
@@ -78,15 +78,15 @@
 							<address>subsystem=resource-adapters</address>
 							<resources>
 								<resource>
-									<address>resource-adapter=twitterDS</address>
+									<address>resource-adapter=webservice</address>
 									<properties>
 										<enable-resource>true</enable-resource>
-										<archive>teiid-connector-ws.rar</archive>
+										<module>org.jboss.teiid.resource-adapter.webservice</module>
 										<transaction-support>NoTransaction</transaction-support>
 									</properties>
 								</resource>
 								<resource>
-									<address>resource-adapter=twitterDS,connection-definitions=webserviceDS</address>
+									<address>resource-adapter=webservice,connection-definitions=webserviceDS</address>
 									<properties>
 										<jndi-name>java:/twitterDS</jndi-name>
 										<class-name>org.teiid.resource.adapter.ws.WSManagedConnectionFactory</class-name>
@@ -95,7 +95,7 @@
 									</properties>
 								</resource>
 								<resource>
-									<address>resource-adapter=twitterDS,connection-definitions=webserviceDS,config-properties=EndPoint</address>
+									<address>resource-adapter=webservice,connection-definitions=webserviceDS,config-properties=EndPoint</address>
 									<properties>
 										<value>http://search.twitter.com/search.json</value>
 									</properties>
