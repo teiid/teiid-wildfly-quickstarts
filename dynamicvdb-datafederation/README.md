@@ -26,18 +26,18 @@ Setup can be done either manually (see Manual Setup) or using maven (see Setup u
 ### Manual setup
 #########################################
 
-1) shutdown jbossas server
+1)  Start the server
 
-2)  Data Source(s) setup:
+	Open a command line and navigate to the "bin" directory under the root directory of the JBoss server
 
-- Edit the contents of "standalone-teiid.xml" file, and add contents of following files to create H2, CSV data sources
+	For Linux:   ./standalone.sh -c standalone-teiid.xml	
+	for Windows: standalone.bat -c standalone-teiid.xml
 
-	(1) src/datasources/portfolio-ds.xml.xml - under "datasources" subsystem element
-	(2) src/datasources/marketdata-file-ds.xml - under "resource-adapter" subsystem
+2)  Copy teiid support files
 	
 - Copy the "teiidfiles" directory to the "<jboss.home>/" directory
 
-	The teiidfiles directory should contain:
+	The src/teiidfiles directory should contain:
 	(1) customer-schema.sql
 	(2) customer-schema-drop.sql
 	(3) data/marketdata-price.txt
@@ -45,17 +45,21 @@ Setup can be done either manually (see Manual Setup) or using maven (see Setup u
 	
 when complete, you should see <jboss.home>/teiidfiles
 
-3)  Teiid Deployment:
+3) Setup the h2 datasource and file resource adapter
+
+-  run the following CLI script
+
+	-	cd to the ${JBOSS_HOME}/bin directory
+	-	execute:  ./jboss-cli.sh --connect --file={path}/dynamicvdb-datafederation/src/scripts/setup.cli 
+
+4)  Teiid Deployment:
 
 Copy the following files to the "<jboss.home>/standalone/deployments" directory
 
      (1) src/vdb/portfolio-vdb.xml
      (2) src/vdb/portfolio-vdb.xml.dodeploy
 
-
-4)  Start the server
-
-	*  run:  ./standalone.sh -c standalone-teiid.xml
+You should see the server log indicate the VDB is active with a message like:  TEIID40003 VDB Portfolio.1 is set to ACTIVE
 
 5)  Open the admin console to make sure the VDB is deployed
 
@@ -85,7 +89,7 @@ Copy the following files to the "<jboss.home>/standalone/deployments" directory
 
 4) copy the vdb and teiidfiles support files
 
-    *  `mvn install -Pcopy-files1
+    *  `mvn install -Pcopy-files`
 
 5)  Open the admin console to make sure the VDB is deployed
 
