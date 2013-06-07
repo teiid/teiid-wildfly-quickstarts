@@ -118,15 +118,15 @@
 							<address>subsystem=resource-adapters</address>
 							<resources>
 								<resource>
-									<address>resource-adapter=marketdata</address>
+									<address>resource-adapter=file</address>
 									<properties>
 										<enable-resource>true</enable-resource>
-										<archive>teiid-connector-file.rar</archive>
+										<module>org.jboss.teiid.resource-adapter.file</module>
 										<transaction-support>NoTransaction</transaction-support>
 									</properties>
 								</resource>
 								<resource>
-									<address>resource-adapter=marketdata,connection-definitions=marketdata-file</address>
+									<address>resource-adapter=file,connection-definitions=marketdata-file</address>
 									<properties>
 										<jndi-name>java:/marketdata-file</jndi-name>
 										<class-name>org.teiid.resource.adapter.file.FileManagedConnectionFactory</class-name>
@@ -135,13 +135,13 @@
 									</properties>
 								</resource>
 								<resource>
-									<address>resource-adapter=marketdata,connection-definitions=marketdata-file,config-properties=ParentDirectory</address>
+									<address>resource-adapter=file,connection-definitions=marketdata-file,config-properties=ParentDirectory</address>
 									<properties>
 										<value>../teiidfiles/data</value>
 									</properties>
 								</resource>
 								<resource>
-									<address>resource-adapter=marketdata,connection-definitions=marketdata-file,config-properties=AllowParentPaths</address>
+									<address>resource-adapter=file,connection-definitions=marketdata-file,config-properties=AllowParentPaths</address>
 									<properties>
 										<value>true</value>
 									</properties>
