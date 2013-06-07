@@ -45,12 +45,14 @@ public class JDBCClient {
 		}
 
 		System.out.println("Executing using the TeiidDriver");
-		execute(getDriverConnection(args[0], args[1], args[2]), args[3]);
+		boolean isSelect = execute(getDriverConnection(args[0], args[1], args[2]), args[3]);
 
-		System.out.println("-----------------------------------");
-		System.out.println("Executing using the TeiidDataSource");
-		// this is showing how to make a Data Source connection. 
-		execute(getDataSourceConnection(args[0], args[1], args[2]), args[3]);
+		if (isSelect) {
+			System.out.println("-----------------------------------");
+			System.out.println("Executing using the TeiidDataSource");
+			// this is showing how to make a Data Source connection. 
+			execute(getDataSourceConnection(args[0], args[1], args[2]), args[3]);
+		}
 	}
 	
 	static Connection getDriverConnection(String host, String port, String vdb) throws Exception {
@@ -81,7 +83,18 @@ public class JDBCClient {
 		return (System.getProperties().getProperty(PASSWORD) != null ? System.getProperties().getProperty(PASSWORD) : PASSWORD_DEFAULT );
 	}
 	
-	public static void execute(Connection connection, String sql) throws Exception {
+	public static boolean execute(Connection connection, String sql) throws Exception {
+		String sql_lower = sql.toLowerCase().trim();
+		if (sql_lower.startsWith("insert") || sql_lower.startsWith("update") || sql_lower.startsWith("delete")) {
+			executeUpdate(connection, sql);
+			return false;
+		} else {
+			executeQuery(connection, sql);
+			return true;
+		}
+		
+	}
+	public static void executeQuery(Connection connection, String sql) throws Exception {
 		try {
 			Statement statement = connection.createStatement();
 			
@@ -113,4 +126,26 @@ public class JDBCClient {
 			}
 		}		
 	}
+	
+	public static void executeUpdate(Connection connection, String sql) throws Exception {
+		try {
+			Statement statement = connection.createStatement();
+			
+			int cnt = statement.executeUpdate(sql);
+			
+			
+			System.out.println("----------------\r");
+			System.out.println("Updated #rows: " + cnt);
+			System.out.println("----------------\r");
+			
+			statement.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (connection != null) {
+				connection.close();
+			}
+		}		
+	}
+
 }
