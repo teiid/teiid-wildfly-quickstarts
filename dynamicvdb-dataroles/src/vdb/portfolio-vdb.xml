@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<vdb name="DynamicPortfolio" version="1">
+<vdb name="Portfolio" version="1">
 
     <description>A Dynamic VDB</description>
     
@@ -11,7 +11,7 @@
 
     <model name="Accounts">
         <property name="importer.useFullSchemaName" value="false"/>
-        <source name="hsql-connector" translator-name="hsql" connection-jndi-name="java:/accounts-ds"/>
+        <source name="h2-connector" translator-name="h2" connection-jndi-name="java:/accounts-ds"/>
     </model>
     
     <!-- For detailed description about data roles please refer to Reference Guide's Data Roles chapter -->

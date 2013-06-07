@@ -19,6 +19,12 @@ System requirements
 
 If you have not done so, please review the System Requirements (../README.md)
 
+############################
+#   NOTE:  This example relies upon the dynamicvdb-datafederation example and that it needs to be deployed prior to running this example.
+#       	Therefore, read the dynamicvdb-datafederation's README.md and follow its directions before continuing.
+############################
+
+
 
 ####################
 #   Setup
@@ -31,74 +37,59 @@ Setup can be done either manually (see Manual Setup) or using maven (see Setup u
 ### Manual setup
 #########################################
 
-1) shutdown the jbossas server
+1) Run the setup in dynamicvdb-datafederation quick start
 
-2)  Data Source(s) setup:
+2) shutdown the jbossas server
 
-    Edit the contents of "standalone-teiid.xml" file, and add contents of following files to create H2, CSV data sources
-
-	* src/datasources/portfolio-ds.xml.xml - under "datasources" subsystem element
-	* src/datasources/marketdata-file-ds.xml - under "resource-adapter" subsystem
-	
-    Copy the "teiidfiles" directory to the "<jboss.home>/" directory.  The teiidfiles directory should contain:
-	* customer-schema.sql
-	* customer-schema-drop.sql
-	* data/marketdata-price.txt
-	* data/marketdata-price1.txt
-	
-    when completed, you should see <jboss.home>/teiidfiles
-
-3.  Security setup
+3) Security setup
 
     Copy the files in the src/security directory to "<jboss.home>/standalone/configuration" directory
 	
-4.  Teiid Deployment:
+4) VDB Deployment:
 
     Copy the following files to the "<jboss.home>/standalone/deployments" directory
 
      * src/vdb/portfolio-vdb.xml
      * src/vdb/portfolio-vdb.xml.dodeploy
 
-5.  Start the server
+5)  Start the server
 
-	*  run:  ./standalone.sh -c standalone-teiid.xml
+	Open a command line and navigate to the "bin" directory under the root directory of the JBoss server
 
-6.  Open the admin console to make sure the VDB is deployed
+	For Linux:   ./standalone.sh -c standalone-teiid.xml	
+	for Windows: standalone.bat -c standalone-teiid.xml
+
+6)  Open the admin console to make sure the VDB is deployed
 
 	*  open a brower to http://localhost:9990/console 	
 
-7.  See "Query Demonstrations" below to demonstrate data federation.
+7)  See "Query Demonstrations" below to demonstrate data federation.
 
 
 #########################################
 ### Setup using the JBoss AS Maven plugin
 #########################################
 
-1. Start the server
+1) Run the setup in dynamicvdb-datafederation quick start
 
-	*  run:  ./standalone.sh -c standalone-teiid.xml	
-
-2. copy the vdb, teiidfiles and security files
-
-	*  mvn install -Pcopy-files
+2) shutdown the jbossas server	
 	
-3. setup the datasource
+3) copy the vdb, teiidfiles and security files
 
-    * mvn -Psetup-datasource jboss-as:add-resource 
+	*  `mvn install -Pcopy-files`    
 	
-4. setup the resource adapter
+4)  Start the server (if not already started)
 
-    * mvn -Psetup-rar jboss-as:add-resource
-    
+	Open a command line and navigate to the "bin" directory under the root directory of the JBoss server
+
+	For Linux:   ./standalone.sh -c standalone-teiid.xml	
+	for Windows: standalone.bat -c standalone-teiid.xml
     	
-5. RESTART the jboss as server.  Without using CLI to configure the resources, the resource isn't activated.  
-		Therefore, jboss-as requires a restart.	
-
-6.  Open the admin console to make sure the VDB is deployed
+5)  Open the admin console to make sure the VDB is deployed
 
 	*  open a brower to http://localhost:9990/console 	
 
-7.  See "Query Demonstrations" below to demonstrate data federation.
+6)  See "Query Demonstrations" below to demonstrate data federation.
 
 
 #########################################
@@ -111,7 +102,7 @@ Setup can be done either manually (see Manual Setup) or using maven (see Setup u
 
 2. Use the simpleclient example to run the following queries:
 
-Example:   mvn install -Dvdb="portfolio" -Dsql="example query"
+Example:   mvn install -Dvdb="portfoliodataroles" -Dsql="example query"
 
 example queries:
 
@@ -122,9 +113,10 @@ example queries:
     
 3.	"select * from customer" - note that the SSN is null and there are no customers from 'New York'
     
-Since this simpleclient example hard coded the default user and password, modify the call to include the user name and password from command line with user name "portfolio" and password "portfolio" and re-execute the above:
+Since this simpleclient example defaults user and password to user/user, modify the call to include the user name and password on the command line 
+where user name "portfolio" and password "portfolio" and re-execute the above:
 
-Example:   mvn install -Dvdb="portfolio" -Dusername="portfolio" -Dpassword="portfolio" -Dsql="example query"
+Example:   mvn install -Dvdb="portfoliodataroles" -Dusername="portfolio" -Dpassword="portfolio" -Dsql="example query"
 
 1.	should be the same result as above
 
