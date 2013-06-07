@@ -33,7 +33,7 @@ Some quickstarts are designed to enhance or extend other quickstarts. These are 
 | **Quickstart Name** | **Features Demonstrated** | **Description** | **Prerequisites** |
 |:-----------|:-----------|:-----------|:-----------|:-----------|
 | [datafederation](dynamicvdb-datafederation/tree/master/README.md "data-federation") | Data Federation, TEXTTABLE, Native Query | Shows how to expose multiple data sources as a single source | None |
-| [dataroles](dynamicvdb-dataroles/tree/master/README.md "data-roles") | Data roles | Shows how to control Read/Write data access using data roles | None |
+| [dataroles](dynamicvdb-dataroles/tree/master/README.md "data-roles") | Data roles | Shows how to control Read/Write data access using data roles and masking | dynamicvdb-datafederation |
 | [consume-webservices](dynamicvdb-webservices-to-twitter/tree/master/README.md "consume-webservices") | 'ws' Translator, Define View Tables | Demonstrates the use of the 'ws' translator to read a web services data source | None |
 | [hibernate](hibernate-on-top-of-teiid/tree/master/README.md "hibernate") | Hibernate Integration, Create VIEW, Create Trigger, TEXTTABLE | Demonstrates how a Hibernate application can add data federation capabilities at the data layer| dynamicvdb-datafederation |
 | [infinispan-cache](infinispan-local-cache/tree/master/README.md "infinispan-cache") | 'infinispan' Object Translator, OBJECTTABLE | Demonstrates the 'infinispan' object translator which enables reading an object cache  | None |
