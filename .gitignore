@@ -2,6 +2,7 @@
 target
 .project
 .classpath
+.svn
 bin
 build.xml
 .DS_Store
