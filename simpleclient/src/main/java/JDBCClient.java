@@ -47,6 +47,7 @@ public class JDBCClient {
 		System.out.println("Executing using the TeiidDriver");
 		boolean isSelect = execute(getDriverConnection(args[0], args[1], args[2]), args[3]);
 
+        // only if its a Select will the SQL be performed again using TeiidDataSource
 		if (isSelect) {
 			System.out.println("-----------------------------------");
 			System.out.println("Executing using the TeiidDataSource");
@@ -84,10 +85,12 @@ public class JDBCClient {
 	}
 	
 	public static boolean execute(Connection connection, String sql) throws Exception {
+        
+        boolean hasRs = true;
 		try {
 			Statement statement = connection.createStatement();
 			
-			boolean hasRs = statement.execute(sql);
+			hasRs = statement.execute(sql);
 			
 			if (!hasRs) {
 				int cnt = statement.getUpdateCount();
@@ -115,14 +118,14 @@ public class JDBCClient {
 			System.out.println(statement.unwrap(TeiidStatement.class).getPlanDescription());
 			
 			statement.close();
-			return hasRs;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			if (connection != null) {
 				connection.close();
 			}
-		}		
+		}
+		return hasRs;
 	}
 
 }

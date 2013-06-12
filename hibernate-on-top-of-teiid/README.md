@@ -40,13 +40,15 @@ Please note this example does not support working with Hibernate 3.
 	
 3) Open a command line and navigate to the root directory of this quickstart
 
+	*   `mvn clean install`
+
 4) Deploy the vdb by running the following command:	
 	
-	*	mvn packate -Pdeploy-vdb 
+	*   `mvn package -Pdeploy-vdb`
 
 3) Deploy the web application buy running the following command:
 
-    *  mvn clean package jboss-as:deploy
+    	*   `mvn package jboss-as:deploy`
     	
 5) RESTART the jboss as server.  Without using CLI to configure the resources, the resource isn't activated.  
 		Therefore, jboss-as requires a restart.	

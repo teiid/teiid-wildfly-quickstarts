@@ -91,11 +91,16 @@ You should see the server log indicate the VDB is active with a message like:  T
 
     *  `mvn install -Pcopy-files`
 
-5)  Open the admin console to make sure the VDB is deployed
+5) REQUIRED: RESTART Server
+
+	This is required because the Teiid market data datasource is not being fully activated and the files
+	are will not be found unless restarted. 
+
+6)  Open the admin console to make sure the VDB is deployed
 
     *  open a browser to http://localhost:9990/console 	
 
-6)  See "Query Demonstrations" below to demonstrate data federation.
+7)  See "Query Demonstrations" below to demonstrate data federation.
 
 
 ##################################

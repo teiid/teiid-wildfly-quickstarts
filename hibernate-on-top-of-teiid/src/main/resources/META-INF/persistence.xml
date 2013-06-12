@@ -20,13 +20,15 @@
       <!-- The datasource is deployed as WEB-INF/hibernate4-teiid-quickstart-ds.xml, you
          can find it in the source at src/main/webapp/WEB-INF/hibernate4-teiid-quickstart-ds.xml -->
       <jta-data-source>java:/jboss/datasources/Hibernate4TeiidQuickstartDS</jta-data-source>
+      
+	<class>com.client.quickstart.hibernate4.model.ProductInfo</class>
       <properties>
          <!-- Properties for Hibernate -->
          <!--  NOTE:  Teiid doesn't not support Hibernate submitting DDL for table drop and creation -->
          <property name="hibernate.hbm2ddl.auto" value="validate" />
          <property name="hibernate.show_sql" value="true" />
          <property name="hibernate.dialect" value="org.teiid.dialect.TeiidDialect" />
-         <property name="connection.autocommit" value="true" />
+         <property name="hibernate.connection.autocommit" value="true" />
       </properties>
    </persistence-unit>
 </persistence>
