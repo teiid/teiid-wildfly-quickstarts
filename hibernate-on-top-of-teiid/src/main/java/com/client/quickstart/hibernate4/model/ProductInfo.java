@@ -38,12 +38,13 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 
 @Entity
-@XmlRootElement
+//@XmlRootElement
 @Table(name = "ProductInfo", uniqueConstraints = @UniqueConstraint(columnNames = "id"))
-public class Product implements java.io.Serializable {
+public class ProductInfo implements java.io.Serializable {
 	/** Default value included to remove warning. Remove or modify at will. **/
 	private static final long serialVersionUID = 1L;
 
+	@NotNull
 	@Id
 	private int id;
 
@@ -60,14 +61,14 @@ public class Product implements java.io.Serializable {
 	@Column(name="price", insertable=false, updatable=false)
 	private BigDecimal price;
 
-	public Product() {
+	public ProductInfo() {
 	}
 
-	public Product(int id) {
+	public ProductInfo(int id) {
 		this.id = id;
 	}
 
-	public Product(int id, String symbol, String companyName) {
+	public ProductInfo(int id, String symbol, String companyName) {
 		this.id = id;
 		this.symbol = symbol;
 		this.companyName = companyName;

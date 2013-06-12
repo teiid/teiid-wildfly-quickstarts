@@ -6,7 +6,7 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Order;
 
-import com.client.quickstart.hibernate4.model.Product;
+import com.client.quickstart.hibernate4.model.ProductInfo;
 
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -24,18 +24,18 @@ public class ProductListProducer {
 	@Inject
 	private EntityManager em;
 
-	private List<Product> products;
+	private List<ProductInfo> productInfos;
 
 	// @Named provides access the return value via the EL variable name
 	// "products" in the UI (e.g.,
 	// Facelets or JSP view)
 	@Produces
 	@Named
-	public List<Product> getProducts() {
-		return products;
+	public List<ProductInfo> getProductInfos() {
+		return productInfos;
 	}
 
-	public void onProductListChanged(@Observes(notifyObserver = Reception.IF_EXISTS) final Product product) {
+	public void onProductListChanged(@Observes(notifyObserver = Reception.IF_EXISTS) final ProductInfo product) {
 		retrieveAllProductsOrderedByName();
 	}
 
@@ -45,9 +45,9 @@ public class ProductListProducer {
 
 		// using Hibernate Session and Criteria Query via Hibernate Native API
 		Session session = (Session) em.getDelegate();
-		Criteria cb = session.createCriteria(Product.class);
+		Criteria cb = session.createCriteria(ProductInfo.class);
 		cb.addOrder(Order.asc("companyName"));
-		products = (List<Product>) cb.list();
+		productInfos = (List<ProductInfo>) cb.list();
 
 	}
 }
