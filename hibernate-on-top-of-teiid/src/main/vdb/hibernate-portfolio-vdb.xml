@@ -1,14 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <vdb name="Hibernate_Portfolio" version="1">
 
-    <description>The VDB is exposed by Hibernate on top</description>
-    
-    <!-- 
-      Setting to use connector supplied metadata. Can be "true" or "cached".  
-      "true" will obtain metadata once for every launch of Teiid. 
-      "cached" will save a file containing the metadata into 
-      the deploy/<vdb name>/<vdb version/META-INF directory
-    -->
+    <description>This VDB is utilized by Hibernate on top</description>
+
     <property name="UseConnectorMetadata" value="true" />
     
     <import-vdb name="Portfolio" version="1" import-data-policies="true"/>

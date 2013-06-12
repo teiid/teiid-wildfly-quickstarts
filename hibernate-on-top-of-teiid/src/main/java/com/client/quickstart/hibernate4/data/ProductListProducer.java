@@ -1,7 +1,5 @@
 package com.client.quickstart.hibernate4.data;
 
-// Generated Jul 14, 2011 10:51:59 AM by Hibernate Tools 3.4.0.CR1
-
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Order;
