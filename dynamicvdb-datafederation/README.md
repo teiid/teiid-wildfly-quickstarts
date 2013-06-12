@@ -3,7 +3,7 @@ Dynamicvdb-datafederation is the 'Hellow World' example for Teiid.
 
 This will demonstrate how to federate data from a relational data source with a text file-based data source.
 This example uses the H2 database, which is referenced as the "accounts-ds" data source in the server, 
-but the creation SQL could be adapted to another database if you choose.
+but the creation SQL can be adapted to another database if you choose.
 
 Note:  this example provides the base setup for which other quick starts depend upon.
 
