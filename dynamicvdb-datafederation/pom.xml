@@ -82,8 +82,7 @@
 							<resource>
 								<enableResource>true</enableResource>
 								<properties>
-									<connection-url>jdbc:h2:mem:accounts;INIT=RUNSCRIPT FROM
-										'../teiidfiles/customer-schema.sql'\;</connection-url>
+									<connection-url>jdbc:h2:mem:accounts;INIT=RUNSCRIPT FROM '${JBOSS_HOME}/teiidfiles/customer-schema.sql'\;</connection-url>
 									<jndi-name>java:/accounts-ds</jndi-name>
 									<user-java-context>true</user-java-context>
 									<enabled>true</enabled>
@@ -137,7 +136,7 @@
 								<resource>
 									<address>resource-adapter=file,connection-definitions=marketdata-file,config-properties=ParentDirectory</address>
 									<properties>
-										<value>../teiidfiles/data</value>
+										<value>${JBOSS_HOME}/teiidfiles/data</value>
 									</properties>
 								</resource>
 								<resource>

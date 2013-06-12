@@ -28,7 +28,7 @@ import javax.inject.Named;
 import javax.persistence.EntityManager;
 import org.hibernate.Session;
 
-import com.client.quickstart.hibernate4.model.Product;
+import com.client.quickstart.hibernate4.model.ProductInfo;
 
 // The @Stateful annotation eliminates the need for manual transaction demarcation
 @Stateful
@@ -47,36 +47,36 @@ public class ProductRegistration {
 	private EntityManager em;
 
 	@Inject
-	private Event<Product> ProductEventSrc;
+	private Event<ProductInfo> ProductEventSrc;
 
-	private Product newProduct;
+	private ProductInfo newProductInfo;
 
 	@Produces
 	@Named
-	public Product getNewProduct() {
-		return newProduct;
+	public ProductInfo getNewProductInfo() {
+		return newProductInfo;
 	}
 
 	@Produces
 	public void register() throws Exception {
-		log.info("Registering " + newProduct.getCompanyName());
+		log.info("Registering " + newProductInfo.getCompanyName());
 
 		// using Hibernate session(Native API) and JPA entitymanager
 		Session session = (Session) em.getDelegate();
-		session.persist(newProduct);
+		session.persist(newProductInfo);
 
 		try {
-			ProductEventSrc.fire(newProduct);
+			ProductEventSrc.fire(newProductInfo);
 		} catch (Exception e) {
 			log.info("Registration Failed!You may have tried to insert a duplicate Product!!!");
 			e.printStackTrace();
 		}
 
-		initNewProduct();
+		initNewProductInfo();
 	}
 
 	@PostConstruct
-	public void initNewProduct() {
-		newProduct = new Product();
+	public void initNewProductInfo() {
+		newProductInfo = new ProductInfo();
 	}
 }

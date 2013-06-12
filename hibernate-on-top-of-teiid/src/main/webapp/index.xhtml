@@ -21,20 +21,20 @@
             <tr>
                <th style="text-align: right;"><h:outputLabel
                      for="id" value="Product Id:" /></th>
-               <td><h:inputText id="id" value="#{newProduct.id}" /><h:outputText value=" please enter unique Product Id!"/>
+               <td><h:inputText id="id" value="#{newProductInfo.id}" /><h:outputText value=" please enter unique Product Id!"/>
                   <h:message for="id" errorClass="invalid" /></td>
             </tr>
             <tr>
                <th style="text-align: right;"><h:outputLabel
                      for="companyName" value="Company Name:" /></th>
-               <td><h:inputText id="companyName" value="#{newProduct.companyName}" />
+               <td><h:inputText id="companyName" value="#{newProductInfo.companyName}" />
                   <h:message for="companyName" errorClass="invalid" /></td>
             </tr>
             <tr>
                <th style="text-align: right;"><h:outputLabel
                      for="symbol" value="Stock Symbol:" /></th>
                <td><h:inputText id="symbol"
-                     value="#{newProduct.symbol}" /> <h:message
+                     value="#{newProductInfo.symbol}" /> <h:message
                      for="symbol" errorClass="invalid" /></td>
             </tr>
  
@@ -48,11 +48,11 @@
          </p>
       </h:form>
       <h2>Products</h2>
-      <h:panelGroup rendered="#{empty products}">
+      <h:panelGroup rendered="#{empty productInfos}">
          <em>No registered products.</em>
       </h:panelGroup>
-      <h:dataTable var="_member" value="#{products}"
-         rendered="#{not empty products}">
+      <h:dataTable var="_member" value="#{productInfos}"
+         rendered="#{not empty productInfos}">
          <h:column>
             <f:facet name="header">Id</f:facet>
                 #{_member.id}
