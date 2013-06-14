@@ -310,7 +310,7 @@
 					<plugin>
 						<groupId>org.jboss.as.plugins</groupId>
 						<artifactId>jboss-as-maven-plugin</artifactId>
-						<version>${version.jboss.as}</version>
+						<version>${version.jboss.as.plugin}</version>
 						<configuration>
 							<address>subsystem=infinispan,cache-container=teiid-infinispan-quickstart</address>
 							<resources>
@@ -342,7 +342,7 @@
 					<plugin>
 						<groupId>org.jboss.as.plugins</groupId>
 						<artifactId>jboss-as-maven-plugin</artifactId>
-						<version>${version.jboss.as}</version>
+						<version>${version.jboss.as.plugin}</version>
 
 <!--   at this point, i've found no way to add the resource and have it activated, after trying with commands and resources
        when using commands, getting message:  Reason: You must specify the address to deploy the resource to. 
@@ -467,7 +467,7 @@
 					<plugin>
 						<groupId>org.jboss.as.plugins</groupId>
 						<artifactId>jboss-as-maven-plugin</artifactId>
-						<version>${version.jboss.as}</version>
+						<version>${version.jboss.as.plugin}</version>
 						<executions>
 							<execution>
 								<id>deploy-war</id>
@@ -493,7 +493,7 @@
 					<plugin>
 						<groupId>org.jboss.as.plugins</groupId>
 						<artifactId>jboss-as-maven-plugin</artifactId>
-						<version>7.2.Final</version>
+						<version>${version.jboss.as.plugin}</version>
 						<executions>
 							<execution>
 								<id>setup-cache</id>

@@ -200,7 +200,7 @@
 			<plugin>
 				<groupId>org.jboss.as.plugins</groupId>
 				<artifactId>jboss-as-maven-plugin</artifactId>
-				<version>7.3.Final</version>
+				<version>${version.jboss.as.plugin}</version>
 			</plugin>
 		</plugins>
 	</build>
