@@ -3,6 +3,8 @@
 
     <description>Shows how to integrate drools rules with Teiid</description>
        
+    <property name="org.teiid.drools.UDF" value="org.jboss.teiid.quickstart.data.MarketData:MyBusinessRules.drl"/>
+
     <property name="lib" value="org.jboss.teiid.businessrules.udf"></property>
         
     <import-vdb name="Portfolio" version="1" import-data-policies="false"/> 

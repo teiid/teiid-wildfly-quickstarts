@@ -36,7 +36,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
 		<version.teiid>8.4.0.Alpha2-SNAPSHOT</version.teiid>
-		<version.jboss.as>7.1.1.Final</version.jboss.as>
+		<version.jboss.as>7.2.0.Final</version.jboss.as>
 		<version.jboss.javaee.web>2.0.0.Final</version.jboss.javaee.web>
 		<version.infinispan>5.1.4.FINAL</version.infinispan>
 		<version.hibernate.search>4.1.1.Final</version.hibernate.search>
@@ -44,6 +44,7 @@
 		<version.javax.spec>1.0.2.Final</version.javax.spec>
 		<version.javax.enterprise>1.1-20120918</version.javax.enterprise>
 		<version.jboss.logging>3.1.2.GA</version.jboss.logging>
+		<version.jboss.as.plugin>7.4.Final</version.jboss.as.plugin>
 		
 		<version.junit>4.10</version.junit>
 	</properties>

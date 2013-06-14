@@ -87,14 +87,13 @@ You should see the server log indicate the VDB is active with a message like:  T
 
     * `mvn -Psetup-rar jboss-as:add-resource`
 
-4) copy the vdb and teiidfiles support files
+4) REQUIRED: RESTART Server
+
+	This is required because the Teiid data datasources are not being fully activated unless restarted. 
+	
+5) copy the vdb and teiidfiles support files
 
     *  `mvn install -Pcopy-files`
-
-5) REQUIRED: RESTART Server
-
-	This is required because the Teiid market data datasource is not being fully activated and the files
-	are will not be found unless restarted. 
 
 6)  Open the admin console to make sure the VDB is deployed
 

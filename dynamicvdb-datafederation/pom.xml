@@ -75,7 +75,7 @@
 					<plugin>
 						<groupId>org.jboss.as.plugins</groupId>
 						<artifactId>jboss-as-maven-plugin</artifactId>
-						<version>${version.jboss.as}</version>
+						<version>${version.jboss.as.plugin}</version>
 
 						<configuration>
 							<address>subsystem=datasources,data-source=accounts-ds</address>
@@ -112,7 +112,7 @@
 					<plugin>
 						<groupId>org.jboss.as.plugins</groupId>
 						<artifactId>jboss-as-maven-plugin</artifactId>
-						<version>${version.jboss.as}</version>
+						<version>${version.jboss.as.plugin}</version>
 						<configuration>
 							<address>subsystem=resource-adapters</address>
 							<resources>

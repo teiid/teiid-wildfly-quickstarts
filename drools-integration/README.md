@@ -5,10 +5,13 @@ Overview:
 
   
   This quick start demonstrates one way to execute a set of business rules on
-  a set of data.   In this example, the execution of the rules will be triggered
-  by calling the UDF (User Defined Function) from a virtual procedure, capturing
-  the errors that occurred, and returning that error list to the client. 
-
+  a set of data.   In this example, a business rule is triggered to validate
+  the data, and an error message is returned from calling the rule if it fails.
+  Those failures will be accumulated in a temp table and will be returned in the 
+  resultset to the client.
+  
+  The execution of the business rules will be triggered
+  by calling the UDF (User Defined Function) from a virtual procedure.
   The UDF (RulesUDF.java) is written such that it can load any drools .drl file
   and process any POJO that is needed by the business rules.  The .drl file is 
   specified in the system property and is in the format of:
@@ -64,31 +67,34 @@ Setup can be done either manually (see Manual Setup) or using maven (see Setup u
 
 1) Run the deploy in dynamicvdb-datafederation quick start
 
-=== Make sure server is shut down ====
+--- Don't Stop the server
 
-2) Add system property to configuration -
-     <system-properties>
-        <property name="org.teiid.drools.UDF" value="org.jboss.teiid.quickstart.data.MarketData:MyBusinessRules.drl"/>
-    </system-properties>
+2) Add the system property by running the following CLI script
+
+	-	cd to the ${JBOSS_HOME}/bin directory
+	-	execute:  ./jboss-cli.sh --connect --file={path}/drools-integration/src/scripts/setup.cli 
+
 
 This property configures what drools file(s) will be loaded.
-value parameter format is:  POJO Class:.drl file[,POJO Class:.drl…]
+value parameter format is:  POJO Class:.drl file[,POJO Class:.drl file,..]
 
+3) Shut Down the Server
 
-3) Deploy VDB
+4) Deploy VDB
 
 Copy the following files to the "<jboss.home>/standalone/deployments" directory
 
      (1) src/vdb/drools-vdb.xml
      (2) src/vdb/drools-vdb.xml.dodeploy
 
-4) Install the modules
+5) Install the UDF module
 
-    unzip the modules: target/teiiddrools-udf-module-dist/zip into the <jboss.home>/modules/system/layers/base directory
+    unzip the module: target/teiiddrools-udf-module-dist/zip into the <jboss.home>/modules/system/layers/base directory
 
 5) Add module dependency to the org/jboss/teiid/main/module.xml
 
    Add:          <module name="org.jboss.teiid.businessrules.pojo" />
+	
 	
 6) Start the server
 
@@ -99,34 +105,40 @@ Copy the following files to the "<jboss.home>/standalone/deployments" directory
 
 1) Run the deploy in dynamicvdb-datafederation quick start
 
-=== Make sure server is shut down ====
+=== Make sure server is up ====
 
-2) Add system property to configuration -
-     <system-properties>
-        <property name="org.teiid.drools.UDF" value="org.jboss.teiid.quickstart.data.MarketData:MyBusinessRules.drl"/>
-    </system-properties>
+2) Add the system property by running the following CLI script
+
+	-	cd to the ${JBOSS_HOME}/bin directory
+	-	execute:  ./jboss-cli.sh --connect --file={path}/drools-integration/src/scripts/setup.cli 
+
 
 This property configures what drools file(s) will be loaded.
-value parameter format is:  POJO Class:.drl file[,POJO Class:.drl…]
+value parameter format is:  POJO Class:.drl file[,POJO Class:.drl file,..]
+
+3)  Shut down server
 
 
-3) Add module dependency to the org/jboss/teiid/main/module.xml
+4) Add the module dependency to the Teiid module.xml
 
-   Add:          <module name="org.jboss.teiid.businessrules.pojo" />
-
+	*  open command line and navigate to  <jboss.home>/modules/system/layers/base/org/jboss/teiid/main
+	*  change the module.xml to add the module dependency
 	
-4) Open a command line and navigate to the root directory of this quickstart
+   Add:    <module name="org.jboss.teiid.businessrules.pojo" />
 
-5) Deploy the artifacts (i.e., VDB and modules) by running the following command:	
+6) Deploy the artifacts (i.e., VDB and modules) by running the following command:
+
+Open a command line and navigate to the root directory of this quickstart	
 	
-	*	mvn package -Pdeploy 
-    	
-6) Start the server
+	*	`mvn package -Pdeploy`
+	    	
+5) Start the server
 
 	Open a command line and navigate to the "bin" directory under the root directory of the JBoss server
 
 	For Linux:   ./standalone.sh -c standalone-teiid.xml	
 	for Windows: standalone.bat -c standalone-teiid.xml
+
 	
 
 7)  See "Query Demonstrations" below to demonstrate data federation.
