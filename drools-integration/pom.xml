@@ -71,6 +71,22 @@
               </execution>
             </executions>
           </plugin>
+          
+          <plugin>
+				<groupId>org.jboss.as.plugins</groupId>
+				<artifactId>jboss-as-maven-plugin</artifactId>
+                <version>${version.jboss.as.plugin}</version>
+                <configuration>
+                	<hostname>localhost</hostname>
+                	<port>9999</port>
+                    <execute-commands>
+
+                      	<commands>
+             				<command>/system-property=org.teiid.drools.UDF:add(value=org.jboss.teiid.quickstart.data.MarketData:MyBusinessRules.drl)</command>
+         				</commands>
+                    </execute-commands>
+                </configuration>
+            </plugin>          
          </plugins>
   </build>
   
