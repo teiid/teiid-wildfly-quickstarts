@@ -1,4 +1,4 @@
-Dynamicvdb-datafederation is the 'Hellow World' example for Teiid.  
+Dynamicvdb-datafederation is the 'Hello World' example for Teiid.  
 
 
 This will demonstrate how to federate data from a relational data source with a text file-based data source.
