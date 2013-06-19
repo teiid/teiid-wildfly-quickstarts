@@ -32,13 +32,13 @@ Some quickstarts are designed to enhance or extend other quickstarts. These are 
 
 | **Quickstart Name** | **Features Demonstrated** | **Description** | **Prerequisites** |
 |:-----------|:-----------|:-----------|:-----------|:-----------|
-| [datafederation](dynamicvdb-datafederation/tree/master/README.md "data-federation") | Data Federation, TEXTTABLE, Native Query | Shows how to expose multiple data sources as a single source | None |
-| [dataroles](dynamicvdb-dataroles/tree/master/README.md "data-roles") | Data roles | Shows how to control Read/Write data access using data roles and masking | datafederation |
-| [rules](drools-integration/tree/master/README.md "rules") | Integrating Drools Rules | Shows how Drools businss rules can be integrated on data moving thru Teiid | datafederation |
-| [consume-webservices](dynamicvdb-webservices-to-twitter/tree/master/README.md "consume-webservices") | 'ws' Translator, Define View Tables | Demonstrates the use of the 'ws' translator to read a web services data source | None |
-| [hibernate](hibernate-on-top-of-teiid/tree/master/README.md "hibernate") | Hibernate Integration, VDB ReUse, Create VIEW, Create Trigger, TEXTTABLE | Demonstrates how a Hibernate application can add data federation capabilities at the data layer| datafederation |
-| [infinispan-cache](infinispan-local-cache/tree/master/README.md "infinispan-cache") | 'infinispan' Object Translator, OBJECTTABLE | Demonstrates the 'infinispan' object translator which enables reading an object cache  | None |
-| [simpleclient](simpleclient/tree/master/README.md "simpleclient") | Teiid JDBC Connection | Demonstrates how to make a jdbc connection to Teiid using the Teiid JDBC Driver and DataSource  | None |
+| [datafederation](dynamicvdb-datafederation/README.md "data-federation") | Data Federation, TEXTTABLE, Native Query | Shows how to expose multiple data sources as a single source | None |
+| [dataroles](dynamicvdb-dataroles/README.md "data-roles") | Data roles | Shows how to control Read/Write data access using data roles and masking | datafederation |
+| [rules](drools-integration/README.md "rules") | Integrating Drools Rules | Shows how Drools businss rules can be integrated on data moving thru Teiid | datafederation |
+| [consume-webservices](dynamicvdb-webservices-to-twitter/README.md "consume-webservices") | 'ws' Translator, Define View Tables | Demonstrates the use of the 'ws' translator to read a web services data source | None |
+| [hibernate](hibernate-on-top-of-teiid/README.md "hibernate") | Hibernate Integration, VDB ReUse, Create VIEW, Create Trigger, TEXTTABLE | Demonstrates how a Hibernate application can add data federation capabilities at the data layer| datafederation |
+| [infinispan-cache](infinispan-local-cache/README.md "infinispan-cache") | 'infinispan' Object Translator, OBJECTTABLE | Demonstrates the 'infinispan' object translator which enables reading an object cache  | None |
+| [simpleclient](simpleclient/README.md "simpleclient") | Teiid JDBC Connection | Demonstrates how to make a jdbc connection to Teiid using the Teiid JDBC Driver and DataSource  | None |
 
 
 -------------------
