@@ -1,0 +1,238 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<parent>
+		<artifactId>teiid-quickstart-parent</artifactId>
+		<groupId>org.jboss.teiid.quickstart</groupId>
+		<version>1.1.0</version>
+	</parent>
+
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>webservices-as-a-datasource</artifactId>
+	<packaging>war</packaging>
+
+	<name>Accessing Webservices</name>
+	<description>This quickstart demonstrates using the 'ws' translator to access a State service, a webservices data source.</description>
+    
+      <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+    	<groupId>org.jboss.resteasy</groupId>
+    	<artifactId>resteasy-jaxrs</artifactId>
+    	<version>1.2.1.GA</version>
+    </dependency>
+    <dependency>
+        <groupId>org.scannotation</groupId>
+        <artifactId>scannotation</artifactId>
+    	<version>1.0.2</version>
+    </dependency>
+    <dependency>
+        <groupId>org.jboss.resteasy</groupId>
+        <artifactId>jaxrs-api</artifactId>
+        <version>1.2.1.GA</version>
+    </dependency>
+    <dependency>
+        <groupId>javax.annotation</groupId>
+        <artifactId>jsr250-api</artifactId>
+        <version>1.0</version>
+        <scope>provided</scope>
+    </dependency>
+    <dependency>
+        <groupId>org.apache.httpcomponents</groupId>
+        <artifactId>httpclient</artifactId>
+        <version>4.1.2</version>
+        <scope>provided</scope>
+    </dependency>
+    <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-api</artifactId>
+        <version>1.6.2</version>
+        <scope>provided</scope>
+    </dependency>
+    <dependency>
+        <groupId>commons-httpclient</groupId>
+        <artifactId>commons-httpclient</artifactId>
+        <version>3.1</version>
+        <scope>provided</scope>
+    </dependency>
+    <dependency>
+        <groupId>net.jcip</groupId>
+        <artifactId>jcip-annotations</artifactId>
+        <version>1.0</version>
+        <scope>provided</scope>
+    </dependency>
+    <dependency>
+        <groupId>javax.activation</groupId>
+        <artifactId>activation</artifactId>
+        <version>1.1.1</version>
+        <scope>provided</scope>
+    </dependency>
+    <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-simple</artifactId>
+        <version>1.6.2</version>
+        <scope>provided</scope>
+    </dependency>
+    <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>jcl-over-slf4j</artifactId>
+        <version>1.6.2</version>
+        <scope>provided</scope>
+    </dependency>
+    <dependency>
+        <groupId>javassist</groupId>
+        <artifactId>javassist</artifactId>
+        <version>3.12.1.GA</version>
+        <scope>provided</scope>
+    </dependency>
+  </dependencies>
+
+    <build>
+      <finalName>CustomerRESTWebSvc</finalName>
+       <plugins>
+       
+        <!-- Maven War file generator plugin -->
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-war-plugin</artifactId>
+            <version>2.1.1</version>
+            <configuration>
+                <webResources>
+                    <resource>
+                        <directory>${basedir}/src/main/java</directory>
+                        <targetPath>WEB-INF/classes</targetPath>
+                        <includes>
+                            <include>**/*.properties</include>
+                            <include>**/*.xml</include>
+                            <include>**/*.css</include>
+                            <include>**/*.html</include>
+                        </includes>
+                    </resource>
+                </webResources>
+            </configuration>
+        </plugin>
+ 
+        <!-- Maven compiler plugin -->
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>2.3.2</version>
+            <configuration>
+                <source>1.6</source>
+                <target>1.6</target>
+            </configuration>
+        </plugin>
+        
+            <!-- The JBoss AS plugin deploys your war to a local JBoss AS container -->
+			<!-- To use, set the JBOSS_HOME environment variable and run: mvn package 
+				jboss-as:deploy -->
+			<plugin>
+				<groupId>org.jboss.as.plugins</groupId>
+				<artifactId>jboss-as-maven-plugin</artifactId>
+				<version>${version.jboss.as.plugin}</version>
+			</plugin>
+ 
+       </plugins>
+    </build>
+
+
+	<profiles>
+		<profile>
+			<id>deploy-vdb</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-antrun-plugin</artifactId>
+						<version>1.7</version>
+						<dependencies>
+							<dependency>
+								<groupId>org.apache.ant</groupId>
+								<artifactId>ant</artifactId>
+								<version>1.7.0</version>
+							</dependency>
+						</dependencies>
+						<executions>
+							<execution>
+								<id>copyfiles</id>
+								<phase>package</phase>
+								<configuration>
+									<target>
+										<echo message="Installing vdb to ${JBOSS_HOME}" />
+
+										<available file="${JBOSS_HOME}" type="dir"
+											property="jboss.present" />
+
+										<fail unless="jboss.present"
+											message="===== JBOSS_HOME variable must be set and the directory must exist ======" />
+
+										<copy todir="${JBOSS_HOME}/standalone/deployments" overwrite="true">
+											<fileset dir="${basedir}/src/vdb/" />
+										</copy>
+								
+										<echo message="Copied vdb to server" />
+									</target>
+								</configuration>
+								<goals>
+									<goal>run</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>setup-rar</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.jboss.as.plugins</groupId>
+						<artifactId>jboss-as-maven-plugin</artifactId>
+						<version>${version.jboss.as}</version>
+						<configuration>
+							<address>subsystem=resource-adapters</address>
+							<resources>
+								<resource>
+									<address>resource-adapter=webservice</address>
+									<properties>
+										<enable-resource>true</enable-resource>
+										<module>org.jboss.teiid.resource-adapter.webservice</module>
+										<transaction-support>NoTransaction</transaction-support>
+									</properties>
+								</resource>
+								<resource>
+									<address>resource-adapter=webservice,connection-definitions=wsDS</address>
+									<properties>
+										<jndi-name>java:/CustomerRESTWebSvcSource</jndi-name>
+										<class-name>org.teiid.resource.adapter.ws.WSManagedConnectionFactory</class-name>
+										<enabled>true</enabled>
+										<use-java-context>true</use-java-context>
+									</properties>
+								</resource>
+								<resource>
+									<address>resource-adapter=webservice,connection-definitions=wsDS,config-properties=EndPoint</address>
+									<properties>
+										<value>http://localhost:8080/CustomerRESTWebSvc/MyRESTApplication/customerList</value>
+									</properties>
+								</resource>
+							</resources>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+
+</project>
