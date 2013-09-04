@@ -35,7 +35,7 @@ Setup can be done either manually (see Manual Setup) or using maven (see Setup u
 
 2)  Copy teiid support files
 	
-- Copy the "teiidfiles" directory to the "<jboss.home>/" directory
+- Copy the "teiidfiles" directory to the $JBOSS_HOME/ directory
 
 	The src/teiidfiles directory should contain:
 	(1) customer-schema.sql
@@ -43,18 +43,18 @@ Setup can be done either manually (see Manual Setup) or using maven (see Setup u
 	(3) data/marketdata-price.txt
 	(4) data/marketdata-price1.txt
 	
-when complete, you should see <jboss.home>/teiidfiles
+when complete, you should see $JBOSS_HOME/teiidfiles
 
 3) Setup the h2 datasource and file resource adapter
 
 -  run the following CLI script
 
-	-	cd to the ${JBOSS_HOME}/bin directory
+	-	cd to the $JBOSS_HOME/bin directory
 	-	execute:  ./jboss-cli.sh --connect --file={path}/dynamicvdb-datafederation/src/scripts/setup.cli 
 
 4)  Teiid Deployment:
 
-Copy the following files to the "<jboss.home>/standalone/deployments" directory
+Copy the following files to the $JBOSS_HOME/standalone/deployments directory
 
      (1) src/vdb/portfolio-vdb.xml
      (2) src/vdb/portfolio-vdb.xml.dodeploy
@@ -120,7 +120,7 @@ NOTE: There currently isn't a JBoss AS plugin option for undeploying the rar and
 
 ==== Using the simpleclient example ====
 
-1) Change your working directory to "<quickstart.install.dir>/simpleclient"
+1) Change your working directory to ${quickstart.install.dir}/simpleclient"
 
 2) Use the simpleclient example to run the following queries:
 
