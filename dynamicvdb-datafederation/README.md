@@ -120,7 +120,7 @@ NOTE: There currently isn't a JBoss AS plugin option for undeploying the rar and
 
 ==== Using the simpleclient example ====
 
-1) Change your working directory to ${quickstart.install.dir}/simpleclient"
+1) Change your working directory to "${quickstart.install.dir}/simpleclient"
 
 2) Use the simpleclient example to run the following queries:
 
