@@ -1,0 +1,18 @@
+
+
+# Configure the custom handler
+/subsystem=logging/custom-handler=COMMAND:add(level=DEBUG,class=org.jboss.teiid.dbms.appender.RDBMSCustomAppender,module=org.jboss.teiid, properties={"datasourceJNDIName"=>"java:/teiid-logging-ds"}) 
+
+
+# Configure the async handler
+/subsystem=logging/async-handler=COMMAND_ASYNC:add(level=DEBUG,queue-length=1024,overflow-action=BLOCK,subhandlers=["COMMAND"]) 
+
+# Create the logger for Teiid to log COMMAND to
+/subsystem=logging/logger=org.teiid.COMMAND_LOG:add(level=DEBUG)
+/subsystem=logging/logger=org.teiid.COMMAND_LOG:assign-handler(name="COMMAND_ASYNC")
+
+
+# configure datasource to persist command log messages
+/subsystem=datasources/data-source=h2:add(jndi-name=java:/teiid-logging-ds,  driver-name=h2, connection-url="jdbc:h2:file:${jboss.server.data.dir}/teiid-logging/commandlog-ds;INIT=RUNSCRIPT FROM '../teiidfiles/logtable.sql';DB_CLOSE_DELAY=-1;",user-name=sa, password=sa)
+
+/:reload
