@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<vdb name="CommandLog" version="1">
+
+    <description>Command Log VDB</description>
+    
+    <!-- 
+      Setting to use connector supplied metadata. Can be "true" or "cached".  
+      "true" will obtain metadata once for every launch of Teiid. 
+      "cached" will save a file containing the metadata into 
+      the deploy/<vdb name>/<vdb version/META-INF directory
+    -->
+    <property name="UseConnectorMetadata" value="true" />
+
+
+    <!-- 
+      Each model represents a access to one or more sources.
+      The name of the model will be used as a top level schema name
+      for all of the metadata imported from the connector.
+    
+      NOTE: Multiple model, with different import settings, can be bound to 
+      the same connector binding and will be treated as the same source at
+      runtime. 
+    --> 
+
+    <model name="Logging">
+        <!-- 
+          JDBC Import settings 
+          
+          importer.useFullSchemaName directs the importer to drop the source 
+          schema from the Teiid object name, so that the Teiid fully qualified name
+          will be in the form of <model name>.<table name>
+        -->
+        <property name="importer.useFullSchemaName" value="false"/>
+           
+         <!--
+            This connector is defined to reference the HSQL localDS" 
+          -->
+        <source name="h2-connector" translator-name="h2" connection-jndi-name="java:/teiid-logging-ds"/>
+    </model>
+    <model name="LoggingView" type="VIRTUAL">
+        <metadata type="DDL"><![CDATA[
+                
+        CREATE VIEW OrderedMessages (
+          Session_ID varchar(100), Request_ID varchar(100), EVENT_TIME timestamp, EVENT_TYPE varchar(50), VDB_Name varchar(254), 
+          VDB_Version integer, Model_Name varchar(100), Translator_Name varchar(10), 
+          Application_Name varchar(254), Principal_Name varchar(100),
+           Transaction_ID varchar(100), Source_Command_ID long,
+           IsSource String, Row_Count integer,
+          SQL_Command varchar(4000), SQL_Plan varchar(4000)
+            )
+            AS  
+               SELECT SESSION_ID, REQUEST_ID, EVENT_TIME, EVENT_TYPE, VDB, "VERSION", MODELNAME, TRANSLATORNAME,  APPLICATION_NAME, 
+               PRINCIPAL_NAME, 
+                TRANSACTION_ID, SOURCE_COMMANDID, ISSOURCE,
+               ROW_COUNT, "SQL", "PLAN" from Logging.TEIID_COMMANDLOG
+               ORDER BY Session_ID, Request_ID, EVENT_TIME
+         
+    
+        ]]> </metadata>
+    </model>
+
+</vdb>
