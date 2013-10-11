@@ -39,6 +39,7 @@ Some quickstarts are designed to enhance or extend other quickstarts. These are 
 | [hibernate](hibernate-on-top-of-teiid/README.md "hibernate") | Hibernate Integration, VDB ReUse, Create VIEW, Create Trigger, TEXTTABLE | Demonstrates how a Hibernate application can add data federation capabilities at the data layer| datafederation |
 | [infinispan-cache](infinispan-local-cache/README.md "infinispan-cache") | 'infinispan' Object Translator, OBJECTTABLE | Demonstrates the 'infinispan' object translator which enables reading an object cache  | None |
 | [simpleclient](simpleclient/README.md "simpleclient") | Teiid JDBC Connection | Demonstrates how to make a jdbc connection to Teiid using the Teiid JDBC Driver and DataSource  | None |
+| [custom-db-logger](custom-log4j-db-logger/README.md "custom-db-logger") | Custom DB Logger | Demonstrates how to use a custom logger to write Command Log messages to a database | None |
 
 
 -------------------
