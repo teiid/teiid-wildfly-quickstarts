@@ -87,9 +87,7 @@ You should see the server log indicate the VDB is active with a message like:  T
 
     * `mvn -Psetup-rar jboss-as:add-resource`
 
-4) REQUIRED: RESTART Server
-
-	This is required because the Teiid data datasources are not being fully activated unless restarted. 
+* previously, a server restart was required at this point, but it is no longer required.
 	
 5) copy the vdb and teiidfiles support files
 
