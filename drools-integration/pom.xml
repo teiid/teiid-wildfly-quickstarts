@@ -15,7 +15,7 @@
 	<description>The Drools integration demonstrates how to use rules to transform your federated data.</description>
 
     <properties>
-			<version.drools>5.5.0.Final</version.drools>
+			
 	</properties>
 	<dependencies>
 		<dependency>
@@ -35,18 +35,16 @@
 			<scope>provided</scope>
 		</dependency>
 				
-		<dependency>
-			<groupId>org.drools</groupId>
-			<artifactId>drools-core</artifactId>
-			<version>${version.drools}</version>
-			<type>jar</type>
-		</dependency>
-		<dependency>
-			<groupId>org.drools</groupId>
-			<artifactId>drools-compiler</artifactId>
-			<version>${version.drools}</version>
-			<type>jar</type>
-		</dependency>
+            <dependency>
+                <groupId>org.drools</groupId>
+                <artifactId>drools-core</artifactId>
+                <type>jar</type>
+            </dependency>
+            <dependency>
+                <groupId>org.drools</groupId>
+                <artifactId>drools-compiler</artifactId>
+                <type>jar</type>
+             </dependency>
 	</dependencies>
 
   <build>
@@ -75,7 +73,6 @@
           <plugin>
 				<groupId>org.jboss.as.plugins</groupId>
 				<artifactId>jboss-as-maven-plugin</artifactId>
-                <version>${version.jboss.as.plugin}</version>
                 <configuration>
                 	<hostname>localhost</hostname>
                 	<port>9999</port>
@@ -101,12 +98,10 @@
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-antrun-plugin</artifactId>
-						<version>1.7</version>
 						<dependencies>
 							<dependency>
 								<groupId>org.apache.ant</groupId>
 								<artifactId>ant</artifactId>
-								<version>1.7.0</version>
 							</dependency>
 						</dependencies>
 						<executions>
@@ -154,12 +149,10 @@
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-antrun-plugin</artifactId>
-						<version>1.7</version>
 						<dependencies>
 							<dependency>
 								<groupId>org.apache.ant</groupId>
 								<artifactId>ant</artifactId>
-								<version>1.7.0</version>
 							</dependency>
 						</dependencies>
 						<executions>

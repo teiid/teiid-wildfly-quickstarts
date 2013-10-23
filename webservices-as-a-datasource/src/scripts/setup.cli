@@ -1,5 +1,5 @@
-/subsystem=resource-adapters/resource-adapter=webservice/connection-definitions=wsDS:add(jndi-name=java:/CustomerRESTWebSvcSource, class-name=org.teiid.resource.adapter.ws.WSManagedConnectionFactory, enabled=true, use-java-context=true)
-/subsystem=resource-adapters/resource-adapter=webservice/connection-definitions=wsDS/config-properties=EndPoint:add(value=http://localhost:8080/CustomerRESTWebSvc/MyRESTApplication/customerList)
-/subsystem=resource-adapters/resource-adapter=webservice:activate
+/subsystem=resource-adapters/resource-adapter=wsQS:add(module=org.jboss.teiid.resource-adapter.webservice)
+/subsystem=resource-adapters/resource-adapter=wsQS/connection-definitions=wsDS:add(jndi-name=java:/CustomerRESTWebSvcSource, class-name=org.teiid.resource.adapter.ws.WSManagedConnectionFactory, enabled=true, use-java-context=true)
+/subsystem=resource-adapters/resource-adapter=wsQS/connection-definitions=wsDS/config-properties=EndPoint:add(value=http://localhost:8080/CustomerRESTWebSvc/MyRESTApplication/customerList)
+/subsystem=resource-adapters/resource-adapter=wsQS:activate
 
-/:reload

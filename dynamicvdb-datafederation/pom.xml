@@ -25,12 +25,10 @@
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-antrun-plugin</artifactId>
-						<version>1.7</version>
 						<dependencies>
 							<dependency>
 								<groupId>org.apache.ant</groupId>
 								<artifactId>ant</artifactId>
-								<version>1.7.0</version>
 							</dependency>
 						</dependencies>
 						<executions>
@@ -75,8 +73,6 @@
 					<plugin>
 						<groupId>org.jboss.as.plugins</groupId>
 						<artifactId>jboss-as-maven-plugin</artifactId>
-						<version>${version.jboss.as.plugin}</version>
-
 						<configuration>
 							<address>subsystem=datasources,data-source=accounts-ds</address>
 							<resource>
@@ -111,7 +107,6 @@
 					<plugin>
 						<groupId>org.jboss.as.plugins</groupId>
 						<artifactId>jboss-as-maven-plugin</artifactId>
-						<version>${version.jboss.as.plugin}</version>
 						<configuration>
 							<address>subsystem=resource-adapters</address>
 							<resources>
@@ -160,12 +155,10 @@
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-antrun-plugin</artifactId>
-						<version>1.7</version>
 						<dependencies>
 							<dependency>
 								<groupId>org.apache.ant</groupId>
 								<artifactId>ant</artifactId>
-								<version>1.7.0</version>
 							</dependency>
 						</dependencies>
 						<executions>

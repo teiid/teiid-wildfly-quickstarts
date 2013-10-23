@@ -108,7 +108,6 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
-				<version>${version.jar.plugin}</version>
 				<configuration>
 					<finalName>infinispan-quickstart-pojos</finalName>
 					<includes>
@@ -127,7 +126,6 @@
 			</plugin>
 			<plugin>
 				<artifactId>maven-war-plugin</artifactId>
-				<version>2.1.1</version>
 				<configuration>
 					<!-- Use this to include a selection of jars that will be included in 
 						the WAR -->
@@ -149,10 +147,9 @@
 				processors -->
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>2.3.2</version>
 				<configuration>
-					<source>1.6</source>
-					<target>1.6</target>
+					<source>${maven.compiler.source}</source>
+					<target>${maven.compiler.target}</target>
 				</configuration>
 			</plugin>
 		</plugins>
@@ -236,7 +233,6 @@
 					<!-- Here we specify the directory containing the endorsed lib -->
 					<plugin>
 						<artifactId>maven-compiler-plugin</artifactId>
-						<version>2.3.2</version>
 						<configuration>
 							<compilerArgument>-Djava.endorsed.dirs=${project.build.directory}/endorsed</compilerArgument>
 						</configuration>
@@ -258,12 +254,10 @@
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-antrun-plugin</artifactId>
-						<version>1.7</version>
 						<dependencies>
 							<dependency>
 								<groupId>org.apache.ant</groupId>
 								<artifactId>ant</artifactId>
-								<version>1.7.0</version>
 							</dependency>
 						</dependencies>
 						<executions>
@@ -310,7 +304,6 @@
 					<plugin>
 						<groupId>org.jboss.as.plugins</groupId>
 						<artifactId>jboss-as-maven-plugin</artifactId>
-						<version>${version.jboss.as.plugin}</version>
 						<configuration>
 							<address>subsystem=infinispan,cache-container=teiid-infinispan-quickstart</address>
 							<resources>
@@ -342,7 +335,6 @@
 					<plugin>
 						<groupId>org.jboss.as.plugins</groupId>
 						<artifactId>jboss-as-maven-plugin</artifactId>
-						<version>${version.jboss.as.plugin}</version>
 
 <!--   at this point, i've found no way to add the resource and have it activated, after trying with commands and resources
        when using commands, getting message:  Reason: You must specify the address to deploy the resource to. 
@@ -427,12 +419,10 @@
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-antrun-plugin</artifactId>
-						<version>1.7</version>
 						<dependencies>
 							<dependency>
 								<groupId>org.apache.ant</groupId>
 								<artifactId>ant</artifactId>
-								<version>1.7.0</version>
 							</dependency>
 						</dependencies>
 						<executions>
@@ -467,7 +457,6 @@
 					<plugin>
 						<groupId>org.jboss.as.plugins</groupId>
 						<artifactId>jboss-as-maven-plugin</artifactId>
-						<version>${version.jboss.as.plugin}</version>
 						<executions>
 							<execution>
 								<id>deploy-war</id>
@@ -493,7 +482,6 @@
 					<plugin>
 						<groupId>org.jboss.as.plugins</groupId>
 						<artifactId>jboss-as-maven-plugin</artifactId>
-						<version>${version.jboss.as.plugin}</version>
 						<executions>
 							<execution>
 								<id>setup-cache</id>
