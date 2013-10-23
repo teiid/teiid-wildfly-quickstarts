@@ -44,7 +44,7 @@
         <!--jbossas-version>7.2.0.Alpha1-redhat-4</jbossas-version-->
         <!--jbossas-version>7.2.1.Final-redhat-10</jbossas-version!-->
         <jbossas-version>7.2.0.Final</jbossas-version>
-		<version.teiid>8.4.0.Final</version.teiid>
+		<version.teiid>8.4.1</version.teiid>
 		<version.jboss.javaee.web>2.0.0.Final</version.jboss.javaee.web>
 		<version.infinispan>5.1.4.FINAL</version.infinispan>
 		<version.hibernate.search>4.1.1.Final</version.hibernate.search>
