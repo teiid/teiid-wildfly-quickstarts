@@ -1,8 +1,9 @@
-/subsystem=resource-adapters/resource-adapter=file/connection-definitions=fileDS:add(jndi-name=java:/marketdata-file, class-name=org.teiid.resource.adapter.file.FileManagedConnectionFactory, enabled=true, use-java-context=true)
-/subsystem=resource-adapters/resource-adapter=file/connection-definitions=fileDS/config-properties=ParentDirectory:add(value=../teiidfiles/data/)
-/subsystem=resource-adapters/resource-adapter=file/connection-definitions=fileDS/config-properties=AllowParentPaths:add(value=true)
-/subsystem=resource-adapters/resource-adapter=file:activate
+/subsystem=resource-adapters/resource-adapter=fileQS:add(module=org.jboss.teiid.resource-adapter.file)
+/subsystem=resource-adapters/resource-adapter=fileQS/connection-definitions=fileDS:add(jndi-name=java:/marketdata-file, class-name=org.teiid.resource.adapter.file.FileManagedConnectionFactory, enabled=true, use-java-context=true)
+/subsystem=resource-adapters/resource-adapter=fileQS/connection-definitions=fileDS/config-properties=ParentDirectory:add(value=../teiidfiles/data/)
+/subsystem=resource-adapters/resource-adapter=fileQS/connection-definitions=fileDS/config-properties=AllowParentPaths:add(value=true)
+/subsystem=resource-adapters/resource-adapter=fileQS:activate
 
-/subsystem=datasources/data-source=h2:add(jndi-name=java:/accounts-ds,  driver-name=h2, connection-url="jdbc:h2:mem:accounts;INIT=RUNSCRIPT FROM '../teiidfiles/customer-schema.sql'\;",user-name=sa, password=sa)
+/subsystem=datasources/data-source=h2:add(jndi-name=java:/accounts-ds,  driver-name=h2, connection-url="jdbc:h2:mem:accounts;INIT=RUNSCRIPT FROM '${jboss.server.base.dir}/../teiidfiles/customer-schema.sql'\;",user-name=sa, password=sa)
 
 /:reload

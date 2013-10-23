@@ -21,18 +21,11 @@ Run the maven build to compile and create the web service war.
 
 
 
-####################
-#   Setup and Deployment
-####################
-
-Setup and deployment can be done either manually (see Manual Setup) or using maven (see Setup using the JBoss AS Maven plugin) 
-
-
 #########################################
-### Manual setup
+### Setup and Deployment
 #########################################
 
-1)  Start the server
+1)  Start the server (if not already started)
 
 	Open a command line and navigate to the "bin" directory under the root directory of the JBoss server
 
@@ -42,7 +35,6 @@ Setup and deployment can be done either manually (see Manual Setup) or using mav
 2)  Deploy the war file that will be used as the web service resource to be accessed as a data source by Teiid
 
         -  copy the target/CustomerRestWebSvc.war to the <jboss.home>/standalone/deployments directory
-
 
 	-  Test the war by opening a browser at the following URL:
 
@@ -65,46 +57,6 @@ Copy the following files to the "<jboss.home>/standalone/deployments" directory
      (2) src/vdb/webservice-vdb.xml.dodeploy
 
 5)  See "Query Demonstrations" below to demonstrate data federation.
-
-
-#########################################
-### Setup using the JBoss AS Maven plugin
-#########################################
-
-1)  Start the server
-
-	Open a command line and navigate to the "bin" directory under the root directory of the JBoss server
-
-	For Linux:   ./standalone.sh -c standalone-teiid.xml	
-	for Windows: standalone.bat -c standalone-teiid.xml
-
-2) Deploy the web application buy running the following command:
-
-    	*   `mvn package jboss-as:deploy`
-
-	*   Test the war by opening a browser at the following URL:
-
-http://localhost:8080/CustomerRESTWebSvc/MyRESTApplication/customerList
-
-
-3) setup the resource adapter
-
-    	*  mvn -Psetup-rar jboss-as:add-resource
-
-
-4) Deploy the vdb by running the following command:	
-	
-	*   `mvn package -Pdeploy-vdb`
-
-    	
-5) RESTART the jboss as server.  Without using CLI to configure the resources, the resource isn't activated.  
-		Therefore, jboss-as requires a restart.	
-
-6)  Open the admin console to make sure the VDB is deployed
-
-	*  open a brower to http://localhost:9990/console 	
-
-6)  See "Query Demonstrations" below to demonstrate data federation.
 
 
 #########################################

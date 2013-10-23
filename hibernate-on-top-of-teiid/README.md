@@ -25,9 +25,17 @@ Correct Dependencies
 --------------------
 Please note this example does not support working with Hibernate 3.  
 
- 
+##########################
+###  Build the project
+##########################
+
+- Open a command line and navigate to the root directory of this quickstart
+
+	*   `mvn clean install`
+
+
 #########################################
-### Setup using the JBoss AS Maven plugin
+### Manual setup
 #########################################
 
 1) Run the setup in dynamicvdb-datafederation quick start
@@ -38,16 +46,16 @@ Please note this example does not support working with Hibernate 3.
 
 	For Linux:   ./standalone.sh -c standalone-teiid.xml	
 	for Windows: standalone.bat -c standalone-teiid.xml
+
 	
-3) Open a command line and navigate to the root directory of this quickstart
+3) VDB Deployment:
 
-	*   `mvn clean install`
+    Copy the following files to the "<jboss.home>/standalone/deployments" directory
 
-4) Deploy the vdb by running the following command:	
-	
-	*   `mvn package -Pdeploy-vdb`
+     * src/vdb/hibernate-portfolio-vdb.xml
+     * src/vdb/hibernate-portfolio-vdb.xml.dodeploy
 
-3) Deploy the web application buy running the following command:
+4) Deploy the web application buy running the following command:
 
     	*   `mvn package jboss-as:deploy`
     	
@@ -69,9 +77,9 @@ Please note this example does not support working with Hibernate 3.
 
 	*  mvn package jboss-as:undeploy
 	
-2)  To undeploy the Teiid VDB, run the following command:
+2)  To undeploy the Teiid VDB, delete the 
 
-	*  mvn package -Pundeploy-vdb
+	*  delete the vdb, hibernate-portfolio-vdb.xml, from the directory "<jboss.home>/standalone/deployments"
 	
 	
 #########################################
@@ -81,7 +89,7 @@ Please note this example does not support working with Hibernate 3.
 Access the application 
 ---------------------
 
-The application will be running at the following URL: <http://localhost:8080/hibernate-on-top-of-teiid/>.
+The application will be running at the following URL: http://localhost:8080/hibernate-on-top-of-teiid/.
 
 The page should display a list of products.
 

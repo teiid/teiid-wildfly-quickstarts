@@ -31,7 +31,7 @@
         <module>hibernate-on-top-of-teiid</module>
         <module>webservices-as-a-datasource</module>
 		<module>infinispan-local-cache</module>
-        <module>custom-metadata-repository</module>
+        <module>custom-log4j-db-logger</module>
 	</modules>
 
 	<properties>
@@ -40,42 +40,50 @@
 		<!-- [WARNING] Using platform encoding (UTF-8 actually) to copy filtered 
 			resources, i.e. build is platform dependent! -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-
-		<version.teiid>8.4.0.Final</version.teiid>
-		<version.jboss.as>7.2.0.Final</version.jboss.as>
+        <version.org.jboss.integration-platform>6.0.0-SNAPSHOT</version.org.jboss.integration-platform>
+        <!--jbossas-version>7.2.0.Alpha1-redhat-4</jbossas-version-->
+        <!--jbossas-version>7.2.1.Final-redhat-10</jbossas-version!-->
+        <jbossas-version>7.2.0.Final</jbossas-version>
+		<version.teiid>8.4.1</version.teiid>
 		<version.jboss.javaee.web>2.0.0.Final</version.jboss.javaee.web>
 		<version.infinispan>5.1.4.FINAL</version.infinispan>
 		<version.hibernate.search>4.1.1.Final</version.hibernate.search>
-		<version.javax.annotation>1.0.1.Final</version.javax.annotation>
 		<version.javax.spec>1.0.2.Final</version.javax.spec>
-		<version.javax.enterprise>1.1-20120918</version.javax.enterprise>
-		<version.jboss.logging>3.1.2.GA</version.jboss.logging>
-		<version.jboss.as.plugin>7.4.Final</version.jboss.as.plugin>
-        
-        <version.org.jboss.logging.jboss-logging>3.1.2.GA</version.org.jboss.logging.jboss-logging>
-        
-        <version.ant>1.7.0</version.ant>
-		
-		<version.junit>4.10</version.junit>
+        <version.drools>5.5.0.Final</version.drools>
+        <version.jboss.as.plugin>7.4.Final</version.jboss.as.plugin>
+        <!--version.drools>6.0.0.CR5</version.drools-->
 	</properties>
 	
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>${version.junit}</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-all</artifactId>
-			<version>1.9.0</version>
 			<scope>test</scope>
 		</dependency>		
 	</dependencies>
 
 	<dependencyManagement>
 		<dependencies>
+        
+          <dependency>
+            <groupId>org.jboss.integration-platform</groupId>
+            <artifactId>jboss-integration-platform-bom</artifactId>
+            <version>${version.org.jboss.integration-platform}</version>
+            <scope>import</scope>
+            <type>pom</type>
+          </dependency>   
+          <dependency>
+             <groupId>org.jboss.as</groupId>
+             <artifactId>jboss-as-parent</artifactId>
+             <version>${jbossas-version}</version>
+             <type>pom</type>
+             <scope>import</scope>
+          </dependency>          
 			<!-- Define the version of JBoss' Java EE 6 APIs we want to use -->
 			<!-- JBoss distributes a complete set of Java EE 6 APIs including a Bill 
 				of Materials (BOM). A BOM specifies the versions of a "stack" (or a collection) 
@@ -133,13 +141,6 @@
 				<type>rar</type>
 			</dependency>
 
-			<!-- Infinispan dependencies -->
-			<dependency>
-				<groupId>org.infinispan</groupId>
-				<artifactId>infinispan-core</artifactId>
-				<version>${version.infinispan}</version>
-			</dependency>
-
 			<dependency>
 				<groupId>org.infinispan</groupId>
 				<artifactId>infinispan-cdi</artifactId>
@@ -152,22 +153,6 @@
 				<version>${version.infinispan}</version>
 			</dependency>
 
-			<!-- Import the Common Annotations API (JSR-250), we use provided scope 
-				as the API is included in JBoss AS 7 -->
-			<dependency>
-				<groupId>org.jboss.spec.javax.annotation</groupId>
-				<artifactId>jboss-annotations-api_1.1_spec</artifactId>
-				<version>${version.javax.annotation}</version>
-			</dependency>
-
-			<!-- Import the Servlet API, we use provided scope as the API is included 
-				in JBoss AS 7 -->
-			<dependency>
-				<groupId>org.jboss.spec.javax.servlet</groupId>
-				<artifactId>jboss-servlet-api_3.0_spec</artifactId>
-				<version>${version.javax.spec}</version>
-			</dependency>
-
 			<dependency>
 				<groupId>org.jboss.spec.javax.ejb</groupId>
 				<artifactId>jboss-ejb-api_3.1_spec</artifactId>
@@ -175,22 +160,28 @@
 			</dependency>
 
 			<dependency>
-				<groupId>javax.resource</groupId>
-				<artifactId>connector-api</artifactId>
-				<version>1.5</version>
-			</dependency>
-
-			<dependency>
-				<groupId>org.jboss.logging</groupId>
-				<artifactId>jboss-logging</artifactId>
-				<version>${version.jboss.logging}</version>
-			</dependency>
-
-			<dependency>
 				<groupId>org.hibernate</groupId>
 				<artifactId>hibernate-search</artifactId>
 				<version>${version.hibernate.search}</version>
 			</dependency>
+            
+            <dependency>
+                <groupId>org.drools</groupId>
+                <artifactId>drools-core</artifactId>
+                <version>${version.drools}</version>
+                <type>jar</type>
+            </dependency>
+            <dependency>
+                <groupId>org.drools</groupId>
+                <artifactId>drools-compiler</artifactId>
+                <version>${version.drools}</version>
+                <type>jar</type>
+            </dependency>   
+            <dependency>           
+                <groupId>org.jboss.as.plugins</groupId>
+				<artifactId>jboss-as-maven-plugin</artifactId>  
+                <version>${version.jboss.as.plugin}</version>
+            </dependency>                                    
 		</dependencies>
 
 	</dependencyManagement>
@@ -200,7 +191,6 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>${version.compiler.plugin}</version>
 				<configuration>
 					<source>${maven.compiler.source}</source>
 					<target>${maven.compiler.target}</target>
@@ -210,7 +200,6 @@
 			</plugin>
 			<plugin>
 				<artifactId>maven-surefire-plugin</artifactId>
-				<version>${version.surefire.plugin}</version>
 				<configuration>
 					<includes>
 						<include>**/*TestCase.java</include>
@@ -257,7 +246,6 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
-                <version>${version.source.plugin}</version>
                 <executions>
                     <execution>
                         <id>attach-sources</id>

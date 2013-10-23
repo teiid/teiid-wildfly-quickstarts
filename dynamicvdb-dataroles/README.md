@@ -70,32 +70,6 @@ Setup can be done either manually (see Manual Setup) or using maven (see Setup u
 
 
 #########################################
-### Setup using the JBoss AS Maven plugin
-#########################################
-
-1) Run the setup in dynamicvdb-datafederation quick start
-
-2) shutdown the jbossas server	
-	
-3) copy the vdb, teiidfiles and security files
-
-	*  `mvn install -Pcopy-files`    
-	
-4)  Start the server (if not already started)
-
-	Open a command line and navigate to the "bin" directory under the root directory of the JBoss server
-
-	For Linux:   ./standalone.sh -c standalone-teiid.xml	
-	for Windows: standalone.bat -c standalone-teiid.xml
-    	
-5)  Open the admin console to make sure the VDB is deployed
-
-	*  open a brower to http://localhost:9990/console 	
-
-6)  See "Query Demonstrations" below to demonstrate data federation.
-
-
-#########################################
 ### Query Demonstrations
 #########################################	
 
@@ -121,7 +95,7 @@ example queries:
 Since this simpleclient example defaults user and password to user/user, modify the call to include the user name and password on the command line 
 where user name "portfolio" and password "portfolio" and re-execute the above:
 
-Example:   mvn install -Dvdb="portfoliodataroles" -Dusername="portfolio" -Dpassword="portfolio" -Dsql="example query"
+Example:   mvn install -Dvdb="portfolio" -Dusername="portfolio" -Dpassword="portfolio" -Dsql="example query"
 
 1.	should be the same result as above
 

@@ -18,76 +18,58 @@
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>3.8.1</version>
       <scope>test</scope>
     </dependency>
     <dependency>
     	<groupId>org.jboss.resteasy</groupId>
     	<artifactId>resteasy-jaxrs</artifactId>
-    	<version>1.2.1.GA</version>
     </dependency>
     <dependency>
         <groupId>org.scannotation</groupId>
         <artifactId>scannotation</artifactId>
-    	<version>1.0.2</version>
     </dependency>
     <dependency>
         <groupId>org.jboss.resteasy</groupId>
         <artifactId>jaxrs-api</artifactId>
-        <version>1.2.1.GA</version>
     </dependency>
     <dependency>
         <groupId>javax.annotation</groupId>
         <artifactId>jsr250-api</artifactId>
-        <version>1.0</version>
         <scope>provided</scope>
     </dependency>
     <dependency>
         <groupId>org.apache.httpcomponents</groupId>
         <artifactId>httpclient</artifactId>
-        <version>4.1.2</version>
         <scope>provided</scope>
     </dependency>
     <dependency>
         <groupId>org.slf4j</groupId>
         <artifactId>slf4j-api</artifactId>
-        <version>1.6.2</version>
         <scope>provided</scope>
     </dependency>
     <dependency>
         <groupId>commons-httpclient</groupId>
         <artifactId>commons-httpclient</artifactId>
-        <version>3.1</version>
         <scope>provided</scope>
     </dependency>
     <dependency>
         <groupId>net.jcip</groupId>
         <artifactId>jcip-annotations</artifactId>
-        <version>1.0</version>
         <scope>provided</scope>
     </dependency>
     <dependency>
         <groupId>javax.activation</groupId>
         <artifactId>activation</artifactId>
-        <version>1.1.1</version>
         <scope>provided</scope>
     </dependency>
     <dependency>
         <groupId>org.slf4j</groupId>
         <artifactId>slf4j-simple</artifactId>
-        <version>1.6.2</version>
         <scope>provided</scope>
     </dependency>
     <dependency>
         <groupId>org.slf4j</groupId>
         <artifactId>jcl-over-slf4j</artifactId>
-        <version>1.6.2</version>
-        <scope>provided</scope>
-    </dependency>
-    <dependency>
-        <groupId>javassist</groupId>
-        <artifactId>javassist</artifactId>
-        <version>3.12.1.GA</version>
         <scope>provided</scope>
     </dependency>
   </dependencies>
@@ -100,7 +82,6 @@
         <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-war-plugin</artifactId>
-            <version>2.1.1</version>
             <configuration>
                 <webResources>
                     <resource>
@@ -121,10 +102,9 @@
         <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-compiler-plugin</artifactId>
-            <version>2.3.2</version>
             <configuration>
-                <source>1.6</source>
-                <target>1.6</target>
+					<source>${maven.compiler.source}</source>
+					<target>${maven.compiler.target}</target>
             </configuration>
         </plugin>
         
@@ -134,7 +114,7 @@
 			<plugin>
 				<groupId>org.jboss.as.plugins</groupId>
 				<artifactId>jboss-as-maven-plugin</artifactId>
-				<version>${version.jboss.as.plugin}</version>
+                <version>${version.jboss.as.plugin}</version>
 			</plugin>
  
        </plugins>
@@ -152,12 +132,10 @@
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-antrun-plugin</artifactId>
-						<version>1.7</version>
 						<dependencies>
 							<dependency>
 								<groupId>org.apache.ant</groupId>
 								<artifactId>ant</artifactId>
-								<version>1.7.0</version>
 							</dependency>
 						</dependencies>
 						<executions>
@@ -200,7 +178,7 @@
 					<plugin>
 						<groupId>org.jboss.as.plugins</groupId>
 						<artifactId>jboss-as-maven-plugin</artifactId>
-						<version>${version.jboss.as}</version>
+                        <version>${version.jboss.as.plugin}</version>
 						<configuration>
 							<address>subsystem=resource-adapters</address>
 							<resources>
