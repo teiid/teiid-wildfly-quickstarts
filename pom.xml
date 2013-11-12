@@ -52,6 +52,7 @@
         <version.drools>5.5.0.Final</version.drools>
         <version.jboss.as.plugin>7.4.Final</version.jboss.as.plugin>
         <!--version.drools>6.0.0.CR5</version.drools-->
+        <version.ant.plugin>1.7.0</version.ant.plugin>
 	</properties>
 	
 	<dependencies>
