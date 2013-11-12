@@ -135,9 +135,7 @@
 					<failOnMissingWebXml>false</failOnMissingWebXml>
 					<archive>
 						<manifestEntries>
-							<Dependencies>org.infinispan export,
-								org.jboss.teiid.translator.object export,
-								com.client.quickstart.pojos export</Dependencies>
+							<Dependencies>org.infinispan export, org.jboss.teiid.translator.object export, com.client.quickstart.pojos export</Dependencies>
 						</manifestEntries>
 					</archive>
 				</configuration>
@@ -258,6 +256,7 @@
 							<dependency>
 								<groupId>org.apache.ant</groupId>
 								<artifactId>ant</artifactId>
+                                <version>1.7.0</version>
 							</dependency>
 						</dependencies>
 						<executions>
@@ -423,6 +422,7 @@
 							<dependency>
 								<groupId>org.apache.ant</groupId>
 								<artifactId>ant</artifactId>
+                                <version>1.7.0</version>
 							</dependency>
 						</dependencies>
 						<executions>
