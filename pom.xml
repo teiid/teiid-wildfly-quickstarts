@@ -49,6 +49,7 @@
         <version.ant.plugin>1.7.0</version.ant.plugin>
         <version.org.scannotation>1.0.3</version.org.scannotation>
         <version.net.jcip>1.0</version.net.jcip>
+        <version.org.codehaus.mojo>1.1.1</version.org.codehaus.mojo>
 	</properties>
 	
 	<dependencies>
@@ -170,7 +171,12 @@
               <groupId>net.jcip</groupId>
               <artifactId>jcip-annotations</artifactId>
               <version>${version.net.jcip}</version>
-            </dependency>   
+            </dependency> 
+            <dependency> 
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+                <version>${version.org.codehaus.mojo}</version>
+             </dependency> 
                                                                                                                              
 		</dependencies>
 
@@ -248,5 +254,16 @@
 		</plugins>
 	</build>
 
-
+    <profiles>
+        <profile>
+            <activation>
+                <file>
+                    <exists>dist</exists>
+                </file>
+            </activation>
+            <modules>
+                <module>dist</module>
+            </modules>
+        </profile>
+    </profiles>
 </project>
