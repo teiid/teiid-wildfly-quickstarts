@@ -20,7 +20,8 @@
 			<artifactId>teiid-client</artifactId>
 			<scope>provided</scope>
 		</dependency>
-	</dependencies>    
+	</dependencies>
+
     <profiles>
         <profile>
             <id>execjava</id>

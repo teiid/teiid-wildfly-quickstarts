@@ -253,7 +253,6 @@
 		</plugins>
 	</build>
 
-
     <profiles>    
         <profile>
             <id>dist</id>
@@ -266,5 +265,5 @@
                 <module>dist</module>
             </modules>
         </profile>
-    </profiles>        
+    </profiles>
 </project>
