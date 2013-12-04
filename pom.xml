@@ -25,13 +25,13 @@
 	</licenses>
 
 	<modules>
-        <!--module>drools-integration</module-->
         <module>dynamicvdb-datafederation</module>
         <module>dynamicvdb-dataroles</module>
         <module>hibernate-on-top-of-teiid</module>
         <module>webservices-as-a-datasource</module>
 		<module>infinispan-local-cache</module>
         <module>custom-log4j-db-logger</module>
+        <module>simpleclient</module>
 	</modules>
 
 	<properties>
@@ -142,7 +142,7 @@
 			<dependency>
 				<groupId>org.hibernate</groupId>
 				<artifactId>hibernate-search</artifactId>
-				<version>${version.org.hibernate.search}</version>
+				<version>${version.org.hibernate}</version>
 			</dependency>
             
             <dependency>
@@ -254,8 +254,9 @@
 		</plugins>
 	</build>
 
-    <profiles>
+    <profiles>    
         <profile>
+            <id>dist</id>
             <activation>
                 <file>
                     <exists>dist</exists>
@@ -265,5 +266,9 @@
                 <module>dist</module>
             </modules>
         </profile>
+      
     </profiles>
+    
+    
+            
 </project>
