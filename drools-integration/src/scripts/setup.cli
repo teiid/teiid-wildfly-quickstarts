@@ -1,1 +1,0 @@
-/system-property=org.teiid.drools.UDF:add(value=org.jboss.teiid.quickstart.data.MarketData:MyBusinessRules.drl)
