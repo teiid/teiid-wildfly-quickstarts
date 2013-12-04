@@ -2,15 +2,15 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<parent>
-		<groupId>org.jboss</groupId>
-		<artifactId>jboss-parent</artifactId>
-		<version>10</version>
+        <groupId>org.jboss.teiid</groupId>
+        <artifactId>teiid-parent</artifactId>
+        <version>8.6.0.Beta2</version>    
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.jboss.teiid.quickstart</groupId>
 	<artifactId>teiid-quickstart-parent</artifactId>
 	<packaging>pom</packaging>
-	<version>1.1.0</version>
+	<version>2.0.0</version>
 	<name>Teiid Quickstart Parent</name>
 	<description>Quickstarts for the Teiid project</description>
 
@@ -25,13 +25,13 @@
 	</licenses>
 
 	<modules>
-        <module>drools-integration</module>
         <module>dynamicvdb-datafederation</module>
         <module>dynamicvdb-dataroles</module>
         <module>hibernate-on-top-of-teiid</module>
         <module>webservices-as-a-datasource</module>
 		<module>infinispan-local-cache</module>
         <module>custom-log4j-db-logger</module>
+        <module>simpleclient</module>
 	</modules>
 
 	<properties>
@@ -40,19 +40,15 @@
 		<!-- [WARNING] Using platform encoding (UTF-8 actually) to copy filtered 
 			resources, i.e. build is platform dependent! -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <version.org.jboss.integration-platform>6.0.0-SNAPSHOT</version.org.jboss.integration-platform>
-        <!--jbossas-version>7.2.0.Alpha1-redhat-4</jbossas-version-->
-        <!--jbossas-version>7.2.1.Final-redhat-10</jbossas-version!-->
-        <jbossas-version>7.2.0.Final</jbossas-version>
-		<version.teiid>8.4.1</version.teiid>
+		<version.teiid>8.6.0.Beta2</version.teiid>
 		<version.jboss.javaee.web>2.0.0.Final</version.jboss.javaee.web>
-		<version.infinispan>5.1.4.FINAL</version.infinispan>
-		<version.hibernate.search>4.1.1.Final</version.hibernate.search>
 		<version.javax.spec>1.0.2.Final</version.javax.spec>
-        <version.drools>5.5.0.Final</version.drools>
         <version.jboss.as.plugin>7.4.Final</version.jboss.as.plugin>
         <!--version.drools>6.0.0.CR5</version.drools-->
         <version.ant.plugin>1.7.0</version.ant.plugin>
+        <version.org.scannotation>1.0.3</version.org.scannotation>
+        <version.net.jcip>1.0</version.net.jcip>
+        <version.org.codehaus.mojo>1.1.1</version.org.codehaus.mojo>
 	</properties>
 	
 	<dependencies>
@@ -70,21 +66,7 @@
 
 	<dependencyManagement>
 		<dependencies>
-        
-          <dependency>
-            <groupId>org.jboss.integration-platform</groupId>
-            <artifactId>jboss-integration-platform-bom</artifactId>
-            <version>${version.org.jboss.integration-platform}</version>
-            <scope>import</scope>
-            <type>pom</type>
-          </dependency>   
-          <dependency>
-             <groupId>org.jboss.as</groupId>
-             <artifactId>jboss-as-parent</artifactId>
-             <version>${jbossas-version}</version>
-             <type>pom</type>
-             <scope>import</scope>
-          </dependency>          
+                
 			<!-- Define the version of JBoss' Java EE 6 APIs we want to use -->
 			<!-- JBoss distributes a complete set of Java EE 6 APIs including a Bill 
 				of Materials (BOM). A BOM specifies the versions of a "stack" (or a collection) 
@@ -104,18 +86,14 @@
 
 			<dependency>
 				<groupId>org.jboss.teiid</groupId>
-				<artifactId>teiid-parent</artifactId>
-				<version>${version.teiid}</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>
-
-			<dependency>
-				<groupId>org.jboss.teiid</groupId>
 				<artifactId>teiid-api</artifactId>
 				<version>${version.teiid}</version>
 			</dependency>
-
+			<dependency>
+				<groupId>org.jboss.teiid</groupId>
+				<artifactId>teiid-common-core</artifactId>
+				<version>${version.teiid}</version>
+			</dependency>
 			<dependency>
 				<groupId>org.jboss.teiid</groupId>
 				<artifactId>teiid-client</artifactId>
@@ -145,13 +123,13 @@
 			<dependency>
 				<groupId>org.infinispan</groupId>
 				<artifactId>infinispan-cdi</artifactId>
-				<version>${version.infinispan}</version>
+				<version>${version.org.infinispan}</version>
 			</dependency>
 
 			<dependency>
 				<groupId>org.infinispan</groupId>
 				<artifactId>infinispan-query</artifactId>
-				<version>${version.infinispan}</version>
+				<version>${version.org.infinispan}</version>
 			</dependency>
 
 			<dependency>
@@ -163,7 +141,7 @@
 			<dependency>
 				<groupId>org.hibernate</groupId>
 				<artifactId>hibernate-search</artifactId>
-				<version>${version.hibernate.search}</version>
+				<version>${version.org.hibernate}</version>
 			</dependency>
             
             <dependency>
@@ -182,7 +160,23 @@
                 <groupId>org.jboss.as.plugins</groupId>
 				<artifactId>jboss-as-maven-plugin</artifactId>  
                 <version>${version.jboss.as.plugin}</version>
-            </dependency>                                    
+            </dependency>  
+            <dependency>
+              <groupId>org.scannotation</groupId>
+              <artifactId>scannotation</artifactId>
+              <version>${version.org.scannotation}</version>
+            </dependency>  
+            <dependency>
+              <groupId>net.jcip</groupId>
+              <artifactId>jcip-annotations</artifactId>
+              <version>${version.net.jcip}</version>
+            </dependency> 
+            <dependency> 
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+                <version>${version.org.codehaus.mojo}</version>
+             </dependency> 
+                                                                                                                             
 		</dependencies>
 
 	</dependencyManagement>
@@ -259,5 +253,21 @@
 		</plugins>
 	</build>
 
-
+    <profiles>    
+        <profile>
+            <id>dist</id>
+            <activation>
+                <file>
+                    <exists>dist</exists>
+                </file>
+            </activation>
+            <modules>
+                <module>dist</module>
+            </modules>
+        </profile>
+      
+    </profiles>
+    
+    
+            
 </project>
