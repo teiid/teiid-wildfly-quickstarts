@@ -14,25 +14,25 @@
 	<name>Custom Database Logger</name>
 	<description>The Custom Database logger demonstrates an example of implementing a custom logger to write Teiid log information to a database.</description>
 
-    <properties>
-			
-	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>org.jboss.teiid</groupId>
 			<artifactId>teiid-common-core</artifactId>
 			<scope>provided</scope>
+            <version>${version.teiid}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.jboss.teiid</groupId>
 			<artifactId>teiid-api</artifactId>
 			<scope>provided</scope>
+            <version>${version.teiid}</version>
 		</dependency>
 		
 		<dependency>
 			<groupId>org.jboss.teiid</groupId>
 			<artifactId>teiid-client</artifactId>
 			<scope>provided</scope>
+            <version>${version.teiid}</version>
 		</dependency>
 
         <dependency>

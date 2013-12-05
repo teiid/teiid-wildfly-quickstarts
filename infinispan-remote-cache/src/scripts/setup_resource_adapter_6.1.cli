@@ -1,0 +1,9 @@
+#  Note:  The RemoteServerList host:port may have to be changed, depending on your JDG deployment.  Also, the port is based on running it locally and incrementing the ports
+
+/subsystem=resource-adapters/resource-adapter=infinispanRemQS:add(module=org.jboss.teiid.resource-adapter.infinispan)
+/subsystem=resource-adapters/resource-adapter=infinispanRemQS/connection-definitions=infinispanDS:add(jndi-name=java:/infinispanRemote, class-name=org.teiid.resource.adapter.infinispan.InfinispanManagedConnectionFactory, enabled=true, use-java-context=true)
+/subsystem=resource-adapters/resource-adapter=infinispanRemQS/connection-definitions=infinispanDS/config-properties=Module:add(value=com.client.quickstart.pojos)
+/subsystem=resource-adapters/resource-adapter=infinispanRemQS/connection-definitions=infinispanDS/config-properties=CacheTypeMap:add(value=local-quickstart-cache:com.client.quickstart.pojo.Order)
+/subsystem=resource-adapters/resource-adapter=infinispanRemQS/connection-definitions=infinispanDS/config-properties=RemoteServerList:add(value=127.0.0.1:11322)
+/subsystem=resource-adapters/resource-adapter=infinispanRemQS:activate
+

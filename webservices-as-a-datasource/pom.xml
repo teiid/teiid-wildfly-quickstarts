@@ -14,65 +14,67 @@
 	<name>Accessing Webservices</name>
 	<description>This quickstart demonstrates using the 'ws' translator to access a State service, a webservices data source.</description>
     
-      <dependencies>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-    	<groupId>org.jboss.resteasy</groupId>
-    	<artifactId>resteasy-jaxrs</artifactId>
-    </dependency>
-    <dependency>
-        <groupId>org.scannotation</groupId>
-        <artifactId>scannotation</artifactId>
-    </dependency>
-    <dependency>
-        <groupId>org.jboss.resteasy</groupId>
-        <artifactId>jaxrs-api</artifactId>
-    </dependency>
-    <dependency>
-        <groupId>javax.annotation</groupId>
-        <artifactId>jsr250-api</artifactId>
-        <scope>provided</scope>
-    </dependency>
-    <dependency>
-        <groupId>org.apache.httpcomponents</groupId>
-        <artifactId>httpclient</artifactId>
-        <scope>provided</scope>
-    </dependency>
-    <dependency>
-        <groupId>org.slf4j</groupId>
-        <artifactId>slf4j-api</artifactId>
-        <scope>provided</scope>
-    </dependency>
-    <dependency>
-        <groupId>commons-httpclient</groupId>
-        <artifactId>commons-httpclient</artifactId>
-        <scope>provided</scope>
-    </dependency>
-    <dependency>
-        <groupId>net.jcip</groupId>
-        <artifactId>jcip-annotations</artifactId>
-        <scope>provided</scope>
-    </dependency>
-    <dependency>
-        <groupId>javax.activation</groupId>
-        <artifactId>activation</artifactId>
-        <scope>provided</scope>
-    </dependency>
-    <dependency>
-        <groupId>org.slf4j</groupId>
-        <artifactId>slf4j-simple</artifactId>
-        <scope>provided</scope>
-    </dependency>
-    <dependency>
-        <groupId>org.slf4j</groupId>
-        <artifactId>jcl-over-slf4j</artifactId>
-        <scope>provided</scope>
-    </dependency>
-  </dependencies>
+    <dependencies>
+        <dependency>
+          <groupId>junit</groupId>
+          <artifactId>junit</artifactId>
+          <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-jaxrs</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.scannotation</groupId>
+            <artifactId>scannotation</artifactId>
+             <version>${version.org.scannotation}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>jaxrs-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>javax.annotation</groupId>
+            <artifactId>jsr250-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>commons-httpclient</groupId>
+            <artifactId>commons-httpclient</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>net.jcip</groupId>
+            <artifactId>jcip-annotations</artifactId>
+            <scope>provided</scope>
+            <version>${version.net.jcip}</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.activation</groupId>
+            <artifactId>activation</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jcl-over-slf4j</artifactId>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
 
     <build>
       <finalName>CustomerRESTWebSvc</finalName>
@@ -95,16 +97,6 @@
                         </includes>
                     </resource>
                 </webResources>
-            </configuration>
-        </plugin>
- 
-        <!-- Maven compiler plugin -->
-        <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-compiler-plugin</artifactId>
-            <configuration>
-					<source>${maven.compiler.source}</source>
-					<target>${maven.compiler.target}</target>
             </configuration>
         </plugin>
         

@@ -8,6 +8,9 @@ JBoss Tools.
 
 Assumptions:
 -  Teiid has been deployed to your jboss as server.
+-  Teiid user has been setup - edit standalone/configuration/teiid-security-users.properties and add your user and password
+
+	the default is username=user   password=user
 
 -------------------
 System requirements
@@ -52,20 +55,17 @@ Setup can be done either manually (see Manual Setup) or using maven (see Setup u
 
 	* copy infinispancache-vdb.xml and infinispancache-vdb.xml.dodeploy to {jbossas.server.dir}/standalone/deployments	
 
-8) security:
 
--  to add the administrative user and password run: bin/adduser.sh   
--  [optional] setup Teiid user:  edit standalone/configuration/teiid-security-users.properties and add your user and password
-
-	the default is username=user   password=user
-
-9) [Required] Open a browser to:  http://localhost:8080/infinispan-quickstart/home.jsf
+8) [Required] Open a browser to:  http://localhost:8080/infinispan-quickstart/home.jsf
 This will trigger the loading of the 10 Orders and then present that list on the page.
 
-10) Use a sql tool, like SQuirreL, to connect and issue following example query:
+9) Use a sql tool, like SQuirreL, to connect and issue following example query:
 
 -  connect:  jdbc:teiid:orders@mm://localhost:31000
--  query: select * from OrdersView
+-  queries 
+
+[1] select * from OrdersView
+[2] select * from OrdersView where OrderNum > 3
 
 
 
@@ -86,33 +86,28 @@ This will trigger the loading of the 10 Orders and then present that list on the
 
 	*  run:  ./standalone.sh -c standalone-teiid.xml
 	
-5) security:
-
--  to add the administrative user and password run: bin/add-user.sh   
--  [optional] setup Teiid user:  edit standalone/configuration/teiid-security-users.properties and add your user and password
-
-	the default is username=user   password=user
-	
-
-6) setup the Infinispan Cache
+5) setup the Infinispan Cache
 
     * `mvn -Psetup-cache jboss-as:add-resource` 
     
-7) setup Infinispan as a datasource
+6) setup Infinispan as a datasource
     
     * `mvn -Psetup-datasource jboss-as:add-resource`  
     
-8) deploy the sample application infinispan-quickstart.war and the infinispan-vdb.xml artifacts
+7) deploy the sample application infinispan-quickstart.war and the infinispan-vdb.xml artifacts
 
 	* `mvn install -Pdeploy-artifacts`
 	
-9) RESTART the jboss as server.  Without using CLI to configure the resources, the resource isn't activated.  
+8) RESTART the jboss as server.  Without using CLI to configure the resources, the resource isn't activated.  
 		Therefore, jboss-as requires a restart.
 	
-10) [Required] Open a browser to:  http://localhost:8080/infinispan-quickstart/home.jsf
+9) [Required] Open a browser to:  http://localhost:8080/infinispan-quickstart/home.jsf
 This will trigger the loading of the 10 Orders and then present that list on the page.
 
-11) Use a sql tool, like SQuirreL, to connect and issue following example query:
+10) Use a sql tool, like SQuirreL, to connect and issue following example query:
 
 -  connect:  jdbc:teiid:orders@mm://localhost:31000
--  query: select * from OrdersView
+-  queries 
+
+[1] select * from OrdersView
+[2] select * from OrdersView where OrderNum > 3

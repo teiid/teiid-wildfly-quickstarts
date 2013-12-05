@@ -18,7 +18,14 @@
 			<groupId>org.jboss.teiid</groupId>
 			<artifactId>teiid-client</artifactId>
 			<scope>provided</scope>
+            <version>${version.teiid}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.jboss.teiid</groupId>
+			<artifactId>teiid-common-core</artifactId>
+			<scope>provided</scope>
+            <version>${version.teiid}</version>
+		</dependency>        
 	</dependencies>
 
     <profiles>
