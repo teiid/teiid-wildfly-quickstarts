@@ -21,18 +21,21 @@
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-search</artifactId>
 			<scope>provided</scope>
+            <version>${version.org.hibernate}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.jboss.teiid</groupId>
 			<artifactId>teiid-common-core</artifactId>
 			<scope>provided</scope>
+            <version>${version.teiid}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.jboss.teiid</groupId>
 			<artifactId>teiid-api</artifactId>
 			<scope>provided</scope>
+            <version>${version.teiid}</version>
 		</dependency>
 
 		<dependency>
@@ -40,6 +43,7 @@
 			<artifactId>connector-infinispan</artifactId>
 			<scope>provided</scope>
 			<classifier>lib</classifier>
+            <version>${version.teiid}</version>
 		</dependency>
 
 
@@ -47,12 +51,14 @@
 			<groupId>org.jboss.teiid.connectors</groupId>
 			<artifactId>translator-object</artifactId>
 			<scope>provided</scope>
+            <version>${version.teiid}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.infinispan</groupId>
 			<artifactId>infinispan-core</artifactId>
 			<scope>provided</scope>
+            <version>${version.org.infinispan}</version>
 		</dependency>
 
 		<!-- Infinispan dependency -->
@@ -60,12 +66,14 @@
 			<groupId>org.infinispan</groupId>
 			<artifactId>infinispan-cdi</artifactId>
 			<scope>provided</scope>
+            <version>${version.org.infinispan}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.infinispan</groupId>
 			<artifactId>infinispan-query</artifactId>
 			<scope>provided</scope>
+            <version>${version.org.infinispan}</version>
 		</dependency>
 
 		<dependency>
@@ -80,6 +88,7 @@
 			<groupId>org.jboss.spec.javax.annotation</groupId>
 			<artifactId>jboss-annotations-api_1.1_spec</artifactId>
 			<scope>provided</scope>
+            <version>${version.javax.annotation}</version>
 		</dependency>
 
 		<!-- Import the Servlet API, we use provided scope as the API is included 
@@ -95,6 +104,7 @@
 			<artifactId>jboss-ejb-api_3.1_spec</artifactId>
 			<scope>provided</scope>
 		</dependency>
+
 	</dependencies>
 
 	<build>
@@ -141,58 +151,10 @@
 				</configuration>
 			</plugin>
 
-			<!-- Compiler plugin enforces Java 1.6 compatibility and activates annotation 
-				processors -->
-			<plugin>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<source>${maven.compiler.source}</source>
-					<target>${maven.compiler.target}</target>
-				</configuration>
-			</plugin>
 		</plugins>
 	</build>
 
 	<profiles>
-		<profile>
-			<id>jboss-public-repository</id>
-			<activation>
-				<property>
-					<name>jboss-public-repository</name>
-					<value>!false</value>
-				</property>
-			</activation>
-			<repositories>
-				<repository>
-					<id>jboss-public-repository-group</id>
-					<name>JBoss Public Maven Repository Group</name>
-					<url>http://repository.jboss.org/nexus/content/groups/public</url>
-					<releases>
-						<enabled>true</enabled>
-						<updatePolicy>never</updatePolicy>
-					</releases>
-					<snapshots>
-						<enabled>true</enabled>
-						<updatePolicy>never</updatePolicy>
-					</snapshots>
-				</repository>
-			</repositories>
-			<pluginRepositories>
-				<pluginRepository>
-					<id>jboss-public-repository-group</id>
-					<name>JBoss Public Maven Repository Group</name>
-					<url>http://repository.jboss.org/nexus/content/groups/public</url>
-					<releases>
-						<enabled>true</enabled>
-						<updatePolicy>never</updatePolicy>
-					</releases>
-					<snapshots>
-						<enabled>false</enabled>
-						<updatePolicy>never</updatePolicy>
-					</snapshots>
-				</pluginRepository>
-			</pluginRepositories>
-		</profile>
 
 		<!-- This optional profile fixes the compilation error encountered with 
 			'javax.annotation' and Java 6. Java 6 embeds an older version of 'javax.annotation' 
@@ -256,7 +218,6 @@
 							<dependency>
 								<groupId>org.apache.ant</groupId>
 								<artifactId>ant</artifactId>
-                                <version>1.7.0</version>
 							</dependency>
 						</dependencies>
 						<executions>
@@ -340,25 +301,7 @@
        have yet to find the right location for <address> 
        
 	 	I'm leaving in the commands in case something is found to resolve
- -->
-                <!-- configuration>
-                	<addresses>
-                		<address>subsystem=resource-adapters</address>
-                	</addresses>
-                    <execute-commands>
-                    <address>subsystem=resource-adapters</address>
-                    <batch>true</batch>
-                        <commands>
-                            <command>/subsystem=resource-adapters/resource-adapter=infinispanTest:add(archive=teiid-connector-infinispan.rar, transaction-support=NoTransaction)</command>
-                            <command>/subsystem=resource-adapters/resource-adapter=infinispanTest/connection-definitions=infinispanTest:add(jndi-name=java:/infinispanTest, class-name=org.teiid.resource.adapter.infinispan.InfinispanManagedConnectionFactory, enabled=true, use-java-context=true)</command>
-                            <command>/subsystem=resource-adapters/resource-adapter=infinispanTest/connection-definitions=infinispanTest/config-properties=CacheTypeMap:add(value=local-quickstart-cache:com.client.quickstart.pojo.Order)</command>
-                            <command>/subsystem=resource-adapters/resource-adapter=infinispanTest/connection-definitions=infinispanTest/config-properties=module:add(value=com.client.quickstart.pojos)</command>
-                            <command>/subsystem=resource-adapters/resource-adapter=infinispanTest/connection-definitions=infinispanTest/config-properties=CacheJndiName:add(value=java:jboss/infinispan/container/teiid-infinispan-quickstart)</command>
-                            <command>/subsystem=resource-adapters/resource-adapter=infinispanTest:activate</command>
-						</commands>
-                    </execute-commands>
-                </configuration-->
-                
+ -->                
 						<configuration>
 							<address>subsystem=resource-adapters</address>
 							<resources>
@@ -422,7 +365,6 @@
 							<dependency>
 								<groupId>org.apache.ant</groupId>
 								<artifactId>ant</artifactId>
-                                <version>1.7.0</version>
 							</dependency>
 						</dependencies>
 						<executions>
