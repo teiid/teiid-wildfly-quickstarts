@@ -48,19 +48,20 @@ Setup can be done either manually (see Manual Setup) or using maven (see Setup u
 
     Copy the files in the src/security directory to "<jboss.home>/standalone/configuration" directory
 	
-4) VDB Deployment:
+4)  Start the server
+
+	Open a command line and navigate to the "bin" directory under the root directory of the JBoss server
+
+	For Linux:   ./standalone.sh -c standalone-teiid.xml	
+	for Windows: standalone.bat -c standalone-teiid.xml
+
+5) VDB Deployment:
 
     Copy the following files to the "<jboss.home>/standalone/deployments" directory
 
      * src/vdb/portfolio-vdb.xml
      * src/vdb/portfolio-vdb.xml.dodeploy
 
-5)  Start the server
-
-	Open a command line and navigate to the "bin" directory under the root directory of the JBoss server
-
-	For Linux:   ./standalone.sh -c standalone-teiid.xml	
-	for Windows: standalone.bat -c standalone-teiid.xml
 
 6)  Open the admin console to make sure the VDB is deployed
 
@@ -79,7 +80,7 @@ Setup can be done either manually (see Manual Setup) or using maven (see Setup u
 
 2. Use the simpleclient example to run the following queries:
 
-Example:   mvn install -Dvdb="portfoliodataroles" -Dsql="example query"
+Example:   mvn install -Dvdb="portfolio" -Dsql="example query"
 
 example queries:
 
