@@ -9,7 +9,6 @@
 
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>simpleclient</artifactId>
-	<packaging>jar</packaging>
 
 	<name>SimpleClient</name>
 	<description>The simpleclient demonstrates making connections to Teiid through both, a Driver and a DataSource</description>
@@ -24,7 +23,7 @@
 
     <profiles>
         <profile>
-            <id>execjava</id>
+            <id>defaultuser</id>
             <activation>
                 <property>
                     <name>vdb</name>
@@ -35,7 +34,7 @@
                     <plugin>
                         <groupId>org.codehaus.mojo</groupId>
                         <artifactId>exec-maven-plugin</artifactId>
-                        <version>${version.org.codehaus.mojo}</version>
+                        <version>${version.org.codehaus.mojo.exec.plugin}</version>
                         <executions>
                             <execution>
                                 <phase>test</phase>
@@ -56,6 +55,6 @@
                     </plugin>                
                 </plugins>
             </build>
-        </profile> 
+        </profile>         
     </profiles>
 </project>

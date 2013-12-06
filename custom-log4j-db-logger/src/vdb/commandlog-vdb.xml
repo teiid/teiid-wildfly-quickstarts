@@ -53,7 +53,7 @@
                PRINCIPAL_NAME, 
                 TRANSACTION_ID, SOURCE_COMMANDID, ISSOURCE,
                ROW_COUNT, "SQL", "PLAN" from Logging.TEIID_COMMANDLOG
-               ORDER BY Session_ID, Request_ID, EVENT_TIME
+               ORDER BY Session_ID, Request_ID, EVENT_TIME;
          
     
         ]]> </metadata>
