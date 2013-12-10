@@ -29,8 +29,8 @@ Run the maven build to compile and create the web service war.
 
 	Open a command line and navigate to the "bin" directory under the root directory of the JBoss server
 
-	For Linux:   ./standalone.sh -c standalone-teiid.xml	
-	for Windows: standalone.bat -c standalone-teiid.xml
+	For Linux:   ./standalone.sh	
+	for Windows: standalone.bat
 
 2)  Deploy the war file that will be used as the web service resource to be accessed as a data source by Teiid
 

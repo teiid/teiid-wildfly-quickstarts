@@ -30,8 +30,8 @@ Setup can be done either manually (see Manual Setup) or using maven (see Setup u
 
 	Open a command line and navigate to the "bin" directory under the root directory of the JBoss server
 
-	For Linux:   ./standalone.sh -c standalone-teiid.xml	
-	for Windows: standalone.bat -c standalone-teiid.xml
+	For Linux:   ./standalone.sh	
+	for Windows: standalone.bat
 
 2)  Copy teiid support files
 	
@@ -76,8 +76,8 @@ You should see the server log indicate the VDB is active with a message like:  T
 
 	Open a command line and navigate to the "bin" directory under the root directory of the JBoss server
 
-	For Linux:   ./standalone.sh -c standalone-teiid.xml	
-	for Windows: standalone.bat -c standalone-teiid.xml
+	For Linux:   ./standalone.sh	
+	for Windows: standalone.bat
 	
 2) setup the datasource
 

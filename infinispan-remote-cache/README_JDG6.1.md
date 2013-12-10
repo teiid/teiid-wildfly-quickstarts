@@ -76,7 +76,8 @@ Type `q`  to exit the application.
 
 4) Start the server
 
-	*  run:  ./standalone.sh -c standalone-teiid.xml
+	For Linux:   ./standalone.sh	
+	for Windows: standalone.bat
 
 5) run the setup.cli  script to setup Infinispan cache and resource adapter for Infinispan connector
 
