@@ -40,7 +40,8 @@ Setup can be done either manually (see Manual Setup) or using maven (see Setup u
 
 4) Start the server
 
-	*  run:  ./standalone.sh -c standalone-teiid.xml
+	For Linux:   ./standalone.sh	
+	for Windows: standalone.bat
 
 5) run the setup.cli  script to setup Infinispan cache and resource adapter for Infinispan connector
 
@@ -84,7 +85,7 @@ This will trigger the loading of the 10 Orders and then present that list on the
 
 4) Start the server
 
-	*  run:  ./standalone.sh -c standalone-teiid.xml
+	*  run:  ./standalone.sh   or  ./standalone.bat
 	
 5) setup the Infinispan Cache
 

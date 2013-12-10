@@ -44,8 +44,8 @@ Please note this example does not support working with Hibernate 3.
 
 	Open a command line and navigate to the "bin" directory under the root directory of the JBoss server
 
-	For Linux:   ./standalone.sh -c standalone-teiid.xml	
-	for Windows: standalone.bat -c standalone-teiid.xml
+	For Linux:   ./standalone.sh 	
+	for Windows: standalone.bat
 
 	
 3) VDB Deployment:

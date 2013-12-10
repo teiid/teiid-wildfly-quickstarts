@@ -52,8 +52,8 @@ Setup can be done either manually (see Manual Setup) or using maven (see Setup u
 
 	Open a command line and navigate to the "bin" directory under the root directory of the JBoss server
 
-	For Linux:   ./standalone.sh -c standalone-teiid.xml	
-	for Windows: standalone.bat -c standalone-teiid.xml
+	For Linux:   ./standalone.sh	
+	for Windows: standalone.bat
 
 5) VDB Deployment:
 

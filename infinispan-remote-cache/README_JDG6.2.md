@@ -96,11 +96,8 @@ b) setup the infinispan hotrod 6.2 remote client
 
 5) Start the server
 
-	*  run:  ./standalone.sh 
-
-		or run the following if Teiid isn't configured in the default configuration
-	*  ./standalone.sh -c standalone-teiid.xml 
-
+	For Linux:   ./standalone.sh	
+	for Windows: standalone.bat
 
 	
 6) deploy the VDB: infinispan-vdb.xml

@@ -34,10 +34,10 @@ Some quickstarts are designed to enhance or extend other quickstarts. These are 
 |:-----------|:-----------|:-----------|:-----------|:-----------|
 | [datafederation](dynamicvdb-datafederation/README.md "data-federation") | Data Federation, TEXTTABLE, Native Query | Shows how to expose multiple data sources as a single source | None |
 | [dataroles](dynamicvdb-dataroles/README.md "data-roles") | Data roles | Shows how to control Read/Write data access using data roles and masking | datafederation |
-| [rules](drools-integration/README.md "rules") | Integrating Drools Rules, UDF | Shows how Drools businss rules can be integrated on data moving thru Teiid | datafederation |
 | [consume-webservices](webservices-as-a-datasource/README.md "consume-webservices") | 'ws' Translator, XMLTABLE, XMLPARSE, VIEW DDL | Demonstrates the use of the 'ws' translator to read a web service data source | None |
 | [hibernate](hibernate-on-top-of-teiid/README.md "hibernate") | Hibernate Integration, VDB ReUse, Create VIEW, Create Trigger, TEXTTABLE | Demonstrates how a Hibernate application can add data federation capabilities at the data layer| datafederation |
 | [infinispan-cache](infinispan-local-cache/README.md "infinispan-cache") | 'infinispan' Object Translator, OBJECTTABLE | Demonstrates the 'infinispan' object translator which enables reading an object cache  | None |
+| [infinispan-remote-cache](infinispan-remote-cache/README.md "infinispan-remote-cache") | 'infinispan' Object Translator, OBJECTTABLE | Demonstrates the 'infinispan' object translator reading from a remote object cache  | None |
 | [simpleclient](simpleclient/README.md "simpleclient") | Teiid JDBC Connection | Demonstrates how to make a jdbc connection to Teiid using the Teiid JDBC Driver and DataSource  | None |
 | [custom-db-logger](custom-log4j-db-logger/README.md "custom-db-logger") | Custom DB Logger | Demonstrates how to use a custom logger to write Command Log messages to a database | None |
 
