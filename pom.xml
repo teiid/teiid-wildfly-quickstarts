@@ -49,6 +49,7 @@
         <version.javax.annotation>1.0.1.Final</version.javax.annotation>
         <version.net.jcip>1.0</version.net.jcip>
         <version.org.codehaus.mojo.exec.plugin>1.2.1</version.org.codehaus.mojo.exec.plugin>
+        <version.org.infinispan.6>6.0.0.CR1</version.org.infinispan.6>
 	</properties>
 	
 	<dependencies>
