@@ -4,13 +4,13 @@
 	<parent>
 		<artifactId>teiid-quickstart-parent</artifactId>
 		<groupId>org.jboss.teiid.quickstart</groupId>
-		<version>1.1.0</version>
+		<version>2.0.0</version>
 	</parent>
 
 	<modelVersion>4.0.0</modelVersion>
-	<artifactId>infinispan-remote-cache.6</artifactId>
-	<name>Infinispan 6 Remote Cache Quickstart</name>
-	<description>This quickstart demonstrates how to access a remote Infinispan 6 cache thru Teiid</description>
+	<artifactId>infinispan-remote-cache</artifactId>
+	<name>Infinispan Remote Cache Quickstart</name>
+	<description>This quickstart demonstrates how to access a remote Infinispan cache thru Teiid</description>
 
     <properties>
 
