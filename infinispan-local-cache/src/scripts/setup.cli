@@ -4,7 +4,7 @@
 /subsystem=resource-adapters/resource-adapter=infinispanQS:add(module=org.jboss.teiid.resource-adapter.infinispan)
 /subsystem=resource-adapters/resource-adapter=infinispanQS/connection-definitions=infinispanDS:add(jndi-name=java:/infinispanTest, class-name=org.teiid.resource.adapter.infinispan.InfinispanManagedConnectionFactory, enabled=true, use-java-context=true)
 /subsystem=resource-adapters/resource-adapter=infinispanQS/connection-definitions=infinispanDS/config-properties=Module:add(value=com.client.quickstart.pojos)
-/subsystem=resource-adapters/resource-adapter=infinispanQS/connection-definitions=infinispanDS/config-properties=CacheTypeMap:add(value=local-quickstart-cache:com.client.quickstart.pojo.Order)
+/subsystem=resource-adapters/resource-adapter=infinispanQS/connection-definitions=infinispanDS/config-properties=CacheTypeMap:add(value=local-quickstart-cache:com.client.quickstart.pojo.Order;id)
 /subsystem=resource-adapters/resource-adapter=infinispanQS/connection-definitions=infinispanDS/config-properties=CacheJndiName:add(value=java:jboss/infinispan/container/teiid-infinispan-quickstart)
 /subsystem=resource-adapters/resource-adapter=infinispanQS:activate
 
