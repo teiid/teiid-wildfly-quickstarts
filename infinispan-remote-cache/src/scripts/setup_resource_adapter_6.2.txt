@@ -10,7 +10,7 @@
                                 com.client.quickstart.pojos
                             </config-property>
                             <config-property name="CacheTypeMap">
-                                local-quickstart-cache:com.client.quickstart.pojo.Order
+                                local-quickstart-cache:com.client.quickstart.pojo.Order;id
                             </config-property>
                             <config-property name="RemoteServerList">
                                 127.0.0.1:11322
