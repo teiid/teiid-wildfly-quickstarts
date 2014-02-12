@@ -1,6 +1,6 @@
 /subsystem=resource-adapters/resource-adapter=fileQS:add(module=org.jboss.teiid.resource-adapter.file)
 /subsystem=resource-adapters/resource-adapter=fileQS/connection-definitions=fileDS:add(jndi-name=java:/marketdata-file, class-name=org.teiid.resource.adapter.file.FileManagedConnectionFactory, enabled=true, use-java-context=true)
-/subsystem=resource-adapters/resource-adapter=fileQS/connection-definitions=fileDS/config-properties=ParentDirectory:add(value=../teiidfiles/data/)
+/subsystem=resource-adapters/resource-adapter=fileQS/connection-definitions=fileDS/config-properties=ParentDirectory:add(value=${jboss.server.base.dir}/../teiidfiles/data/)
 /subsystem=resource-adapters/resource-adapter=fileQS/connection-definitions=fileDS/config-properties=AllowParentPaths:add(value=true)
 /subsystem=resource-adapters/resource-adapter=fileQS:activate
 
