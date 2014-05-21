@@ -4,6 +4,7 @@
 /subsystem=resource-adapters/resource-adapter=fileQS/connection-definitions=fileDS/config-properties=AllowParentPaths:add(value=true)
 /subsystem=resource-adapters/resource-adapter=fileQS:activate
 
-/subsystem=datasources/data-source=h2:add(jndi-name=java:/accounts-ds,  driver-name=h2, connection-url="jdbc:h2:mem:accounts;INIT=RUNSCRIPT FROM '${jboss.home.dir}/teiidfiles/customer-schema.sql'\;",user-name=sa, password=sa)
+/subsystem=datasources/data-source=h2:add(jndi-name=java:/accounts-ds,  enabled=true, use-java-context=true, driver-name=h2, connection-url="jdbc:h2:mem:accounts;INIT=RUNSCRIPT FROM '${jboss.home.dir}/teiidfiles/customer-schema.sql'\;",user-name=sa, password=sa)
+/subsystem=datasources/data-source=h2:enable
 
 /:reload
