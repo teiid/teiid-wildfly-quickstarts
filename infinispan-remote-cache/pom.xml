@@ -19,27 +19,41 @@
         <main.class.hotrod-endpoint>com.client.quickstart.OrderManager</main.class.hotrod-endpoint>
 
     </properties>
+    
+    <dependencyManagement>
+		<dependencies>
+			<dependency>
+			  <groupId>org.infinispan</groupId>
+			  <artifactId>infinispan-client-hotrod</artifactId>
+			  <version>${version.org.infinispan.6}</version>
+			</dependency>  	   
+			<dependency>
+				<groupId>org.infinispan</groupId>
+				<artifactId>infinispan-core</artifactId>
+			    <version>${version.org.infinispan.6}</version>
+			</dependency> 									
+        </dependencies>	
+    </dependencyManagement>    
 
     <dependencies>
         <!-- Import the infinispan core -->
         <dependency>
             <groupId>org.infinispan</groupId>
             <artifactId>infinispan-core</artifactId>
-            <version>${version.org.infinispan.6}</version>
+            <scope>provided</scope>
         </dependency>
 
         <!-- Import the Infinispan client hotrod -->
         <dependency>
             <groupId>org.infinispan</groupId>
             <artifactId>infinispan-client-hotrod</artifactId>
-            <version>${version.org.infinispan.6}</version>
+            <scope>provided</scope>
         </dependency>
 
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-search</artifactId>
 			<scope>provided</scope>
-            <version>${version.org.hibernate}</version>
 		</dependency>
 
 		<dependency>
