@@ -21,87 +21,47 @@
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-search</artifactId>
 			<scope>provided</scope>
-            <version>${version.org.hibernate}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.jboss.teiid</groupId>
 			<artifactId>teiid-common-core</artifactId>
 			<scope>provided</scope>
-            <version>${version.teiid}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.jboss.teiid</groupId>
 			<artifactId>teiid-api</artifactId>
 			<scope>provided</scope>
-            <version>${version.teiid}</version>
 		</dependency>
-
-		<dependency>
-			<groupId>org.jboss.teiid.connectors</groupId>
-			<artifactId>connector-infinispan</artifactId>
-			<scope>provided</scope>
-			<classifier>lib</classifier>
-            <version>${version.teiid}</version>
-		</dependency>
-
-
 		<dependency>
 			<groupId>org.jboss.teiid.connectors</groupId>
 			<artifactId>translator-object</artifactId>
 			<scope>provided</scope>
-            <version>${version.teiid}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.infinispan</groupId>
 			<artifactId>infinispan-core</artifactId>
 			<scope>provided</scope>
-            <version>${version.org.infinispan}</version>
-		</dependency>
+ 		</dependency>
 
 		<!-- Infinispan dependency -->
 		<dependency>
 			<groupId>org.infinispan</groupId>
 			<artifactId>infinispan-cdi</artifactId>
 			<scope>provided</scope>
-            <version>${version.org.infinispan}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.infinispan</groupId>
 			<artifactId>infinispan-query</artifactId>
 			<scope>provided</scope>
-            <version>${version.org.infinispan}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>javax.resource</groupId>
 			<artifactId>connector-api</artifactId>
-			<scope>provided</scope>
-		</dependency>
-
-		<!-- Import the Common Annotations API (JSR-250), we use provided scope 
-			as the API is included in JBoss AS 7 -->
-		<dependency>
-			<groupId>org.jboss.spec.javax.annotation</groupId>
-			<artifactId>jboss-annotations-api_1.1_spec</artifactId>
-			<scope>provided</scope>
-            <version>${version.javax.annotation}</version>
-		</dependency>
-
-		<!-- Import the Servlet API, we use provided scope as the API is included 
-			in JBoss AS 7 -->
-		<dependency>
-			<groupId>org.jboss.spec.javax.servlet</groupId>
-			<artifactId>jboss-servlet-api_3.0_spec</artifactId>
-			<scope>provided</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>org.jboss.spec.javax.ejb</groupId>
-			<artifactId>jboss-ejb-api_3.1_spec</artifactId>
 			<scope>provided</scope>
 		</dependency>
 

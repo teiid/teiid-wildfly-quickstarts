@@ -4,8 +4,9 @@
 	<parent>
         <groupId>org.jboss.teiid</groupId>
         <artifactId>teiid-parent</artifactId>
-        <version>8.6.0.Final</version>    
+        <version>8.7.0.Final</version>    
 	</parent>
+	
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.jboss.teiid.quickstart</groupId>
 	<artifactId>teiid-quickstart-parent</artifactId>
@@ -31,7 +32,6 @@
         <module>webservices-as-a-datasource</module>
 		<module>infinispan-local-cache</module>
         <module>infinispan-remote-cache</module>
-        <module>custom-log4j-db-logger</module>
         <module>simpleclient</module>
 	</modules>
 
@@ -41,7 +41,9 @@
 		<!-- [WARNING] Using platform encoding (UTF-8 actually) to copy filtered 
 			resources, i.e. build is platform dependent! -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<version.teiid>8.6.0.Final</version.teiid>
+	
+		<version.org.jboss.integration-platform>6.0.0.CR8</version.org.jboss.integration-platform>
+		<version.teiid>8.7.0.Final</version.teiid>
 		<version.jboss.javaee.web>2.0.0.Final</version.jboss.javaee.web>
 		<version.javax.spec>1.0.2.Final</version.javax.spec>
         <version.jboss.as.plugin>7.4.Final</version.jboss.as.plugin>
@@ -50,20 +52,119 @@
         <version.net.jcip>1.0</version.net.jcip>
         <version.org.codehaus.mojo.exec.plugin>1.2.1</version.org.codehaus.mojo.exec.plugin>
         <version.org.infinispan.6>6.0.0.CR1</version.org.infinispan.6>
+        <version.org.hibernate.search>4.2.0.Final</version.org.hibernate.search>
+        <version.org.jboss.bom.jboss-javaee-6.0-with-tools>1.0.7.Final</version.org.jboss.bom.jboss-javaee-6.0-with-tools>
+		<version.junit>4.11</version.junit>
+        <version.org.mockito>1.9.5</version.org.mockito>
+
 	</properties>
 	
 	<dependencies>
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.mockito</groupId>
-			<artifactId>mockito-all</artifactId>
-			<scope>test</scope>
-		</dependency>	       	
+
+	
 	</dependencies>
+	
+	<dependencyManagement>
+		<dependencies>
+		
+           <dependency>
+            	<groupId>org.jboss.integration-platform</groupId>
+            	<artifactId>jboss-integration-platform-bom</artifactId>
+            	<version>${version.org.jboss.integration-platform}</version>
+            	<scope>import</scope>
+            	<type>pom</type>
+          </dependency> 		
+          <dependency>
+				<groupId>org.jboss.teiid</groupId>
+				<artifactId>teiid-parent</artifactId>
+             	<version>${version.teiid}</version>
+             	<type>pom</type>
+             	<scope>import</scope>
+          </dependency>  
+		
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${version.junit}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mockito</groupId>
+                <artifactId>mockito-all</artifactId>
+                <version>${version.org.mockito}</version>
+            </dependency> 
+			<dependency>
+				<groupId>org.jboss.teiid.connectors</groupId>
+				<artifactId>translator-object</artifactId>
+				<version>${version.teiid}</version>
+			</dependency>                              
+			<dependency>
+				<groupId>org.jboss.teiid</groupId>
+				<artifactId>teiid-common-core</artifactId>
+				<version>${version.teiid}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.jboss.teiid</groupId>
+				<artifactId>teiid-api</artifactId>
+				<version>${version.teiid}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.jboss.teiid</groupId>
+				<artifactId>teiid-client</artifactId>
+				<version>${version.teiid}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.jboss.teiid</groupId>
+				<artifactId>teiid</artifactId>
+				<version>${version.teiid}</version>
+				<classifier>jdbc</classifier>
+			</dependency>			
+            <dependency>
+                <groupId>org.jboss.bom</groupId>
+                <artifactId>jboss-javaee-6.0-with-tools</artifactId>
+                <version>${version.org.jboss.bom.jboss-javaee-6.0-with-tools}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>          
+			 <dependency>
+				<groupId>org.scannotation</groupId>
+				<artifactId>scannotation</artifactId>
+				<version>${version.org.scannotation}</version>
+			 </dependency>
+			 <dependency>
+            	<groupId>net.jcip</groupId>
+            	<artifactId>jcip-annotations</artifactId>
+            	<scope>provided</scope>
+            	<version>${version.net.jcip}</version>
+        	</dependency>
+			<dependency>
+				<groupId>org.infinispan</groupId>
+				<artifactId>infinispan-cdi</artifactId>
+				<version>${version.org.infinispan}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.infinispan</groupId>
+				<artifactId>infinispan-query</artifactId>
+				<version>${version.org.infinispan}</version>
+			</dependency>            
+			<dependency>
+				<groupId>org.infinispan</groupId>
+				<artifactId>infinispan-core</artifactId>
+				<version>${version.org.infinispan}</version>
+ 			</dependency>        
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-search</artifactId>
+                <version>${version.org.hibernate.search}</version>
+            </dependency>    
+            <dependency>
+               <groupId>org.hibernate</groupId>
+               <artifactId>hibernate-search-engine</artifactId>
+               <version>${version.org.hibernate.search}</version>                      		           
+        </dependency> 
+   
+         </dependencies>      
+    </dependencyManagement>	
 
     <build>
         <plugins>

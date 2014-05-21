@@ -27,7 +27,6 @@
         <dependency>
             <groupId>org.scannotation</groupId>
             <artifactId>scannotation</artifactId>
-             <version>${version.org.scannotation}</version>
         </dependency>
         <dependency>
             <groupId>org.jboss.resteasy</groupId>
@@ -57,7 +56,6 @@
             <groupId>net.jcip</groupId>
             <artifactId>jcip-annotations</artifactId>
             <scope>provided</scope>
-            <version>${version.net.jcip}</version>
         </dependency>
         <dependency>
             <groupId>javax.activation</groupId>
