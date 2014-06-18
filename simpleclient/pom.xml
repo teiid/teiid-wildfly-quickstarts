@@ -17,19 +17,16 @@
 		<dependency>
             <groupId>org.jboss.teiid</groupId>
             <artifactId>teiid</artifactId>
-            <scope>provided</scope>
             <classifier>jdbc</classifier>
 		</dependency>
 		<dependency>
             <groupId>org.jboss.teiid</groupId>
             <artifactId>teiid-common-core</artifactId>
-            <scope>provided</scope>
-		</dependency>
+ 		</dependency>
 		<dependency>
             <groupId>org.jboss.teiid</groupId>
             <artifactId>teiid-client</artifactId>
-            <scope>provided</scope>
-		</dependency>
+ 		</dependency>
 	</dependencies>
 
     <profiles>
