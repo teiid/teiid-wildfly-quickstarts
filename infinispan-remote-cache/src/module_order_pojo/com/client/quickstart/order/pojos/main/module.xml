@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<module xmlns="urn:jboss:module:1.0" name="com.client.quickstart.pojos">
+<module xmlns="urn:jboss:module:1.0" name="com.client.quickstart.order.pojos">
     <resources>
         <resource-root path="infinispan-remote-cache-pojos.jar" />
         <!-- Insert resources here -->
     </resources>
 
     <dependencies>
-    		<module name="org.infinispan.hotrod" slot="6.2" />
+    		<module name="org.infinispan.hotrod" slot="6.3" />
     </dependencies>
 </module>

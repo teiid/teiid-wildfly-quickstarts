@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<vdb name="People" version="1">
+
+    <description>People Object Cache VDB</description>
+
+    <property name="UseConnectorMetadata" value="true" />
+
+
+    <model name="People" type="Physical">
+        <property name="importer.useFullSchemaName" value="false"/>
+           
+        <source name="infinispan-cache-dsl-connector" translator-name="infinispan-cache-dsl" connection-jndi-name="java:/infinispanRemoteDSL" />
+    </model>
+
+
+</vdb>
