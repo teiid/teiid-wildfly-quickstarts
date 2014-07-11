@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <vdb name="remote_orders" version="1">
 
-    <description>Shows how to call an Infinispan local cache</description>
+    <description>Shows how to call an Infinispan remote cache</description>
     
     <property name="UseConnectorMetadata" value="cached" />
     <model name="Orders" visible="false">
