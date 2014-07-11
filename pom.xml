@@ -51,7 +51,8 @@
         <version.javax.annotation>1.0.1.Final</version.javax.annotation>
         <version.net.jcip>1.0</version.net.jcip>
         <version.org.codehaus.mojo.exec.plugin>1.2.1</version.org.codehaus.mojo.exec.plugin>
-        <version.org.infinispan.6>6.0.0.CR1</version.org.infinispan.6>
+        <!--version.org.infinispan.6>6.0.0.CR1</version.org.infinispan.6-->
+        <version.org.infinispan.6>6.1.0.Final-redhat-3</version.org.infinispan.6>
         <version.org.hibernate.search>4.2.0.Final</version.org.hibernate.search>
         <version.org.jboss.bom.jboss-javaee-6.0-with-tools>1.0.7.Final</version.org.jboss.bom.jboss-javaee-6.0-with-tools>
 		<version.junit>4.11</version.junit>
