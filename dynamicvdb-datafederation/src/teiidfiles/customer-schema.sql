@@ -1,3 +1,27 @@
+CREATE TABLE status
+(
+  VDBName varchar(50) not null,
+  VDBVersion integer not null,
+  SchemaName varchar(50) not null,
+  Name varchar(256) not null,
+  TargetSchemaName varchar(50),
+  TargetName varchar(256) not null,
+  Valid boolean not null,
+  LoadState varchar(25) not null,
+  Cardinality integer,
+  Updated timestamp not null,
+  LoadNumber integer not null,
+  PRIMARY KEY (VDBName, VDBVersion, SchemaName, Name)
+);
+
+CREATE TABLE h2_stock_mat
+(
+   product_id integer,
+   SYMBOL varchar(16),
+   PRICE decimal(20,4),
+   COMPANY_NAME varchar(256)            
+);
+
 CREATE TABLE CUSTOMER
 (
    SSN char(10),

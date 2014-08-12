@@ -32,7 +32,7 @@ Some quickstarts are designed to enhance or extend other quickstarts. These are 
 
 | **Quickstart Name** | **Features Demonstrated** | **Description** | **Prerequisites** |
 |:-----------|:-----------|:-----------|:-----------|:-----------|
-| [datafederation](dynamicvdb-datafederation/README.md "data-federation") | Data Federation, TEXTTABLE, Native Query | Shows how to expose multiple data sources as a single source | None |
+| [datafederation](dynamicvdb-datafederation/README.md "data-federation") | Data Federation, TEXTTABLE, Native Query, External Materialization | Shows how to expose multiple data sources as a single source and externally materialize a view to improve performance | None |
 | [dataroles](dynamicvdb-dataroles/README.md "data-roles") | Data roles | Shows how to control Read/Write data access using data roles and masking | datafederation |
 | [rules](drools-integration/README.md "rules") | Integrating Drools Rules, UDF | Shows how Drools businss rules can be integrated on data moving thru Teiid | datafederation |
 | [consume-webservices](webservices-as-a-datasource/README.md "consume-webservices") | 'ws' Translator, XMLTABLE, XMLPARSE, VIEW DDL | Demonstrates the use of the 'ws' translator to read a web service data source | None |
