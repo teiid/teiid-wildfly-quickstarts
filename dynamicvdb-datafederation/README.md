@@ -1,7 +1,13 @@
 Dynamicvdb-datafederation is the 'Hello World' example for Teiid.  
 
 
-This will demonstrate how to federate data from a relational data source with a text file-based data source.
+This will demonstrate the following:
+-  how to federate data from a relational data source with a text file-based data source
+-  how to define a translator override to support native queries
+-  how to define a view using DDL
+-  how to define a materialized VIEW using DDL and load the external materialized table 
+
+
 This example uses the H2 database, which is referenced as the "accounts-ds" data source in the server, 
 but the creation SQL can be adapted to another database if you choose.
 
@@ -126,21 +132,57 @@ Example:   mvn install -Dvdb="portfolio" -Dsql="example query"
 
 
 #################
-# Example queries:
+# Examples:
 #################
 
-Example 1 queries the relational source
+--------------------
+-  Source and Federated Queries
+--------------------
 
-Example 2 queries the text file-based source
+*  Example 1  - queries the relational source
 
-Example 3 performs a join between the relational source and the text file-based source.  The files returned from the getTextFiles procedure are passed to the TEXTTABLE table function (via the nested table correlated reference f.file).  The TEXTTABLE function expects a 
+	select * from product
+
+
+*  Example 2  - queries the text file-based source
+
+	select stock.* from (call MarketData.getTextFiles('*.txt')) f, TEXTTABLE(f.file COLUMNS symbol string, price bigdecimal HEADER) stock
+
+
+*  Example 3  - performs a join between the relational source and the text file-based source.  The files returned from the getTextFiles procedure are passed to the TEXTTABLE table function (via the nested table correlated reference f.file).  The TEXTTABLE function expects a 
 text file with a HEADER containing entries for at least symbol and price columns. 
 
-Example 4 Issue query that contains a NATIVE sql call that will be directly issued against the H2 database.  This is useful if the function isn't supported by the translator (check the documentation for the types of translators that support NATIVE sql).   Note that the translator override in the vdb xml enabling support for native queries has to be set.
+	select product.symbol, stock.price, company_name from product, (call MarketData.getTextFiles('*.txt')) f, TEXTTABLE(f.file COLUMNS symbol string, price bigdecimal HEADER) stock where product.symbol=stock.symbol
 
-1	select * from product
-2	select stock.* from (call MarketData.getTextFiles('*.txt')) f, TEXTTABLE(f.file COLUMNS symbol string, price bigdecimal HEADER) stock
-3.	select product.symbol, stock.price, company_name from product, (call MarketData.getTextFiles('*.txt')) f, TEXTTABLE(f.file COLUMNS symbol string, price bigdecimal HEADER) stock where product.symbol=stock.symbol
-4 	select x.* FROM (call native('select Shares_Count, MONTHNAME(Purchase_Date) from Holdings')) w, ARRAYTABLE(w.tuple COLUMNS "Shares_Count" integer, "MonthPurchased" string ) AS x
+--------------------
+-  Native Query
+--------------------
 
+*  Example 4  - Issue query that contains a NATIVE sql call that will be directly issued against the H2 database.  This is useful if the function isn't supported by the translator (check the documentation for the types of translators that support NATIVE sql).   Note that the translator override in the vdb xml enabling support for native queries has to be set.
+
+ 	select x.* FROM (call native('select Shares_Count, MONTHNAME(Purchase_Date) from Holdings')) w, ARRAYTABLE(w.tuple COLUMNS "Shares_Count" integer, "MonthPurchased" string ) AS x
+
+
+--------------------
+-  Materialized View
+--------------------
+
+*  Example 5  - Query the materialized View
+
+	select * from StocksMatModel.stockPricesMatView  (should get 18 rows)
+
+*  Example 6  - Add a row to the product table, so that when the materialized view is updated,
+the new row will be picked 
+
+First, insert a new row into Products table:
+
+	INSERT INTO PRODUCT (ID,SYMBOL,COMPANY_NAME) VALUES(2000,'RHT','Red Hat Inc')
+
+wait 2 minutes, as defined by:  "teiid_rel:MATVIEW_TTL" 120000,  in the portfolio-vdb.xml
+
+then re-issue query in #5 and should now see 19 rows
+
+*  Example 7  - Query the original source, not the cached data
+
+	select * from StocksMatModel.stockPricesMatView option nocache  (should be the same as #6)
 
