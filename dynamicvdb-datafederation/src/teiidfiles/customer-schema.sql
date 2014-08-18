@@ -1,3 +1,12 @@
+DROP TABLE IF EXISTS status;
+DROP TABLE IF EXISTS h2_stock_mat;
+DROP TABLE IF EXISTS mat_stock_staging;
+DROP TABLE IF EXISTS CUSTOMER;
+DROP TABLE IF EXISTS ACCOUNT;
+DROP TABLE IF EXISTS PRODUCT;
+DROP TABLE IF EXISTS HOLDINGS;
+DROP TABLE IF EXISTS HT_ProductInfo;
+
 CREATE TABLE status
 (
   VDBName varchar(50) not null,
@@ -15,6 +24,14 @@ CREATE TABLE status
 );
 
 CREATE TABLE h2_stock_mat
+(
+   product_id integer,
+   SYMBOL varchar(16),
+   PRICE decimal(20,4),
+   COMPANY_NAME varchar(256)            
+);
+
+CREATE TABLE mat_stock_staging
 (
    product_id integer,
    SYMBOL varchar(16),
@@ -49,7 +66,7 @@ CREATE TABLE ACCOUNT
 );
 
 
-CREATE TABLE PRODUCT (
+CREATE TABLE  PRODUCT (
    ID integer,
    SYMBOL varchar(16),
    COMPANY_NAME varchar(256),
@@ -57,7 +74,7 @@ CREATE TABLE PRODUCT (
 );
 
 
-CREATE TABLE HOLDINGS
+CREATE TABLE  HOLDINGS
 (
    TRANSACTION_ID integer IDENTITY,
    ACCOUNT_ID integer,
@@ -67,7 +84,7 @@ CREATE TABLE HOLDINGS
    CONSTRAINT HOLDINGS_PK PRIMARY KEY (TRANSACTION_ID)
 );
 
-CREATE TABLE HT_ProductInfo 
+CREATE TABLE  HT_ProductInfo 
 (
 	id integer not null, 
 	hib_sess_id CHAR(36)
