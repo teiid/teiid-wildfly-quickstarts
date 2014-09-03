@@ -4,7 +4,7 @@
 	<parent>
     	<groupId>org.jboss.integration-platform</groupId>
     	<artifactId>jboss-integration-platform-parent</artifactId>
-    	<version>6.0.0.CR9</version>	
+    	<version>6.0.0.CR11</version>	
 	</parent>
 		
 	<modelVersion>4.0.0</modelVersion>
@@ -42,7 +42,7 @@
 			resources, i.e. build is platform dependent! -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	
-		<version.org.jboss.integration-platform>6.0.0.CR9</version.org.jboss.integration-platform>
+		<version.org.jboss.integration-platform>6.0.0.CR11</version.org.jboss.integration-platform>
 		<version.teiid>8.7.0.Final</version.teiid>
 		<version.jboss.javaee.web>2.0.0.Final</version.jboss.javaee.web>
 		<version.javax.spec>1.0.2.Final</version.javax.spec>
