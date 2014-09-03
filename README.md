@@ -32,14 +32,14 @@ Some quickstarts are designed to enhance or extend other quickstarts. These are 
 
 | **Quickstart Name** | **Features Demonstrated** | **Description** | **Prerequisites** |
 |:-----------|:-----------|:-----------|:-----------|:-----------|
-| [datafederation](dynamicvdb-datafederation/README.md "data-federation") | Data Federation, TEXTTABLE, Native Query, External Materialization | Shows how to expose multiple data sources as a single source and externally materialize a view to improve performance | None |
+| [datafederation](dynamicvdb-datafederation/README.md "data-federation") | Data Federation, TEXTTABLE, Native Query, External Materialization, Excel File | Shows how to expose multiple data sources for data federation and externally materialize a view to improve performance | None |
 | [dataroles](dynamicvdb-dataroles/README.md "data-roles") | Data roles | Shows how to control Read/Write data access using data roles and masking | datafederation |
-| [rules](drools-integration/README.md "rules") | Integrating Drools Rules, UDF | Shows how Drools businss rules can be integrated on data moving thru Teiid | datafederation |
 | [consume-webservices](webservices-as-a-datasource/README.md "consume-webservices") | 'ws' Translator, XMLTABLE, XMLPARSE, VIEW DDL | Demonstrates the use of the 'ws' translator to read a web service data source | None |
 | [hibernate](hibernate-on-top-of-teiid/README.md "hibernate") | Hibernate Integration, VDB ReUse, Create VIEW, Create Trigger, TEXTTABLE | Demonstrates how a Hibernate application can add data federation capabilities at the data layer| datafederation |
-| [infinispan-cache](infinispan-local-cache/README.md "infinispan-cache") | 'infinispan' Object Translator, OBJECTTABLE | Demonstrates the 'infinispan' object translator which enables reading an object cache  | None |
+| [infinispan local cache](infinispan-local-cache/README.md "infinispan-cache") | 'infinispan' Object Translator, OBJECTTABLE | Demonstrates the 'infinispan' object translator which enables reading a local object cache  | None |
+| [infinispan remote cache by key](infinispan-remote-cache/README.md "infinispan-cache") | 'infinispan' Object Translator | Demonstrates reading a remote infinispan cache using hot rod client by key value  | None |
+| [infinispan remote cache using dsl](infinispan-remote-cache/README.md "infinispan-cache-dsl") | 'infinispan' DSL Translator | Demonstrates reading from a remote infinispan cache that's configured using protobuffers  | None |
 | [simpleclient](simpleclient/README.md "simpleclient") | Teiid JDBC Connection | Demonstrates how to make a jdbc connection to Teiid using the Teiid JDBC Driver and DataSource  | None |
-| [custom-db-logger](custom-log4j-db-logger/README.md "custom-db-logger") | Custom DB Logger | Demonstrates how to use a custom logger to write Command Log messages to a database | None |
 
 
 -------------------
