@@ -74,13 +74,49 @@ http://maven.apache.org/xsd/settings-1.0.0.xsd">
           </snapshots>
         </repository>
       </repositories>
-    </profile>    
+    </profile>  
+       <profile>
+            <id>redhat-techpreview-all-repository</id>
+            <repositories>
+                <repository>
+                    <id>redhat-techpreview-all-repository</id>
+                    <name>Red Hat Tech Preview repository (all)</name>
+                    <url>http://maven.repository.redhat.com/techpreview/all/</url>
+                    <layout>default</layout>
+                    <releases>
+                        <enabled>true</enabled>
+                        <updatePolicy>never</updatePolicy>
+                    </releases>
+                    <snapshots>
+                        <enabled>false</enabled>
+                        <updatePolicy>never</updatePolicy>
+                    </snapshots>
+                </repository>
+            </repositories>
+            <pluginRepositories>
+                <pluginRepository>
+                    <id>redhat-techpreview-all-repository</id>
+                    <name>Red Hat Tech Preview repository (all)</name>
+                    <url>http://maven.repository.redhat.com/techpreview/all/</url>
+                    <layout>default</layout>
+                    <releases>
+                        <enabled>true</enabled>
+                        <updatePolicy>never</updatePolicy>
+                    </releases>
+                    <snapshots>
+                        <enabled>false</enabled>
+                        <updatePolicy>never</updatePolicy>
+                    </snapshots>
+                </pluginRepository>
+            </pluginRepositories>
+        </profile>            
   </profiles>
 
   <activeProfiles>
     <activeProfile>jboss-public-repository</activeProfile>
     <activeProfile>jboss-developer-repository</activeProfile>
     <activeProfile>jboss-eap-alpha</activeProfile>
+    <activeProfile>redhat-techpreview-all-repository</activeProfile>
   </activeProfiles>
 
 </settings>
