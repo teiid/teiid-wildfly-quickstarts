@@ -11,7 +11,7 @@
 	<groupId>org.jboss.teiid.quickstart</groupId>
 	<artifactId>teiid-quickstart-parent</artifactId>
 	<packaging>pom</packaging>
-	<version>2.0.1</version>
+	<version>2.1.0</version>
 	<name>Teiid Quickstart Parent</name>
 	<description>Quickstarts for the Teiid project</description>
 
@@ -30,8 +30,8 @@
         <module>dynamicvdb-dataroles</module>
         <module>hibernate-on-top-of-teiid</module>
         <module>webservices-as-a-datasource</module>
-		<module>infinispan-local-cache</module>
-        <module>infinispan-remote-cache</module>
+		<module>jdg-local-cache</module>
+        <module>jdg-remote-cache</module>
         <module>simpleclient</module>
 	</modules>
 
@@ -51,8 +51,15 @@
         <version.javax.annotation>1.0.1.Final</version.javax.annotation>
         <version.net.jcip>1.0</version.net.jcip>
         <version.org.codehaus.mojo.exec.plugin>1.2.1</version.org.codehaus.mojo.exec.plugin>
-        <version.org.infinispan.6>6.1.0.Final-redhat-4</version.org.infinispan.6>
-        <version.org.hibernate.search>4.2.0.Final</version.org.hibernate.search>
+
+        <version.org.infinispan>6.0.2.Final</version.org.infinispan>        
+        <version.org.hibernate>4.2.0.Final</version.org.hibernate>
+        <version.org.hibernate.search>4.4.0.Final</version.org.hibernate.search>
+
+<!--
+        <version.org.infinispan>6.1.0.Final-redhat-4</version.org.infinispan>
+        <version.org.hibernate.search>4.5.0.Final</version.org.hibernate.search>
+ -->
         <version.org.jboss.bom.jboss-javaee-6.0-with-tools>1.0.7.Final</version.org.jboss.bom.jboss-javaee-6.0-with-tools>
 		<version.junit>4.11</version.junit>
         <version.org.mockito>1.9.5</version.org.mockito>
@@ -125,7 +132,12 @@
                 <version>${version.org.jboss.bom.jboss-javaee-6.0-with-tools}</version>
                 <type>pom</type>
                 <scope>import</scope>
-            </dependency>          
+            </dependency>    
+			 <dependency>
+				<groupId>javax.enterprise</groupId>
+				<artifactId>cdi-api</artifactId>
+				<version>1.0-SP4</version>
+			 </dependency>
 			 <dependency>
 				<groupId>org.scannotation</groupId>
 				<artifactId>scannotation</artifactId>
@@ -152,6 +164,16 @@
 				<artifactId>infinispan-core</artifactId>
 				<version>${version.org.infinispan}</version>
  			</dependency>        
+			<dependency>
+				<groupId>org.infinispan</groupId>
+				<artifactId>infinispan-commons</artifactId>
+				<version>${version.org.infinispan}</version>
+ 			</dependency>  
+ 			<dependency>
+				<groupId>org.infinispan</groupId>
+				<artifactId>infinispan-client-hotrod</artifactId>
+				<version>${version.org.infinispan}</version>
+ 			</dependency>			      
             <dependency>
                 <groupId>org.hibernate</groupId>
                 <artifactId>hibernate-search</artifactId>
@@ -161,7 +183,7 @@
                <groupId>org.hibernate</groupId>
                <artifactId>hibernate-search-engine</artifactId>
                <version>${version.org.hibernate.search}</version>                      		           
-        </dependency> 
+        	</dependency> 
    
          </dependencies>      
     </dependencyManagement>	
@@ -236,7 +258,7 @@
                     </execution>
                 </executions>
             </plugin>
-		</plugins>
+ 		</plugins>            
 	</build>
 
     <profiles>    

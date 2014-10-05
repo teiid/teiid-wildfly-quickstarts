@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<vdb name="orders" version="1">
+
+    <description>Shows how to call an Infinispan local cache</description>
+    
+    <property name="UseConnectorMetadata" value="cached" />
+    <model name="Orders" visible="true">
+        <source name="objsource" translator-name="infinispan1" connection-jndi-name="java:/infinispanLocal" />
+        <metadata type="DDL"><![CDATA[
+ 
+ CREATE FOREIGN TABLE Orders (
+    OrdersObject object OPTIONS (NAMEINSOURCE 'this', UPDATABLE FALSE, SEARCHABLE 'Unsearchable', NATIVE_TYPE 'java.lang.Object'),
+    orderNum integer NOT NULL OPTIONS (NAMEINSOURCE 'id', SEARCHABLE 'Searchable', NATIVE_TYPE 'int'),
+    orderDate date OPTIONS (SEARCHABLE 'Searchable', NATIVE_TYPE 'date'),
+    orderedBy varchar(100) OPTIONS (NAMEINSOURCE 'person', SEARCHABLE 'Searchable', NATIVE_TYPE 'java.lang.String'),
+    orderDateString varchar(10) OPTIONS (SEARCHABLE 'Searchable', NATIVE_TYPE 'java.lang.String'),
+    CONSTRAINT PK_ORDERNUM PRIMARY KEY(orderNum)
+) OPTIONS (NAMEINSOURCE 'local-quickstart-cache', UPDATABLE TRUE);
+ 
+ 
+         ]]> </metadata>
+    </model>
+    <model name="OrdersView" type="VIRTUAL">
+        <metadata type="DDL"><![CDATA[
+            CREATE VIEW OrdersView (
+            OrderNum integer PRIMARY KEY,
+            OrderDate date,
+            OrderedBy   varchar(100)
+            )
+            AS
+            SELECT T.OrderNum, T.OrderDate, T.OrderedBy  FROM Orders as T;
+            
+        ]]> </metadata>
+    </model>
+    <translator name="infinispan1" type="infinispan-cache">
+        <property name="SupportsLuceneSearching" value="true"/>
+        
+        <!--
+         <property name="ConfigurationFileName" value="<dir>/infinispan-config.xml"/>
+         -->
+
+    </translator>
+</vdb>
