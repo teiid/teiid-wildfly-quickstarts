@@ -1,0 +1,129 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<parent>
+		<artifactId>teiid-quickstart-parent</artifactId>
+		<groupId>org.jboss.teiid.quickstart</groupId>
+		<version>2.1.0</version>
+	</parent>
+
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>jdg-remote-cache</artifactId>
+	<name>JDG Remote Cache Quickstart</name>
+	<description>This quickstart demonstrates how to access a remote JDG cache thru Teiid</description>
+
+    <properties>
+
+        <!-- Defines the main class to be execute when running java -jar 
+            command -->
+        <main.class.hotrod-endpoint>com.client.quickstart.OrderManager</main.class.hotrod-endpoint>
+
+    </properties>
+
+    <dependencies>
+        <!-- Import the infinispan core -->
+        <dependency>
+            <groupId>org.infinispan</groupId>
+            <artifactId>infinispan-core</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Import the Infinispan client hotrod -->
+        <dependency>
+            <groupId>org.infinispan</groupId>
+            <artifactId>infinispan-client-hotrod</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-search</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.resource</groupId>
+			<artifactId>connector-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+	</dependencies>
+
+	<build>
+
+		<finalName>${project.artifactId}-pojos</finalName>
+		<plugins>
+        
+			<!-- add the vdb to the repo -->
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+					<includes>
+						<include>**/pojo/*</include>
+					</includes>
+				</configuration>
+				<executions>
+					<execution>
+						<id>make-a-jar</id>
+						<phase>compile</phase>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+        
+
+
+            <!-- This plugin permits the execution of this quickstart 
+                through mvn exec:java command -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>${version.org.codehaus.mojo.exec.plugin}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>java</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <classpathScope>test</classpathScope>
+                    <mainClass>${main.class.hotrod-endpoint}</mainClass>
+                </configuration>
+            </plugin>
+
+            <!-- This plugin will create a new jar's with all dependencies 
+                packages added. It also changes the MANIFEST.MF to include the information 
+                about which is the main class -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>${version.shade.plugin}</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <finalName>${project.artifactId}-pojo-loader</finalName>
+                    <transformers>
+                        <transformer
+                            implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                            <mainClass>${main.class.hotrod-endpoint}</mainClass>
+                        </transformer>
+                    </transformers>
+                </configuration>
+            </plugin>
+
+		</plugins>
+	</build>
+	
+
+</project>
