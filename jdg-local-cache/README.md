@@ -59,13 +59,13 @@ updated to the correct slot (default set to slot="jdg-6.3")
 
 NOTE:  if you change the slot, then the pom.xml needs the maven-war-plugin dependencies updated (then rebuild quickstart)
 
-b)  The "your.pojo.module" reference in the translator-object needs to be replaced with the module name that has
-the java class that's being stored in the JDG cache
+b)  The "your.pojo.module" reference in the translator-object module.xml file needs to be replaced with the module name that has
+the java class that's being stored in the JDG cache.  For this quickstart, this would be - com.client.quickstart.pojos
 		
 5) Configure resource-adapter
 
 -  open the src/scripts/setup_resource_adapter.txt file and copy-n-paste the resource-adapter
-segment into the server configuration (i.e., standalone.xml), in the  <subsystem xmlns="urn:jboss:domain:resource-adapters:1.1">
+segment into the server configuration (i.e., standalone.xml), under the  <subsystem xmlns="urn:jboss:domain:resource-adapters:1.1">
 section.  There is a current bug that will not allow CLI script to be run that configures a resource-adapter that has a "slot" defined.
 
 
@@ -82,11 +82,11 @@ section.  There is a current bug that will not allow CLI script to be run that c
 	-	cd to the ${JBOSS_HOME}/bin directory
 	-	execute:  ./jboss-cli.sh --connect --file={path}/infinispan-local-cache/src/scripts/add-infinispan-cache-translator.cli 
 
-6) deploy the sample application war using the management console at http://localhost:9990
+6) deploy the sample application war (target/jdg-quickstart.war) that will be used to preload the cache
 
-	* use the management console at http://localhost:9990 to deploy infinispan-quickstart.war from the target directory
-
-    or copy the file:  target/jdg-quickstart.war to the deployments folder in the server
+	* use the management console at http://localhost:9990 to deploy target/jdg-quickstart.war from the target directory
+		or
+    * copy the file:  target/jdg-quickstart.war to the deployments folder in the server
 	
 7) deploy the VDB: jdg-local-cache-vdb.xml
 
@@ -94,23 +94,24 @@ section.  There is a current bug that will not allow CLI script to be run that c
 
 
 ####################
-#   **** IMPORTANT **** This following be done before you move on to next step (9), 
+#   **** IMPORTANT **** This following step must be done before you move on to next step (9), 
 #   so that the cache will be created and bound into JNDI to used by the VDB.
 #####################
 
 8) [Required] Open a browser to:  http://localhost:8080/jdg-quickstart/home.jsf
-This will trigger the loading of the 10 Orders and then present that list on the page.
+This will trigger the loading of 10 Orders and then present that list on the page.
 
 
 
-9) Use a sql tool, like SQuirreL, to connect and issue following example query:
+9) Use a sql tool, like SQuirreL, to connect and issue following example queries:
 
 -  connect:  jdbc:teiid:orders@mm://localhost:31000
 -  queries 
 
-[1] select orderDate, orderedBy from Order
+[1] select orderDate, orderedBy from Orders
 [2] select * from OrdersView
 [3] select * from OrdersView where OrderNum > 3
 [4] Insert into Orders (OrderNum, OrderedBy) Values (100, 'TestPerson')
+and rerun one of the above select's to see the new order
 
 
