@@ -1,2 +1,0 @@
-/subsystem=infinispan/cache-container=local/local-cache=local-quickstart-cache:add(start=EAGER)
-

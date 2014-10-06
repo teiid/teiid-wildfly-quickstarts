@@ -1,7 +1,7 @@
-Infinispan Remote-Cache Quickstart to a JDG 6.2/6.3 Server using Google Protocol Buffers for Serialization
+JDG Remote-Cache Quickstart using Google Protocol Buffers for Serialization and Hot Rod client to query
 ================================
 
-This remote quickstart demonstrates how Teiid can query a remote 6.2/.3 JDG cache using the hotrod client.
+This remote quickstart demonstrates how Teiid can query a remote 6.3 JDG cache using the hotrod client utilizing google protbuffers.
 
 
 Setup to include:
@@ -14,11 +14,12 @@ Quick Start requirements
 -------------------
 
 -  If you have not done so, please review the System Requirements (../README.md)
+Need the following kits:
 -  JBoss application server to run Teiid
 -  The Teiid Jboss distribution kit
--  JDG 6.3 server kit
--  JDG 6.3 quick start kit
--  JDG 6.3 eap modules hotrod client kit
+-  JDG 6.3 server kit (will be the remote cache)
+-  JDG 6.3 quick start kit (will use the remote-query which has the protobin file(s) and will be used to load the cache)
+-  JDG 6.3 eap modules hotrod client kit (used by Teiid to access the remote cache)
 
 ####################
 #   JDG server setup
@@ -26,17 +27,24 @@ Quick Start requirements
 
 -  Download the JDG quickstarts, specifically will be using the remote-query in this example.  Will need
 	to build the remote-query quickstart, so that the jboss-remote-query-quickstart.jar is found in the target directory.
--  A separate JDG 6.2 or 6.3 server needs to be installed, and configured based on the remote-query quicks start
+	
+-  Install the JDG 6.3 server and configured based on the remote-query quicks start
 
-- if running JDG and DV on same box, will need to increment the ports of one of the servers, use:
+-  if running JDG and DV on same box, will need to increment the ports of one of the servers using:
 
 		-  -Djboss.socket.binding.port-offset=100
 
 For the purpose of this quick start, its expecting the JDG server to have its ports incremented.  The
 port adjustment has been made in the setup.cli script to match the above offset.
 
+
 -  run the remote-query quickstart to load the cache
 
+NOTE: you will need to adjust the jdg remote-query quickstart  jdg.properties that defines the connection ports
+that it uses.   The following properties will need to incremented:
+
+jdg.hotrod.port=11222      	----> 11322
+jdg.jmx.port=9999			----> 10099
 
 ######################
 #   Setup Teiid Server
@@ -46,7 +54,7 @@ port adjustment has been made in the setup.cli script to match the above offset.
 
 2) run:  mvn clean install
 
-3) Setup Modules (pojo's and infinispan remote client) 
+3) Setup Modules (pojo's and JDG remote client) 
 	-	under  src/module_addressbook_pojo,  copy 'com' directory to <jbossas-dir>/modules/
 	-	from the remote-query quick start, under  target, copy  infinispan-remote-query-quickstart.jar to <jbossas-dir>/modules/com/client/quickstart/addressbook/pojos/main
 
@@ -66,18 +74,23 @@ port adjustment has been made in the setup.cli script to match the above offset.
 		or run the following if Teiid isn't configured in the default configuration
 	*  ./standalone.sh -c standalone-teiid.xml 
 
+6) run the add-infinispan-cache-dsl-translator.cli script to install translator infinispan-cache.
 
+	-	cd to the ${JBOSS_HOME}/bin directory
+	-	execute:  ./jboss-cli.sh --connect --file={path}/infinispan-local-cache/src/scripts/add-infinispan-cache-dsl-translator.cli 
 	
-6) deploy the VDB: infinispan-vdb.xml
+7) deploy the VDB: infinispan-dsl-cache-vdb.xml
 
 	* copy infinispan-dsl-cache-vdb.xml and infinispan-dsl-cache-vdb.xml.dodeploy to {jbossas.server.dir}/standalone/deployments	
 
     
 
-7) Use a sql tool, like SQuirreL, to connect and issue following example query:
+8) Use a sql tool, like SQuirreL, to connect and issue following example query:
 
 -  connect:  jdbc:teiid:People@mm://{host}:31000
--  query: select name, email, id from Person
+[1]  query: select name, email, id from Person
+[2]  insert:  Insert into Person (id, name, email) Values (100, 'TestPerson', 'test@person.com')
+then rerun [1] to see the new row
 
 NOTE:  do not do a SELECT * FROM Person
 because you will get a serialization error, because the Person class is not serializable.
