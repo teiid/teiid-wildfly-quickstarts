@@ -36,9 +36,8 @@ Some quickstarts are designed to enhance or extend other quickstarts. These are 
 | [dataroles](dynamicvdb-dataroles/README.md "data-roles") | Data roles | Shows how to control Read/Write data access using data roles and masking | datafederation |
 | [consume-webservices](webservices-as-a-datasource/README.md "consume-webservices") | 'ws' Translator, XMLTABLE, XMLPARSE, VIEW DDL | Demonstrates the use of the 'ws' translator to read a web service data source | None |
 | [hibernate](hibernate-on-top-of-teiid/README.md "hibernate") | Hibernate Integration, VDB ReUse, Create VIEW, Create Trigger, TEXTTABLE | Demonstrates how a Hibernate application can add data federation capabilities at the data layer| datafederation |
-| [infinispan local cache](infinispan-local-cache/README.md "infinispan-cache") | 'infinispan' Object Translator, OBJECTTABLE | Demonstrates the 'infinispan' object translator which enables reading a local object cache  | None |
-| [infinispan remote cache by key](infinispan-remote-cache/README.md "infinispan-cache") | 'infinispan' Object Translator | Demonstrates reading a remote infinispan cache using hot rod client by key value  | None |
-| [infinispan remote cache using dsl](infinispan-remote-cache/README.md "infinispan-cache-dsl") | 'infinispan' DSL Translator | Demonstrates reading from a remote infinispan cache that's configured using protobuffers  | None |
+| [jdg local cache](jdg-local-cache/README.md "infinispan-cache") | 'infinispan' Object Translator, OBJECTTABLE | Demonstrates reading reading a JDG cache running in library mode  | None |
+| [jdg remote cache using dsl](jdg-remote-cache/README.md "infinispan-cache-dsl") | 'infinispan' DSL Translator | Demonstrates reading from a remote JDG cache using hot rod client that's configured using protobuffers  | None |
 | [simpleclient](simpleclient/README.md "simpleclient") | Teiid JDBC Connection | Demonstrates how to make a jdbc connection to Teiid using the Teiid JDBC Driver and DataSource  | None |
 
 
@@ -65,7 +64,6 @@ To run these quickstarts with the provided build scripts, you need the following
 
 4.  Set JBOSS_HOME to the root directory location of your application server, the scripts use this variable to
 	determine where to deploy to.
-
 
 
 ------------------
