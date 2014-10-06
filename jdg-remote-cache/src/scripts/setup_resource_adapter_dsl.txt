@@ -12,7 +12,7 @@
                                 addressbook:org.jboss.as.quickstarts.datagrid.hotrod.query.domain.Person;id
                             </config-property>
                             <config-property name="ProtobinFile">
-                                /addressbook.protobin
+                                 /quickstart/addressbook.protobin
                             </config-property>
                             <config-property name="MessageDescriptor">
                                 quickstart.Person
