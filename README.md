@@ -37,7 +37,7 @@ Some quickstarts are designed to enhance or extend other quickstarts. These are 
 | [consume-webservices](webservices-as-a-datasource/README.md "consume-webservices") | 'ws' Translator, XMLTABLE, XMLPARSE, VIEW DDL | Demonstrates the use of the 'ws' translator to read a web service data source | None |
 | [hibernate](hibernate-on-top-of-teiid/README.md "hibernate") | Hibernate Integration, VDB ReUse, Create VIEW, Create Trigger, TEXTTABLE | Demonstrates how a Hibernate application can add data federation capabilities at the data layer| datafederation |
 | [jdg local cache](jdg-local-cache/README.md "infinispan-cache") | 'infinispan' Object Translator, OBJECTTABLE | Demonstrates reading reading a JDG cache running in library mode  | None |
-| [jdg remote cache using dsl](jdg-remote-cache/README.md "infinispan-cache-dsl") | 'infinispan' DSL Translator | Demonstrates reading from a remote JDG cache using hot rod client that's configured using protobuffers  | None |
+| [jdg remote cache using dsl](jdg-remote-cache/README_JDG_REMOTE_QUERY_DSL.md "infinispan-cache-dsl") | 'infinispan' DSL Translator | Demonstrates reading from a remote JDG cache using hot rod client that's configured using protobuffers  | None |
 | [simpleclient](simpleclient/README.md "simpleclient") | Teiid JDBC Connection | Demonstrates how to make a jdbc connection to Teiid using the Teiid JDBC Driver and DataSource  | None |
 
 
