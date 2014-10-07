@@ -39,7 +39,7 @@ Some quickstarts are designed to enhance or extend other quickstarts. These are 
 | [jdg local cache](jdg-local-cache/README.md "infinispan-cache") | 'infinispan' Object Translator, OBJECTTABLE | Demonstrates reading reading a JDG cache running in library mode  | None |
 | [jdg remote cache using dsl](jdg-remote-cache/README_JDG_REMOTE_QUERY_DSL.md "infinispan-cache-dsl") | 'infinispan' DSL Translator | Demonstrates reading from a remote JDG cache using hot rod client that's configured using protobuffers  | None |
 | [simpleclient](simpleclient/README.md "simpleclient") | Teiid JDBC Connection | Demonstrates how to make a jdbc connection to Teiid using the Teiid JDBC Driver and DataSource  | None |
-
+| [tpch](tpch/README.md "tphc") | Performance, Data Federation | Measures performance using TPC-H benchmark against two running Postgresql servers  | 2 running PostgresSQL servers, Unix machine host |
 
 -------------------
 <a id="systemrequirements"></a>
