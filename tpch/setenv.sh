@@ -6,7 +6,7 @@
 
 
 # Path to the directory that contains DBGEN binaries. e.g. tpch_2_17_0/dbgen 
-DBGEN=/home/fnguyen/work/edsqa/teiid-quickstarts/tpc-h-quickstart/tpch_2_17_0/dbgen
+DBGEN=/home/fnguyen/work/edsqa/temp/tpch/tpch_2_17_0/dbgen
 # Path to the jar file with JDBC driver of your Teiid Server
 DRIVER_PATH=/home/fnguyen/work/edsqa/builds/DV-6.1.0/jboss-eap-6.3/dataVirtualization/jdbc/teiid-8.7.1.redhat-3-jdbc.jar
 TEIID_USER=teiidUser
