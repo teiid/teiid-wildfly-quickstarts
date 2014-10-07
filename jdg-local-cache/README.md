@@ -112,6 +112,10 @@ This will trigger the loading of 10 Orders and then present that list on the pag
 [2] select * from OrdersView
 [3] select * from OrdersView where OrderNum > 3
 [4] Insert into Orders (OrderNum, OrderedBy) Values (100, 'TestPerson')
-and rerun one of the above select's to see the new order
+[5] Update Orders set OrderedBy='Testperson2' where OrderNum = 100
+[6] Delete From Orders where OrderNum = 10
+
+* When running either 4, 5, or 6, rerun one of the above select's to see the results to 
+verify the changed data
 
 

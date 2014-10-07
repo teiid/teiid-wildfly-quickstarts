@@ -45,7 +45,8 @@ that it uses.   The following properties will need to incremented:
 
 jdg.hotrod.port=11222      	----> 11322
 jdg.jmx.port=9999			----> 10099
-
+ 
+   
 ######################
 #   Setup Teiid Server
 ######################
@@ -54,9 +55,14 @@ jdg.jmx.port=9999			----> 10099
 
 2) run:  mvn clean install
 
-3) Setup Modules (pojo's and JDG remote client) 
+3) Setup pojo Module  
 	-	under  src/module_addressbook_pojo,  copy 'com' directory to <jbossas-dir>/modules/
 	-	from the remote-query quick start, under  target, copy  infinispan-remote-query-quickstart.jar to <jbossas-dir>/modules/com/client/quickstart/addressbook/pojos/main
+
+4) Install the JBoss Data Grid 6.3.x version of the hot rod client modules kit for EAP into 
+	the modules location for your Teiid/EAP instance.
+   See Red Hat:   http://access.redhat.com  to obtain the kit.
+
 
 4) setup the infinispan resource adapter 
 
@@ -88,9 +94,13 @@ jdg.jmx.port=9999			----> 10099
 8) Use a sql tool, like SQuirreL, to connect and issue following example query:
 
 -  connect:  jdbc:teiid:People@mm://{host}:31000
-[1]  query: select name, email, id from Person
-[2]  insert:  Insert into Person (id, name, email) Values (100, 'TestPerson', 'test@person.com')
-then rerun [1] to see the new row
+[1]  select name, email, id from Person
+[2]  Insert into Person (id, name, email) Values (100, 'TestPerson', 'test@person.com')
+[3]  Update Person set name='testPerson 100' where id = 100
+[4]  delete from Person where id = 2
+
+* When running either 2, 3, or 4, rerun above select to see the results to 
+verify the changed data
 
 NOTE:  do not do a SELECT * FROM Person
 because you will get a serialization error, because the Person class is not serializable.
