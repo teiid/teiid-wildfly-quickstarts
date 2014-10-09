@@ -32,7 +32,6 @@ make
   ./generate-data.sh <scale>
 ``` 
 where scale is a flot number. It is a number of gigabytes of data to generate.
-
   3. Two postgresql servers must be running. For each of one, run the following command to load the data
 ```
     load-data-into-db.sh <hostname> <port> <dbname> <username>
