@@ -6,6 +6,7 @@
     </resources>
 
     <dependencies>
-    		<module name="org.infinispan.hotrod" slot="6.3" />
+            <module name="org.infinispan.client.hotrod" slot="6.3" optional="true" export="true" />
+   			<module name="org.infinispan.protostream" slot="jdg-6.3" export="true" />
     </dependencies>
 </module>
