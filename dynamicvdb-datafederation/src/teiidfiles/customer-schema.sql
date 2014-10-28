@@ -19,7 +19,7 @@ CREATE TABLE status
   LoadState varchar(25) not null,
   Cardinality integer,
   Updated timestamp not null,
-  LoadNumber integer not null,
+  LoadNumber long not null,
   PRIMARY KEY (VDBName, VDBVersion, SchemaName, Name)
 );
 
