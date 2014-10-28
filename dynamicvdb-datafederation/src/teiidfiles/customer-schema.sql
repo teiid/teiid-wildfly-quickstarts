@@ -17,9 +17,9 @@ CREATE TABLE status
   TargetName varchar(256) not null,
   Valid boolean not null,
   LoadState varchar(25) not null,
-  Cardinality integer,
+  Cardinality long,
   Updated timestamp not null,
-  LoadNumber integer not null,
+  LoadNumber long not null,
   PRIMARY KEY (VDBName, VDBVersion, SchemaName, Name)
 );
 
