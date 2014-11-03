@@ -26,6 +26,12 @@ System requirements
 
 If you have not done so, please review the System Requirements (../README.md)
 
+#############
+#  Build
+#############
+First, build the project by running
+
+	mvn clean install
 
 
 #############
@@ -53,7 +59,7 @@ Notice the "user" and "password" are not arguments.  These are preset in JDBCCli
 
 To override the defaults, you can pass overrides via the command line, as an example:
 
- mvn clean install -Dvdb="twitter" -Dsql="select * from tweet where query= 'jboss'" -Dusername="test" -Dpassword="pwd"
+ mvn install -Dvdb="twitter" -Dsql="your query" -Dusername="teiidUser" -Dpassword="pwd"
 
 Or you can change the default in JDBCClient.java.
 

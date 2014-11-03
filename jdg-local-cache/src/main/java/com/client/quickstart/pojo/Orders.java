@@ -29,6 +29,7 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+import org.hibernate.search.annotations.*;
 import org.hibernate.search.annotations.DateBridge;
 import org.hibernate.search.annotations.DocumentId;
 import org.hibernate.search.annotations.Field;
@@ -40,9 +41,8 @@ import org.hibernate.search.annotations.ProvidedId;
 /**
  * @ProvidedId
  */
-@Entity
-@Indexed(index = "Order")
-@ProvidedId
+//@Entity
+//@Indexed @ProvidedId
 public class Orders implements java.io.Serializable {
 
 	/**
@@ -52,12 +52,11 @@ public class Orders implements java.io.Serializable {
 
 	private static DateFormat dateFormat = new SimpleDateFormat("M/dd/yyyy"); //$NON-NLS-1$
 
-	private @Field(index=Index.YES) int id;
-	private @Field Date orderDate = new Date();
-	private @Field(index=Index.YES) String person = "NA";
-	private List<LineItem> lineItems;
+	private int id;
+	private  Date orderDate = new Date();
+	private  String person = "NA";
+	private   List<LineItem> lineItems;
 
-	// @IndexedEmbedded
 	public Orders() {
 	}
 
@@ -72,9 +71,6 @@ public class Orders implements java.io.Serializable {
 		this.lineItems = items;
 	}
 
-	@Id
-	@Field
-	@DocumentId
 	public int getId() {
 		return this.id;
 	}
@@ -83,13 +79,10 @@ public class Orders implements java.io.Serializable {
 		this.id = id;
 	}
 
-	@Field(index = Index.YES)
 	public String getOrderDateString() {
 		return dateFormat.format(orderDate);
 	}
 
-	@Field
-	@DateBridge(resolution = Resolution.MINUTE)
 	public Date getOrderDate() {
 		return this.orderDate;
 	}
@@ -98,7 +91,6 @@ public class Orders implements java.io.Serializable {
 		this.orderDate = orderDate;
 	}
 
-	@Field(index = Index.YES)
 	public String getPerson() {
 		return this.person;
 	}
@@ -112,7 +104,6 @@ public class Orders implements java.io.Serializable {
 
 	}
 
-	// @IndexedEmbedded
 	public List<LineItem> getLineItems() {
 		return this.lineItems;
 	}
