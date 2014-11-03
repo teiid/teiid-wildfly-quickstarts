@@ -28,12 +28,12 @@ import org.hibernate.search.annotations.Index;
 import org.hibernate.search.annotations.Indexed;
 import org.hibernate.search.annotations.ProvidedId;
 
+import javax.persistence.Entity;
 /**
  * 
  */
-
-@Indexed
-@ProvidedId
+//@Entity
+//@Indexed 
 public class Product implements java.io.Serializable {
 
 	/**
@@ -41,8 +41,7 @@ public class Product implements java.io.Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private int id;
-	private @Field(index = Index.YES)
-	String name;
+	private String name;
 	private BigDecimal price;
 
 	public Product() {

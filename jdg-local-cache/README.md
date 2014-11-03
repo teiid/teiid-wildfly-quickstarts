@@ -52,15 +52,29 @@ This will build a jboss-as7 dist zip in the target directory.
 
 4) Update module dependencies
 
--  translator-object
+a)  If the version of JDG modules you installed were not JDG 6.3, then update the following modules:
 
-a)  depending on the version of JDG modules you installed, the module.xml may need to be
-updated to the correct slot (default set to slot="jdg-6.3")
+	1)  If the version of JDG modules you installed were not JDG 6.3, then the following module.xml files will need to be
+updated to the align the slot (default set to slot="jdg-6.3"):
 
-NOTE:  if you change the slot, then the pom.xml needs the maven-war-plugin dependencies updated (then rebuild quickstart)
+		a.  Teiid deployed modules:
+			-  org.jboss.teiid.translator.object
+			-  org.jboss.teiid.resource-adapter.infinispan" slot="6"
+	
+		b.  jdg-local-cache quickstart pojo module
+			-  com.client.quickstart.pojos
+	
+	2)  This quicks-start pom.xml needs the maven-war-plugin dependencies updated (then rebuild quickstart) so that the
+manifest is correct when war is built.
 
 b)  The "your.pojo.module" reference in the translator-object module.xml file needs to be replaced with the module name that has
 the java class that's being stored in the JDG cache.  For this quickstart, this would be - com.client.quickstart.pojos
+
+c)  the org.infinispan.commons (slot="jdg-6.3" or slot for version installed) module needs to have the pojo dependency added:
+
+    <module name="com.client.quickstart.pojos"   export="true" />
+    
+    
 		
 5) Configure resource-adapter
 
@@ -102,18 +116,37 @@ section.  There is a current bug that will not allow CLI script to be run that c
 This will trigger the loading of 10 Orders and then present that list on the page.
 
 
+#########################################
+### Query Demonstrations
+#########################################	
 
-9) Use a sql tool, like SQuirreL, to connect and issue following example queries:
+==== Using the simpleclient example ====
+
+1) Change your working directory to "${quickstart.install.dir}/simpleclient"
+
+2) Use the simpleclient example to run the following queries:
+
+Example:   mvn install -Dvdb="orders" -Dsql="example query"  -Dusername="teiidUser" -Dpassword="pwd"
+
+
+or 
+
+3) Use a sql tool, like SQuirreL, to connect and issue following example queries:
 
 -  connect:  jdbc:teiid:orders@mm://localhost:31000
--  queries 
+
+
+#################
+# Example Queries:
+#################
+
 
 [1] select orderDate, orderedBy from Orders
 [2] select * from OrdersView
 [3] select * from OrdersView where OrderNum > 3
-[4] Insert into Orders (OrderNum, OrderedBy) Values (100, 'TestPerson')
-[5] Update Orders set OrderedBy='Testperson2' where OrderNum = 100
-[6] Delete From Orders where OrderNum = 10
+[4] Insert into Orders (OrderNum, OrderedBy) Values (99, 'TestPerson')
+[5] Update Orders set OrderedBy='Testperson2' where OrderNum = 99
+[6] Delete From Orders where OrderNum = 9
 
 * When running either 4, 5, or 6, rerun one of the above select's to see the results to 
 verify the changed data

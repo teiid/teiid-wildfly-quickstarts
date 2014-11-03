@@ -33,11 +33,8 @@
         ]]> </metadata>
     </model>
     <translator name="infinispan1" type="infinispan-cache">
-        <property name="SupportsLuceneSearching" value="true"/>
-        
-        <!--
-         <property name="ConfigurationFileName" value="<dir>/infinispan-config.xml"/>
-         -->
+        <!--property name="SupportsLuceneSearching" value="true"/-->
+        <property name="SupportsDSLSearching" value="true"/>
 
     </translator>
 </vdb>

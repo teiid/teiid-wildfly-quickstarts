@@ -128,7 +128,7 @@ NOTE: There currently isn't a JBoss AS plugin option for undeploying the rar and
 
 2) Use the simpleclient example to run the following queries:
 
-Example:   mvn install -Dvdb="portfolio" -Dsql="example query"
+Example:   mvn install -Dvdb="portfolio" -Dsql="example query" -Dusername="xx" -Dpassword="xx"
 
 
 #################

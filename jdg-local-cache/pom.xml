@@ -44,12 +44,12 @@
 			<groupId>org.infinispan</groupId>
 			<artifactId>infinispan-core</artifactId>
 			<scope>provided</scope>
- 		</dependency>
+		</dependency>
 		<dependency>
 			<groupId>org.infinispan</groupId>
 			<artifactId>infinispan-commons</artifactId>
 			<scope>provided</scope>
- 		</dependency>
+		</dependency>
 
 		<!-- Infinispan dependency -->
 		<dependency>
@@ -69,12 +69,16 @@
 			<artifactId>connector-api</artifactId>
 			<scope>provided</scope>
 		</dependency>
-			 <dependency>
-				<groupId>javax.enterprise</groupId>
-				<artifactId>cdi-api</artifactId>
-				<scope>provided</scope>
-			 </dependency>
-
+		<dependency>
+			<groupId>javax.enterprise</groupId>
+			<artifactId>cdi-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.modules</groupId>
+			<artifactId>jboss-modules</artifactId>
+			<scope>provided</scope>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -100,7 +104,7 @@
 					<exclude>**/*.properties</exclude>
 				</excludes>
 			</resource>
-		</resources>		
+		</resources>
 		<plugins>
 			<!-- add the vdb to the repo -->
 
@@ -206,7 +210,7 @@
 				</plugins>
 			</build>
 		</profile>
-	
+
 	</profiles>
 
 </project>
