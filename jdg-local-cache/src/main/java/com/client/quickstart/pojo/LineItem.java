@@ -25,23 +25,22 @@ import org.hibernate.search.annotations.Field;
 import org.hibernate.search.annotations.Indexed;
 import org.hibernate.search.annotations.ProvidedId;
 
+import javax.persistence.Entity;
 /**
  * 
  */
 
-@Indexed
-@ProvidedId
+//@Entity
+//@Indexed 
 public class LineItem implements java.io.Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -1921968291712892230L;
-	private @Field
-	int id;
+	private int id;
 	private Product product;
-	private @Field
-	int quantity;
+	private  int quantity;
 
 	public LineItem() {
 	}
@@ -56,7 +55,7 @@ public class LineItem implements java.io.Serializable {
 		this.quantity = quantity;
 	}
 
-	@Field
+
 	public int getId() {
 		return this.id;
 	}
@@ -65,7 +64,7 @@ public class LineItem implements java.io.Serializable {
 		this.id = id;
 	}
 
-	@Field
+
 	public int getQuantity() {
 		return this.quantity;
 	}
@@ -74,7 +73,6 @@ public class LineItem implements java.io.Serializable {
 		this.quantity = cnt;
 	}
 
-	@Field
 	public Product getProduct() {
 		return this.product;
 	}

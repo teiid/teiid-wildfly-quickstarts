@@ -7,7 +7,9 @@
     
     <dependencies>
         
-        <module name="org.hibernate.search.engine" slot="jdg-6.3"  export="true" />
+        <module name="org.infinispan" slot="jdg-6.3"   export="true" />
+        <module name="org.infinispan.commons" slot="jdg-6.3"   export="true"  services="import" />
+        <module name="org.infinispan.query.dsl" slot="jdg-6.3"  export="true" /> 
  
     </dependencies>
 </module>
