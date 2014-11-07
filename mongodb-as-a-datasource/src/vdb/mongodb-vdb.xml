@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<vdb name="mongoVDB" version="1">
+    <model name="Employee">
+        <source name="local" translator-name="translator-mongodb" connection-jndi-name="java:/mongoDS"/>
+            <metadata type="DDL"><![CDATA[
+                CREATE FOREIGN TABLE Employee (
+                    employee_id integer,
+                    FirstName varchar(25),
+                    LastName varchar(25)
+                ) OPTIONS(UPDATABLE 'TRUE');
+            ]]> </metadata>
+    </model>
+
+    <translator name="translator-mongodb" type="mongodb">
+    </translator>
+</vdb>

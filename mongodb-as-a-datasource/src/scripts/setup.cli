@@ -1,0 +1,5 @@
+/subsystem=resource-adapters/resource-adapter=mongodbQS:add(module=org.jboss.teiid.resource-adapter.mongodb)
+/subsystem=resource-adapters/resource-adapter=mongodbQS/connection-definitions=mongodbDS:add(jndi-name=java:/mongoDS, class-name=org.teiid.resource.adapter.mongodb.MongoDBManagedConnectionFactory, enabled=true, use-java-context=true)
+/subsystem=resource-adapters/resource-adapter=mongodbQS/connection-definitions=mongodbDS/config-properties=RemoteServerList:add(value=${mongodb.serverlist})
+/subsystem=resource-adapters/resource-adapter=mongodbQS/connection-definitions=mongodbDS/config-properties=Database:add(value=${mongodb.dbname})
+/subsystem=resource-adapters/resource-adapter=mongodbQS:activate
