@@ -1,0 +1,115 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<parent>
+		<artifactId>teiid-quickstart-parent</artifactId>
+		<groupId>org.jboss.teiid.quickstart</groupId>
+		<version>2.1.0</version>
+	</parent>
+
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>mongodb-as-a-datasource</artifactId>
+	<packaging>pom</packaging>
+
+	<name>Accessing mongoDB</name>
+	<description>This quickstart demonstrates using the 'mongodb' translator to access data in mongodb.</description>
+
+	<profiles>
+		<profile>
+			<id>deploy-vdb</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-antrun-plugin</artifactId>
+						<dependencies>
+							<dependency>
+								<groupId>org.apache.ant</groupId>
+								<artifactId>ant</artifactId>
+							</dependency>
+						</dependencies>
+						<executions>
+							<execution>
+								<id>copyfiles</id>
+								<phase>package</phase>
+								<configuration>
+									<target>
+										<echo message="Installing vdb to ${JBOSS_HOME}" />
+
+										<available file="${JBOSS_HOME}" type="dir"
+											property="jboss.present" />
+
+										<fail unless="jboss.present"
+											message="===== JBOSS_HOME variable must be set and the directory must exist ======" />
+
+										<copy todir="${JBOSS_HOME}/standalone/deployments" overwrite="true">
+											<fileset dir="${basedir}/src/vdb/" />
+										</copy>
+								
+										<echo message="Copied vdb to server" />
+									</target>
+								</configuration>
+								<goals>
+									<goal>run</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>setup-rar</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.jboss.as.plugins</groupId>
+						<artifactId>jboss-as-maven-plugin</artifactId>
+                        <version>${version.jboss.as.plugin}</version>
+						<configuration>
+							<address>subsystem=resource-adapters</address>
+							<resources>
+								<resource>
+									<address>resource-adapter=webservice</address>
+									<properties>
+										<enable-resource>true</enable-resource>
+										<module>org.jboss.teiid.resource-adapter.webservice</module>
+										<transaction-support>NoTransaction</transaction-support>
+									</properties>
+								</resource>
+								<resource>
+									<address>resource-adapter=mongodb,connection-definitions=mongodbDS</address>
+									<properties>
+										<jndi-name>java:/mongoDS</jndi-name>
+										<class-name>org.teiid.resource.adapter.mongodb.MongoDBManagedConnectionFactory</class-name>
+										<enabled>true</enabled>
+										<use-java-context>true</use-java-context>
+									</properties>
+								</resource>
+								<resource>
+									<address>resource-adapter=mongodb,connection-definitions=mongodbDS,config-properties=RemoteServerList</address>
+									<properties>
+										<value>${mongodb.serverlist}</value>
+									</properties>
+								</resource>
+								<resource>
+									<address>resource-adapter=mongodb,connection-definitions=mongodbDS,config-properties=Database</address>
+									<properties>
+										<value>${mongodb.dbname}</value>
+									</properties>
+								</resource>
+							</resources>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+
+</project>
