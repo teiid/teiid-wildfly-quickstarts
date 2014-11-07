@@ -1,0 +1,5 @@
+*.jar
+generated-data/*
+generated-queries/*
+javaPerfTest/target
+**/*~

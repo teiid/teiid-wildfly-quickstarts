@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<vdb name="tpch" version="1">
+ 
+    <model name="tpch1">
+        <property name="importer.schemaPattern" value="tpch" />
+        <property name="importer.tableTypes" value="TABLE"/>
+        <source name="pg1" translator-name="postgresql" connection-jndi-name="java:/postgres92"/>
+    </model>
+ 
+    <model name="tpch2">
+        <property name="importer.schemaPattern" value="tpch" />
+        <property name="importer.tableTypes" value="TABLE"/>
+        <source name="pg2" translator-name="postgresql" connection-jndi-name="java:/Postgres_84"/>
+    </model>
+</vdb>

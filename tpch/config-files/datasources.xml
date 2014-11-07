@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8'?>
+            <datasources>
+                <datasource jndi-name="java:/postgres92" pool-name="postgres92" enabled="true">
+                    <connection-url>jdbc:postgresql://db02.mw.lab.eng.bos.redhat.com:5432/bqt2</connection-url>
+                    <driver>postgresql92</driver>
+                    <pool>
+                        <prefill>false</prefill>
+                        <use-strict-min>false</use-strict-min>
+                        <flush-strategy>FailingConnectionOnly</flush-strategy>
+                    </pool>
+                    <security>
+                        <user-name>bqt2</user-name>
+                        <password>mm</password>
+                    </security>
+                </datasource>
+		
+                <datasource jndi-name="java:/Postgres_84" pool-name="Postgres_84" enabled="true">
+                    <connection-url>jdbc:postgresql://postgresql02.mw.lab.eng.bos.redhat.com:5432/bqt2</connection-url>
+                    <driver>postgresql84</driver>
+                    <pool>
+                        <prefill>false</prefill>
+                        <use-strict-min>false</use-strict-min>
+                        <flush-strategy>FailingConnectionOnly</flush-strategy>
+                    </pool>
+                    <security>
+                        <user-name>bqt2</user-name>
+                        <password>mm</password>
+                    </security>
+                </datasource>
+                
+                <drivers>
+                    <driver name="postgresql84" module="org.postgresql84">
+                        <driver-class>org.postgresql.Driver</driver-class>
+                    </driver>
+                    <driver name="postgresql92" module="org.postgresql92">
+                        <xa-datasource-class>org.postgresql.Driver</xa-datasource-class>
+                    </driver>
+                </drivers>
+            </datasources>

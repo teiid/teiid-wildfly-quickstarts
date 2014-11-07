@@ -1,0 +1,44 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>org.teiid.quickstarts</groupId>
+	<artifactId>tpch</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<packaging>jar</packaging>
+
+	<name>tpch</name>
+	<url>http://maven.apache.org</url>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<jdbcDriverPath>/home/fnguyen/work/edsqa/builds/DV-6.1.0/jboss-eap-6.3/dataVirtualization/jdbc/teiid-8.7.1.redhat-3-jdbc.jar</jdbcDriverPath>
+		<generated-queries-dir>/home/fnguyen/work/edsqa/teiid-quickstarts/tpc-h-quickstart/generated-queries</generated-queries-dir>
+	</properties>
+
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>exec-maven-plugin</artifactId>
+				<groupId>org.codehaus.mojo</groupId>
+				<version>1.3.2</version>
+				<configuration>
+				   <classpathScope>compile</classpathScope>
+				   <stopUnresponsiveDaemonThreads>true</stopUnresponsiveDaemonThreads>
+					<mainClass>org.teiid.quickstarts.JDBCClient</mainClass>
+					<commandlineArgs>${generated-queries-dir} ${teiid-user} ${teiid-password}</commandlineArgs>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.teiid.jdbc</groupId>
+			<artifactId>teiidJdbc</artifactId>
+			<systemPath>${jdbcDriverPath}</systemPath>
+			<version>6.1</version>
+			<scope>system</scope>
+		</dependency>
+	</dependencies>
+</project>
