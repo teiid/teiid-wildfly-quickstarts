@@ -8,11 +8,11 @@
 	</parent>
 
 	<modelVersion>4.0.0</modelVersion>
-	<artifactId>mongodb-as-a-datasource</artifactId>
+	<artifactId>ldap-as-a-datasource</artifactId>
 	<packaging>pom</packaging>
 
-	<name>Accessing mongoDB</name>
-	<description>This quickstart demonstrates using the 'mongodb' translator to access data in mongodb.</description>
+	<name>Accessing LDAP</name>
+	<description>This quickstart demonstrates using the 'ldap' translator to access data in OpenLDAP server.</description>
 
 	<profiles>
 		<profile>
@@ -76,32 +76,38 @@
 							<address>subsystem=resource-adapters</address>
 							<resources>
 								<resource>
-									<address>resource-adapter=mongodb</address>
+									<address>resource-adapter=webservice</address>
 									<properties>
 										<enable-resource>true</enable-resource>
-										<module>org.jboss.teiid.resource-adapter.webservice</module>
+										<module>org.jboss.teiid.resource-adapter.ldap</module>
 										<transaction-support>NoTransaction</transaction-support>
 									</properties>
 								</resource>
 								<resource>
-									<address>resource-adapter=mongodb,connection-definitions=mongodbDS</address>
+									<address>resource-adapter=ldap,connection-definitions=ldapDS</address>
 									<properties>
-										<jndi-name>java:/mongoDS</jndi-name>
-										<class-name>org.teiid.resource.adapter.mongodb.MongoDBManagedConnectionFactory</class-name>
+										<jndi-name>java:/ldapDS</jndi-name>
+										<class-name>org.teiid.resource.adapter.ldap.LDAPManagedConnectionFactory</class-name>
 										<enabled>true</enabled>
 										<use-java-context>true</use-java-context>
 									</properties>
 								</resource>
 								<resource>
-									<address>resource-adapter=mongodb,connection-definitions=mongodbDS,config-properties=RemoteServerList</address>
+									<address>resource-adapter=ldap,connection-definitions=ldapDS,config-properties=LdapUrl</address>
 									<properties>
-										<value>${mongodb.serverlist}</value>
+										<value>${ldap.url}</value>
 									</properties>
 								</resource>
 								<resource>
-									<address>resource-adapter=mongodb,connection-definitions=mongodbDS,config-properties=Database</address>
+									<address>resource-adapter=ldap,connection-definitions=ldapDS,config-properties=LdapAdminUserDN</address>
 									<properties>
-										<value>${mongodb.dbname}</value>
+										<value>${ldap.rootdn}</value>
+									</properties>
+								</resource>
+								<resource>
+									<address>resource-adapter=ldap,connection-definitions=ldapDS,config-properties=LdapAdminUserPassword</address>
+									<properties>
+										<value>${ldap.rootpw}</value>
 									</properties>
 								</resource>
 							</resources>

@@ -33,6 +33,7 @@
 	<module>jdg-local-cache</module>
         <module>jdg-remote-cache</module>
         <module>mongodb-as-a-datasource</module>
+        <module>ldap-as-a-datasource</module>
         <module>simpleclient</module>
 	</modules>
 
