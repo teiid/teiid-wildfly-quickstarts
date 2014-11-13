@@ -40,7 +40,7 @@ Also the query document commands output as below:
 	-	cd to the ${JBOSS_HOME}/bin directory
 	-	execute:  ./jboss-cli.sh --connect file={path}/mongodb-as-a-datasource/src/scripts/setup.cli 
 
-> NOTE - Before execute `setup.cli`, either modify `setup.cli` change ${mongodb.serverlist} to mongoDB server list and ${mongodb.dbname} to mongoDB DB name, or set System Properties mongodb.serverlist point to mongoDB server list and mongodb.dbname to mongoDB DB name. `10.66.218.46:27017` is a sample mongoDB server list and `mydb` is a sample DB name.
+> NOTE - Before executing `setup.cli`, either modify `setup.cli` change ${mongodb.serverlist} to mongoDB server list and ${mongodb.dbname} to mongoDB DB name, or set System Properties mongodb.serverlist point to mongoDB server list and mongodb.dbname to mongoDB DB name. `10.66.218.46:27017` is a sample mongoDB server list and `mydb` is a sample DB name.
 
 4)  Teiid mongoDB VDB Deployment:
 
@@ -63,4 +63,4 @@ Copy the following files to the "<jboss.home>/standalone/deployments" directory
 Example:   mvn install -Dvdb="mongoVDB" -Dsql="select * from Employee"
 
 
-> NOTE - depending on your OS/Shell the quoting/escaping required to run the example can be complicated.  It would be better to install a Java client, such as SQuirreL, to run the queries below. 
+> NOTE - depending on your OS/Shell the quoting/escaping required to run the example can be complicated.  It would be better to install a Java client, such as SQuirreL, to run the queries. 
