@@ -11,6 +11,7 @@
 	<url>http://www.tpc.org/tpch/</url>
 
 	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<generated-queries-dir>./generated-queries</generated-queries-dir>
 	</properties>
 

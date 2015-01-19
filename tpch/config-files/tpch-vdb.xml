@@ -4,12 +4,38 @@
     <model name="tpch1">
         <property name="importer.schemaPattern" value="tpch" />
         <property name="importer.tableTypes" value="TABLE"/>
-        <source name="pg1" translator-name="postgresql" connection-jndi-name="java:/postgres92"/>
+        <source name="pg1" translator-name="postgresql-override" connection-jndi-name="java:/postgres92"/>
+        <metadata type="NATIVE,DDL"><![CDATA[
+            ALTER FOREIGN TABLE "tpch.customer" OPTIONS (ADD CARDINALITY 1500000);        
+            ALTER FOREIGN TABLE "tpch.lineitem" OPTIONS (ADD CARDINALITY 59986052);        
+            ALTER FOREIGN TABLE "tpch.nation" OPTIONS (ADD CARDINALITY 25);        
+            ALTER FOREIGN TABLE "tpch.orders" OPTIONS (ADD CARDINALITY 15000000);        
+            ALTER FOREIGN TABLE "tpch.part" OPTIONS (ADD CARDINALITY 2000000);        
+            ALTER FOREIGN TABLE "tpch.partsupp" OPTIONS (ADD CARDINALITY 8000000);        
+            ALTER FOREIGN TABLE "tpch.region" OPTIONS (ADD CARDINALITY 5);        
+            ALTER FOREIGN TABLE "tpch.supplier" OPTIONS (ADD CARDINALITY 100000);        
+		]]> </metadata>
+        
     </model>
  
     <model name="tpch2">
         <property name="importer.schemaPattern" value="tpch" />
         <property name="importer.tableTypes" value="TABLE"/>
-        <source name="pg2" translator-name="postgresql" connection-jndi-name="java:/Postgres_84"/>
+        <source name="pg2" translator-name="postgresql-override" connection-jndi-name="java:/Postgres_84"/>        
+        <metadata type="NATIVE,DDL"><![CDATA[
+            ALTER FOREIGN TABLE "tpch.customer" OPTIONS (ADD CARDINALITY 1500000);        
+            ALTER FOREIGN TABLE "tpch.lineitem" OPTIONS (ADD CARDINALITY 59986052);        
+            ALTER FOREIGN TABLE "tpch.nation" OPTIONS (ADD CARDINALITY 25);        
+            ALTER FOREIGN TABLE "tpch.orders" OPTIONS (ADD CARDINALITY 15000000);        
+            ALTER FOREIGN TABLE "tpch.part" OPTIONS (ADD CARDINALITY 2000000);        
+            ALTER FOREIGN TABLE "tpch.partsupp" OPTIONS (ADD CARDINALITY 8000000);        
+            ALTER FOREIGN TABLE "tpch.region" OPTIONS (ADD CARDINALITY 5);        
+            ALTER FOREIGN TABLE "tpch.supplier" OPTIONS (ADD CARDINALITY 100000);        
+		]]> </metadata>
     </model>
+    
+    <translator name="postgresql-override" type="postgresql">
+         <property name="MaxInCriteriaSize" value="100"/>
+         <property name="MaxDependentInPredicates" value="100"/>
+    </translator>    
 </vdb>

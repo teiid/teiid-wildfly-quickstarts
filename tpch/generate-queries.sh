@@ -26,8 +26,7 @@ echo "About to generate 22 queries into directory $GENERATED_QUERIES"
 echo "Please wait..."
 for q in {1..22}
 do	
-	f=$GENERATED_QUERIES/r$q.sql
-	./generate-one-query.sh $q $SCALE > $GENERATED_QUERIES/r$q.sql
+	./generate-one-query.sh $q $SCALE > $GENERATED_QUERIES/$q.sql
 done
 
 
