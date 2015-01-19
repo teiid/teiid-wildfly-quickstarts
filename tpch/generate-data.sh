@@ -15,6 +15,7 @@ if [ -z $SCALE ]
  then
  echo "Usage: ./generate-data.sh <scale>"
  echo "   scale: number that controls volume of size in gigabytes. "
+ echo "   A scale one (1) will generate 8 tables (made up of 150k Customers, 6million Line Items and 1.5million Orders)"
  exit 1;
 fi
 

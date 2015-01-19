@@ -8,12 +8,11 @@
 	<packaging>jar</packaging>
 
 	<name>tpch</name>
-	<url>http://maven.apache.org</url>
+	<url>http://www.tpc.org/tpch/</url>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<jdbcDriverPath>/home/fnguyen/work/edsqa/builds/DV-6.1.0/jboss-eap-6.3/dataVirtualization/jdbc/teiid-8.7.1.redhat-3-jdbc.jar</jdbcDriverPath>
-		<generated-queries-dir>/home/fnguyen/work/edsqa/teiid-quickstarts/tpc-h-quickstart/generated-queries</generated-queries-dir>
+		<generated-queries-dir>./generated-queries</generated-queries-dir>
 	</properties>
 
 	<build>
@@ -34,11 +33,14 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>org.teiid.jdbc</groupId>
-			<artifactId>teiidJdbc</artifactId>
-			<systemPath>${jdbcDriverPath}</systemPath>
-			<version>6.1</version>
-			<scope>system</scope>
+			<groupId>org.jboss.teiid</groupId>
+			<artifactId>teiid-common-core</artifactId>
+			<version>8.9.0.Final</version>
 		</dependency>
+        <dependency>
+            <groupId>org.jboss.teiid</groupId>
+            <artifactId>teiid-client</artifactId>
+            <version>8.9.0.Final</version>
+        </dependency>        
 	</dependencies>
 </project>

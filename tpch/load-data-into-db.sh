@@ -36,8 +36,10 @@ do
   echo "\\copy tpch.$f FROM '$GENERATED_DATA/$f.tbl' DELIMITER '|' CSV;" >> script.sql
 done
 
+cat config-files/postgres-index.sql >> script.sql
+
 echo "About to run the SQL script, you will be prompted for password"
-psql --username=$USERNAME -h $HOST --port=$PORT --dbname=$DBNAME -f script.sql
+psql --echo-all --username=$USERNAME -h $HOST --port=$PORT --dbname=$DBNAME -f script.sql
 
 echo ""
 echo "Data loaded. Done."
