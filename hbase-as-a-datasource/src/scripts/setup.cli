@@ -1,0 +1,3 @@
+deploy phoenix-4.2.1-client.jar
+
+/subsystem=datasources/data-source=phoenixDS:add(jndi-name=java:/phoenixDS,  driver-name=phoenix-4.2.1-client.jar, driver-class=org.apache.phoenix.jdbc.PhoenixDriver, connection-url=jdbc:phoenix:127.0.0.1:2181, user-name='', password='')
