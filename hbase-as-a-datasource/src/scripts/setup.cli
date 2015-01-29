@@ -1,3 +1,7 @@
-deploy phoenix-4.2.1-client.jar
+module add --name=org.apache.phoenix --resources=phoenix-4.2.1-client.jar --dependencies=javax.api,sun.jdk,org.apache.log4j,javax.transaction.api
 
-/subsystem=datasources/data-source=phoenixDS:add(jndi-name=java:/phoenixDS,  driver-name=phoenix-4.2.1-client.jar, driver-class=org.apache.phoenix.jdbc.PhoenixDriver, connection-url=jdbc:phoenix:127.0.0.1:2181, user-name='', password='')
+/subsystem=datasources/jdbc-driver=phoenix:add(driver-name=phoenix,driver-module-name=org.apache.phoenix,driver-class-name=org.apache.phoenix.jdbc.PhoenixDriver)
+
+/subsystem=datasources/data-source=QSPhoenixDS:add(jndi-name="java:/QSPhoenixDS",driver-name=phoenix,connection-url=jdbc:phoenix:127.0.0.1:2181,user-name=sa,password=sa,enabled=true,use-java-context=true)
+
+:reload()

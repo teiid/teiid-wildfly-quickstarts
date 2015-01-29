@@ -8,11 +8,11 @@
 	</parent>
 
 	<modelVersion>4.0.0</modelVersion>
-	<artifactId>mongodb-as-a-datasource</artifactId>
+	<artifactId>hbase-as-a-datasource</artifactId>
 	<packaging>pom</packaging>
 
-	<name>Accessing mongoDB</name>
-	<description>This quickstart demonstrates using the 'mongodb' translator to access data in mongodb.</description>
+	<name>Accessing HBase</name>
+	<description>This quickstart demonstrates using the 'hbase' translator to access data in HBase.</description>
 
 	<profiles>
 		<profile>
@@ -57,55 +57,6 @@
 								</goals>
 							</execution>
 						</executions>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-		<profile>
-			<id>setup-rar</id>
-			<activation>
-				<activeByDefault>false</activeByDefault>
-			</activation>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.jboss.as.plugins</groupId>
-						<artifactId>jboss-as-maven-plugin</artifactId>
-                        <version>${version.jboss.as.plugin}</version>
-						<configuration>
-							<address>subsystem=resource-adapters</address>
-							<resources>
-								<resource>
-									<address>resource-adapter=mongodb</address>
-									<properties>
-										<enable-resource>true</enable-resource>
-										<module>org.jboss.teiid.resource-adapter.webservice</module>
-										<transaction-support>NoTransaction</transaction-support>
-									</properties>
-								</resource>
-								<resource>
-									<address>resource-adapter=mongodb,connection-definitions=mongodbDS</address>
-									<properties>
-										<jndi-name>java:/mongoDS</jndi-name>
-										<class-name>org.teiid.resource.adapter.mongodb.MongoDBManagedConnectionFactory</class-name>
-										<enabled>true</enabled>
-										<use-java-context>true</use-java-context>
-									</properties>
-								</resource>
-								<resource>
-									<address>resource-adapter=mongodb,connection-definitions=mongodbDS,config-properties=RemoteServerList</address>
-									<properties>
-										<value>${mongodb.serverlist}</value>
-									</properties>
-								</resource>
-								<resource>
-									<address>resource-adapter=mongodb,connection-definitions=mongodbDS,config-properties=Database</address>
-									<properties>
-										<value>${mongodb.dbname}</value>
-									</properties>
-								</resource>
-							</resources>
-						</configuration>
 					</plugin>
 				</plugins>
 			</build>

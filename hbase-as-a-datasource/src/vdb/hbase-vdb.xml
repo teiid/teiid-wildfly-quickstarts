@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <vdb name="hbasevdb" version="1">
     <model name="Customer">
-        <source name="connector-hbase" translator-name="translator-hbase" connection-jndi-name="java:/hbaseDS"/>
+        <source name="connector-hbase" translator-name="translator-hbase" connection-jndi-name="java:/QSPhoenixDS"/>
         <metadata type="DDL"><![CDATA[
 
 SET NAMESPACE 'http://www.teiid.org/translator/hbase/2014' AS teiid_hbase;
