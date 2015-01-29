@@ -54,15 +54,10 @@
         <version.jboss.as.plugin>7.4.Final</version.jboss.as.plugin>       
         <version.net.jcip>1.0</version.net.jcip>
         <version.org.codehaus.mojo.exec.plugin>1.2.1</version.org.codehaus.mojo.exec.plugin>
-        <version.org.hibernate>4.2.0.Final</version.org.hibernate>
-        <version.org.hibernate.search>4.4.0.Final</version.org.hibernate.search>
-        <version.org.infinispan>6.0.2.Final</version.org.infinispan>        
-        <version.org.jboss.bom.jboss-javaee-6.0-with-tools>1.0.7.Final</version.org.jboss.bom.jboss-javaee-6.0-with-tools>
-
-<!--
-        <version.org.infinispan>6.1.0.Final-redhat-4</version.org.infinispan>
         <version.org.hibernate.search>4.5.0.Final</version.org.hibernate.search>
- -->
+        <version.org.infinispan>6.2.0.Final-redhat-4</version.org.infinispan> <!-- 6.0.2.Final -->
+                
+        <version.org.jboss.bom.jboss-javaee-6.0-with-tools>1.0.7.Final</version.org.jboss.bom.jboss-javaee-6.0-with-tools>
 
 	</properties>
 	

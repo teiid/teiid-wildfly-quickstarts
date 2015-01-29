@@ -1,17 +1,23 @@
 JDG Local-Cache (Library Mode) Quickstart
 ================================
 
-This quickstart demonstrates how Teiid can access a cache of Java Objects stored in a 
-local JDG 6.3.x cache running library mode.
+Level: Intermediate
+Technologies: Teiid, Infinispan, Library Mode
+Target Product: DV, JDG
+Product Versions: DV 6.1, JDG 6.4
+Source: <https://github.com/teiid/teiid-quickstarts>
 
-The example can be deployed using Maven from the command line or from Eclipse using
-JBoss Tools.
+What is it?
+-----------
+
+This quickstart demonstrates how Teiid can access a cache of Java Objects stored in a 
+local JDG cache running library mode.
 
 Assumptions:
 -  Teiid has been deployed to your jboss as server and a Teiid user has been setup.
 
 -------------------
-System requirements
+Quick Start requirements
 -------------------
 
 If you have not done so, please review the System Requirements (../README.md)
@@ -20,21 +26,25 @@ If you have not done so, please review the System Requirements (../README.md)
 #  PREREQUISTES
 ####################
 
--  Teiid has to be deployed to your jboss EAP server and a Teiid user has been setup.
+-  JBoss application server to run Teiid
+-  The Teiid Jboss distribution kit
+-  JDG 6.4 eap modules kit 
+
+NOTE: can obtain JDG kit distributions on Red Hat's Customer Portal at https://access.redhat.com/jbossnetwork/restricted/listSoftware.html
+
    
 ####################
-#  JDG Requirements
+#  JDG Setup
 ####################
 
 1) shutdown jbossas server
 
-2) Install the JBoss Data Grid 6.3.x version of the library modules kit for EAP into 
-	the modules location for your Teiid/EAP instance.
+2) Install the JBoss Data Grid eap modules kit into the modules location for your JBoss AS - Teiid instance.
    See Red Hat:   http://access.redhat.com  to obtain the kit.
 
 
 ####################
-#   QuickStart Deployment
+#   Setup Teiid Server
 ####################
 
 1) shutdown jbossas server
@@ -43,7 +53,7 @@ If you have not done so, please review the System Requirements (../README.md)
 
 	run:  mvn clean install   
 
-This will build a jboss-as7 dist zip in the target directory.
+This will build jdg-quickstart-jboss-as7-dist.zip in the target directory.
 
 3)  Deploy the distribution kit
 
@@ -52,38 +62,40 @@ This will build a jboss-as7 dist zip in the target directory.
 
 4) Update module dependencies
 
-a)  If the version of JDG modules you installed were not JDG 6.3, then update the following modules:
+*  [Optional] If the version of JDG modules you installed were not JDG 6.4, then update the following:
 
-	1)  If the version of JDG modules you installed were not JDG 6.3, then the following module.xml files will need to be
-updated to the align the slot (default set to slot="jdg-6.3"):
+	1) Change the "jdg.slot" property in the pom.xml for this quickstart to the slot to use, and rebuild
+		-  will update the com.client.quickstart.pojos pojo module
+		-  will update the manifest for the jdg-quickstart.war 
+			
+	2) Update the following module.xml files in the server to the align the JDG slot (default set to slot="jdg-6.4"):
 
-		a.  Teiid deployed modules:
-			-  org.jboss.teiid.translator.object
-			-  org.jboss.teiid.resource-adapter.infinispan" slot="6"
+		-  org.jboss.teiid.translator.object
+		-  org.jboss.teiid.resource-adapter.infinispan" slot="6"
 	
-		b.  jdg-local-cache quickstart pojo module
-			-  com.client.quickstart.pojos
-	
-	2)  This quicks-start pom.xml needs the maven-war-plugin dependencies updated (then rebuild quickstart) so that the
-manifest is correct when war is built.
 
-b)  The "your.pojo.module" reference in the translator-object module.xml file needs to be replaced with the module name that has
-the java class that's being stored in the JDG cache.  For this quickstart, this would be - com.client.quickstart.pojos
+*  [Required] Update the "your.pojo.module" reference in the translator-object module.xml
 
-c)  the org.infinispan.commons (slot="jdg-6.3" or slot for version installed) module needs to have the pojo dependency added:
+The module.xml file needs to be updated with the module name that has
+the java class that's being stored in the JDG cache.  For this quickstart, 
+this should be changed to - com.client.quickstart.pojos
+
+*  [Required] the org.infinispan.commons (slot="jdg-6.3" or slot for version installed) module needs to have 
+the pojo dependency added:
 
     <module name="com.client.quickstart.pojos"   export="true" />
-    
     
 		
 5) Configure resource-adapter
 
--  open the src/scripts/setup_resource_adapter.txt file and copy-n-paste the resource-adapter
-segment into the server configuration (i.e., standalone.xml), under the  <subsystem xmlns="urn:jboss:domain:resource-adapters:1.1">
-section.  There is a current bug that will not allow CLI script to be run that configures a resource-adapter that has a "slot" defined.
+	-	open the file: {jbossas.server.dir}/docs/teiid/datasources/infinispan/infinispan-ds.xml
+	-	copy and paste the resource-adapter section it into the server configuration, under the section:
+
+        <subsystem xmlns="urn:jboss:domain:resource-adapters:1.1">
+            <resource-adapters>
 
 
-4) Start the server
+6) Start the server
 
 -  if Teiid configuration is installed into default configuration:
 	*  run:  ./standalone.sh
@@ -91,28 +103,29 @@ section.  There is a current bug that will not allow CLI script to be run that c
 -  if you want to start the server using the teiid configuration file:
 	*  run:  ./standalone.sh -c standalone-teiid.xml
 
-5) run the add-infinispan-cache-translator.cli script to install translator infinispan-cache.
+7) Install the infinispan-cache translator
 
 	-	cd to the ${JBOSS_HOME}/bin directory
-	-	execute:  ./jboss-cli.sh --connect --file={path}/infinispan-local-cache/src/scripts/add-infinispan-cache-translator.cli 
+	-	execute:  ./jboss-cli.sh --connect --file={jbossas.server.dir}/docs/teiid/datasources/infinispan/add-infinispan-cache-translator.cli
 
-6) deploy the sample application war (target/jdg-quickstart.war) that will be used to preload the cache
+
+8) deploy the sample application war (target/jdg-quickstart.war) that will be used to preload the cache
 
 	* use the management console at http://localhost:9990 to deploy target/jdg-quickstart.war from the target directory
 		or
     * copy the file:  target/jdg-quickstart.war to the deployments folder in the server
 	
-7) deploy the VDB: jdg-local-cache-vdb.xml
+9) deploy the VDB: jdg-local-cache-vdb.xml
 
-	* copy jdg-local-cache-vdb.xml and jdg-local-cache-vdb.xml.dodeploy to {jbossas.server.dir}/standalone/deployments	
+	* copy files jdg-local-cache-vdb.xml and jdg-local-cache-vdb.xml.dodeploy to {jbossas.server.dir}/standalone/deployments	
 
 
 ####################
-#   **** IMPORTANT **** This following step must be done before you move on to next step (9), 
-#   so that the cache will be created and bound into JNDI to used by the VDB.
+#   **** IMPORTANT **** This following step must be done before you perform Query Demonstration, 
+#   so that the cache will be created and bound into JNDI to be accessed by the VDB.
 #####################
 
-8) [Required] Open a browser to:  http://localhost:8080/jdg-quickstart/home.jsf
+10) [Required] Open a browser to:  http://localhost:8080/jdg-quickstart/home.jsf
 This will trigger the loading of 10 Orders and then present that list on the page.
 
 
