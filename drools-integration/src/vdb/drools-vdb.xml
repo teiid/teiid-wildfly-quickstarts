@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<vdb name="DroolsVDB" version="1">
+
+  <description>The Drools VDB</description>
+
+  <property name ="lib" value ="org.jboss.teiid.drools"></property>
+
+  <property name="UseConnectorMetadata" value="true" />
+  
+  <model name="FilesVDB">
+    <source name="text-connector" translator-name="file" connection-jndi-name="java:/marketdata-file"/>
+  </model>
+
+  <model name="DroolsModel" type="VIRTUAL">
+        <metadata type="DDL"><![CDATA[
+        
+    CREATE VIEW FOO as SELECT 'FOO';
+    
+    CREATE VIRTUAL FUNCTION performRuleOnData(className string, message string, status integer) RETURNS object OPTIONS (JAVA_CLASS 'org.jboss.teiid.drools.HelloWorld',  JAVA_METHOD 'performRuleOnData');
+]]> </metadata>
+    </model>
+
+</vdb>

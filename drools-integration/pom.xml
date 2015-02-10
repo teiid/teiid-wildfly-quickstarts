@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	
+	<parent>
+		<artifactId>teiid-quickstart-parent</artifactId>
+		<groupId>org.jboss.teiid.quickstart</groupId>
+		<version>2.1.0</version>
+	</parent>
+	
+	<!-- <main-class name="org.jboss.teiid.drools.HelloWorldExample"/> -->
+	
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>drools-integration</artifactId>
+
+	<packaging>jar</packaging>
+	<name>Drools Integration Quick Start</name>
+	<description>Drools Integration Quick Start</description>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.kie</groupId>
+			<artifactId>kie-api</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.drools</groupId>
+			<artifactId>drools-compiler</artifactId>
+		</dependency>
+
+	</dependencies>
+	
+	<build>
+		<finalName>${project.artifactId}</finalName>
+	</build>
+
+
+</project>
