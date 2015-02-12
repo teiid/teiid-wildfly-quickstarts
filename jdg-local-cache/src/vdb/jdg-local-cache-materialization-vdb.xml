@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<vdb name="Stocks" version="1">
+
+    <description>Shows how to call an Infinispan local cache</description>
+    
+    <property name="UseConnectorMetadata" value="cached" />
+    
+    <model name="MarketData">
+        <!-- 
+            Each source represents a translator and data source. There are 
+            pre-defined translators, or you can create one.
+        -->
+        <source name="text-connector" translator-name="file" connection-jndi-name="java:/marketdata-file"/>
+    </model>
+    
+
+    <model name="Accounts">
+        <!-- 
+          JDBC Import settings 
+          
+          importer.useFullSchemaName directs the importer to drop the source 
+          schema from the Teiid object name, so that the Teiid fully qualified name
+          will be in the form of <model name>.<table name>
+        -->
+        <property name="importer.useFullSchemaName" value="false"/>
+           
+         <!--
+            This connector is defined to reference the H2 localDS" 
+          -->
+        <source name="h2-connector" translator-name="translator-h2" connection-jndi-name="java:/accounts-ds"/>
+    </model>    
+    
+    <model name="StockCache" type="Physical">
+        <property name="importer.useFullSchemaName" value="false"/>
+           
+       <source name="objsource" translator-name="infinispan1" connection-jndi-name="java:/infinispanLocal" />
+        <metadata type="DDL"><![CDATA[
+ 
+ CREATE FOREIGN TABLE Stock (
+    StockObject object OPTIONS (NAMEINSOURCE 'this', UPDATABLE FALSE, SEARCHABLE 'Unsearchable', NATIVE_TYPE 'java.lang.Object'),
+    productId integer NOT NULL OPTIONS (NAMEINSOURCE 'productId', SEARCHABLE 'Searchable', NATIVE_TYPE 'int'),
+    price bigdecimal OPTIONS (NAMEINSOURCE 'price', SEARCHABLE 'Searchable', NATIVE_TYPE 'BigDecimal'),
+    symbol varchar(100) OPTIONS (NAMEINSOURCE 'symbol', SEARCHABLE 'Searchable', NATIVE_TYPE 'java.lang.String'),
+    companyName varchar(256) OPTIONS (NAMEINSOURCE 'companyName', SEARCHABLE 'Searchable', NATIVE_TYPE 'java.lang.String'),
+    CONSTRAINT PK_ORDERNUM PRIMARY KEY(productId)
+) OPTIONS (NAMEINSOURCE 'local-quickstart-cache', UPDATABLE TRUE);
+ 
+ 
+         ]]> </metadata>       
+       
+    </model>    
+    
+    <model name="Stocks" type="VIRTUAL">
+        <metadata type="DDL"><![CDATA[
+                
+        CREATE VIEW StockPrices (
+            symbol string,
+            price bigdecimal
+            )
+            AS  
+               SELECT SP.symbol, SP.price
+                FROM (EXEC MarketData.getTextFiles('*.txt')) AS f, 
+                    TEXTTABLE(f.file COLUMNS symbol string, price bigdecimal HEADER) AS SP;
+        
+        
+        CREATE VIEW Stock (
+            product_id integer,
+            symbol string,
+            price bigdecimal,
+            company_name   varchar(256)
+            )
+            AS
+                SELECT  A.ID, S.symbol, S.price, A.COMPANY_NAME
+                    FROM StockPrices AS S, Accounts.PRODUCT AS A
+                    WHERE S.symbol = A.SYMBOL;
+
+                 
+        ]]> </metadata>
+    </model>
+      
+    <translator name="infinispan1" type="infinispan-cache">
+        <!--property name="SupportsLuceneSearching" value="true"/-->
+        <property name="SupportsDSLSearching" value="true"/>
+
+    </translator>
+     <translator name="translator-h2" type="h2">
+        <property name="SupportsNativeQueries" value="true"/>
+    </translator>   
+</vdb>

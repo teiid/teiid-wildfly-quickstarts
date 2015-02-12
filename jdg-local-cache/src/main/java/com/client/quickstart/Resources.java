@@ -47,6 +47,7 @@ import org.infinispan.manager.DefaultCacheManager;
 import com.client.quickstart.pojo.LineItem;
 import com.client.quickstart.pojo.Orders;
 import com.client.quickstart.pojo.Product;
+import com.client.quickstart.pojo.Stock;
 
 /**
  * Note: the @Resource(lookup..) will look like its invalid in Eclipse, but will
@@ -73,12 +74,13 @@ public class Resources {
 			Resources r = new Resources();
 			try {
 				r.createContainer();
+//				r.createContainerNoMapping();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 				throw new RuntimeException(e);
 			}
-			r.loadCache();
+//			r.loadCache();
 			r.bindToJNDI();
 			resource = r;
 			PRELOADED = true;
@@ -143,11 +145,17 @@ public class Resources {
 	protected void createContainer() throws IOException {
 	
 		SearchMapping mapping = new SearchMapping();
-		mapping.entity(Orders.class).indexed().providedId().
-		property("id", ElementType.METHOD).field().analyze(Analyze.NO).
-		property("orderDate", ElementType.METHOD).field().analyze(Analyze.NO).
-		property("person", ElementType.METHOD).field().analyze(Analyze.NO);
-//		property("lineItems", ElementType.METHOD).field().analyze(Analyze.NO);
+		mapping.entity(Stock.class).indexed().providedId().
+		property("productId", ElementType.METHOD).field().analyze(Analyze.NO).
+		property("price", ElementType.METHOD).field().analyze(Analyze.NO).
+		property("symbol", ElementType.METHOD).field().analyze(Analyze.NO).
+		property("companyName", ElementType.METHOD).field().analyze(Analyze.NO);
+
+// 		mapping.entity(Orders.class).indexed().providedId().
+// 		property("id", ElementType.METHOD).field().analyze(Analyze.NO).
+// 		property("orderDate", ElementType.METHOD).field().analyze(Analyze.NO).
+// 		property("person", ElementType.METHOD).field().analyze(Analyze.NO);
+////		property("lineItems", ElementType.METHOD).field().analyze(Analyze.NO);
 
 		Properties properties = new Properties();
 		properties.put(org.hibernate.search.Environment.MODEL_MAPPING, mapping);
@@ -157,7 +165,7 @@ public class Resources {
 		GlobalConfiguration glob = new GlobalConfigurationBuilder()
         	.nonClusteredDefault() //Helper method that gets you a default constructed GlobalConfiguration, preconfigured for use in LOCAL mode
         	.globalJmxStatistics().enable() //This method allows enables the jmx statistics of the global configuration.
-        	.jmxDomain("org.infinispan.orders")  //prevent collision
+        	.jmxDomain("org.infinispan.stock")  //prevent collision
         	.build(); //Builds  the GlobalConfiguration object
 		
 		Configuration loc = new ConfigurationBuilder()
@@ -170,6 +178,19 @@ public class Resources {
 		container = new DefaultCacheManager(glob, loc);
 		container.startCache();
 	}
+	
+	protected void createContainerNoMapping() throws IOException {
+	     ConfigurationBuilder builder = new ConfigurationBuilder();
+      builder
+         .indexing()
+            .enable()
+            .indexLocalOnly(false)
+            .addProperty("default.directory_provider", "ram")
+            .addProperty("lucene_version", "LUCENE_CURRENT");
+
+      container = new DefaultCacheManager(builder.build());
+      container.startCache();
+      }
 	
 
 } // class end

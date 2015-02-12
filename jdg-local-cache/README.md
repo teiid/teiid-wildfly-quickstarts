@@ -80,7 +80,7 @@ The module.xml file needs to be updated with the module name that has
 the java class that's being stored in the JDG cache.  For this quickstart, 
 this should be changed to - com.client.quickstart.pojos
 
-*  [Required] the org.infinispan.commons (slot="jdg-6.3" or slot for version installed) module needs to have 
+*  [Required] the org.infinispan.commons (slot="jdg-6.4" or slot for version installed) module needs to have 
 the pojo dependency added:
 
     <module name="com.client.quickstart.pojos"   export="true" />

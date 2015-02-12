@@ -1,7 +1,17 @@
 Dynamicvdb-datafederation is the 'Hello World' example for Teiid.  
+================================
+
+Level: Basic
+Technologies: Teiid, Dynamic VDB, Materialization, Native Queries, reading data from JDBC, delimited file and Excel File
+Target Product: DV
+Product Versions: DV 6.1
+Source: <https://github.com/teiid/teiid-quickstarts>
 
 
-This will demonstrate the following:
+What is it?
+-----------
+
+This will demonstrate the common useful features of data federation using Teiid:
 -  how to federate data from a relational data source, a text file-based data source and an EXCEL File
 -  how to define a translator override to support native queries
 -  how to define a view using DDL
@@ -13,8 +23,6 @@ but the creation SQL can be adapted to another database if you choose.
 
 Note:  this example provides the base setup for which other quick starts depend upon.
 
-### Steps to setup and run the quickstart ###
-These can be done either manually (see Setup manually) or using maven (see Setup using the JBoss AS Maven plugin) 
 
 System requirements
 -------------------
@@ -25,20 +33,17 @@ If you have not done so, please review the System Requirements (../README.md)
 #   Setup
 ####################
 
-Setup can be done either manually (see Manual Setup) or using maven (see Setup using the JBoss AS Maven plugin) 
-
-
-#########################################
-### Manual setup
-#########################################
-
 1)  Start the server
 
 	Open a command line and navigate to the "bin" directory under the root directory of the JBoss server
+	
+	For Linux:   ./standalone.sh	
+	for Windows: standalone.bat
 
-	For Linux:   ./standalone.sh -c standalone-teiid.xml	
-	for Windows: standalone.bat -c standalone-teiid.xml
-
+		or append the following to the command to indicate which configuration to use if Teiid isn't configured in the default configuration
+		
+	-c standalone-teiid.xml 
+	
 2)  Copy teiid support files
 	
 - Copy the "teiidfiles" directory to the $JBOSS_HOME/ directory
@@ -73,50 +78,6 @@ You should see the server log indicate the VDB is active with a message like:  T
 
 6)  See "Query Demonstrations" below to demonstrate data federation.
 
-
-#########################################
-### Setup using the JBoss AS Maven plugin
-#########################################
-
-1) Start the server
-
-	Open a command line and navigate to the "bin" directory under the root directory of the JBoss server
-
-	For Linux:   ./standalone.sh -c standalone-teiid.xml	
-	for Windows: standalone.bat -c standalone-teiid.xml
-	
-2) setup the datasource
-
-    * `mvn -Psetup-datasource jboss-as:add-resource` 
-	
-3) setup the resource adapter
-
-    * `mvn -Psetup-rar jboss-as:add-resource`
-
-* previously, a server restart was required at this point, but it is no longer required.
-	
-5) copy the vdb and teiidfiles support files
-
-    *  `mvn install -Pcopy-files`
-
-6)  Open the admin console to make sure the VDB is deployed
-
-    *  open a browser to http://localhost:9990/console 	
-
-7)  See "Query Demonstrations" below to demonstrate data federation.
-
-
-##################################
-#  Undeploy artifacts
-##################################
-
-
-1)  To undeploy the Teiid VDB, run the following command:
-
-	*  mvn package -Pundeploy-vdb
-
-NOTE: There currently isn't a JBoss AS plugin option for undeploying the rar and datasource that were
-		setup in the configuration.  This will need to be done manually.	
 
 #########################################
 ### Query Demonstrations
