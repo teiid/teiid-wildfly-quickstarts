@@ -48,7 +48,7 @@
 			
 		<version.org.jboss.integration-platform>6.0.0.CR13</version.org.jboss.integration-platform>
 
-		<version.teiid>8.7.0.Final</version.teiid>
+		<version.teiid>8.9.0.Final</version.teiid>
 
         <version.javax.annotation>${version.org.jboss.spec.javax.annotation.jboss-annotations-api_1.1_spec}</version.javax.annotation>
         <version.jboss.as.plugin>7.4.Final</version.jboss.as.plugin>       
