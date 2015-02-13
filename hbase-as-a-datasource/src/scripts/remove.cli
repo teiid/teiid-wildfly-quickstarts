@@ -1,0 +1,5 @@
+module remove --name=org.apache.phoenix
+
+/subsystem=datasources/jdbc-driver=phoenix:remove()
+
+/subsystem=datasources/data-source=QSPhoenixDS:remove()

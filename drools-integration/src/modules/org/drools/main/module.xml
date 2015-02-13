@@ -1,0 +1,24 @@
+<?xml version="1.0" ?>
+
+<module xmlns="urn:jboss:module:1.1" name="org.drools">
+
+    <resources>
+        <resource-root path="kie-api-6.1.0.Final.jar"/>
+	<resource-root path="kie-internal-6.1.0.Final.jar"/>
+	<resource-root path="drools-core-6.1.0.Final.jar"/>
+	<resource-root path="drools-compiler-6.1.0.Final.jar"/>
+	<resource-root path="ecj-4.3.1.jar"/>
+	<resource-root path="mvel2-2.2.1.Final.jar"/>
+	<resource-root path="antlr-runtime-3.5.jar"/>
+	<resource-root path="xstream-1.4.7.jar"/>
+<!--
+	<resource-root path=""/>
+	<resource-root path=""/>
+-->
+    </resources>
+
+    <dependencies>
+        <module name="org.slf4j"/>
+        <module name="javax.api"/>
+    </dependencies>
+</module>

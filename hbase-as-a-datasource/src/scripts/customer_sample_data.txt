@@ -1,0 +1,39 @@
+# Create the table:
+
+create 'Customer', 'customer', 'sales'
+
+# List tables:
+
+list
+
+# Describe Customer table
+
+describe 'Customer'
+
+
+# Sample data
+
+put 'Customer', '101', 'customer:name', 'John White'
+put 'Customer', '101', 'customer:city', 'Los Angeles, CA'
+put 'Customer', '101', 'sales:product', 'Chairs'
+put 'Customer', '101', 'sales:amount', '$400.00'
+
+put 'Customer', '102', 'customer:name', 'Jane Brown'
+put 'Customer', '102', 'customer:city', 'Atlanta, GA'
+put 'Customer', '102', 'sales:product', 'Lamps'
+put 'Customer', '102', 'sales:amount', '$200.00'
+
+put 'Customer', '103', 'customer:name', 'Bill Green'
+put 'Customer', '103', 'customer:city', 'Pittsburgh, PA'
+put 'Customer', '103', 'sales:product', 'Desk'
+put 'Customer', '103', 'sales:amount', '$500.00'
+
+put 'Customer', '104', 'customer:name', 'Jack Black'
+put 'Customer', '104', 'customer:city', 'St. Louis, MO'
+put 'Customer', '104', 'sales:product', 'Bed'
+put 'Customer', '104', 'sales:amount', '$1600.00'
+
+put 'Customer', '105', 'customer:name', 'John White'
+put 'Customer', '105', 'customer:city', 'Los Angeles, CA'
+put 'Customer', '105', 'sales:product', 'Chairs'
+put 'Customer', '105', 'sales:amount', '$400.00'

@@ -34,6 +34,8 @@
         <module>jdg-remote-cache</module>
         <module>mongodb-as-a-datasource</module>
         <module>ldap-as-a-datasource</module>
+		<module>hbase-as-a-datasource</module>
+		<module>drools-integration</module>
         <module>simpleclient</module>
 	</modules>
 
@@ -58,7 +60,7 @@
         <version.org.infinispan>6.2.0.Final-redhat-4</version.org.infinispan> <!-- 6.0.2.Final -->
                 
         <version.org.jboss.bom.jboss-javaee-6.0-with-tools>1.0.7.Final</version.org.jboss.bom.jboss-javaee-6.0-with-tools>
-
+		<version.org.drools>6.1.0.Final</version.org.drools>
 	</properties>
 	
 	<dependencies>
@@ -183,7 +185,22 @@
 			  <groupId>org.jboss.spec.javax.annotation</groupId>
 			  <artifactId>jboss-annotations-api_1.1_spec</artifactId>
                <version>${version.javax.annotation}</version>                      		           
-			</dependency>        	
+			</dependency> 
+		<dependency>
+			<groupId>org.kie</groupId>
+			<artifactId>kie-api</artifactId>
+			<version>${version.org.drools}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.drools</groupId>
+			<artifactId>drools-core</artifactId>
+			<version>${version.org.drools}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.drools</groupId>
+			<artifactId>drools-compiler</artifactId>
+			<version>${version.org.drools}</version>
+		</dependency>       	
          </dependencies>      
     </dependencyManagement>	
 

@@ -1,0 +1,2 @@
+
+module add --name=org.jboss.teiid.drools --resources=drools-integration.jar --dependencies=javax.api,org.slf4j,org.drools

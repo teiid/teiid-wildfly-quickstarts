@@ -42,6 +42,8 @@ Some quickstarts are designed to enhance or extend other quickstarts. These are 
 | [tpch](tpch/README.md "tphc") | Performance, Data Federation | Measures performance using TPC-H benchmark against two running Postgresql servers  | 2 running PostgresSQL servers, Unix machine host |
 | [ldap-as-a-datasource](ldap-as-a-datasource/README.md) | 'ldap' Translator, FOREIGN TABLE DDL, OpenLDAP | Demonstrates using the ldap Translator to access data in OpenLDAP Server | OpenLDAP be installed, Groups 'HR' and Users under it be configured |
 | [mongodb-as-a-datasource](mongodb-as-a-datasource/README.md) | 'mongodb' Translator, FOREIGN TABLE DDL | Demonstrates using the mongodb Translator to access documents in mongodb | MongoDB be installed, docuemnts be inserted under 'Employee' connection |
+| [hbase-as-a-datasource](hbase-as-a-datasource/README.md) | 'hbase' Translator, FOREIGN TABLE DDL | Demonstrates using the Hbase Translator via the Pheonix driver | Hbase be installed |
+| [drools-integration](drools-integration/README.md) | Drools integration, UDF, FOREIGN Function DDL | Demonstrates using a simple rules invocation via a Function | |
 
 -------------------
 <a id="systemrequirements"></a>

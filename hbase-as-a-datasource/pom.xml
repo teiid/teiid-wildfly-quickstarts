@@ -1,0 +1,66 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<parent>
+		<artifactId>teiid-quickstart-parent</artifactId>
+		<groupId>org.jboss.teiid.quickstart</groupId>
+		<version>2.1.0</version>
+	</parent>
+
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>hbase-as-a-datasource</artifactId>
+	<packaging>pom</packaging>
+
+	<name>Accessing HBase</name>
+	<description>This quickstart demonstrates using the 'hbase' translator to access data in HBase.</description>
+
+	<profiles>
+		<profile>
+			<id>deploy-vdb</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-antrun-plugin</artifactId>
+						<dependencies>
+							<dependency>
+								<groupId>org.apache.ant</groupId>
+								<artifactId>ant</artifactId>
+							</dependency>
+						</dependencies>
+						<executions>
+							<execution>
+								<id>copyfiles</id>
+								<phase>package</phase>
+								<configuration>
+									<target>
+										<echo message="Installing vdb to ${JBOSS_HOME}" />
+
+										<available file="${JBOSS_HOME}" type="dir"
+											property="jboss.present" />
+
+										<fail unless="jboss.present"
+											message="===== JBOSS_HOME variable must be set and the directory must exist ======" />
+
+										<copy todir="${JBOSS_HOME}/standalone/deployments" overwrite="true">
+											<fileset dir="${basedir}/src/vdb/" />
+										</copy>
+								
+										<echo message="Copied vdb to server" />
+									</target>
+								</configuration>
+								<goals>
+									<goal>run</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+
+</project>
