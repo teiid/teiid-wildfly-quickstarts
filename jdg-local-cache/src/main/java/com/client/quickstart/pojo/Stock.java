@@ -21,27 +21,21 @@
  */
 package com.client.quickstart.pojo;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
 import java.math.BigDecimal;
 
-//import javax.persistence.Entity;
-//import javax.persistence.Id;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
-import org.hibernate.search.annotations.*;
-//import org.hibernate.search.annotations.DateBridge;
-//import org.hibernate.search.annotations.DocumentId;
+import org.hibernate.search.annotations.Analyze;
 import org.hibernate.search.annotations.Field;
-//import org.hibernate.search.annotations.Index;
+import org.hibernate.search.annotations.Index;
 import org.hibernate.search.annotations.Indexed;
-//import org.hibernate.search.annotations.Resolution;
-//import org.hibernate.search.annotations.ProvidedId;
+import org.hibernate.search.annotations.Store;
 
 /**
  * @ProvidedId
  */
+@Entity
 @Indexed(index="StockIndex")
 public class Stock implements java.io.Serializable {
 
@@ -49,30 +43,37 @@ public class Stock implements java.io.Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = -5155172202224249683L;
-
-   @Field(store = Store.YES, analyze=Analyze.NO)
-	private int product_id;
-	@Field(store = Store.YES, analyze=Analyze.NO)
-	private  BigDecimal price;
-	@Field(store = Store.YES, analyze=Analyze.NO)
-	private  String symbol;
-	@Field(store = Store.YES, analyze=Analyze.NO)
-	private  String company_name;
+	@Id
+   @Field(index=Index.YES, store=Store.YES, analyze=Analyze.NO)
+	public int productId;
+	@Field(index=Index.YES, store=Store.YES, analyze=Analyze.NO)
+	public  BigDecimal price;
+	@Field(index=Index.YES, store=Store.YES, analyze=Analyze.NO)
+	public  String symbol;
+	@Field(index=Index.YES, store=Store.YES, analyze=Analyze.NO)
+	public  String companyName;
 
 	public Stock() {
 	}
+	
+	public Stock(int id, double price, String symbol, String name) {
+		setProductId(id);
+		setPrice(price);
+		setSymbol(symbol);
+		setCompanyName(name);
+	}
 
 	public Stock(int id) {
-		this.product_id = id;
+		this.productId = id;
 	}
 
 
 	public int getProductId() {
-		return this.product_id;
+		return this.productId;
 	}
 
 	public void setProductId(int id) {
-		this.product_id = id;
+		this.productId = id;
 	}
 
 	public BigDecimal getPrice() {
@@ -81,6 +82,9 @@ public class Stock implements java.io.Serializable {
 
 	public void setPrice(BigDecimal price) {
 		this.price = price;
+	}
+	public void setPrice(double price) {
+		this.price = new BigDecimal(price);
 	}
 
 	public String getSymbol() {
@@ -92,11 +96,11 @@ public class Stock implements java.io.Serializable {
 	}
 
 	public String getCompanyName() {
-		return company_name;
+		return companyName;
 	}
 
 	public void setCompanyName(String name) {
-		this.company_name = name;
+		this.companyName = name;
 	}
 
 	public String toString() {
