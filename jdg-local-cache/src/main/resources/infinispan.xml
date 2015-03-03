@@ -22,7 +22,7 @@
                     ignoreModifications="false"
                     purgeOnStartup="true"
                     preload="false"
-                    location="./target/localcache/indexing/orders">
+                    location="${jboss.server.data.dir}/jdg/indexing/stocks">
             </singleFile>
         </persistence>
     </namedCache> 
