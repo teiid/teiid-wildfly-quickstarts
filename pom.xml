@@ -4,7 +4,7 @@
 	<parent>
     	<groupId>org.jboss.integration-platform</groupId>
     	<artifactId>jboss-integration-platform-parent</artifactId>
-    	<version>6.0.0.CR13</version>	
+    	<version>6.0.0.CR25</version>	
 	</parent>
 		
 	<modelVersion>4.0.0</modelVersion>
@@ -44,7 +44,8 @@
 		
 	    <illegaltransitivereportonly>true</illegaltransitivereportonly>
 			
-		<version.org.jboss.integration-platform>6.0.0.CR13</version.org.jboss.integration-platform>
+		<version.org.jboss.integration-platform>6.0.0.CR25</version.org.jboss.integration-platform>
+		<version.commons-httpclient>3.1</version.commons-httpclient>
 
 		<version.teiid>8.7.0.Final</version.teiid>
 
@@ -181,7 +182,12 @@
 			  <groupId>org.jboss.spec.javax.annotation</groupId>
 			  <artifactId>jboss-annotations-api_1.1_spec</artifactId>
                <version>${version.javax.annotation}</version>                      		           
-			</dependency>        	
+			</dependency> 
+            <dependency>
+          		<groupId>commons-httpclient</groupId>
+          		<artifactId>commons-httpclient</artifactId>
+          		<version>${version.commons-httpclient}</version>
+        	</dependency> 			       	
          </dependencies>      
     </dependencyManagement>	
 
