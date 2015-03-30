@@ -9,11 +9,15 @@ ldap-as-a-datasource demonstrates using the ldap Translator to access data in Op
 
 1)  Start the server (if not already started)
 
-	Open a command line and navigate to the "bin" directory under the root directory of the JBoss server
+	To start the server, open a command line and navigate to the "bin" directory under the root directory of the JBoss server and run:
+	
+	For Linux:   ./standalone.sh	
+	for Windows: standalone.bat
 
-	For Linux:   ./standalone.sh -c standalone-teiid.xml	
-	for Windows: standalone.bat -c standalone-teiid.xml
-
+	append the following to the command to indicate which configuration to use if Teiid isn't configured in the default configuration
+		
+	-c standalone-teiid.xml 
+	
 2)  Setup LDAP Group and Users
 
 For installing OpenLDAP on Red Hat Linux 6.x please refer to above **System requirements**, in this section we will create a Group `HR` and 3 users(`hr1`, `hr2`, `hr3`) under it.
