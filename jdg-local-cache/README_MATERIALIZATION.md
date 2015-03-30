@@ -113,10 +113,14 @@ the pojo dependency added.  Copy the following module reference:
 
 8) Start the server
 
-	*  run:  ./standalone.sh 
+	To start the server, open a command line and navigate to the "bin" directory under the root directory of the JBoss server and run:
+	
+	For Linux:   ./standalone.sh	
+	for Windows: standalone.bat
 
-		or run the following if Teiid isn't configured in the default configuration
-	*  ./standalone.sh -c standalone-teiid.xml 
+	append the following to the command to indicate which configuration to use if Teiid isn't configured in the default configuration
+		
+	-c standalone-teiid.xml 
 
 
 9) Install the infinispan-cache translator
