@@ -4,14 +4,14 @@
 	<parent>
     	<groupId>org.jboss.integration-platform</groupId>
     	<artifactId>jboss-integration-platform-parent</artifactId>
-    	<version>6.0.0.CR13</version>	
+    	<version>6.0.0.CR26</version>	
 	</parent>
 		
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.jboss.teiid.quickstart</groupId>
 	<artifactId>teiid-quickstart-parent</artifactId>
 	<packaging>pom</packaging>
-	<version>2.1.0</version>
+	<version>3.0.0</version>
 	<name>Teiid Quickstart Parent</name>
 	<description>Quickstarts for the Teiid project</description>
 
@@ -30,7 +30,7 @@
         <module>dynamicvdb-dataroles</module>
         <module>hibernate-on-top-of-teiid</module>
         <module>webservices-as-a-datasource</module>
-	<module>jdg-local-cache</module>
+		<module>jdg-local-cache</module>
         <module>jdg-remote-cache</module>
         <module>mongodb-as-a-datasource</module>
         <module>ldap-as-a-datasource</module>
@@ -48,12 +48,12 @@
 		
 	    <illegaltransitivereportonly>true</illegaltransitivereportonly>
 			
-		<version.org.jboss.integration-platform>6.0.0.CR13</version.org.jboss.integration-platform>
+		<version.org.jboss.integration-platform>6.0.0.CR26</version.org.jboss.integration-platform>
 
-		<version.teiid>8.9.0.Final</version.teiid>
+		<version.teiid>8.10.0.Final</version.teiid>
 
         <version.javax.annotation>${version.org.jboss.spec.javax.annotation.jboss-annotations-api_1.1_spec}</version.javax.annotation>
-        <version.jboss.as.plugin>7.4.Final</version.jboss.as.plugin>       
+        <version.jboss.as.plugin>${version.org.jboss.as}</version.jboss.as.plugin>       
         <version.net.jcip>1.0</version.net.jcip>
         <version.org.codehaus.mojo.exec.plugin>1.2.1</version.org.codehaus.mojo.exec.plugin>
         <version.org.hibernate.search>4.5.0.Final</version.org.hibernate.search>
@@ -61,6 +61,9 @@
                 
         <version.org.jboss.bom.jboss-javaee-6.0-with-tools>1.0.7.Final</version.org.jboss.bom.jboss-javaee-6.0-with-tools>
 		<version.org.drools>6.1.0.Final</version.org.drools>
+		
+		<version.commons-httpclient>3.1</version.commons-httpclient>
+
 	</properties>
 	
 	<dependencies>
@@ -200,7 +203,12 @@
 			<groupId>org.drools</groupId>
 			<artifactId>drools-compiler</artifactId>
 			<version>${version.org.drools}</version>
-		</dependency>       	
+		</dependency>     
+		<dependency>
+			<groupId>commons-httpclient</groupId>
+			<artifactId>commons-httpclient</artifactId>
+			<version>${version.commons-httpclient}</version>
+		</dependency> 		  	
          </dependencies>      
     </dependencyManagement>	
 

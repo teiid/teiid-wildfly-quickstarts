@@ -2,10 +2,15 @@ Dynamicvdb-datafederation is the 'Hello World' example for Teiid.
 ================================
 
 Level: Basic
-Technologies: Teiid, Dynamic VDB, Materialization, Native Queries, reading data from JDBC, delimited file and Excel File
+Technologies: Teiid, Dynamic VDB, Materialization, Native Queries, VDB reuse, reading data from JDBC, delimited file and Excel File
 Target Product: DV
 Product Versions: DV 6.1
 Source: <https://github.com/teiid/teiid-quickstarts>
+
+VDB's: 
+------
+* Portfolio   -  source models, view's, native query
+* PortfolioMaterialize  -  vdb resuse, materialization model
 
 
 What is it?
@@ -13,8 +18,9 @@ What is it?
 
 This will demonstrate the common useful features of data federation using Teiid:
 -  how to federate data from a relational data source, a text file-based data source and an EXCEL File
--  how to define a translator override to support native queries
 -  how to define a view using DDL
+-  how to define a translator override to support native queries
+-  how to define a second vdb that reuses (extends) another vdb
 -  how to define a materialized VIEW using DDL and load the external materialized table 
 
 
@@ -69,6 +75,9 @@ Copy the following files to the $JBOSS_HOME/standalone/deployments directory
 
      (1) src/vdb/portfolio-vdb.xml
      (2) src/vdb/portfolio-vdb.xml.dodeploy
+     
+     (3) src/vdb/portfolio-mat-vdb.xml
+     (4) src/vdb/portfolio-mat-vdb.xml.dodeploy
 
 You should see the server log indicate the VDB is active with a message like:  TEIID40003 VDB Portfolio.1 is set to ACTIVE
 
@@ -100,6 +109,9 @@ Example:   mvn install -Dvdb="portfolio" -Dsql="example query" -Dusername="xx" -
 -  Source and Federated Queries
 --------------------
 
+NOTE:  For the following examples,  use the vdb:  Portfolio
+
+
 *  Example a  - queries the relational source
 
 	select * from product
@@ -124,6 +136,9 @@ text file with a HEADER containing entries for at least symbol and price columns
 -  Native Query
 --------------------
 
+NOTE:  For the following examples,  use the vdb:  Portfolio
+
+
 *  Example a  - Issue query that contains a NATIVE sql call that will be directly issued against the H2 database.  This is useful if the function isn't supported by the translator (check the documentation for the types of translators that support NATIVE sql).   Note that the translator override in the vdb xml enabling support for native queries has to be set.
 
  	select x.* FROM (call native('select Shares_Count, MONTHNAME(Purchase_Date) from Holdings')) w, ARRAYTABLE(w.tuple COLUMNS "Shares_Count" integer, "MonthPurchased" string ) AS x
@@ -131,6 +146,8 @@ text file with a HEADER containing entries for at least symbol and price columns
 --------------------
 -  Materialized View
 --------------------
+
+NOTE:  For the following examples,  use the vdb:  PortfolioMaterialize
 
 *  Example a  - Query the materialized View
 
@@ -145,9 +162,9 @@ First, insert a new row into Products table:
 
 wait 2 minutes, as defined by:  "teiid_rel:MATVIEW_TTL" 120000,  in the portfolio-vdb.xml
 
-then re-issue query in #5 and should now see 19 rows
+then re-issue query in "a" and should now see 19 rows
 
-*  Example c  - Query the original source, not the cached data
+*  Example c  - Issue a query that bypasses the cached data, and queries the original source
 
-	select * from StocksMatModel.stockPricesMatView option nocache  (should be the same as #6)
+	select * from StocksMatModel.stockPricesMatView option nocache  (should be the same as "b")
 
