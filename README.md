@@ -32,7 +32,7 @@ Some quickstarts are designed to enhance or extend other quickstarts. These are 
 
 | **Quickstart Name** | **Features Demonstrated** | **Description** | **Prerequisites** |
 |:-----------|:-----------|:-----------|:-----------|:-----------|
-| [datafederation](dynamicvdb-datafederation/README.md "data-federation") | Data Federation, TEXTTABLE, Native Query, External Materialization, Excel File | Shows how to expose multiple data sources for data federation and externally materialize a view to improve performance | None |
+| [datafederation](dynamicvdb-datafederation/README.md "data-federation") | Data Federation, TEXTTABLE, Native Query, VDB Reuse, External Materialization, Excel File | Shows how to expose multiple data sources for data federation and externally materialize a view to improve performance | None |
 | [dataroles](dynamicvdb-dataroles/README.md "data-roles") | Data roles | Shows how to control Read/Write data access using data roles and masking | datafederation |
 | [consume-webservices](webservices-as-a-datasource/README.md "consume-webservices") | 'ws' Translator, XMLTABLE, XMLPARSE, VIEW DDL | Demonstrates the use of the 'ws' translator to read a web service data source | None |
 | [hibernate](hibernate-on-top-of-teiid/README.md "hibernate") | Hibernate Integration, VDB ReUse, Create VIEW, Create Trigger, TEXTTABLE | Demonstrates how a Hibernate application can add data federation capabilities at the data layer| datafederation |
@@ -63,7 +63,7 @@ To run these quickstarts with the provided build scripts, you need the following
 
             mvn --version 
 
-3. The JBoss Enterprise Application Platform (EAP) 6 Alpha distribution ZIP or the JBoss AS 7 distribution ZIP.
+3. The JBoss Enterprise Application Platform (EAP) 6 distribution ZIP or the JBoss AS 7 distribution ZIP that's compatible with Teiid.
     * For information on how to install and run JBoss, refer to the server documentation.
 
 4.  Set JBOSS_HOME to the root directory location of your application server, the scripts use this variable to
