@@ -4,7 +4,7 @@
 	<parent>
     	<groupId>org.jboss.integration-platform</groupId>
     	<artifactId>jboss-integration-platform-parent</artifactId>
-    	<version>6.0.0.CR25</version>	
+    	<version>6.0.0.CR26</version>	
 	</parent>
 		
 	<modelVersion>4.0.0</modelVersion>
@@ -44,13 +44,13 @@
 		
 	    <illegaltransitivereportonly>true</illegaltransitivereportonly>
 			
-		<version.org.jboss.integration-platform>6.0.0.CR25</version.org.jboss.integration-platform>
+		<version.org.jboss.integration-platform>6.0.0.CR26</version.org.jboss.integration-platform>
 		<version.commons-httpclient>3.1</version.commons-httpclient>
 
 		<version.teiid>8.7.0.Final</version.teiid>
 
         <version.javax.annotation>${version.org.jboss.spec.javax.annotation.jboss-annotations-api_1.1_spec}</version.javax.annotation>
-        <version.jboss.as.plugin>7.4.Final</version.jboss.as.plugin>       
+        <version.jboss.as.plugin>7.5.Final</version.jboss.as.plugin>       
         <version.net.jcip>1.0</version.net.jcip>
         <version.org.codehaus.mojo.exec.plugin>1.2.1</version.org.codehaus.mojo.exec.plugin>
         <version.org.hibernate.search>4.5.0.Final</version.org.hibernate.search>
