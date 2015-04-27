@@ -102,11 +102,12 @@ the pojo dependency added:
 	For Linux:   ./standalone.sh	
 	for Windows: standalone.bat
 
-	append the following to the command to indicate which configuration to use if Teiid isn't configured in the default configuration
+	If Teiid isn't configured in the default configuration, append the following arguments to the command to specify the configuration
 		
-	-c standalone-teiid.xml 
+	-c {configuration.file}  
 	
-
+	Example: -c standalone-teiid.xml 
+	
 7) Install the infinispan-cache translator
 
 	-	cd to the ${JBOSS_HOME}/bin directory

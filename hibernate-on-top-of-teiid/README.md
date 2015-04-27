@@ -1,3 +1,15 @@
+Hibernate-on-top-of-teiid Quickstart
+================================
+
+Level: Intermmediate
+Technologies: Teiid, Hibernate
+Target Product: DV
+Product Versions: DV 6.1
+Source: <https://github.com/teiid/teiid-quickstarts>
+
+What is it?
+-----------
+
 Hibernate-on-top-of-teiid demonstrates how a hibernate4 application can take advantage of multiple data sources through
 a single Java Object by using the data federation capabilities of Teiid.  This example will extend the Portfolio VDB, which
 is deployed by the dynamicvdb-datafederation quickstart, and create a view that will be mapped to a single 
@@ -47,9 +59,11 @@ Please note this example does not support working with Hibernate 3.
 	For Linux:   ./standalone.sh	
 	for Windows: standalone.bat
 
-	append the following to the command to indicate which configuration to use if Teiid isn't configured in the default configuration
+	If Teiid isn't configured in the default configuration, append the following arguments to the command to specify the configuration
 		
-	-c standalone-teiid.xml 
+	-c {configuration.file}  
+	
+	Example: -c standalone-teiid.xml 
 	
 	
 3) VDB Deployment:

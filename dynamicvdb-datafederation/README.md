@@ -10,13 +10,16 @@ Source: <https://github.com/teiid/teiid-quickstarts>
 VDB's: 
 ------
 * Portfolio   -  source models, view's, native query
-* PortfolioMaterialize  -  vdb resuse, materialization model
+* PortfolioMaterialize  -  vdb resuse, external materialization model
 
 
 What is it?
 -----------
 
-This will demonstrate the common useful features of data federation using Teiid:
+This quickstart demonstrates how to define a dynamic vdb to enable data federation across
+multiple data sources (i.e., relational and text file).   This will demonstrate the
+following: 
+
 -  how to federate data from a relational data source, a text file-based data source and an EXCEL File
 -  how to define a view using DDL
 -  how to define a translator override to support native queries
@@ -46,10 +49,12 @@ If you have not done so, please review the System Requirements (../README.md)
 	For Linux:   ./standalone.sh	
 	for Windows: standalone.bat
 
-	append the following to the command to indicate which configuration to use if Teiid isn't configured in the default configuration
+	If Teiid isn't configured in the default configuration, append the following arguments to the command to specify the configuration
 		
-	-c standalone-teiid.xml 
+	-c {configuration.file}  
 	
+	Example: -c standalone-teiid.xml 
+		
 2)  Copy teiid support files
 	
 - Copy the "teiidfiles" directory to the $JBOSS_HOME/ directory
@@ -71,13 +76,15 @@ when complete, you should see $JBOSS_HOME/teiidfiles
 
 4)  Teiid Deployment:
 
-Copy the following files to the $JBOSS_HOME/standalone/deployments directory
+Copy (deploy) the following VDB related files to the $JBOSS_HOME/standalone/deployments directory
 
-     (1) src/vdb/portfolio-vdb.xml
-     (2) src/vdb/portfolio-vdb.xml.dodeploy
+     (1) Portolio VDB
+    	- src/vdb/portfolio-vdb.xml
+     	- src/vdb/portfolio-vdb.xml.dodeploy
      
-     (3) src/vdb/portfolio-mat-vdb.xml
-     (4) src/vdb/portfolio-mat-vdb.xml.dodeploy
+     (2) PortfolioMaterialize VDB
+     	- src/vdb/portfolio-mat-vdb.xml
+     	- src/vdb/portfolio-mat-vdb.xml.dodeploy
 
 You should see the server log indicate the VDB is active with a message like:  TEIID40003 VDB Portfolio.1 is set to ACTIVE
 
@@ -160,7 +167,7 @@ First, insert a new row into Products table:
 
 	INSERT INTO PRODUCT (ID,SYMBOL,COMPANY_NAME) VALUES(2000,'RHT','Red Hat Inc')
 
-wait 2 minutes, as defined by:  "teiid_rel:MATVIEW_TTL" 120000,  in the portfolio-vdb.xml
+wait 1 minute, as defined by:  "teiid_rel:MATVIEW_TTL" 60000,  in the portfolio-vdb.xml
 
 then re-issue query in "a" and should now see 19 rows
 

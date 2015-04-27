@@ -24,7 +24,7 @@
             company_name   varchar(256)
  		) OPTIONS (MATERIALIZED 'TRUE', UPDATABLE 'TRUE',         
                MATERIALIZED_TABLE 'Accounts.h2_stock_mat', 
-               "teiid_rel:MATVIEW_TTL" 120000,
+               "teiid_rel:MATVIEW_TTL" 60000,
                "teiid_rel:MATVIEW_BEFORE_LOAD_SCRIPT" 'execute accounts.native(''truncate table mat_stock_staging'');',
                "teiid_rel:MATVIEW_AFTER_LOAD_SCRIPT"  'execute accounts.native(''ALTER TABLE h2_stock_mat RENAME TO h2_stock_mat_temp'');execute accounts.native(''ALTER TABLE mat_stock_staging RENAME TO h2_stock_mat'');execute accounts.native(''ALTER TABLE h2_stock_mat_temp RENAME TO mat_stock_staging'');', 
                "teiid_rel:ON_VDB_DROP_SCRIPT" 'DELETE FROM Accounts.status WHERE Name=''stock'' AND schemaname = ''Stocks''',
