@@ -1,7 +1,19 @@
-Dynamicvdb-datafederation is the 'Hello World' example for Teiid.  
+Dynamicvdb-datafederation 'Hello World' Quickstart
+================================
 
+Level: Beginners
+Technologies: Teiid, Defining Models using DDL, Translator Override
+Target Product: DV
+Product Versions: DV 6.1
+Source: <https://github.com/teiid/teiid-quickstarts>
 
-This will demonstrate the following:
+What is it?
+-----------
+
+This quickstart demonstrates how to define a dynamic vdb to enable data federation across
+multiple data sources (i.e., relational and text file).   This will demonstrate the
+following: 
+
 -  how to federate data from a relational data source, a text file-based data source and an EXCEL File
 -  how to define a translator override to support native queries
 -  how to define a view using DDL
@@ -12,9 +24,6 @@ This example uses the H2 database, which is referenced as the "accounts-ds" data
 but the creation SQL can be adapted to another database if you choose.
 
 Note:  this example provides the base setup for which other quick starts depend upon.
-
-### Steps to setup and run the quickstart ###
-These can be done either manually (see Setup manually) or using maven (see Setup using the JBoss AS Maven plugin) 
 
 System requirements
 -------------------
@@ -34,10 +43,17 @@ Setup can be done either manually (see Manual Setup) or using maven (see Setup u
 
 1)  Start the server
 
-	Open a command line and navigate to the "bin" directory under the root directory of the JBoss server
+	To start the server, open a command line and navigate to the "bin" directory under the root directory of the JBoss server and run:
+	
+	For Linux:   ./standalone.sh	
+	for Windows: standalone.bat
 
-	For Linux:   ./standalone.sh -c standalone-teiid.xml	
-	for Windows: standalone.bat -c standalone-teiid.xml
+	If Teiid isn't configured in the default configuration, append the following arguments to the command to specify the configuration
+		
+	-c {configuration.file}  
+	
+	Example: -c standalone-teiid.xml 
+	
 
 2)  Copy teiid support files
 	

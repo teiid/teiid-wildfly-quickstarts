@@ -1,3 +1,15 @@
+Simpleclient Quickstart
+================================
+
+Level: Beginners
+Technologies: Teiid, JDBC
+Target Product: DV
+Product Versions: DV 6.1
+Source: <https://github.com/teiid/teiid-quickstarts>
+
+What is it?
+-----------
+
 Simpleclient quickstart demonstrates how to make a connection to Teiid using both a Driver
 and a DataSource.
 
