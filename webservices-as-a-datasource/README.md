@@ -1,3 +1,15 @@
+webservices-as-a-datasource Quickstart
+================================
+
+Level: Beginners
+Technologies: Teiid, WS Translator
+Target Product: DV
+Product Versions: DV 6.1
+Source: <https://github.com/teiid/teiid-quickstarts>
+
+What is it?
+-----------
+
 webservices-as-a-datasource demonstrates using the WS Translator to call a web services and
 transform the web service results into relational results.
 
@@ -32,10 +44,11 @@ Run the maven build to compile and create the web service war.
 	For Linux:   ./standalone.sh	
 	for Windows: standalone.bat
 
-	append the following to the command to indicate which configuration to use if Teiid isn't configured in the default configuration
+	If Teiid isn't configured in the default configuration, append the following arguments to the command to specify the configuration
 		
-	-c standalone-teiid.xml 
+	-c {configuration.file}  
 	
+	Example: -c standalone-teiid.xml 
 
 2)  Deploy the war file that will be used as the web service resource to be accessed as a data source by Teiid
 

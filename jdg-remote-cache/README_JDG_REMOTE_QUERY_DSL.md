@@ -117,10 +117,11 @@ the cache you will get a marshalling exception for a cached object that has a Me
 	For Linux:   ./standalone.sh	
 	for Windows: standalone.bat
 
-	append the following to the command to indicate which configuration to use if Teiid isn't configured in the default configuration
+	If Teiid isn't configured in the default configuration, append the following arguments to the command to specify the configuration
 		
-	-c standalone-teiid.xml 
+	-c {configuration.file}  
 	
+	Example: -c standalone-teiid.xml 
 
 6) Install the infinispan-cache-dsl translator
 

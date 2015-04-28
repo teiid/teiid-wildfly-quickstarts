@@ -1,3 +1,15 @@
+Dynamicvdb-dataroles Quickstart
+================================
+
+Level: Beginners
+Technologies: Teiid, Defining data roles
+Target Product: DV
+Product Versions: DV 6.1
+Source: <https://github.com/teiid/teiid-quickstarts>
+
+What is it?
+-----------
+
 Dynamicvdb-dataroles demonstrates how to use data roles to control access to data.  This
 includes read-only and read-write access as well as the use of row-based filters and column masking.
 
@@ -46,8 +58,24 @@ Setup can be done either manually (see Manual Setup) or using maven (see Setup u
 
 3) Security setup
 
-    Copy the files in the src/security directory to "<jboss.home>/standalone/configuration" directory
+	The following 2 users, and their roles, need to be configured.
+		
+	Usernames   Roles
+	----------	-----
+	portfolio	superuser
+	user		user,prices
 	
+	
+	-  Open a command line and navigate to the "bin" directory under the root directory of the JBoss server.
+	-  run the ./add-user.sh (.bat) script for each user.
+	-  The following prompts need to be answered:
+	
+	a.  "b"  Application User
+	b.  UserName
+	c.  Password
+	d.  roles (comma seperated)
+
+
 4)  Start the server
 
 	To start the server, open a command line and navigate to the "bin" directory under the root directory of the JBoss server and run:
@@ -55,10 +83,11 @@ Setup can be done either manually (see Manual Setup) or using maven (see Setup u
 	For Linux:   ./standalone.sh	
 	for Windows: standalone.bat
 
-	append the following to the command to indicate which configuration to use if Teiid isn't configured in the default configuration
+	If Teiid isn't configured in the default configuration, append the following arguments to the command to specify the configuration
 		
-	-c standalone-teiid.xml 
+	-c {configuration.file}  
 	
+	Example: -c standalone-teiid.xml 
 
 5) VDB Deployment:
 
