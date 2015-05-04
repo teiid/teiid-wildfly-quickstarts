@@ -114,7 +114,8 @@ Setup can be done either manually (see Manual Setup) or using maven (see Setup u
 
 2. Use the simpleclient example to run the following queries:
 
-Example:   mvn install -Dvdb="portfolio" -Dsql="example query"
+Example:   mvn install -Dvdb="portfolio" -Dsql="example query" -Dusername="xx" -Dpassword="xx"
+
 
 example queries:
 
