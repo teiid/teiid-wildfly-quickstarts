@@ -38,10 +38,6 @@ import org.infinispan.query.Search;
 import org.infinispan.query.SearchManager;
 import org.apache.lucene.search.Query;
 
-//import org.infinispan.query.dsl.Query;
-//import org.infinispan.query.dsl.QueryBuilder;
-//import org.infinispan.query.dsl.QueryFactory;
-
 import com.client.quickstart.pojo.Stock;
 
 /**
@@ -59,8 +55,6 @@ public class ServletLoadResources implements ServletContextListener {
 
 	private static final String CACHE_NAME = "local-quickstart-cache";
 	private static final String JNDI_NAME = "jboss/teiid/jdg-quickstart";
-
-	// private static ServletLoadResources resource = null;
 
 	private static DefaultCacheManager container;
 	private static boolean PREBOUND = false;
@@ -109,26 +103,12 @@ public class ServletLoadResources implements ServletContextListener {
 		}
 
 		Cache<Long, Stock> cache = container.getCache(CACHE_NAME);
-/*		
-		QueryFactory qf = Search.getQueryFactory(cache);
-	    		  
-	    QueryBuilder qb = qf.from(Stock.class);
-		
-		Query query = qb.build();
-		
-		query.list();
-*/		
-/*
-		SearchManager sm = Search.getSearchManager(cache);
-		sm.getQueryFactory().from(Stock.class).build().list();
-*/
+
 
 		SearchManager sm = Search.getSearchManager(cache);
 		Query query = sm.buildQueryBuilderForClass(Stock.class).get().keyword()
 				.onField("symbol").matching("CIS").createQuery();
 		CacheQuery q1 = sm.getQuery(query);
-		
-//		Query query = sm.buildQueryBuilderForClass(type).get().all().createQuery();
 
 		System.out
 				.println("*******" + CACHE_NAME + " is setup and be searched");
