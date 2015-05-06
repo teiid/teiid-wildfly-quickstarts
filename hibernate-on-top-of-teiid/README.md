@@ -64,7 +64,7 @@ Please note this example does not support working with Hibernate 3.
 	-c {configuration.file}  
 	
 	Example: -c standalone-teiid.xml 
-	
+
 	
 3) VDB Deployment:
 

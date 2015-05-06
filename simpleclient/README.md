@@ -53,27 +53,12 @@ To execute a sql query using the simpleclient, use the following format:
 
 		   mvn install -Dvdb="<vdb>" -Dsql="<sql>"
 
-Example:   mvn install -Dvdb="twitter" -Dsql="select * from tweet where query= 'jboss'"
+Example:   mvn install -Dvdb="twitter" -Dsql="select * from tweet where query= 'jboss'" -Dusername="teiidUser" -Dpassword="pwd"
 
 Note that the query is in quotes so that it is understood as a single argument.
 
 NOTE: To run more advanced queries, it would be better a fully featured Java client, 
 such as SQuirreL [http://www.squirrelsql.org/].
-
-
-#########################
-#  Username and Password
-#########################
-Notice the "user" and "password" are not arguments.  These are preset in JDBCClient.java to:
-
-	public static final String USERNAME_DEFAULT = "user";
-	public static final String PASSWORD_DEFAULT = "user";
-
-To override the defaults, you can pass overrides via the command line, as an example:
-
- mvn install -Dvdb="twitter" -Dsql="your query" -Dusername="teiidUser" -Dpassword="pwd"
-
-Or you can change the default in JDBCClient.java.
 
 
 
