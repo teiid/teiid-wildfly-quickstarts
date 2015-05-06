@@ -80,7 +80,7 @@ The module.xml file needs to be updated with the module name that has
 the java class that's being stored in the JDG cache.  For this quickstart, 
 this should be changed to - com.client.quickstart.pojos
 
-*  [Required] the org.infinispan.commons (slot="jdg-6.3" or slot for version installed) module needs to have 
+*  [Required] the org.infinispan.commons (slot="jdg-6.4" or slot for version installed) module needs to have 
 the pojo dependency added:
 
     <module name="com.client.quickstart.pojos"   export="true" />
@@ -111,10 +111,10 @@ the pojo dependency added:
 7) Install the infinispan-cache translator
 
 	-	cd to the ${JBOSS_HOME}/bin directory
-	-	execute:  ./jboss-cli.sh --connect --file={jbossas.server.dir}/docs/teiid/datasources/infinispan/add-infinispan-cache-translator.cli
+	-	execute:  ./jboss-cli.sh --connect --file=../docs/teiid/datasources/infinispan/add-infinispan-cache-translator.cli
 
 
-8) deploy the sample application war (target/jdg-quickstart.war) that will be used to preload the cache
+8) deploy the sample application war (target/jdg-quickstart.war) that will be used to configure and preload the cache
 
 	* use the management console at http://localhost:9990 to deploy target/jdg-quickstart.war from the target directory
 		or
@@ -144,29 +144,35 @@ This will trigger the loading of 10 Orders and then present that list on the pag
 
 2) Use the simpleclient example to run the following queries:
 
-Example:   mvn install -Dvdb="orders" -Dsql="example query"  -Dusername="teiidUser" -Dpassword="pwd"
+Example:   mvn install -Dvdb="Stocks" -Dsql="Insert into Stock (productId, symbol, price, companyname) Values (99, 'WMT', 45.35, 'Walmart')"  -Dusername="teiidUser" -Dpassword="pwd"
 
 
 or 
 
 3) Use a sql tool, like SQuirreL, to connect and issue following example queries:
 
--  connect:  jdbc:teiid:orders@mm://localhost:31000
+-  connect:  jdbc:teiid:Stocks@mm://localhost:31000
+
 
 
 #################
 # Example Queries:
 #################
 
+[Selects]
+ 	select productId, symbol, price, companyname from Stock
 
-[1] select orderDate, orderedBy from Orders
-[2] select * from OrdersView
-[3] select * from OrdersView where OrderNum > 3
-[4] Insert into Orders (OrderNum, OrderedBy) Values (99, 'TestPerson')
-[5] Update Orders set OrderedBy='Testperson2' where OrderNum = 99
-[6] Delete From Orders where OrderNum = 9
+ 	select productId, symbol, price, companyname from Stock where symbol = 'CIS'
 
-* When running either 4, 5, or 6, rerun one of the above select's to see the results to 
-verify the changed data
+ 	select productId, symbol, price, companyname from Stock where price < '60.50'
+
+[Insert]
+	Insert into Stock (productId, symbol, price, companyname) Values (99, 'WMT', 45.35, 'Walmart');
+
+[Update]
+	Update Stock set companyname='Apple Corp' where productId = 4
+
+[Delete]
+	Delete From Stock where productId = 3
 
 

@@ -58,6 +58,7 @@
                 
         <version.org.jboss.bom.jboss-javaee-6.0-with-tools>1.0.7.Final</version.org.jboss.bom.jboss-javaee-6.0-with-tools>
 
+		<jdg.slot>jdg-6.4</jdg.slot>
 	</properties>
 	
 	<dependencies>
