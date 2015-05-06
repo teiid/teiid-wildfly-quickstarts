@@ -38,6 +38,10 @@ import org.infinispan.query.Search;
 import org.infinispan.query.SearchManager;
 import org.apache.lucene.search.Query;
 
+//import org.infinispan.query.dsl.Query;
+//import org.infinispan.query.dsl.QueryBuilder;
+//import org.infinispan.query.dsl.QueryFactory;
+
 import com.client.quickstart.pojo.Stock;
 
 /**
@@ -63,7 +67,10 @@ public class ServletLoadResources implements ServletContextListener {
 	private static boolean PRELOADED = false;
 
 	public void contextInitialized(ServletContextEvent contextEvent) {
-		if (!PREBOUND) {
+		if (PREBOUND) {
+			return;
+		}
+		
 			if (exists()) {
 				PREBOUND = true;
 				return;
@@ -72,9 +79,7 @@ public class ServletLoadResources implements ServletContextListener {
 				// createContainer();
 				createContainerUsingFile();
 				
-				/* locacache can be used for testing */
-				loadCache();
-
+				
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -82,16 +87,13 @@ public class ServletLoadResources implements ServletContextListener {
 			}
 			bindToJNDI();
 			PREBOUND = true;
-		}
-
-		if (PRELOADED) {
+			
 			try {
 				testCache();
 			} catch (Exception e) {
 				e.printStackTrace();
 				throw new RuntimeException(e);
 			}
-		}
 	}
 
 	public void contextDestroyed(ServletContextEvent contextEvent) {
@@ -107,15 +109,26 @@ public class ServletLoadResources implements ServletContextListener {
 		}
 
 		Cache<Long, Stock> cache = container.getCache(CACHE_NAME);
+/*		
+		QueryFactory qf = Search.getQueryFactory(cache);
+	    		  
+	    QueryBuilder qb = qf.from(Stock.class);
+		
+		Query query = qb.build();
+		
+		query.list();
+*/		
+/*
+		SearchManager sm = Search.getSearchManager(cache);
+		sm.getQueryFactory().from(Stock.class).build().list();
+*/
 
 		SearchManager sm = Search.getSearchManager(cache);
 		Query query = sm.buildQueryBuilderForClass(Stock.class).get().keyword()
 				.onField("symbol").matching("CIS").createQuery();
 		CacheQuery q1 = sm.getQuery(query);
-		if (q1.getResultSize() != 1) {
-			throw new Exception(
-					"Error setting up cache to read Stocks, did not find CIS stock");
-		}
+		
+//		Query query = sm.buildQueryBuilderForClass(type).get().all().createQuery();
 
 		System.out
 				.println("*******" + CACHE_NAME + " is setup and be searched");
@@ -131,6 +144,7 @@ public class ServletLoadResources implements ServletContextListener {
 
 		} catch (NamingException e) {
 			e.printStackTrace();
+			throw new RuntimeException(e);
 		}
 
 	}
@@ -155,6 +169,13 @@ public class ServletLoadResources implements ServletContextListener {
 			e.printStackTrace();
 		}
 		container.start();
+		container.startCache(CACHE_NAME);
+		
+		container.getCacheConfiguration(CACHE_NAME).module(Stock.class);
+		
+		System.out
+				.println("******* Start cache: " + CACHE_NAME + " and set Module Stock.class on default configuration ");
+
 	}
 
 	protected void createContainer() throws Exception {
@@ -175,22 +196,4 @@ public class ServletLoadResources implements ServletContextListener {
 
 	}
 
-	/** 
-	 * 
-	 */
-	private void loadCache() {
-		
-//		container.getCache(CACHE_NAME, true).getCacheManager().getCacheManagerConfiguration().;
-
-		Cache<Long, Stock> cache = container.getCache(CACHE_NAME, true);
-
-		cache.put(1l, new Stock(1, 70.01, "RHT", "Red Hat"));
-		cache.put(2l, new Stock(2, 32.49, "ORA", "Oracle"));
-		cache.put(3l, new Stock(3, 12.44, "CIS", "Cisco"));
-		cache.put(4l, new Stock(4, 99.21, "APL", "Apple"));
-		
-		PRELOADED = true;
-
-
-	}
 } // class end

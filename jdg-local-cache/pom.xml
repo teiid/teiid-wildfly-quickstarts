@@ -13,7 +13,7 @@
 
 	<name>JDG Local Cache Quickstart</name>
 	<description>This quickstart demonstrates how to access a local JDG cache thru Teiid</description>
-
+    
 	<dependencies>
 
 		<dependency>
@@ -24,7 +24,7 @@
 		<dependency>
 		   	<groupId>org.hibernate</groupId>
 		   	<artifactId>hibernate-search-engine</artifactId>
-			<scope>provided</scope>
+		   	<scope>provided</scope>
 		</dependency>	
 
 		<dependency>
@@ -140,7 +140,7 @@
 					<failOnMissingWebXml>false</failOnMissingWebXml>
 					<archive>
 						<manifestEntries>
-							<Dependencies>org.infinispan:${jdg.slot} services, org.infinispan.query:${jdg.slot} services, com.client.quickstart.pojos export</Dependencies>
+							<Dependencies>org.infinispan:${jdg.slot} services, org.infinispan.commons:${jdg.slot} export, org.infinispan.query:${jdg.slot} services, org.infinispan.query.dsl:${jdg.slot} export, com.client.quickstart.pojos export</Dependencies>
 						</manifestEntries>
 					</archive>
 				</configuration>

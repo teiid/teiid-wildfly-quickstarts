@@ -111,15 +111,27 @@ the pojo dependency added:
 7) Install the infinispan-cache translator
 
 	-	cd to the ${JBOSS_HOME}/bin directory
-	-	execute:  ./jboss-cli.sh --connect --file={jbossas.server.dir}/docs/teiid/datasources/infinispan/add-infinispan-cache-translator.cli
+	-	execute:  ./jboss-cli.sh --connect --file=../docs/teiid/datasources/infinispan/add-infinispan-cache-translator.cli
 
 
-8) deploy the sample servlet war (target/jdg-quickstart.war) that will configure the cache and preload the cache with example data.
+8) deploy the sample application war (target/jdg-quickstart.war) that will be used to configure and preload the cache
 
+	* use the management console at http://localhost:9990 to deploy target/jdg-quickstart.war from the target directory
+		or
+    * copy the file:  target/jdg-quickstart.war to the deployments folder in the server
 	
 9) deploy the VDB: jdg-local-cache-vdb.xml
 
 	* copy files jdg-local-cache-vdb.xml and jdg-local-cache-vdb.xml.dodeploy to {jbossas.server.dir}/standalone/deployments	
+
+
+####################
+#   **** IMPORTANT **** This following step must be done before you perform Query Demonstration, 
+#   so that the cache will be created and bound into JNDI to be accessed by the VDB.
+#####################
+
+10) [Required] Open a browser to:  http://localhost:8080/jdg-quickstart/home.jsf
+This will trigger the loading of 10 Orders and then present that list on the page.
 
 
 #########################################
@@ -132,7 +144,7 @@ the pojo dependency added:
 
 2) Use the simpleclient example to run the following queries:
 
-Example:   mvn install -Dvdb="Stocks" -Dsql="example query"  -Dusername="teiidUser" -Dpassword="pwd"
+Example:   mvn install -Dvdb="Stocks" -Dsql="Insert into Stock (productId, symbol, price, companyname) Values (99, 'WMT', 45.35, 'Walmart')"  -Dusername="teiidUser" -Dpassword="pwd"
 
 
 or 
@@ -140,6 +152,7 @@ or
 3) Use a sql tool, like SQuirreL, to connect and issue following example queries:
 
 -  connect:  jdbc:teiid:Stocks@mm://localhost:31000
+
 
 
 #################
@@ -161,6 +174,5 @@ or
 
 [Delete]
 	Delete From Stock where productId = 3
-
 
 
