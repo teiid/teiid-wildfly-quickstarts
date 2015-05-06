@@ -114,7 +114,7 @@ the pojo dependency added:
 	-	execute:  ./jboss-cli.sh --connect --file=../docs/teiid/datasources/infinispan/add-infinispan-cache-translator.cli
 
 
-8) deploy the sample application war (target/jdg-quickstart.war) that will be used to configure and preload the cache
+8) deploy the sample application war (target/jdg-quickstart.war) that will configure the JDG cache from a file
 
 	* use the management console at http://localhost:9990 to deploy target/jdg-quickstart.war from the target directory
 		or
@@ -123,15 +123,6 @@ the pojo dependency added:
 9) deploy the VDB: jdg-local-cache-vdb.xml
 
 	* copy files jdg-local-cache-vdb.xml and jdg-local-cache-vdb.xml.dodeploy to {jbossas.server.dir}/standalone/deployments	
-
-
-####################
-#   **** IMPORTANT **** This following step must be done before you perform Query Demonstration, 
-#   so that the cache will be created and bound into JNDI to be accessed by the VDB.
-#####################
-
-10) [Required] Open a browser to:  http://localhost:8080/jdg-quickstart/home.jsf
-This will trigger the loading of 10 Orders and then present that list on the page.
 
 
 #########################################
