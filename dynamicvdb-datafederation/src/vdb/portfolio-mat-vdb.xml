@@ -27,7 +27,7 @@
                "teiid_rel:MATVIEW_TTL" 60000,
                "teiid_rel:MATVIEW_BEFORE_LOAD_SCRIPT" 'execute accounts.native(''truncate table mat_stock_staging'');',
                "teiid_rel:MATVIEW_AFTER_LOAD_SCRIPT"  'execute accounts.native(''ALTER TABLE h2_stock_mat RENAME TO h2_stock_mat_temp'');execute accounts.native(''ALTER TABLE mat_stock_staging RENAME TO h2_stock_mat'');execute accounts.native(''ALTER TABLE h2_stock_mat_temp RENAME TO mat_stock_staging'');', 
-               "teiid_rel:ON_VDB_DROP_SCRIPT" 'DELETE FROM Accounts.status WHERE Name=''stock'' AND schemaname = ''Stocks''',
+               "teiid_rel:ON_VDB_DROP_SCRIPT" 'DELETE FROM Accounts.status WHERE Name=''stockPricesMatView'' AND schemaname = ''StocksMatModel''',
                "teiid_rel:MATERIALIZED_STAGE_TABLE" 'Accounts.mat_stock_staging',
                "teiid_rel:ALLOW_MATVIEW_MANAGEMENT" 'true', 
                "teiid_rel:MATVIEW_STATUS_TABLE" 'status', 
