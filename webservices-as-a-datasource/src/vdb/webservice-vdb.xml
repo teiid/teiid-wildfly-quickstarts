@@ -14,7 +14,7 @@
         <metadata type="DDL"><![CDATA[
         
               CREATE  VIEW CustomersView (
-         customernumber varchar(100), customername varchar(200), contactlastname varchar(100),  contactfirstname varchar(100), phone varchar(50), addressline1 varchar(100), addressline2 varchar(100), city varchar(100), state varchar(100),  postalcode varchar(50),  country varchar(100),  salesrepemployeenumber varchar(100),  creditlimit varchar(100) )
+              customernumber varchar(100) PRIMARY KEY, customername varchar(200), contactlastname varchar(100),  contactfirstname varchar(100), phone varchar(50), addressline1 varchar(100), addressline2 varchar(100), city varchar(100), state varchar(100),  postalcode varchar(50),  country varchar(100),  salesrepemployeenumber varchar(100),  creditlimit varchar(100) )
          AS
  SELECT
 		A.customernumber, A.customername, A.contactlastname, A.contactfirstname, A.phone, A.addressline1, A.addressline2, A.city, A.state, A.postalcode, A.country, A.salesrepemployeenumber, A.creditlimit
