@@ -1,5 +1,3 @@
-## Dynamicvdb-restservice
-
 ---
 Level: Basic
 Technologies: Teiid, Dynamic VDB, Native Queries, VDB reuse, reading data from JDBC, delimited file, REST Service Through VDB
