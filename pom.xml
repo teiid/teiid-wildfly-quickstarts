@@ -28,6 +28,7 @@
 	<modules>
         <module>dynamicvdb-datafederation</module>
         <module>dynamicvdb-dataroles</module>
+	<module>dynamicvdb-restservice</module>
         <module>hibernate-on-top-of-teiid</module>
         <module>webservices-as-a-datasource</module>
 		<module>jdg-local-cache</module>
