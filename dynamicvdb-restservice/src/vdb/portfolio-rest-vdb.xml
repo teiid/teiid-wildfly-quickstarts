@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<vdb name="PortfolioRest" version="1">
+
+    <description>The REST Service Through Portfolio Dynamic VDB</description>
+    
+    <!-- 
+      Setting to use connector supplied metadata. Can be "true" or "cached".  
+      "true" will obtain metadata once for every launch of Teiid. 
+      "cached" will save a file containing the metadata into 
+      the deploy/<vdb name>/<vdb version/META-INF directory
+    -->
+    <property name="UseConnectorMetadata" value="true" />
+
+    <property name="{http://teiid.org/rest}auto-generate" value="true"/>
+
+    <import-vdb name="Portfolio" version="1" import-data-policies="true"/>
+
+    <model name="Rest" type ="VIRTUAL">
+	<metadata type="DDL"><![CDATA[
+	SET NAMESPACE 'http://teiid.org/rest' AS REST;
+
+	CREATE VIRTUAL PROCEDURE foo(IN id integer) RETURNS TABLE (xml_out xml) OPTIONS (UPDATECOUNT 0, "REST:METHOD" 'GET', "REST:URI" 'foo/{id}')
+	AS
+	BEGIN
+	    SELECT XMLELEMENT(NAME "tns:foo", XMLNAMESPACES( 'http://www.teiid.org/foo/' AS tns), XMLELEMENT(NAME "id", id)) AS xml_out;
+	END
+
+	CREATE VIRTUAL PROCEDURE getAllStocks() RETURNS TABLE (xml_out xml) OPTIONS (UPDATECOUNT 0, "REST:METHOD" 'GET', "REST:URI" 'getAllStocks')
+	AS
+        BEGIN
+	    SELECT XMLELEMENT(NAME "stocks", XMLAGG(XMLELEMENT(NAME "stock", XMLFOREST(product_id, symbol, price, company_name)))) AS xml_out FROM Stock;
+	END
+
+	CREATE VIRTUAL PROCEDURE getAllStockById(IN id integer) RETURNS TABLE (xml_out xml) OPTIONS (UPDATECOUNT 0, "REST:METHOD" 'GET', "REST:URI" 'getAllStockById/{id}')
+        AS
+        BEGIN
+            SELECT XMLELEMENT(NAME "stocks", XMLAGG(XMLELEMENT(NAME "stock", XMLFOREST(product_id, symbol, price, company_name)))) AS xml_out FROM Stock AS S WHERE S.product_id = getAllStockById.id;
+        END
+
+	CREATE VIRTUAL PROCEDURE getAllStockBySymbol(IN symbol string NOT NULL) RETURNS TABLE (xml_out xml) OPTIONS (UPDATECOUNT 0, "REST:METHOD" 'GET', "REST:URI" 'getAllStockBySymbol/{symbol}')
+        AS
+        BEGIN
+            SELECT XMLELEMENT(NAME "stocks", XMLAGG(XMLELEMENT(NAME "stock", XMLFOREST(product_id, symbol, price, company_name)))) AS xml_out FROM Stock AS S WHERE S.symbol = getAllStockBySymbol.symbol;
+        END
+	]]> </metadata>
+    </model>
+
+</vdb>
