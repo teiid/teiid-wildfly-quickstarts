@@ -1,20 +1,21 @@
-Dynamicvdb-datafederation is the 'Hello World' example for Teiid.  
-================================
-
+---
 Level: Basic
 Technologies: Teiid, Dynamic VDB, Materialization, Native Queries, VDB reuse, reading data from JDBC, delimited file and Excel File
 Target Product: DV
 Product Versions: DV 6.1
-Source: <https://github.com/teiid/teiid-quickstarts>
+Source: https://github.com/teiid/teiid-quickstarts
+---
 
-VDB's: 
-------
+Dynamicvdb-datafederation is the 'Hello World' example for Teiid.
+================================
+
+## VDB's: 
+
 * Portfolio   -  source models, view's, native query
 * PortfolioMaterialize  -  vdb resuse, external materialization model
 
 
-What is it?
------------
+## What is it?
 
 This quickstart demonstrates how to define a dynamic vdb to enable data federation across
 multiple data sources (i.e., relational and text file).   This will demonstrate the
@@ -33,14 +34,11 @@ but the creation SQL can be adapted to another database if you choose.
 Note:  this example provides the base setup for which other quick starts depend upon.
 
 
-System requirements
--------------------
+## System requirements
 
-If you have not done so, please review the System Requirements (../README.md)
+If you have not done so, please review the System Requirements [../README.md](../README.md)
 
-####################
-#   Setup
-####################
+## Setup
 
 1)  Start the server
 
@@ -94,10 +92,7 @@ You should see the server log indicate the VDB is active with a message like:  T
 
 6)  See "Query Demonstrations" below to demonstrate data federation.
 
-
-#########################################
-### Query Demonstrations
-#########################################	
+## Query Demonstrations
 
 ==== Using the simpleclient example ====
 
@@ -107,16 +102,11 @@ You should see the server log indicate the VDB is active with a message like:  T
 
 Example:   mvn install -Dvdb="portfolio" -Dsql="example query" -Dusername="xx" -Dpassword="xx"
 
+## Examples:
 
-#################
-# Examples:
-#################
+###  Source and Federated Queries
 
---------------------
--  Source and Federated Queries
---------------------
-
-NOTE:  For the following examples,  use the vdb:  Portfolio
+> NOTE:  For the following examples,  use the vdb:  Portfolio
 
 
 *  Example a  - queries the relational source
@@ -139,22 +129,18 @@ text file with a HEADER containing entries for at least symbol and price columns
 
 	select * from OtherHoldings
 
---------------------
--  Native Query
---------------------
+### Native Query
 
-NOTE:  For the following examples,  use the vdb:  Portfolio
+> NOTE:  For the following examples,  use the vdb:  Portfolio
 
 
 *  Example a  - Issue query that contains a NATIVE sql call that will be directly issued against the H2 database.  This is useful if the function isn't supported by the translator (check the documentation for the types of translators that support NATIVE sql).   Note that the translator override in the vdb xml enabling support for native queries has to be set.
 
  	select x.* FROM (call native('select Shares_Count, MONTHNAME(Purchase_Date) from Holdings')) w, ARRAYTABLE(w.tuple COLUMNS "Shares_Count" integer, "MonthPurchased" string ) AS x
 
---------------------
--  Materialized View
---------------------
+### Materialized View
 
-NOTE:  For the following examples,  use the vdb:  PortfolioMaterialize
+> NOTE:  For the following examples,  use the vdb:  PortfolioMaterialize
 
 *  Example a  - Query the materialized View
 

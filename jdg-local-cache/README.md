@@ -1,51 +1,43 @@
-JDG Local-Cache (Library Mode) Quickstart
-================================
-
+---
 Level: Intermediate
 Technologies: Teiid, Infinispan, Library Mode
 Target Product: DV, JDG
 Product Versions: DV 6.1, JDG 6.4
-Source: <https://github.com/teiid/teiid-quickstarts>
+Source: https://github.com/teiid/teiid-quickstarts
+---
 
-What is it?
------------
+JDG Local-Cache (Library Mode) Quickstart
+================================
+
+# What is it?
 
 This quickstart demonstrates how Teiid can access a cache of Java Objects stored in a 
 local JDG cache running library mode.
 
 Assumptions:
--  Teiid has been deployed to your jboss as server and a Teiid user has been setup.
 
--------------------
-Quick Start requirements
--------------------
+* Teiid has been deployed to your jboss as server and a Teiid user has been setup.
 
-If you have not done so, please review the System Requirements (../README.md)
+# Quick Start requirements
 
-####################
-#  PREREQUISTES
-####################
+If you have not done so, please review the System Requirements [../README.md](../README.md)
 
--  JBoss application server to run Teiid
--  The Teiid Jboss distribution kit
--  JDG 6.4 eap modules kit 
+# PREREQUISTES
 
-NOTE: can obtain JDG kit distributions on Red Hat's Customer Portal at https://access.redhat.com/jbossnetwork/restricted/listSoftware.html
+* JBoss application server to run Teiid
+* The Teiid Jboss distribution kit
+* JDG 6.4 eap modules kit 
 
-   
-####################
-#  JDG Setup
-####################
+> NOTE: can obtain JDG kit distributions on Red Hat's Customer Portal at https://access.redhat.com/jbossnetwork/restricted/listSoftware.html
+
+# JDG Setup
 
 1) shutdown jbossas server
 
 2) Install the JBoss Data Grid eap modules kit into the modules location for your JBoss AS - Teiid instance.
    See Red Hat:   http://access.redhat.com  to obtain the kit.
 
-
-####################
-#   Setup Teiid Server
-####################
+# Teiid Server Setup
 
 1) shutdown jbossas server
 
@@ -125,9 +117,7 @@ the pojo dependency added:
 	* copy files jdg-local-cache-vdb.xml and jdg-local-cache-vdb.xml.dodeploy to {jbossas.server.dir}/standalone/deployments	
 
 
-#########################################
-### Query Demonstrations
-#########################################	
+# Query Demonstrations
 
 ==== Using the simpleclient example ====
 
@@ -144,11 +134,7 @@ or
 
 -  connect:  jdbc:teiid:Stocks@mm://localhost:31000
 
-
-
-#################
 # Example Queries:
-#################
 
 [Selects]
  	select productId, symbol, price, companyname from Stock

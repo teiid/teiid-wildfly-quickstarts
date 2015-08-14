@@ -1,14 +1,15 @@
-Dynamicvdb-dataroles Quickstart
-================================
-
+---
 Level: Beginners
 Technologies: Teiid, Defining data roles
 Target Product: DV
 Product Versions: DV 6.1
-Source: <https://github.com/teiid/teiid-quickstarts>
+Source: https://github.com/teiid/teiid-quickstarts
+---
 
-What is it?
------------
+Dynamicvdb-dataroles Quickstart
+================================
+
+## What is it?
 
 Dynamicvdb-dataroles demonstrates how to use data roles to control access to data.  This
 includes read-only and read-write access as well as the use of row-based filters and column masking.
@@ -28,29 +29,17 @@ generic role (empty) for controlling access to information.
 See the portfolio-vdb.xml for extra xml elements defined for define the above roles. For more information check out
 Reference Guide's Data Roles chapter.
 
--------------------
-System requirements
--------------------
+## System requirements
 
-If you have not done so, please review the System Requirements (../README.md)
+If you have not done so, please review the System Requirements [../README.md](../README.md)
 
-############################
-#   NOTE:  This example relies upon the dynamicvdb-datafederation example and that it needs to be deployed prior to running this example.
-#       	Therefore, read the dynamicvdb-datafederation's README.md and follow its directions before continuing.
-############################
+> NOTE: This example relies upon the dynamicvdb-datafederation example and that it needs to be deployed prior to running this example. Therefore, read the dynamicvdb-datafederation's README.md and follow its directions before continuing.
 
-
-
-####################
-#   Setup
-####################
+## Setup
 
 Setup can be done either manually (see Manual Setup) or using maven (see Setup using the JBoss AS Maven plugin) 
 
-
-#########################################
 ### Manual setup
-#########################################
 
 1) Run the setup in dynamicvdb-datafederation quick start
 
@@ -103,10 +92,7 @@ Setup can be done either manually (see Manual Setup) or using maven (see Setup u
 
 7)  See "Query Demonstrations" below to demonstrate data federation.
 
-
-#########################################
-### Query Demonstrations
-#########################################	
+## Query Demonstrations
 
 ==== Using the simpleclient example ====
 

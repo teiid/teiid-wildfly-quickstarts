@@ -1,3 +1,14 @@
+---
+Level: Intermediate 
+Technologies: Teiid, BRMS, Drools, User Defined Function
+Target Product: DV, BRMS
+Product Versions: DV 6.1 
+Source: https://github.com/teiid/teiid-quickstarts
+---
+
+
+## What is it?
+
 **drools-integration** demonstrates  how a business rule can be triggered via a User Defined Function (UDF).
 
 ## System requirements
