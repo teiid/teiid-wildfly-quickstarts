@@ -3,7 +3,7 @@ Level: Basic
 Technologies: Teiid, Dynamic VDB, Native Queries, VDB reuse, reading data from JDBC, delimited file, REST Service Through VDB
 Target Product: DV
 Product Versions: DV 6.1, DV 6.2
-Source: <https://github.com/teiid/teiid-quickstarts>
+Source: https://github.com/teiid/teiid-quickstarts
 ---
 
 ## What is it?

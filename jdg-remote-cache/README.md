@@ -1,15 +1,16 @@
-JDG Remote-Cache Quickstart using JDG Hot Rod that supports Google Protocol Buffers for Serialization
-================================
-
+---
 Level: Intermediate
 Technologies: Teiid, Infinispan, Hot Rod, Remote Query
 Target Product: DV
 Product Versions: DV 6.1
-Source: <https://github.com/teiid/teiid-quickstarts>
+Source: https://github.com/teiid/teiid-quickstarts
+---
 
+JDG Remote-Cache Quickstart using JDG Hot Rod that supports Google Protocol Buffers for Serialization
+================================
 
-What is it?
------------
+# What is it?
+
 This quickstart demonstrates how Teiid can connect to a remote JBoss Data Grid (JDG) as a data source, to query and update data from cache using the Hot Rod protocol. 
 It uses the JDG quick-start remote-query as how the cache is defined and its contents.
 
@@ -19,11 +20,9 @@ Setup to include:
 -  configure the resource-adapter to connect to the JDG remote server
 -  deploy the remote-cache-vdb that you will connect to in Teiid, which will access to the JDG remote server
 
--------------------
-Quick Start requirements
--------------------
+# Quick Start requirements
 
--  If you have not done so, please review the System Requirements (../README.md) 
+-  If you have not done so, please review the System Requirements [../README.md](../README.md) 
 Need the following kits:
 -  JBoss application server to run Teiid
 -  The Teiid Jboss distribution kit
@@ -31,11 +30,9 @@ Need the following kits:
 -  JDG 6.4 quick start kit (will use the remote-query which has the protobuf definition file(s) and will be used to load the cache)
 -  JDG 6.4 eap modules hotrod client kit (used by Teiid to access the remote cache)
 
-NOTE: can obtain JDG kit distributions on Red Hat's Customer Portal at https://access.redhat.com/jbossnetwork/restricted/listSoftware.html
+> NOTE: can obtain JDG kit distributions on Red Hat's Customer Portal at https://access.redhat.com/jbossnetwork/restricted/listSoftware.html
 
-####################
-#   JDG setup
-####################
+# JDG setup
 
 1.  Setup JDG Server
 	
@@ -75,18 +72,14 @@ jdg.hotrod.port=11222      	----> 11322
 
 *  load the cache
 
-*** NOTE ***:  When running the quickstart to load the cache, DO NOT ADD A MEMO FOR A PERSON
+**NOTE**:  When running the quickstart to load the cache, DO NOT ADD A MEMO FOR A PERSON
 
 This is because there is no MemoMarshaller defined in the quickstart for translator to reference, therefore when you query
 the cache you will get a marshalling exception for a cached object that has a Memo defined. 
 
 - run the remote-query quickstart to load the cache
 
-
-   
-######################
-#   Setup Teiid Server
-######################
+# Setup Teiid Server
 
 1) shutdown jbossas server
 
@@ -148,7 +141,6 @@ then - select name, email, id from Person
 * When running either 2, 3, or 4, rerun above select to see the results to 
 verify the changed data
 
-NOTE:  do not do a SELECT * FROM Person
-because you will get a serialization error, because the Person class is not serializable.
+> NOTE:  do not do a `SELECT * FROM Person`, because you will get a serialization error, because the Person class is not serializable.
 
 

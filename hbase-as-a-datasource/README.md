@@ -1,3 +1,13 @@
+---
+Level: Beginners
+Technologies: Teiid, HBase Translator, Foreign Table
+Target Product: DV
+Product Versions: DV 6.1
+Source: https://github.com/teiid/teiid-quickstarts
+---
+
+## What is it?
+
 **hbase-as-a-datasource** demonstrates using the HBase Translator with Phoenix Data Source to access data in HBase.
 
 ## System requirements

@@ -1,14 +1,15 @@
-Hibernate-on-top-of-teiid Quickstart
-================================
-
+---
 Level: Intermmediate
 Technologies: Teiid, Hibernate
 Target Product: DV
 Product Versions: DV 6.1
-Source: <https://github.com/teiid/teiid-quickstarts>
+Source: https://github.com/teiid/teiid-quickstarts
+---
 
-What is it?
------------
+Hibernate-on-top-of-teiid Quickstart
+================================
+
+## What is it?
 
 Hibernate-on-top-of-teiid demonstrates how a hibernate4 application can take advantage of multiple data sources through
 a single Java Object by using the data federation capabilities of Teiid.  This example will extend the Portfolio VDB, which
@@ -19,36 +20,23 @@ Hibernate is normally a 1 object to 1 data source mapping.  By using Teiid as th
 approached from integrating at the application layer, but done at the data layer.  Making it easier to join together related information to be exposed
 through Hibernate, rather than writing application code to merge related data.
 
-############################
-#   NOTE:  This example relies upon the dynamicvdb-datafederation example and that it needs to be deployed prior to running this example.
-#       	Therefore, read the dynamicvdb-datafederation's README.md and follow its directions before continuing.
-############################
+> NOTE: This example relies upon the dynamicvdb-datafederation example and that it needs to be deployed prior to running this example. Therefore, read the dynamicvdb-datafederation's README.md and follow its directions before continuing.
 
--------------------
-System requirements
--------------------
+## System requirements
 
-If you have not done so, please review the System Requirements (../README.md)
+If you have not done so, please review the System Requirements [../README.md](../README.md)
 
 This example produces a WAR that is designed to be run on JBoss Enterprise Application Platform 6 or JBoss AS 7.
 
+> NOTE: Correct Dependencies - Please note this example does not support working with Hibernate 3.  
 
-Correct Dependencies
---------------------
-Please note this example does not support working with Hibernate 3.  
-
-##########################
-###  Build the project
-##########################
+## Build the project
 
 - Open a command line and navigate to the root directory of this quickstart
 
 	*   `mvn clean install`
 
-
-#########################################
-### Manual setup
-#########################################
+## Manual setup
 
 1) Run the setup in dynamicvdb-datafederation quick start
 
@@ -86,10 +74,7 @@ Please note this example does not support working with Hibernate 3.
 
 7)  See "Query Demonstrations" below to demonstrate data federation.
 
-
-##################################
-#  Undeploy artifacts
-##################################
+## Undeploy artifacts
 
 1)  To undeploy the web application run the following command:
 
@@ -99,13 +84,9 @@ Please note this example does not support working with Hibernate 3.
 
 	*  delete the vdb, hibernate-portfolio-vdb.xml, from the directory "<jboss.home>/standalone/deployments"
 	
-	
-#########################################
-### Query Demonstrations
-#########################################	
+## Query Demonstrations
 
-Access the application 
----------------------
+### Access the application 
 
 The application will be running at the following URL: http://localhost:8080/hibernate-on-top-of-teiid/.
 
@@ -117,10 +98,4 @@ To add (Register) a new product, enter the following:
 -  Company Name
 -  Stock Symbol
 
-NOTE:  the Stock Symbol entered must exist in the marketdata-price.txt file.  
-	   For convenience, RHT has already been added to the file that doesn't 
-	   currently exist in the Products table.
-
-
-
-
+> NOTE: the Stock Symbol entered must exist in the marketdata-price.txt file. For convenience, RHT has already been added to the file that doesn't currently exist in the Products table.

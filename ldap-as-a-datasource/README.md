@@ -1,3 +1,5 @@
+## What is it?
+
 ldap-as-a-datasource demonstrates using the ldap Translator to access data in OpenLDAP Server.
 
 ## System requirements

@@ -1,14 +1,15 @@
-webservices-as-a-datasource Quickstart
-================================
-
+---
 Level: Beginners
 Technologies: Teiid, WS Translator
 Target Product: DV
 Product Versions: DV 6.1
-Source: <https://github.com/teiid/teiid-quickstarts>
+Source: https://github.com/teiid/teiid-quickstarts
+---
 
-What is it?
------------
+webservices-as-a-datasource Quickstart
+================================
+
+# What is it?
 
 webservices-as-a-datasource demonstrates using the WS Translator to call a web services and
 transform the web service results into relational results.
@@ -16,26 +17,17 @@ transform the web service results into relational results.
 The CustomerRESTWebSvc war will be deployed and accessed as a data source using the WS Translator.  This war contains
 customer information, so that no external web service is required in order to demonstrate the WS feature.
 
--------------------
-System requirements
--------------------
+# System requirements
 
 If you have not done so, please review the System Requirements (../README.md) in the root quick starts directory.
 
-
-####################
-#   Build
-####################
+# Build
 
 Run the maven build to compile and create the web service war.
 
 -  mvn clean compile war:war
 
-
-
-#########################################
-### Setup and Deployment
-#########################################
+# Setup and Deployment
 
 1)  Start the server (if not already started)
 
@@ -77,10 +69,7 @@ Copy the following files to the "<jboss.home>/standalone/deployments" directory
 
 5)  See "Query Demonstrations" below to demonstrate data federation.
 
-
-#########################################
-### Query Demonstrations
-#########################################	
+# Query Demonstrations
 
 ==== Using the simpleclient example ====
 
@@ -90,7 +79,6 @@ Copy the following files to the "<jboss.home>/standalone/deployments" directory
 
 Example:   mvn install -Dvdb="webservice" -Dsql="select * from CustomersView" -Dusername="xx" -Dpassword="xx"
 
-
-NOTE - depending on your OS/Shell the quoting/escaping required to run the example can be
+> NOTE - depending on your OS/Shell the quoting/escaping required to run the example can be
 complicated.  It would be better to install a Java client, such as SQuirreL, to run the 
 queries below. 
