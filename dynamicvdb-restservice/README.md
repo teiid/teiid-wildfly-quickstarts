@@ -8,9 +8,12 @@ Source: https://github.com/teiid/teiid-quickstarts
 
 ## What is it?
 
-This quickstart demonstrates how to define a dynamic vdb to enable [REST Service Through VDB](https://docs.jboss.org/author/display/TEIID/REST+Service+Through+VDB).
+This quickstart demonstrates:
 
-This quickstart relies upon the [dynamicvdb-datafederation](../dynamicvdb-datafederation) and that it needs to be deployed prior to running this example.
+* how to define a dynamic vdb to enable [REST Service Through VDB](https://docs.jboss.org/author/display/TEIID/REST+Service+Through+VDB).
+* hot to use httpclient api integrate VDB data via REST API
+
+This quickstart depends upon the [dynamicvdb-datafederation](../dynamicvdb-datafederation) and that it needs to be deployed prior to running this example.
 
 ## System requirements
 
@@ -56,3 +59,9 @@ The following Rest API will extract data from VDB:
 
 > NOTE: Above Query Demonstrations assuming DV server run on localhost.
 
+### Run http client
+
+~~~
+$ cd http-client/
+$ mvn exec:java
+~~~
