@@ -10,10 +10,10 @@ Source: https://github.com/teiid/teiid-quickstarts
 
 This quickstart demonstrates:
 
-* how to define a dynamic vdb to enable [REST Service Through VDB](https://docs.jboss.org/author/display/TEIID/REST+Service+Through+VDB).
-* hot to use httpclient api integrate VDB data via REST API
+* how to define a dynamic vdb to enable a [REST Service Through VDB](https://docs.jboss.org/author/display/TEIID/REST+Service+Through+VDB).
+* how to use the httpclient api to integrate VDB data via REST
 
-This quickstart depends upon the [dynamicvdb-datafederation](../dynamicvdb-datafederation) and that it needs to be deployed prior to running this example.
+This quickstart depends upon the [dynamicvdb-datafederation](../dynamicvdb-datafederation) quickstart.  It needs to be deployed prior to running this example.
 
 ## System requirements
 
@@ -25,7 +25,7 @@ If you have not done so, please review the System Requirements [../README.md](..
 
 Refer to [dynamicvdb-datafederation's README.md](../dynamicvdb-datafederation/README.md) Setup Section, make sure all setps are setup completely and correctly.
 
-2) Create a Application User under grops `rest`
+2) Create a Application User under group `rest`
 
 Navigate to JBOSS_HOME, execute below command will create user `testUser` under group `rest`:
 
@@ -33,7 +33,7 @@ Navigate to JBOSS_HOME, execute below command will create user `testUser` under 
 $ ./bin/add-user.sh -a -u testUser -p password1! -g rest
 ~~~ 
 
-> NOTE: By default, REST Service Through VDB are secured with security domain "teiid-security" and with security role "rest".
+> NOTE: By default, REST services through a VDB are secured with security domain "teiid-security" and with security role "rest".
 		
 3)  Deploy VDB
 
@@ -50,7 +50,7 @@ You should see the server log indicate the VDB is active with a message like:  T
 
 ## Query Demonstrations
 
-The following Rest API will extract data from VDB:
+The following Rest API will extract data from the VDB:
 
 * http://localhost:8080/portfoliorest_1/rest/foo/1
 * http://localhost:8080/portfoliorest_1/rest/getAllStocks
