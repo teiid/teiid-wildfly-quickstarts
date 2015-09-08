@@ -14,4 +14,7 @@
 	<name>REST Service Through Portfolio Dynamic VDB</name>
 	<description>This quickstart demonstrates how to enable REST Service Through Portfolio Dynamic VDB</description>
 
+	<modules>
+            <module>http-client</module>
+        </modules>
 </project>
