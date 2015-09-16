@@ -55,9 +55,9 @@ public class PortfolioClient {
 	static String PASSWORD = "password1!";
 	
 	String[] apis = {"http://localhost:8080/portfoliorest_1/rest/foo/1", 
-			         "http://localhost:8080/portfoliorest_1/rest/getAllStocks", 
-			         "http://localhost:8080/portfoliorest_1/rest/getAllStockById/1007", 
-			         "http://localhost:8080/portfoliorest_1/rest/getAllStockBySymbol/IBM"}; 
+	                 "http://localhost:8080/portfoliorest_1/rest/getAllStocks", 
+	                 "http://localhost:8080/portfoliorest_1/rest/getAllStockById/1007",
+	                 "http://localhost:8080/portfoliorest_1/rest/getAllStockBySymbol/IBM"}; 
 	
 	/**
 	 * JAX-RS 2.0 Client API
@@ -72,9 +72,9 @@ public class PortfolioClient {
 		for(String api : apis){
 			WebTarget target = client.target(api);
 			Response response = target.request()
-									.header(HttpHeaders.ACCEPT, MediaType.APPLICATION_XML)
-									.header(HttpHeaders.AUTHORIZATION, authString)
-									.get();
+			                        .header(HttpHeaders.ACCEPT, MediaType.APPLICATION_XML)
+			                        .header(HttpHeaders.AUTHORIZATION, authString)
+			                        .get();
 			String value = response.readEntity(String.class);
 			System.out.println(value);
 			response.close();
@@ -95,9 +95,9 @@ public class PortfolioClient {
 		for(String api : apis){
 			ResteasyWebTarget target = client.target(api);
 			Response response = target.request()
-									.header(HttpHeaders.ACCEPT, MediaType.APPLICATION_XML)
-									.header(HttpHeaders.AUTHORIZATION, authString)
-									.get();
+                                    .header(HttpHeaders.ACCEPT, MediaType.APPLICATION_XML)
+                                    .header(HttpHeaders.AUTHORIZATION, authString)
+                                    .get();
 			String value = response.readEntity(String.class);
 			System.out.println(value);
 			response.close();
@@ -115,33 +115,33 @@ public class PortfolioClient {
 		
 		// 2. Generate BASIC scheme object and add it to the local auth cache
 		BasicScheme basicAuth = new BasicScheme();
-        authCache.put(targetHost, basicAuth);
-
-        // 3. Add AuthCache to the execution context
-        HttpClientContext localContext = HttpClientContext.create();
-        localContext.setAuthCache(authCache);
+		authCache.put(targetHost, basicAuth);
+		
+		// 3. Add AuthCache to the execution context
+		HttpClientContext localContext = HttpClientContext.create();
+		localContext.setAuthCache(authCache);
 		
 		// 4. Create client executor and proxy
 		HttpClientBuilder builder = HttpClientBuilder.create();
 		CredentialsProvider credsProvider = new BasicCredentialsProvider();
 		AuthScope scope = new AuthScope(targetHost.getHostName(), targetHost.getPort());
-        UsernamePasswordCredentials credentials = new UsernamePasswordCredentials(USERNAME, PASSWORD);
-        credsProvider.setCredentials(scope, credentials);
-        builder.setDefaultCredentialsProvider(credsProvider);
-        HttpClient httpClient = builder.build();
-        
-        // 5. Create ResteasyClient with http client as engine
-        ApacheHttpClient4Engine engine = new ApacheHttpClient4Engine(httpClient, localContext);
-        ResteasyClient client = new ResteasyClientBuilder().httpEngine(engine).build();
-        
-        // 6. Execute Rest call via ResteasyClient
-        String authString = getBasicAuthentication();
+		UsernamePasswordCredentials credentials = new UsernamePasswordCredentials(USERNAME, PASSWORD);
+		credsProvider.setCredentials(scope, credentials);
+		builder.setDefaultCredentialsProvider(credsProvider);
+		HttpClient httpClient = builder.build();
+		
+		// 5. Create ResteasyClient with http client as engine
+		ApacheHttpClient4Engine engine = new ApacheHttpClient4Engine(httpClient, localContext);
+		ResteasyClient client = new ResteasyClientBuilder().httpEngine(engine).build();
+		
+		// 6. Execute Rest call via ResteasyClient
+		String authString = getBasicAuthentication();
 		for(String api : apis){
 			ResteasyWebTarget target = client.target(api);
 			Response response = target.request()
-									.header(HttpHeaders.ACCEPT, MediaType.APPLICATION_XML)
-									.header(HttpHeaders.AUTHORIZATION, authString)
-									.get();
+                                    .header(HttpHeaders.ACCEPT, MediaType.APPLICATION_XML)
+                                    .header(HttpHeaders.AUTHORIZATION, authString)
+                                    .get();
 			String value = response.readEntity(String.class);
 			System.out.println(value);
 			response.close();
