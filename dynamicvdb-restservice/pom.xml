@@ -16,5 +16,6 @@
 
 	<modules>
             <module>http-client</module>
+	    <module>resteasy-client</module>
         </modules>
 </project>

@@ -63,6 +63,8 @@
                 
         <version.org.jboss.bom.jboss-javaee-6.0-with-tools>1.0.7.Final</version.org.jboss.bom.jboss-javaee-6.0-with-tools>
 		<version.org.drools>6.1.0.Final</version.org.drools>
+		<version.resteasy>3.0.12.Final</version.resteasy>
+                <version.commons-codec>1.10</version.commons-codec>
 		
 		<version.commons-httpclient>3.1</version.commons-httpclient>
 
@@ -216,6 +218,26 @@
                         <groupId>org.apache.httpcomponents</groupId>
                         <artifactId>httpclient</artifactId>
                         <version>${version.httpclient}</version>
+                </dependency>
+		<dependency>
+                    <groupId>org.jboss.resteasy</groupId>
+                    <artifactId>resteasy-jaxrs</artifactId>
+                    <version>${version.resteasy}</version>
+                 </dependency>
+		<dependency>
+                    <groupId>org.jboss.resteasy</groupId>
+                    <artifactId>resteasy-client</artifactId>
+                    <version>${version.resteasy}</version>
+                 </dependency>
+                <dependency>
+                    <groupId>org.jboss.resteasy</groupId>
+                    <artifactId>jaxrs-api</artifactId>
+                    <version>${version.resteasy}</version>
+                 </dependency>
+                <dependency>
+                    <groupId>commons-codec</groupId>
+                    <artifactId>commons-codec</artifactId>
+                    <version>${version.commons-codec}</version>
                 </dependency>
          </dependencies>      
     </dependencyManagement>	
