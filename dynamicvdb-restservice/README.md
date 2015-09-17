@@ -12,6 +12,9 @@ This quickstart demonstrates:
 
 * how to define a dynamic vdb to enable a [REST Service Through VDB](https://docs.jboss.org/author/display/TEIID/REST+Service+Through+VDB).
 * how to use the httpclient api to integrate VDB data via REST
+* how to use the JAX-RS 2.0 Client API to integrate VDB data via REST with security authentication
+* how to use the Resteasy Client API with JAX-RS 2.0 Client API to integrate VDB data via REST
+* how to use the esteasy Client API with HTTP client as engine to integrate VDB data via REST with security authentication
 
 This quickstart depends upon the [dynamicvdb-datafederation](../dynamicvdb-datafederation) quickstart.  It needs to be deployed prior to running this example.
 
@@ -64,4 +67,11 @@ The following Rest API will extract data from the VDB:
 ~~~
 $ cd http-client/
 $ mvn exec:java
+~~~
+
+### Run resteasy client
+
+~~~
+$ mvn clean install dependency:copy-dependencies
+$ java -cp target/dependency/*:target/dynamicvdb-resteasy-client.jar org.jboss.teiid.quickstart.PortfolioClient
 ~~~
