@@ -6,10 +6,6 @@
     </resources>
     
     <dependencies>
-        
-        <module name="org.infinispan" slot="${jdg.slot}"   export="true" />
-        <module name="org.infinispan.commons" slot="${jdg.slot}"   export="true"  services="import" />
-        <module name="org.infinispan.query.dsl" slot="${jdg.slot}"  export="true" /> 
- 		<module name="org.infinispan.query" slot="${jdg.slot}"  export="true" /> 
+        <module name="org.jboss.teiid.resource-adapter.infinispan" slot="6" />
     </dependencies>
 </module>
