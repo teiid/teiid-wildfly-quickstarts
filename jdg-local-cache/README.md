@@ -3,8 +3,7 @@ JDG Local-Cache (Library Mode) Quickstart
 
 Level: Intermediate
 Technologies: Teiid, Infinispan, Library Mode
-Target Product: DV, JDG
-Product Versions: DV 6.1, JDG 6.4
+Target Product: DV 6.x, JDG 6.x
 Source: <https://github.com/teiid/teiid-quickstarts>
 
 What is it?
@@ -28,9 +27,11 @@ If you have not done so, please review the System Requirements (../README.md)
 
 -  JBoss application server to run Teiid
 -  The Teiid Jboss distribution kit
--  JDG 6.4 eap modules kit 
+-  JDG 6.5 eap modules kit.  If the JDG version is different from that is defined in the root pom, then the
+JDG slot and version should be updated and then rebuild the project.
 
 NOTE: can obtain JDG kit distributions on Red Hat's Customer Portal at https://access.redhat.com/jbossnetwork/restricted/listSoftware.html
+
 
    
 ####################
@@ -62,28 +63,18 @@ This will build jdg-quickstart-jboss-as7-dist.zip in the target directory.
 
 4) Update module dependencies
 
-*  [Optional] If the version of JDG modules you installed were not JDG 6.4, then update the following:
+*  [Required] Update the "your.pojo.module" reference in the translator-infinispan-cache module.xml
 
-	1) Change the "jdg.slot" property in the pom.xml for this quickstart to the slot to use, and rebuild
-		-  will update the com.client.quickstart.pojos pojo module
-		-  will update the manifest for the jdg-quickstart.war 
-			
-	2) Update the following module.xml files in the server to the align the JDG slot (default set to slot="jdg-6.4"):
 
-		-  org.jboss.teiid.translator.object
+*  [Optional] If the version of JDG modules you installed were not ${jdg.slot}, then update the following:
+
+		-  org.jboss.teiid.translator.infinispan.cache
 		-  org.jboss.teiid.resource-adapter.infinispan" slot="6"
 	
-
-*  [Required] Update the "your.pojo.module" reference in the translator-object module.xml
 
 The module.xml file needs to be updated with the module name that has
 the java class that's being stored in the JDG cache.  For this quickstart, 
 this should be changed to - com.client.quickstart.pojos
-
-*  [Required] the org.infinispan.commons (slot="jdg-6.4" or slot for version installed) module needs to have 
-the pojo dependency added:
-
-    <module name="com.client.quickstart.pojos"   export="true" />
     
 		
 5) Configure resource-adapter
@@ -119,7 +110,15 @@ the pojo dependency added:
 	* use the management console at http://localhost:9990 to deploy target/jdg-quickstart.war from the target directory
 		or
     * copy the file:  target/jdg-quickstart.war to the deployments folder in the server
-	
+    
+    Make sure the following is seen in the server log before trying to execute any sql:
+    
+21:19:26,900 INFO  [stdout] (ServerService Thread Pool -- 65)  ******* Loaded local-quickstart-cache with number of objects 200
+21:19:28,511 INFO  [stdout] (ServerService Thread Pool -- 65)  *******local-quickstart-cache is setup and tested
+
+	This means the JDG cache was configured and registered via JNDI, which will make it available to Teiid resoure-adapter.
+		
+		
 9) deploy the VDB: jdg-local-cache-vdb.xml
 
 	* copy files jdg-local-cache-vdb.xml and jdg-local-cache-vdb.xml.dodeploy to {jbossas.server.dir}/standalone/deployments	
@@ -158,7 +157,7 @@ or
  	select productId, symbol, price, companyname from Stock where price < '60.50'
 
 [Insert]
-	Insert into Stock (productId, symbol, price, companyname) Values (99, 'WMT', 45.35, 'Walmart');
+	Insert into Stock (productId, symbol, price, companyname) Values (599, 'WMT', 45.35, 'Walmart');
 
 [Update]
 	Update Stock set companyname='Apple Corp' where productId = 4

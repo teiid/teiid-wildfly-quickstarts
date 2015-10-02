@@ -8,26 +8,20 @@
     <model name="StockCache" type="Physical">
         <property name="importer.useFullSchemaName" value="false"/>
            
-       <source name="StockSource" translator-name="infinispan1" connection-jndi-name="java:/infinispanLocal" />
-        <metadata type="DDL"><![CDATA[
- 
- CREATE FOREIGN TABLE Stock (
-    StockObject object OPTIONS (NAMEINSOURCE 'this', UPDATABLE FALSE, SEARCHABLE 'Unsearchable', NATIVE_TYPE 'java.lang.Object'),
-    productId integer NOT NULL OPTIONS (NAMEINSOURCE 'productId', SEARCHABLE 'Searchable', NATIVE_TYPE 'int'),
-    price bigdecimal OPTIONS (NAMEINSOURCE 'price', SEARCHABLE 'Searchable', NATIVE_TYPE 'BigDecimal'),
-    symbol varchar(100) OPTIONS (NAMEINSOURCE 'symbol', SEARCHABLE 'Searchable', NATIVE_TYPE 'java.lang.String'),
-    companyName varchar(256) OPTIONS (NAMEINSOURCE 'companyName', SEARCHABLE 'Searchable', NATIVE_TYPE 'java.lang.String'),
-    CONSTRAINT PK_ORDERNUM PRIMARY KEY(productId)
-) OPTIONS (NAMEINSOURCE 'local-quickstart-cache', UPDATABLE TRUE);
- 
- 
-         ]]> </metadata>       
+       <source name="StockSource" translator-name="infinispan1" connection-jndi-name="java:/infinispanLocal" />  
        
     </model>        
   
     <translator name="infinispan1" type="infinispan-cache">
-        <!--property name="SupportsLuceneSearching" value="true"/-->
+
         <property name="SupportsDSLSearching" value="true"/>
+
+<!-- other translator overrides -->
+<!--        
+        <property name="SupportsNotCriteria" value="true"/>
+        <property name="SupportsCompareCriteriaOrdered" value="true"/>
+        <property name="SupportsIsNullCriteria" value="true"/>
+-->
 
     </translator>
 </vdb>

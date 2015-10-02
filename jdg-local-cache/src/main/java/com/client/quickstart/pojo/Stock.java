@@ -31,6 +31,7 @@ import org.hibernate.search.annotations.Field;
 import org.hibernate.search.annotations.Index;
 import org.hibernate.search.annotations.Indexed;
 import org.hibernate.search.annotations.Store;
+import org.hibernate.search.annotations.NumericField;
 
 /**
  * @ProvidedId
@@ -44,8 +45,11 @@ public class Stock implements java.io.Serializable {
 	 */
 	private static final long serialVersionUID = -5155172202224249683L;
 	@Id
-   @Field(index=Index.YES, store=Store.YES, analyze=Analyze.NO)
+    @NumericField @Field(index=Index.YES, store=Store.YES, analyze=Analyze.NO)
 	public int productId;
+	
+	// NOTE: hibernate doesn't support BigDecimal using NumericField, so for this
+	//       example, it will remain being stored as a string
 	@Field(index=Index.YES, store=Store.YES, analyze=Analyze.NO)
 	public  BigDecimal price;
 	@Field(index=Index.YES, store=Store.YES, analyze=Analyze.NO)

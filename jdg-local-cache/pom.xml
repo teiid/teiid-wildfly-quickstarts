@@ -27,23 +27,6 @@
 		   	<scope>provided</scope>
 		</dependency>	
 
-		<dependency>
-			<groupId>org.jboss.teiid</groupId>
-			<artifactId>teiid-common-core</artifactId>
-			<scope>provided</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>org.jboss.teiid</groupId>
-			<artifactId>teiid-api</artifactId>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.jboss.teiid.connectors</groupId>
-			<artifactId>translator-object</artifactId>
-			<scope>provided</scope>
-		</dependency>
-
 		<!-- Infinispan dependency -->
 		<dependency>
 			<groupId>org.infinispan</groupId>
@@ -60,6 +43,11 @@
 			<artifactId>infinispan-query</artifactId>
 			<scope>provided</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.infinispan</groupId>
+			<artifactId>infinispan-query-dsl</artifactId>
+			<scope>provided</scope>
+		</dependency>		
 		<dependency>
 			<groupId>org.apache.lucene</groupId>
 			<artifactId>lucene-core</artifactId>
