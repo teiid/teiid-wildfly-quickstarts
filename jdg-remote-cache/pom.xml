@@ -19,33 +19,45 @@
         <main.class.hotrod-endpoint>com.client.quickstart.OrderManager</main.class.hotrod-endpoint>
 
     </properties>
+    
+ 	 <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.infinispan</groupId>
+                <artifactId>infinispan-bom</artifactId>
+                <version>${version.org.infinispan.6}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>    
 
     <dependencies>
-        <!-- Import the infinispan core -->
-        <dependency>
-            <groupId>org.infinispan</groupId>
-            <artifactId>infinispan-core</artifactId>
-            <scope>provided</scope>
-        </dependency>
-
-        <!-- Import the Infinispan client hotrod -->
-        <dependency>
-            <groupId>org.infinispan</groupId>
-            <artifactId>infinispan-client-hotrod</artifactId>
-            <scope>provided</scope>
-        </dependency>
-
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-search</artifactId>
-			<scope>provided</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>javax.resource</groupId>
-			<artifactId>connector-api</artifactId>
-			<scope>provided</scope>
-		</dependency>
+             <dependency>
+              <groupId>org.infinispan</groupId>
+              <artifactId>infinispan-commons</artifactId>
+              <scope>provided</scope>
+            </dependency>           
+            <dependency>
+              <groupId>org.infinispan</groupId>
+              <artifactId>infinispan-query</artifactId>
+              <scope>provided</scope>
+            </dependency>   
+            <dependency>
+              <groupId>org.infinispan</groupId>
+              <artifactId>infinispan-query-dsl</artifactId>
+              <scope>provided</scope>
+            </dependency>   
+            <dependency>
+              <groupId>org.infinispan</groupId>
+              <artifactId>infinispan-client-hotrod</artifactId>
+              <scope>provided</scope>
+            </dependency>       
+            <dependency>
+			  <groupId>org.infinispan.protostream</groupId>
+			  <artifactId>protostream</artifactId>
+              <scope>provided</scope>
+            </dependency>       
 
 	</dependencies>
 

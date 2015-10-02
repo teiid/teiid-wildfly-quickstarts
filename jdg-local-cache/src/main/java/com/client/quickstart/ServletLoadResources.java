@@ -24,19 +24,38 @@ package com.client.quickstart;
 
 import java.io.IOException;
 import java.util.logging.Logger;
+import java.util.List;
+import java.util.Properties;
 
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
+import java.lang.annotation.ElementType;
+
+import org.hibernate.search.annotations.Analyze;
+import org.hibernate.search.cfg.SearchMapping;
+
 import org.infinispan.Cache;
+import org.infinispan.configuration.cache.CacheMode;
+import org.infinispan.configuration.cache.Configuration;
 import org.infinispan.configuration.cache.ConfigurationBuilder;
+import org.infinispan.configuration.global.GlobalConfiguration;
+import org.infinispan.configuration.global.GlobalConfigurationBuilder;
 import org.infinispan.manager.DefaultCacheManager;
-import org.infinispan.query.CacheQuery;
+import org.infinispan.eviction.EvictionStrategy;
+import org.infinispan.transaction.TransactionMode;
+
+import org.infinispan.query.dsl.FilterConditionContext;
+import org.infinispan.query.dsl.Query;
+import org.infinispan.query.dsl.QueryBuilder;
+import org.infinispan.query.dsl.QueryFactory;
+
+//import org.infinispan.query.CacheQuery;
 import org.infinispan.query.Search;
-import org.infinispan.query.SearchManager;
-import org.apache.lucene.search.Query;
+//import org.infinispan.query.SearchManager;
+//import org.apache.lucene.search.Query;
 
 import com.client.quickstart.pojo.Stock;
 
@@ -54,7 +73,7 @@ public class ServletLoadResources implements ServletContextListener {
 			.getName());
 
 	private static final String CACHE_NAME = "local-quickstart-cache";
-	private static final String JNDI_NAME = "jboss/teiid/jdg-quickstart";
+	private static final String JNDI_NAME = "java:jboss/teiid/jdg-quickstart";
 
 	private static DefaultCacheManager container;
 	private static boolean PREBOUND = false;
@@ -70,8 +89,8 @@ public class ServletLoadResources implements ServletContextListener {
 				return;
 			}
 			try {
-				// createContainer();
-				createContainerUsingFile();
+				createContainer();
+				//createContainerUsingFile();
 				
 				
 			} catch (Exception e) {
@@ -83,6 +102,7 @@ public class ServletLoadResources implements ServletContextListener {
 			PREBOUND = true;
 			
 			try {
+			    loadCache();
 				testCache();
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -98,22 +118,51 @@ public class ServletLoadResources implements ServletContextListener {
 		
 		container = null;
 		if (!exists()) {
-			throw new Exception("Unable to testcache, JNDI " + JNDI_NAME
+			throw new Exception("Unable to test cache, JNDI " + JNDI_NAME
 					+ "was not found");
 		}
 
-		Cache<Long, Stock> cache = container.getCache(CACHE_NAME);
+		Cache<Integer, Stock> cache = container.getCache(CACHE_NAME);
+		QueryFactory qf = Search.getQueryFactory(cache);
+		QueryBuilder qb = qf.from(Stock.class);
+		
+		FilterConditionContext fcc = qb.having("productId").lte(new Integer(100).intValue());
+		
+		Query query = fcc.toBuilder().build();
+		List<Object> results = query.list();
 
-
-		SearchManager sm = Search.getSearchManager(cache);
-		Query query = sm.buildQueryBuilderForClass(Stock.class).get().keyword()
-				.onField("symbol").matching("CIS").createQuery();
-		CacheQuery q1 = sm.getQuery(query);
-
-		System.out
-				.println("*******" + CACHE_NAME + " is setup and be searched");
+/*		
+		if (results.size() != 100) {
+			throw new Exception("*******" + CACHE_NAME + " test returned incorrect size of " + results.size());
+		}
+*/		
+		System.out.println("*******" + CACHE_NAME + " is setup and tested");
 		
 	}
+	
+	private void loadCache() throws Exception {
+	
+		Cache<Integer, Stock> cache = container.getCache(CACHE_NAME);
+		int x = 0;
+		for (int i = 1; i <= 200; i++) {
+
+			Stock s = new Stock(i, 12.33, "RHT" + i, "Red Hat " + i);
+
+			cache.put(new Integer(i).intValue(), s);
+			x = i;
+
+		}	
+		System.out.println("******* Loaded " + CACHE_NAME + " with number of objects " + x );
+
+	}
+	
+	private void printObjects(List<Object> results) {
+	
+		for(Object o:results) {
+			System.out.println("******* Object: " + o.toString());
+		}
+	}
+	
 
 	private void bindToJNDI() {
 
@@ -159,20 +208,41 @@ public class ServletLoadResources implements ServletContextListener {
 	}
 
 	protected void createContainer() throws Exception {
+	
+		SearchMapping mapping = new SearchMapping();
+		mapping.entity(Stock.class).indexed().providedId();
+//		property("productId", ElementType.METHOD).field().analyze(Analyze.NO).
+//		property("price", ElementType.METHOD).field().analyze(Analyze.NO).
+//		property("symbol", ElementType.METHOD).field().analyze(Analyze.NO).
+//		property("companyName", ElementType.METHOD).field().analyze(Analyze.NO);
 
-		ConfigurationBuilder builder = new ConfigurationBuilder();
-		builder.indexing().enable().indexLocalOnly(false)
-				.addProperty("default.directory_provider", "ram")
-				.addProperty("lucene_version", "LUCENE_CURRENT");
+		Properties properties = new Properties();
+		properties.put(org.hibernate.search.Environment.MODEL_MAPPING, mapping);
+		properties.put("lucene_version", "LUCENE_CURRENT");		
+		properties.put("hibernate.search.default.directory_provider", "ram");
+		
+		
+		GlobalConfiguration glob = new GlobalConfigurationBuilder()
+        	.nonClusteredDefault() //Helper method that gets you a default constructed GlobalConfiguration, preconfigured for use in LOCAL mode
+        	.globalJmxStatistics().enable() //This method allows enables the jmx statistics of the global configuration.
+        	.jmxDomain("org.infinispan.stocks")  //prevent collision
+        	.build(); //Builds  the GlobalConfiguration object
+		
+		Configuration loc = new ConfigurationBuilder()
+    		.indexing().enable().addProperty("hibernate.search.default.directory_provider", "filesystem").addProperty("hibernate.search.default.indexBase", "./data/quickstart/lucene/indexes")
+    		.enable()
+    		.indexLocalOnly(true)
+    		.withProperties(properties)
+		        .persistence().passivation(false).addSingleFileStore().purgeOnStartup(true).location("./data/quickstart/localcache/indexing/trades") //Disable passivation and adds a SingleFileStore that is purged on Startup
+    		.build();
 
-		container = new DefaultCacheManager();
-
-		if (!container.cacheExists(CACHE_NAME)) {
-
-			container.defineConfiguration(CACHE_NAME, builder.build());
+		container = new DefaultCacheManager(glob, loc);
 			container.startCache(CACHE_NAME);
+			
+			container.getCacheConfiguration(CACHE_NAME).module(Stock.class);
+	
 
-		}
+
 
 	}
 

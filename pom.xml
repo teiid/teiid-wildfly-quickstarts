@@ -51,20 +51,23 @@
 			
 		<version.org.jboss.integration-platform>6.0.0.CR26</version.org.jboss.integration-platform>
 
-		<version.teiid>8.10.0.Final</version.teiid>
+		<version.teiid>8.11.0.Final</version.teiid>
 
         <version.javax.annotation>${version.org.jboss.spec.javax.annotation.jboss-annotations-api_1.1_spec}</version.javax.annotation>
         <version.jboss.as.plugin>${version.org.jboss.as}</version.jboss.as.plugin>       
         <version.net.jcip>1.0</version.net.jcip>
         <version.org.codehaus.mojo.exec.plugin>1.2.1</version.org.codehaus.mojo.exec.plugin>
-        <version.org.hibernate.search>4.5.0.Final</version.org.hibernate.search>
-        <version.org.infinispan>6.2.0.Final-redhat-4</version.org.infinispan> <!-- 6.0.2.Final -->
-	<version.httpclient>4.3.5</version.httpclient>
+        <!--version.org.hibernate.search>4.5.0.Final</version.org.hibernate.search-->
+        <version.org.infinispan.6>6.3.0.Final-redhat-5</version.org.infinispan.6>  
+        <!-- JDG module slot to use  -->
+        <jdg.slot>jdg-6.5</jdg.slot>  
+
+		<version.httpclient>4.3.5</version.httpclient>
                 
         <version.org.jboss.bom.jboss-javaee-6.0-with-tools>1.0.7.Final</version.org.jboss.bom.jboss-javaee-6.0-with-tools>
 		<version.org.drools>6.1.0.Final</version.org.drools>
 		<version.resteasy>3.0.12.Final</version.resteasy>
-                <version.commons-codec>1.10</version.commons-codec>
+        <version.commons-codec>1.10</version.commons-codec>
 		
 		<version.commons-httpclient>3.1</version.commons-httpclient>
 
@@ -157,28 +160,33 @@
 			<dependency>
 				<groupId>org.infinispan</groupId>
 				<artifactId>infinispan-cdi</artifactId>
-				<version>${version.org.infinispan}</version>
+				<version>${version.org.infinispan.6}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.infinispan</groupId>
 				<artifactId>infinispan-query</artifactId>
-				<version>${version.org.infinispan}</version>
-			</dependency>            
+				<version>${version.org.infinispan.6}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.infinispan</groupId>
+				<artifactId>infinispan-query-dsl</artifactId>
+				<version>${version.org.infinispan.6}</version>
+			</dependency>   			            
 			<dependency>
 				<groupId>org.infinispan</groupId>
 				<artifactId>infinispan-core</artifactId>
-				<version>${version.org.infinispan}</version>
+				<version>${version.org.infinispan.6}</version>
  			</dependency>        
 			<dependency>
 				<groupId>org.infinispan</groupId>
 				<artifactId>infinispan-commons</artifactId>
-				<version>${version.org.infinispan}</version>
+				<version>${version.org.infinispan.6}</version>
  			</dependency>  
  			<dependency>
 				<groupId>org.infinispan</groupId>
 				<artifactId>infinispan-client-hotrod</artifactId>
-				<version>${version.org.infinispan}</version>
- 			</dependency>			      
+				<version>${version.org.infinispan.6}</version>
+ 			</dependency>					      
             <dependency>
                 <groupId>org.hibernate</groupId>
                 <artifactId>hibernate-search</artifactId>
@@ -194,51 +202,51 @@
 			  <artifactId>jboss-annotations-api_1.1_spec</artifactId>
                <version>${version.javax.annotation}</version>                      		           
 			</dependency> 
-		<dependency>
-			<groupId>org.kie</groupId>
-			<artifactId>kie-api</artifactId>
-			<version>${version.org.drools}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.drools</groupId>
-			<artifactId>drools-core</artifactId>
-			<version>${version.org.drools}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.drools</groupId>
-			<artifactId>drools-compiler</artifactId>
-			<version>${version.org.drools}</version>
-		</dependency>     
-		<dependency>
-			<groupId>commons-httpclient</groupId>
-			<artifactId>commons-httpclient</artifactId>
-			<version>${version.commons-httpclient}</version>
-		</dependency>
-		<dependency>
-                        <groupId>org.apache.httpcomponents</groupId>
-                        <artifactId>httpclient</artifactId>
-                        <version>${version.httpclient}</version>
-                </dependency>
-		<dependency>
-                    <groupId>org.jboss.resteasy</groupId>
-                    <artifactId>resteasy-jaxrs</artifactId>
-                    <version>${version.resteasy}</version>
-                 </dependency>
-		<dependency>
-                    <groupId>org.jboss.resteasy</groupId>
-                    <artifactId>resteasy-client</artifactId>
-                    <version>${version.resteasy}</version>
-                 </dependency>
-                <dependency>
-                    <groupId>org.jboss.resteasy</groupId>
-                    <artifactId>jaxrs-api</artifactId>
-                    <version>${version.resteasy}</version>
-                 </dependency>
-                <dependency>
-                    <groupId>commons-codec</groupId>
-                    <artifactId>commons-codec</artifactId>
-                    <version>${version.commons-codec}</version>
-                </dependency>
+			<dependency>
+				<groupId>org.kie</groupId>
+				<artifactId>kie-api</artifactId>
+				<version>${version.org.drools}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.drools</groupId>
+				<artifactId>drools-core</artifactId>
+				<version>${version.org.drools}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.drools</groupId>
+				<artifactId>drools-compiler</artifactId>
+				<version>${version.org.drools}</version>
+			</dependency>     
+			<dependency>
+				<groupId>commons-httpclient</groupId>
+				<artifactId>commons-httpclient</artifactId>
+				<version>${version.commons-httpclient}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.httpcomponents</groupId>
+				<artifactId>httpclient</artifactId>
+				<version>${version.httpclient}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.jboss.resteasy</groupId>
+				<artifactId>resteasy-jaxrs</artifactId>
+				<version>${version.resteasy}</version>
+			 </dependency>
+			<dependency>
+				<groupId>org.jboss.resteasy</groupId>
+				<artifactId>resteasy-client</artifactId>
+				<version>${version.resteasy}</version>
+			 </dependency>
+			<dependency>
+				<groupId>org.jboss.resteasy</groupId>
+				<artifactId>jaxrs-api</artifactId>
+				<version>${version.resteasy}</version>
+			 </dependency>
+			<dependency>
+				<groupId>commons-codec</groupId>
+				<artifactId>commons-codec</artifactId>
+				<version>${version.commons-codec}</version>
+			</dependency>
          </dependencies>      
     </dependencyManagement>	
 
