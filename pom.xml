@@ -38,6 +38,7 @@
 		<module>hbase-as-a-datasource</module>
 		<module>drools-integration</module>
         <module>simpleclient</module>
+	<module>socialMedia-as-a-datasource</module>
 	</modules>
 
 	<properties>

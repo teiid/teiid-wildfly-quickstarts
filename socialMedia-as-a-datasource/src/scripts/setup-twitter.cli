@@ -1,0 +1,4 @@
+/subsystem=resource-adapters/resource-adapter=TwitterQS:add(module=org.jboss.teiid.resource-adapter.webservice,transaction-support=NoTransaction)
+/subsystem=resource-adapters/resource-adapter=TwitterQS/connection-definitions=TwitterQS:add(jndi-name=java:/twitterDS, class-name=org.teiid.resource.adapter.ws.WSManagedConnectionFactory, enabled=true, use-java-context=true, security-domain=oauth-security)
+/subsystem=resource-adapters/resource-adapter=TwitterQS/connection-definitions=TwitterQS/config-properties=SecurityT:add(value=OAuth)
+/subsystem=resource-adapters/resource-adapter=TwitterQS:activate
