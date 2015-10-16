@@ -1,0 +1,18 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<parent>
+		<artifactId>teiid-quickstart-parent</artifactId>
+		<groupId>org.jboss.teiid.quickstart</groupId>
+		<version>3.0.0</version>
+	</parent>
+
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>socialMedia-as-a-datasource</artifactId>
+	<packaging>jar</packaging>
+
+	<name>Accessing Securited Webservices</name>
+	<description>This quickstart demonstrates using the 'ws' translator to access data in Social Media(Twitter, Linkedin, Weibo)</description>
+    
+
+</project>

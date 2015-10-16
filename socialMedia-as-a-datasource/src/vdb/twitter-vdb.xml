@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>  
+<vdb name="twitter" version="1">  
+    <description>Shows how to call Web Services</description>  
+    <model name="twitter">  
+        <source name="twitter" translator-name="rest" connection-jndi-name="java:/twitterDS"/>  
+    </model> 
+
+    <model name="twitterView" type="VIRTUAL">
+        <metadata type="DDL"><![CDATA[
+        
+        CREATE VIEW TwitterUserTimelineView(
+            id string,
+            created_at string,
+            text string
+        )
+            AS
+        SELECT
+            tweet.id, tweet.created_at, tweet.text
+        FROM
+            (call twitter.invokeHTTP(endpoint=>'https://api.twitter.com/1.1/statuses/user_timeline.json', action=>'GET')) w, XMLTABLE('/twitter/twitter' passing JSONTOXML('twitter', w.result) columns id string PATH 'id_str', created_at string PATH 'created_at', text string PATH 'text') tweet;
+
+                ]]>
+        </metadata>
+    </model>
+ 
+    <translator name="rest" type="ws">  
+        <property name="DefaultBinding" value="HTTP"/>  
+        <property name="DefaultServiceMode" value="MESSAGE"/>  
+    </translator> 
+
+</vdb> 
