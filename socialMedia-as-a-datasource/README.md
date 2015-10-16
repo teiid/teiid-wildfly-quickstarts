@@ -8,7 +8,7 @@ Source: https://github.com/teiid/teiid-quickstarts
 
 # What is it?
 
-The 'socialMedia-as-a-datasource' demonstrates using the WS Translator to call secured rest services which supplied by Social Media(Twitter, Facebook, Weibo, etc) and transform the web service results into relational results.
+The 'socialMedia-as-a-datasource' demonstrates using the WS Translator to call secured rest services, including Social Media(Twitter, Facebook, Weibo, etc), and transform the web service results into relational results.
 
 
 ## System requirements
@@ -18,7 +18,7 @@ If you have not done so, please review the System Requirements (../README.md) in
 
 ## Twitter as a Data Source
 
-In this section, we will demonstrate how to use Teiid WS Translator query all tweets that you have post years ago. Using the following 5 steps to execute query:
+In this section, we will demonstrate how to use Teiid WS Translator query all tweets you have posted over the years. Using the following 5 steps to execute a query:
 
 1) Create a Twitter Apps
 
@@ -32,14 +32,14 @@ Twitter use OAuth authentication, run `teiid-oauth-util.sh` utility:
 $ ./bin/teiid-oauth-util.sh
 ~~~
 
-will generate a security-domain xml configuration, put it to your standalone-teiid.xml file in security-domains subsystem. 
+will generate a security-domain xml configuration. Add the security domain to your standalone-teiid.xml file in security-domains subsystem. 
 
 3)  Start the server
 
 To start the server, open a command line and navigate to the "bin" directory under the root directory of the JBoss server and run:
 
 ~~~
-$ ./bin/standalone.sh
+$ ./bin/standalone.sh -c=standalone-teiid.xml
 ~~~
 	
 4) Install web service datasource 
@@ -79,6 +79,6 @@ queries below.
 
 ### Twitter Data Source
 
-~~~
+~~~s
 mvn install -Dvdb="twitter" -Dsql="select * from TwitterUserTimelineView" -Dusername="xx" -Dpassword="xx"
 ~~~
