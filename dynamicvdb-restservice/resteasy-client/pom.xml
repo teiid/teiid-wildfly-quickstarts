@@ -5,6 +5,7 @@
         <groupId>org.jboss.teiid.quickstart</groupId>
         <artifactId>dynamicvdb-restservice</artifactId>
         <version>3.0.0</version>
+        <relativePath></relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>dynamicvdb-resteasy-client</artifactId>
@@ -12,23 +13,59 @@
     <name>REST Service Through Portfolio Dynamic VDB RestEasy Client</name>
     <description>This quickstart demonstrates how to enable REST Service Through Portfolio Dynamic VDB RestEasy Client</description>
 
-    <dependencies>
-        <dependency>
-            <groupId>org.jboss.resteasy</groupId>
-            <artifactId>resteasy-client</artifactId>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.jboss.resteasy</groupId>
-            <artifactId>jaxrs-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>commons-codec</groupId>
-            <artifactId>commons-codec</artifactId>
-        </dependency>
-    </dependencies>
+	<dependencyManagement>
+	<!--   
+	 		The ip-bom depends on a 2.x version, and this was built based on 3.x.
+	 		
+	-->
+		<dependencies>
+			<dependency>
+				<groupId>org.jboss.resteasy</groupId>
+				<artifactId>resteasy-client</artifactId>
+				<version>${version.resteasy.client}</version>
+			</dependency>  
+			<dependency>
+				<groupId>org.jboss.resteasy</groupId>
+				<artifactId>resteasy-jaxrs</artifactId>
+				<version>${version.resteasy.client}</version>
+		 	</dependency>  
+			<dependency>
+				<groupId>org.jboss.resteasy</groupId>
+				<artifactId>jaxrs-api</artifactId>
+				<version>${version.resteasy.client}</version>
+			</dependency>			 	 		
+		</dependencies>
+	</dependencyManagement>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-client</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>jaxrs-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-jaxrs</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpcore</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+		</dependency>
+
+	</dependencies>
     
     <build>
-    	<finalName>${artifactId}</finalName>
+    	<finalName>${project.artifactId}</finalName>
     </build>
 </project>

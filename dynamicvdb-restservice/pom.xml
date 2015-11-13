@@ -5,6 +5,7 @@
 		<artifactId>teiid-quickstart-parent</artifactId>
 		<groupId>org.jboss.teiid.quickstart</groupId>
 		<version>3.0.0</version>
+		<relativePath></relativePath>
 	</parent>
 
 	<modelVersion>4.0.0</modelVersion>
@@ -15,7 +16,7 @@
 	<description>This quickstart demonstrates how to enable REST Service Through Portfolio Dynamic VDB</description>
 
 	<modules>
-            <module>http-client</module>
-	    <module>resteasy-client</module>
-        </modules>
+		<module>http-client</module>
+		<module>resteasy-client</module>
+    </modules>
 </project>
