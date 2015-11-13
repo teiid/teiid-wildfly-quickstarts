@@ -2,10 +2,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<parent>
-    	<groupId>org.jboss.integration-platform</groupId>
-    	<artifactId>jboss-integration-platform-parent</artifactId>
-    	<version>6.0.0.CR26</version>	
-	</parent>
+        <groupId>org.jboss.integration-platform</groupId>
+        <artifactId>jboss-integration-platform-parent</artifactId>
+        <version>6.0.0.CR30</version>
+        <relativePath></relativePath>		
+	</parent>	
 		
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.jboss.teiid.quickstart</groupId>
@@ -28,7 +29,7 @@
 	<modules>
         <module>dynamicvdb-datafederation</module>
         <module>dynamicvdb-dataroles</module>
-	<module>dynamicvdb-restservice</module>
+	    <module>dynamicvdb-restservice</module>
         <module>hibernate-on-top-of-teiid</module>
         <module>webservices-as-a-datasource</module>
 		<module>jdg-local-cache</module>
@@ -38,7 +39,7 @@
 		<module>hbase-as-a-datasource</module>
 		<module>drools-integration</module>
         <module>simpleclient</module>
-	<module>socialMedia-as-a-datasource</module>
+		<module>socialMedia-as-a-datasource</module>
 	</modules>
 
 	<properties>
@@ -48,29 +49,29 @@
 			resources, i.e. build is platform dependent! -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		
-	    <illegaltransitivereportonly>true</illegaltransitivereportonly>
+	    <illegaltransitivereportonly>false</illegaltransitivereportonly>
 			
-		<version.org.jboss.integration-platform>6.0.0.CR26</version.org.jboss.integration-platform>
+		<version.org.jboss.integration-platform>6.0.0.CR30</version.org.jboss.integration-platform>
 
-		<version.teiid>8.11.0.Final</version.teiid>
+		<version.teiid>8.12.0.Final</version.teiid>
 
         <version.javax.annotation>${version.org.jboss.spec.javax.annotation.jboss-annotations-api_1.1_spec}</version.javax.annotation>
         <version.jboss.as.plugin>${version.org.jboss.as}</version.jboss.as.plugin>       
-        <version.net.jcip>1.0</version.net.jcip>
+        <!--version.net.jcip>1.0</version.net.jcip-->
         <version.org.codehaus.mojo.exec.plugin>1.2.1</version.org.codehaus.mojo.exec.plugin>
         <!--version.org.hibernate.search>4.5.0.Final</version.org.hibernate.search-->
         <version.org.infinispan.6>6.3.0.Final-redhat-5</version.org.infinispan.6>  
         <!-- JDG module slot to use  -->
         <jdg.slot>jdg-6.5</jdg.slot>  
-
-		<version.httpclient>4.3.5</version.httpclient>
+  		<version.net.jcip>1.0</version.net.jcip>
+        <version.resteasy.client>3.0.12.Final</version.resteasy.client>
                 
         <version.org.jboss.bom.jboss-javaee-6.0-with-tools>1.0.7.Final</version.org.jboss.bom.jboss-javaee-6.0-with-tools>
 		<version.org.drools>6.1.0.Final</version.org.drools>
-		<version.resteasy>3.0.12.Final</version.resteasy>
-        <version.commons-codec>1.10</version.commons-codec>
-		
-		<version.commons-httpclient>3.1</version.commons-httpclient>
+		<!--version.resteasy>3.0.12.Final</version.resteasy-->
+        <!--version.commons-codec>1.10</version.commons-codec-->
+        
+         <version.commons-httpclient>3.1</version.commons-httpclient>
 
 	</properties>
 	
@@ -80,8 +81,7 @@
 	</dependencies>
 	
 	<dependencyManagement>
-		<dependencies>
-		
+		<dependencies>		
            <dependency>
             	<groupId>org.jboss.integration-platform</groupId>
             	<artifactId>jboss-integration-platform-bom</artifactId>
@@ -89,14 +89,6 @@
             	<scope>import</scope>
             	<type>pom</type>
           </dependency> 		
-          <dependency>
-				<groupId>org.jboss.teiid</groupId>
-				<artifactId>teiid-parent</artifactId>
-             	<version>${version.teiid}</version>
-             	<type>pom</type>
-             	<scope>import</scope>
-          </dependency>  
-		
             <dependency>
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
@@ -106,7 +98,7 @@
                 <groupId>org.mockito</groupId>
                 <artifactId>mockito-all</artifactId>
                 <version>${version.org.mockito}</version>
-            </dependency> 
+            </dependency>           
 			<dependency>
 				<groupId>org.jboss.teiid.connectors</groupId>
 				<artifactId>translator-object</artifactId>
@@ -156,37 +148,7 @@
             	<artifactId>jcip-annotations</artifactId>
             	<scope>provided</scope>
             	<version>${version.net.jcip}</version>
-        	</dependency>
-			<dependency>
-				<groupId>org.infinispan</groupId>
-				<artifactId>infinispan-cdi</artifactId>
-				<version>${version.org.infinispan.6}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.infinispan</groupId>
-				<artifactId>infinispan-query</artifactId>
-				<version>${version.org.infinispan.6}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.infinispan</groupId>
-				<artifactId>infinispan-query-dsl</artifactId>
-				<version>${version.org.infinispan.6}</version>
-			</dependency>   			            
-			<dependency>
-				<groupId>org.infinispan</groupId>
-				<artifactId>infinispan-core</artifactId>
-				<version>${version.org.infinispan.6}</version>
- 			</dependency>        
-			<dependency>
-				<groupId>org.infinispan</groupId>
-				<artifactId>infinispan-commons</artifactId>
-				<version>${version.org.infinispan.6}</version>
- 			</dependency>  
- 			<dependency>
-				<groupId>org.infinispan</groupId>
-				<artifactId>infinispan-client-hotrod</artifactId>
-				<version>${version.org.infinispan.6}</version>
- 			</dependency>					      
+        	</dependency>   
             <dependency>
                 <groupId>org.hibernate</groupId>
                 <artifactId>hibernate-search</artifactId>
@@ -218,35 +180,25 @@
 				<version>${version.org.drools}</version>
 			</dependency>     
 			<dependency>
-				<groupId>commons-httpclient</groupId>
-				<artifactId>commons-httpclient</artifactId>
-				<version>${version.commons-httpclient}</version>
-			</dependency>
-			<dependency>
 				<groupId>org.apache.httpcomponents</groupId>
 				<artifactId>httpclient</artifactId>
-				<version>${version.httpclient}</version>
-			</dependency>
+				<version>${version.org.apache.httpcomponents.httpclient}</version>
+			</dependency>			
 			<dependency>
-				<groupId>org.jboss.resteasy</groupId>
-				<artifactId>resteasy-jaxrs</artifactId>
-				<version>${version.resteasy}</version>
-			 </dependency>
-			<dependency>
-				<groupId>org.jboss.resteasy</groupId>
-				<artifactId>resteasy-client</artifactId>
-				<version>${version.resteasy}</version>
-			 </dependency>
-			<dependency>
-				<groupId>org.jboss.resteasy</groupId>
-				<artifactId>jaxrs-api</artifactId>
-				<version>${version.resteasy}</version>
-			 </dependency>
+				<groupId>org.apache.httpcomponents</groupId>
+				<artifactId>httpcore</artifactId>
+				<version>${version.org.apache.httpcomponents.httpcore}</version>
+			</dependency>							 
 			<dependency>
 				<groupId>commons-codec</groupId>
 				<artifactId>commons-codec</artifactId>
 				<version>${version.commons-codec}</version>
 			</dependency>
+		    <dependency>
+				<groupId>commons-httpclient</groupId> 
+				<artifactId>commons-httpclient</artifactId>
+				<version>${version.commons-httpclient}</version>
+			   </dependency>			
          </dependencies>      
     </dependencyManagement>	
 

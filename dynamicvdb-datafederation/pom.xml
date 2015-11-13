@@ -2,12 +2,14 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
 	<parent>
-		<artifactId>teiid-quickstart-parent</artifactId>
 		<groupId>org.jboss.teiid.quickstart</groupId>
+		<artifactId>teiid-quickstart-parent</artifactId>
 		<version>3.0.0</version>
+		<relativePath></relativePath>
 	</parent>
 
 	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.jboss.teiid.quickstart</groupId>
 	<artifactId>dynamicvdb-datafederation</artifactId>
 	<packaging>pom</packaging>
 

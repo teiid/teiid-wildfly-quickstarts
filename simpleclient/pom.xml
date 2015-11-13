@@ -5,6 +5,7 @@
 		<artifactId>teiid-quickstart-parent</artifactId>
 		<groupId>org.jboss.teiid.quickstart</groupId>
 		<version>3.0.0</version>
+		<relativePath></relativePath>
 	</parent>
 
 	<modelVersion>4.0.0</modelVersion>

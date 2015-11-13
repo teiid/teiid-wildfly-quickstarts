@@ -5,6 +5,7 @@
 		<artifactId>teiid-quickstart-parent</artifactId>
 		<groupId>org.jboss.teiid.quickstart</groupId>
 		<version>3.0.0</version>
+		<relativePath></relativePath>
 	</parent>
 
 	<modelVersion>4.0.0</modelVersion>
@@ -32,33 +33,37 @@
         </dependencies>
     </dependencyManagement>    
 
-    <dependencies>
-             <dependency>
+    <dependencies>   
+        <dependency>
               <groupId>org.infinispan</groupId>
               <artifactId>infinispan-commons</artifactId>
               <scope>provided</scope>
-            </dependency>           
-            <dependency>
+    	</dependency>           
+        <dependency>
               <groupId>org.infinispan</groupId>
               <artifactId>infinispan-query</artifactId>
               <scope>provided</scope>
-            </dependency>   
-            <dependency>
+        </dependency>   
+        <dependency>
               <groupId>org.infinispan</groupId>
               <artifactId>infinispan-query-dsl</artifactId>
               <scope>provided</scope>
-            </dependency>   
-            <dependency>
+        </dependency>   
+        <dependency>
               <groupId>org.infinispan</groupId>
               <artifactId>infinispan-client-hotrod</artifactId>
               <scope>provided</scope>
-            </dependency>       
-            <dependency>
+        </dependency>       
+        <dependency>
 			  <groupId>org.infinispan.protostream</groupId>
 			  <artifactId>protostream</artifactId>
               <scope>provided</scope>
-            </dependency>       
-
+        </dependency>       
+		<dependency>
+		   	<groupId>org.hibernate</groupId>
+		   	<artifactId>hibernate-search-engine</artifactId>
+		   	<scope>provided</scope>
+		</dependency>	
 	</dependencies>
 
 	<build>
