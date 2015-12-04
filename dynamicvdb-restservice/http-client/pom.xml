@@ -5,7 +5,6 @@
         <groupId>org.jboss.teiid.quickstart</groupId>
         <artifactId>dynamicvdb-restservice</artifactId>
         <version>3.0.0</version>
-        <relativePath></relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>dynamicvdb-restservice-client</artifactId>
