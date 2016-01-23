@@ -33,7 +33,10 @@ Reference Guide's Data Roles chapter.
 
 If you have not done so, please review the System Requirements [../README.md](../README.md)
 
-> NOTE: This example relies upon the dynamicvdb-datafederation example and that it needs to be deployed prior to running this example. Therefore, read the dynamicvdb-datafederation's README.md and follow its directions before continuing.
+
+# PREREQUISTES
+
+* NOTE: This example relies upon the dynamicvdb-datafederation example and that it needs to be deployed prior to running this example. Therefore, read the dynamicvdb-datafederation's README.md and follow its directions before continuing.
 
 ## Setup
 

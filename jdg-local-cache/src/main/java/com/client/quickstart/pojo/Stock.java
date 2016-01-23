@@ -23,8 +23,8 @@ package com.client.quickstart.pojo;
 
 import java.math.BigDecimal;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+//import javax.persistence.Entity;
+//import javax.persistence.Id;
 
 import org.hibernate.search.annotations.Analyze;
 import org.hibernate.search.annotations.Field;
@@ -36,7 +36,7 @@ import org.hibernate.search.annotations.NumericField;
 /**
  * @ProvidedId
  */
-@Entity
+//@Entity
 @Indexed(index="StockIndex")
 public class Stock implements java.io.Serializable {
 
@@ -44,7 +44,7 @@ public class Stock implements java.io.Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = -5155172202224249683L;
-	@Id
+//	@Id
     @NumericField @Field(index=Index.YES, store=Store.YES, analyze=Analyze.NO)
 	public int productId;
 	
