@@ -1,6 +1,6 @@
 ---
 Level: Intermediate
-Technologies: Teiid, Infinispan, Library Mode
+Technologies: Teiid, Infinispan Library Mode
 Target Product: DV, JDG
 Product Versions: DV 6.2, JDG 6.5
 Source: https://github.com/teiid/teiid-quickstarts
@@ -11,8 +11,11 @@ JDG Local-Cache (Library Mode) Quickstart
 
 # What is it?
 
-This quickstart demonstrates how Teiid can access a cache of Java Objects stored in a 
-local JDG cache running library mode.
+This quickstart demonstrates the following:
+
+* how Teiid can access a cache of Java Objects stored in a local JDG cache running library mode. 
+* how to use Teiid external materialization to improve performance when reading the data
+
 
 Assumptions:
 
@@ -27,6 +30,9 @@ If you have not done so, please review the System Requirements [../README.md](..
 * JBoss application server to run Teiid
 * The Teiid Jboss distribution kit
 * JDG 6.5 eap modules kit 
+
+* If you plan to use the external materialization example, then the dynamicvdb-datafederation example data (datafiles and resource adapters) must first be installed
+  Read the dynamicvdb-datafederation's README.md and follow its directions before continuing.
 
 > NOTE: can obtain JDG kit distributions on Red Hat's Customer Portal at https://access.redhat.com/jbossnetwork/restricted/listSoftware.html
 
@@ -68,7 +74,15 @@ this should be changed to - com.client.quickstart.pojos
 		
 5) Configure resource-adapter
 
+*  configure for reading and writing to a cache
 	-	open the file: {jbossas.server.dir}/docs/teiid/datasources/infinispan/infinispan-ds.xml
+	-	copy and paste the resource-adapter section it into the server configuration, under the section:
+
+        <subsystem xmlns="urn:jboss:domain:resource-adapters:1.1">
+            <resource-adapters>
+
+*  configure for materialization
+	-	open the file: {jbossas.server.dir}/docs/teiid/datasources/infinispan/infinispan-materialization-ds.xml
 	-	copy and paste the resource-adapter section it into the server configuration, under the section:
 
         <subsystem xmlns="urn:jboss:domain:resource-adapters:1.1">
@@ -109,9 +123,13 @@ this should be changed to - com.client.quickstart.pojos
 	This means the JDG cache was configured and registered via JNDI, which will make it available to Teiid resoure-adapter.
 	
 	
-9) deploy the VDB: jdg-local-cache-vdb.xml
+9) deploy the VDB
 
-	* copy files jdg-local-cache-vdb.xml and jdg-local-cache-vdb.xml.dodeploy to {jbossas.server.dir}/standalone/deployments	
+*  deploy for reading the cache
+	- copy files jdg-local-cache-vdb.xml and jdg-local-cache-vdb.xml.dodeploy to {jbossas.server.dir}/standalone/deployments	
+
+*  deploy for materialization
+	- copy files jdg-local-cache-mat-vdb.xml and jdg-local-cache-mat-vdb.xml.dodeploy to {jbossas.server.dir}/standalone/deployments	
 
 
 # Query Demonstrations
@@ -131,12 +149,12 @@ or
 
 -  connect:  jdbc:teiid:Stocks@mm://localhost:31000
 
-# Example Queries:
+# Example Queries for using jdg-local-cache-vdb.xml:
 
 [Selects]
  	select productId, symbol, price, companyname from Stock
 
- 	select productId, symbol, price, companyname from Stock where symbol = 'CIS'
+ 	select productId, symbol, price, companyname from Stock where symbol = 'RHT50'
 
  	select productId, symbol, price, companyname from Stock where price < '60.50'
 
@@ -148,5 +166,22 @@ or
 
 [Delete]
 	Delete From Stock where productId = 3
+
+
+# Example Queries for using jdg-local-cache-mat-vdb.xml:
+
+[Select]
+
+select productId, symbol, price, companyname from StocksMatModel.stockPricesMatView 
+
+
+To see materialization and confirm the process is working, do the following:
+*  Insert row into Accounts.Product table
+
+Insert into Product (ID, SYMBOL, COMPANY_NAME) Values (2000, 'RHT', 'Red Hat Inc')
+
+*  Wait for 2 mins - the refresh is set to 60 secs, but depending on when the insert occurred on the refresh cycle, it could take close to 2 minutes.
+*  Reissue query:      elect name, id, email from PersonMatModel.PersonMatView
+	and should see the RHT stock. 
 
 
