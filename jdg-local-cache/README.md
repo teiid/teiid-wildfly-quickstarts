@@ -2,7 +2,7 @@
 Level: Intermediate
 Technologies: Teiid, Infinispan Library Mode
 Target Product: DV, JDG
-Product Versions: DV 6.2, JDG 6.5
+Product Versions: DV 6.1+, JDG 6.5
 Source: https://github.com/teiid/teiid-quickstarts
 ---
 
@@ -62,7 +62,7 @@ This will build jdg-quickstart-jboss-as7-dist.zip in the target directory.
 
 *  [Required] Update the "your.pojo.module" reference in the translator-object module.xml
 
-The module.xml file needs to be updated with the module name that has
+The org.jboss.teiid.translator.object module.xml file needs to be updated with the module name that has
 the java class that's being stored in the JDG cache.  For this quickstart, 
 this should be changed to - com.client.quickstart.pojos
 
@@ -125,10 +125,10 @@ this should be changed to - com.client.quickstart.pojos
 	
 9) deploy the VDB
 
-*  deploy for reading the cache
+*  deploy VDB for reading the cache from directory  src/vdb
 	- copy files jdg-local-cache-vdb.xml and jdg-local-cache-vdb.xml.dodeploy to {jbossas.server.dir}/standalone/deployments	
 
-*  deploy for materialization
+*  deploy VDB for materialization from directory  src/vdb
 	- copy files jdg-local-cache-mat-vdb.xml and jdg-local-cache-mat-vdb.xml.dodeploy to {jbossas.server.dir}/standalone/deployments	
 
 

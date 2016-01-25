@@ -2,7 +2,7 @@
 Level: Intermmediate
 Technologies: Teiid, Hibernate
 Target Product: DV
-Product Versions: DV 6.1
+Product Versions: DV 6.0+
 Source: https://github.com/teiid/teiid-quickstarts
 ---
 
@@ -36,7 +36,7 @@ This example produces a WAR that is designed to be run on JBoss Enterprise Appli
 
 	*   `mvn clean install`
 
-## Manual setup
+## Setup
 
 1) Run the setup in dynamicvdb-datafederation quick start
 
@@ -58,8 +58,8 @@ This example produces a WAR that is designed to be run on JBoss Enterprise Appli
 
     Copy the following files to the "<jboss.home>/standalone/deployments" directory
 
-     * src/vdb/hibernate-portfolio-vdb.xml
-     * src/vdb/hibernate-portfolio-vdb.xml.dodeploy
+     * src/main/vdb/hibernate-portfolio-vdb.xml
+     * src/main/vdb/hibernate-portfolio-vdb.xml.dodeploy
 
 4) Deploy the web application buy running the following command:
 

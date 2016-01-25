@@ -2,7 +2,7 @@
 Level: Basic
 Technologies: Teiid, Dynamic VDB, Materialization, Native Queries, VDB reuse, reading data from JDBC, delimited file and Excel File
 Target Product: DV
-Product Versions: DV 6.1
+Product Versions: DV 6.0+
 Source: https://github.com/teiid/teiid-quickstarts
 ---
 
@@ -127,7 +127,7 @@ text file with a HEADER containing entries for at least symbol and price columns
 
 *  Example d  -  queries the EXCEL file to retrieve other personal holdings valuations
 
-	select * from OtherHoldings
+	select * from OtherHoldings.PersonalHoldings
 
 ### Native Query
 
