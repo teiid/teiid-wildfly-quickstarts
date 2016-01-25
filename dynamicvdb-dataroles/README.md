@@ -2,7 +2,7 @@
 Level: Beginners
 Technologies: Teiid, Defining data roles
 Target Product: DV
-Product Versions: DV 6.1
+Product Versions: DV 6.0+
 Source: https://github.com/teiid/teiid-quickstarts
 ---
 
@@ -40,9 +40,6 @@ If you have not done so, please review the System Requirements [../README.md](..
 
 ## Setup
 
-Setup can be done either manually (see Manual Setup) or using maven (see Setup using the JBoss AS Maven plugin) 
-
-### Manual setup
 
 1) Run the setup in dynamicvdb-datafederation quick start
 
@@ -99,7 +96,7 @@ Setup can be done either manually (see Manual Setup) or using maven (see Setup u
 
 ==== Using the simpleclient example ====
 
-1. Change your working directory to "&lt;quickstart.install.dir&gt;/simpleclient"
+1. Change your working directory to "<quickstart.install.dir>/simpleclient"
 
 2. Use the simpleclient example to run the following queries:
 

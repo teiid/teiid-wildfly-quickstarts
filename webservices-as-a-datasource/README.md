@@ -2,7 +2,7 @@
 Level: Beginners
 Technologies: Teiid, WS Translator
 Target Product: DV
-Product Versions: DV 6.1
+Product Versions: DV 6.0+
 Source: https://github.com/teiid/teiid-quickstarts
 ---
 
@@ -45,7 +45,7 @@ Run the maven build to compile and create the web service war.
 
 2)  Deploy the war file that will be used as the web service resource to be accessed as a data source by Teiid
 
-    -  copy the target/CustomerRestWebSvc.war to the <jboss.home>/standalone/deployments directory
+    -  copy the target/CustomerRESTWebSvc.war to the <jboss.home>/standalone/deployments directory
 
 	-  Test the war by opening a browser at the following URL:
 
@@ -57,7 +57,7 @@ http://localhost:8080/CustomerRESTWebSvc/MyRESTApplication/customerList
 -  run the following CLI script
 
 	-	cd to the ${JBOSS_HOME}/bin directory
-	-	execute:  ./jboss-cli.sh --connect file={path}/webservice-as-a-datasource/src/scripts/setup.cli 
+	-	execute:  ./jboss-cli.sh --connect --file={path}/webservice-as-a-datasource/src/scripts/setup.cli 
 
 
 4)  Teiid WebService VDB Deployment:

@@ -2,7 +2,7 @@
 Level: Intermediate
 Technologies: Teiid, Infinispan, Hot Rod, Remote Query, Materialization
 Target Product: DV
-Product Versions: DV 6.1
+Product Versions: DV 6.1+
 Source: https://github.com/teiid/teiid-quickstarts
 ---
 
@@ -32,7 +32,7 @@ Setup to include:
 * The Teiid Jboss distribution kit
 * JDG 6.5 server kit (used as the remote server)
 * JDG 6.5 eap modules kit (used by Teiid to access the remote cache)
-	> NOTE: can obtain JDG kit distributions on Red Hat's Customer Portal at https://access.redhat.com/jbossnetwork/restricted/listSoftware.html
+	> NOTE: You can obtain JDG kit distributions on Red Hat's Customer Portal at https://access.redhat.com/jbossnetwork/restricted/listSoftware.html
 
 
 * If you plan to use the external materialization example, then the dynamicvdb-datafederation example data (datafiles and resource adapters) must first be installed
