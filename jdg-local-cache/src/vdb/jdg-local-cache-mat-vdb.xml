@@ -5,6 +5,8 @@
     
     <property name="UseConnectorMetadata" value="cached" />
     
+    <property name ="lib" value ="com.client.quickstart.pojos"></property>
+    
     <model name="Accounts">
         <!-- 
           JDBC Import settings 

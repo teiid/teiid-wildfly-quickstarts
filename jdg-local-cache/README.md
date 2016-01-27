@@ -60,13 +60,12 @@ This will build jdg-quickstart-jboss-as7-dist.zip in the target directory.
 
 4) Update module dependencies
 
-*  [Required] Update the "your.pojo.module" reference in the translator-object module.xml
+*  [Required] the org.infinispan.commons (slot="jdg-6.5" or slot for version installed) module needs to have 
+the pojo dependency added:
 
-The org.jboss.teiid.translator.object module.xml file needs to be updated with the module name that has
-the java class that's being stored in the JDG cache.  For this quickstart, 
-this should be changed to - com.client.quickstart.pojos
+    <module name="com.client.quickstart.pojos"   export="true" />
 
-*  [Optional] If the version of JDG modules you installed were not ${jdg.slot}, then update the following:
+*  [Optional] If the version of JDG modules you installed was not ${jdg.slot}, then update the following modules:
 
 		-  org.jboss.teiid.translator.infinispan.cache
 		-  org.jboss.teiid.resource-adapter.infinispan" slot="6"
