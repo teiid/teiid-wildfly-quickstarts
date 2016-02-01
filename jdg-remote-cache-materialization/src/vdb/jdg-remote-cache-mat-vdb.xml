@@ -3,9 +3,11 @@
 
     <description>Shows how to materialize into an Infinispan remote cache</description>
     
-    <property name="UseConnectorMetadata" value="cached" />
+    <property name="UseConnectorMetadata" value="cached" />   
+    <property name ="lib" value ="com.client.quickstart.addressbook.pojos" />
     
     <import-vdb name="Portfolio" version="1" import-data-policies="true"/>
+    
  
     <model name="PersonInfoModel" type="VIRTUAL">
         <metadata type="DDL"><![CDATA[   

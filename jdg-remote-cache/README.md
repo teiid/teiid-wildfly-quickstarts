@@ -1,6 +1,6 @@
 ---
 Level: Intermediate
-Technologies: Teiid, Infinispan, Hot Rod, Remote Query, Materialization
+Technologies: Teiid, Infinispan, Hot Rod, Remote Query
 Target Product: DV
 Product Versions: DV 6.1+
 Source: https://github.com/teiid/teiid-quickstarts
@@ -12,14 +12,6 @@ JDG Remote-Cache Quickstart using JDG Hot Rod that supports Google Protocol Buff
 # What is it?
 
 This quickstart demonstrates how Teiid can connect to a remote JBoss Data Grid (JDG) as a data source, to query and update data from cache using the Hot Rod protocol. 
-It also will demonstrate how to configure and materialize data into a JDG remote cache.
-
-
-Setup to include:
--  deploying and configuring the new module that will contain the POJO jars.  This jar contains the class(s) that are contained in the remote cache.
--  configure the resource-adapter to connect to the JDG remote server
--  deploy the remote-cache-vdb that you will connect to in Teiid, which will access to the JDG remote server
--  configuring JDG caches needed to materialize data thru Teiid and how to configure the -vdb.xml file that controls that process
 
 # Quick Start requirements
 
@@ -28,15 +20,20 @@ Setup to include:
 
 # PREREQUISTES
 
+
+1.  Teiid Server Prerequistes
+
 * JBoss application server to run Teiid
 * The Teiid Jboss distribution kit
 * JDG 6.5 server kit (used as the remote server)
-* JDG 6.5 eap modules kit (used by Teiid to access the remote cache)
+
+
+2.  JDG Server Prerequistes
 	> NOTE: You can obtain JDG kit distributions on Red Hat's Customer Portal at https://access.redhat.com/jbossnetwork/restricted/listSoftware.html
 
+* JDG 6.5 eap modules kit (used by Teiid to access the remote cache)
+* JDG 6.5 quickstart kit (used to configure remote cache and initialize data)
 
-* If you plan to use the external materialization example, then the dynamicvdb-datafederation example data (datafiles and resource adapters) must first be installed
-  Read the dynamicvdb-datafederation's README.md and follow its directions before continuing.
 
 
 # JDG setup
@@ -44,7 +41,7 @@ Setup to include:
 1.  Setup JDG Server
 	
 -  Install the JDG server
--  Configure caches based on the JDG_SERVER_README.md
+-  Configure caches based on the [./JDG_SERVER_README.md]
 
 
 2.  Starting JDG Server
@@ -122,38 +119,45 @@ There are 2 options here, the first is for reading/writing to a single cache.   
 	
 7. deploy the VDB
 
-*  deploy for reading/writing to a single cache
+*  deploy for reading/writing to a remote cache
 	- copy files infinispan-dsl-cache-vdb.xml and infinispan-dsl-cache-vdb.xml.dodeploy to {jbossas.server.dir}/standalone/deployments	
 
-*  deploy for materialization
-	- copy files jdg-remote-cache-mat-vdb.xml and jdg-remote-cache-mat-vdb.xml.dodeploy to {jbossas.server.dir}/standalone/deployments	
 
+8.  JDG Remote Cache initialization
 
-8.  JDG initialization
+_NOTE: The following build command assumes you have configured your Maven user settings. If you have not, you must include Maven setting arguments on the command line. See [Build and Deploy the Quickstarts](../../README.md#build-and-deploy-the-quickstarts) for complete instructions and additional options._
 
-*  If using the read/write to a single cache, run the sample application to preload some data.
+1. Make sure you have started the JDG as described above.
+2. Open a command line and navigate to the root directory of this quickstart.
+3. Type this command to build and deploy the archive:
 
->> Note:  do not run this if doing materialization
+        mvn clean install 
+                
+4. This will create a file at `target/jboss-remote-query-quickstart.jar`
+
+5. Run the example application in its directory:
 
         mvn exec:java
  
-Using the application to create objects in the cache
+
+Using the application
 ---------------------
+Basic usage scenarios can look like this (keyboard shortcuts will be shown to you upon start):
 
     Available actions:
-         0. Display available actions
-         1. Add person
-         2. Remove person
-         3. Add phone to person
-         4. Remove phone from person
-         5. Query persons by name
-         6. Query persons by phone
-         7. Query memo by author
-         8. Display all cache entries
-         9. Quit\n
+    0. Display available actions
+    1. Add person
+    2. Remove person
+    3. Add phone to person
+    4. Remove phone from person
+    5. Display all persons
+    6. Query persons by name
+    7. Query persons by phone
+    8. Quit
 
         
-Type `9` to exit the application.
+Type `8` to exit the application.
+
 
 
 # Query Demonstrations
@@ -162,7 +166,7 @@ Use a sql tool, like SQuirreL, to connect and issue following example query:
 
 > NOTE:  do not do a `SELECT * FROM Person`, because you will get a serialization error, because the Person class is not serializable.
 
-1.  Queries for reading/writing to a single cache
+1.  Queries for reading/writing to a remote cache
 
 -  connect:  jdbc:teiid:People@mm://{host}:31000
 [1]  select name, email, id from Person
@@ -176,10 +180,6 @@ then - select name, email, id from Person
 * When running either 2, 3, or 4, rerun above select to see the results to 
 verify the changed data
 
-
-2.  Queries for reading from a materialized view
-
-*  select name, id, email from PersonMatModel.PersonMatView
 
        
 
