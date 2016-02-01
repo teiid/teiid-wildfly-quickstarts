@@ -118,7 +118,44 @@ This subsytem  will completely replace what's currently defined in the standalon
                             <timestamp-column name="version" type="BIGINT"/>
                         </string-keyed-table>
                     </string-keyed-jdbc-store>
-                </local-cache>                                
+                </local-cache>
+               <local-cache name="addressbook_indexed_mat" start="EAGER">
+
+                    <!-- Define the locking isolation of this cache -->
+                    <locking
+                        acquire-timeout="20000"
+                        concurrency-level="500"
+                        striping="false" />
+                        
+                    <!-- Enable indexing using the RAM Lucene directory provider -->
+                    <indexing index="ALL">
+                        <property name="default.directory_provider">ram</property>
+                    </indexing>
+                    
+                    <!-- Define the JdbcBinaryCacheStores to point to the ExampleDS previously defined -->
+                    <string-keyed-jdbc-store datasource="java:jboss/datasources/ExampleDS" passivation="false" preload="false" purge="false">
+
+                        <!-- specifies information about database table/column names and data types -->
+                        <string-keyed-table prefix="JDG">
+                            <id-column name="id" type="VARCHAR"/>
+                            <data-column name="datum" type="BINARY"/>
+                            <timestamp-column name="version" type="BIGINT"/>
+                        </string-keyed-table>
+                    </string-keyed-jdbc-store>
+                </local-cache>   
+              <local-cache name="aliasCache" start="EAGER">
+
+                    <!-- Define the locking isolation of this cache -->
+                    <locking
+                        acquire-timeout="20000"
+                        concurrency-level="500"
+                        striping="false" />
+
+                    <!-- Define the JdbcBinaryCacheStores to point to the ExampleDS previously defined -->
+                    <string-keyed-jdbc-store datasource="java:jboss/datasources/ExampleDS" passivation="false" preload="false" purge="false">
+
+                    </string-keyed-jdbc-store>
+                </local-cache>                                    
                 <!-- End of 'addressbook' cache definition -->
 
             </cache-container>
@@ -132,8 +169,6 @@ Start JDG
 
         For Linux:   $JDG_HOME/bin/standalone.sh
         For Windows: %JDG_HOME%\bin\standalone.bat
-
-
 
 
 
