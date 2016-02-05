@@ -4,7 +4,7 @@
     <description>Shows how to call an Infinispan local cache</description>
     
     <property name="UseConnectorMetadata" value="cached" />
-    <property name ="lib" value ="com.client.quickstart.addressbook.pojos" />
+    <property name ="lib" value ="com.client.quickstart.pojos"></property>
    
     <model name="StockCache" type="Physical">
         <property name="importer.useFullSchemaName" value="false"/>

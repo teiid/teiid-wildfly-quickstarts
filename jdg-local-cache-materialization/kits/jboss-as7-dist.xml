@@ -10,7 +10,7 @@
   <includeBaseDirectory>false</includeBaseDirectory>
   <baseDirectory>modules</baseDirectory>
 
- <fileSets>
+ <fileSets>   
     <fileSet>
         <directory>kits/jboss-as7/standalone</directory>
         <outputDirectory>standalone</outputDirectory>     
@@ -34,7 +34,7 @@
         <includes>
           <include>jdg-quickstart-pojos.jar</include>
         </includes>   
-    </fileSet>        
+    </fileSet>            
   </fileSets>
    
 </assembly>

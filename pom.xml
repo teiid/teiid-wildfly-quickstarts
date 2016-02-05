@@ -30,10 +30,13 @@
         <module>dynamicvdb-datafederation</module>
         <module>dynamicvdb-dataroles</module>
 	    <module>dynamicvdb-restservice</module>
+	    <module>dynamicvdb-materialization</module>
         <module>hibernate-on-top-of-teiid</module>
         <module>webservices-as-a-datasource</module>
 		<module>jdg-local-cache</module>
+		<module>jdg-local-cache-materialization</module>
         <module>jdg-remote-cache</module>
+        <module>jdg-remote-cache-materialization</module>
         <module>mongodb-as-a-datasource</module>
         <module>ldap-as-a-datasource</module>
 		<module>hbase-as-a-datasource</module>
@@ -54,6 +57,7 @@
 		<version.org.jboss.integration-platform>6.0.0.CR30</version.org.jboss.integration-platform>
 
 		<version.teiid>8.12.0.Final</version.teiid>
+     	<jbossas-module-root>modules/system/layers/dv</jbossas-module-root>
 
         <version.javax.annotation>${version.org.jboss.spec.javax.annotation.jboss-annotations-api_1.1_spec}</version.javax.annotation>
         <version.jboss.as.plugin>${version.org.jboss.as}</version.jboss.as.plugin>       
