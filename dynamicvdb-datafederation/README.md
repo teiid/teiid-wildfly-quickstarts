@@ -1,6 +1,6 @@
 ---
 Level: Basic
-Technologies: Teiid, Dynamic VDB, Materialization, Native Queries, VDB reuse, reading data from JDBC, delimited file and Excel File
+Technologies: Teiid, Dynamic VDB, Native Queries, VDB reuse, reading data from JDBC, delimited file and Excel File
 Target Product: DV
 Product Versions: DV 6.0+
 Source: https://github.com/teiid/teiid-quickstarts
@@ -9,10 +9,9 @@ Source: https://github.com/teiid/teiid-quickstarts
 Dynamicvdb-datafederation is the 'Hello World' example for Teiid.
 ================================
 
-## VDB's: 
+## VDB: 
 
 * Portfolio   -  source models, view's, native query
-* PortfolioMaterialize  -  vdb resuse, external materialization model
 
 
 ## What is it?
@@ -25,7 +24,6 @@ following:
 -  how to define a view using DDL
 -  how to define a translator override to support native queries
 -  how to define a second vdb that reuses (extends) another vdb
--  how to define a materialized VIEW using DDL and load the external materialized table 
 
 
 This example uses the H2 database, which is referenced as the "accounts-ds" data source in the server, 
@@ -76,13 +74,10 @@ when complete, you should see $JBOSS_HOME/teiidfiles
 
 Copy (deploy) the following VDB related files to the $JBOSS_HOME/standalone/deployments directory
 
-     (1) Portolio VDB
+	* Portfolio VDB
     	- src/vdb/portfolio-vdb.xml
      	- src/vdb/portfolio-vdb.xml.dodeploy
-     
-     (2) PortfolioMaterialize VDB
-     	- src/vdb/portfolio-mat-vdb.xml
-     	- src/vdb/portfolio-mat-vdb.xml.dodeploy
+
 
 You should see the server log indicate the VDB is active with a message like:  TEIID40003 VDB Portfolio.1 is set to ACTIVE
 
@@ -138,26 +133,4 @@ text file with a HEADER containing entries for at least symbol and price columns
 
  	select x.* FROM (call native('select Shares_Count, MONTHNAME(Purchase_Date) from Holdings')) w, ARRAYTABLE(w.tuple COLUMNS "Shares_Count" integer, "MonthPurchased" string ) AS x
 
-### Materialized View
-
-> NOTE:  For the following examples,  use the vdb:  PortfolioMaterialize
-
-*  Example a  - Query the materialized View
-
-	select * from StocksMatModel.stockPricesMatView  (should get 18 rows)
-
-*  Example b  - Add a row to the product table, so that when the materialized view is updated,
-the new row will be picked 
-
-First, insert a new row into Products table:
-
-	INSERT INTO PRODUCT (ID,SYMBOL,COMPANY_NAME) VALUES(2000,'RHT','Red Hat Inc')
-
-wait 1 minute, as defined by:  "teiid_rel:MATVIEW_TTL" 60000,  in the portfolio-vdb.xml
-
-then re-issue query in "a" and should now see 19 rows
-
-*  Example c  - Issue a query that bypasses the cached data, and queries the original source
-
-	select * from StocksMatModel.stockPricesMatView option nocache  (should be the same as "b")
 

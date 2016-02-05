@@ -8,9 +8,9 @@
 	</parent>
 
 	<modelVersion>4.0.0</modelVersion>
-	<artifactId>jdg-remote-cache</artifactId>
-	<name>JDG Remote Cache Quickstart</name>
-	<description>This quickstart demonstrates how to access a remote JDG cache thru Teiid</description>
+	<artifactId>jdg-remote-cache-materialization</artifactId>
+	<name>JDG Remote Cache Materialization Quickstart</name>
+	<description>This quickstart demonstrates how to use a remote JDG cache for materialization</description>
 
     <properties>
 
