@@ -2,7 +2,7 @@
 Level: Intermediate
 Technologies: Teiid, Infinispan, Hot Rod, Remote Query
 Target Product: DV
-Product Versions: DV 6.1+
+Product Versions: DV 6.1+,  JDG 6.5+
 Source: https://github.com/teiid/teiid-quickstarts
 ---
 
@@ -25,13 +25,12 @@ This quickstart demonstrates how Teiid can connect to a remote JBoss Data Grid (
 
 * JBoss application server to run Teiid
 * The Teiid Jboss distribution kit
-* JDG 6.5 server kit (used as the remote server)
-
 
 2.  JDG Server Prerequistes
 	> NOTE: You can obtain JDG kit distributions on Red Hat's Customer Portal at https://access.redhat.com/jbossnetwork/restricted/listSoftware.html
 
 * JDG 6.5 eap modules kit (used by Teiid to access the remote cache)
+* JDG 6.5 server kit (used as the remote server)
 * JDG 6.5 quickstart kit (used to configure remote cache and initialize data)
 
 
@@ -70,7 +69,7 @@ port adjustment has been made in the setup.cli script to match the above offset.
 1. shutdown jbossas server, if not already.
 
 2. deploy pojo Module  
-	-	take the jdg-remote-cache-pojos-jboss-as7-dist.zip and unzip at <jbossas-dir>/modules/
+	-	take the target/jdg-remote-cache-pojos-jboss-as7-dist.zip and unzip at <jbossas-dir>/modules/
 
 3. Install the JBoss Data Grid version of the hot rod client modules kit for EAP into <jbossas-dir>/modules/ of your Teiid/EAP instance.
    See Red Hat:   http://access.redhat.com  to obtain the kit.
@@ -78,23 +77,12 @@ port adjustment has been made in the setup.cli script to match the above offset.
 
 4. setup the infinispan resource adapter 
 
-There are 2 options here, the first is for reading/writing to a single cache.   The second option is if your wanting to test materialization.
-
 *  configure for reading and writing to a remote cache
 	-	open the file: {jbossas.server.dir}/docs/teiid/datasources/infinispan/infinispan-remote-query-dsl-ds.xml
 	-	copy and paste the resource-adapter section it into the server configuration, under the section:
 
         <subsystem xmlns="urn:jboss:domain:resource-adapters:1.1">
             <resource-adapters>
-
-            
-*  configure for materialization
-	-	open the file: {jbossas.server.dir}/docs/teiid/datasources/infinispan/infinispan-remote-query-materialize-dsl-ds.xml
-	-	copy and paste the resource-adapter section it into the server configuration, under the section:
-
-        <subsystem xmlns="urn:jboss:domain:resource-adapters:1.1">
-            <resource-adapters>
-
 
 
 5. Start the server
@@ -128,14 +116,12 @@ There are 2 options here, the first is for reading/writing to a single cache.   
 _NOTE: The following build command assumes you have configured your Maven user settings. If you have not, you must include Maven setting arguments on the command line. See [Build and Deploy the Quickstarts](../../README.md#build-and-deploy-the-quickstarts) for complete instructions and additional options._
 
 1. Make sure you have started the JDG as described above.
-2. Open a command line and navigate to the root directory of this quickstart.
-3. Type this command to build and deploy the archive:
+2. Open a command line and navigate to the root directory of this teiid jdg-remote quickstart.
+3. If you need to, rebuild the quick start
 
         mvn clean install 
                 
-4. This will create a file at `target/jboss-remote-query-quickstart.jar`
-
-5. Run the example application in its directory:
+4. Run the example application in its directory:
 
         mvn exec:java
  
@@ -166,7 +152,7 @@ Use a sql tool, like SQuirreL, to connect and issue following example query:
 
 > NOTE:  do not do a `SELECT * FROM Person`, because you will get a serialization error, because the Person class is not serializable.
 
-1.  Queries for reading/writing to a remote cache
+1.  Queries for reading/writing to a remote cache via VDB People
 
 -  connect:  jdbc:teiid:People@mm://{host}:31000
 [1]  select name, email, id from Person

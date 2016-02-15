@@ -57,8 +57,6 @@ public class AddressBookManager {
    private static final String SERVER_HOST = "jdg.host";
    private static final String HOTROD_PORT = "jdg.hotrod.port";
    private static final String CACHE_NAME = "jdg.cache";
-   private static final String CACHE_MAT_NAME = "jdg.mat.cache";
-   private static final String CACHE_ALIAS_NAME = "jdg.alias.cache";
 
    private static final String PROPERTIES_FILE = "jdg.properties";
 
@@ -82,15 +80,11 @@ public class AddressBookManager {
     * A cache that hold both Person and Memo objects.
     */
    private RemoteCache<Integer, Object> addressbookCache;
-   private RemoteCache<Integer, Object> addressbookMatCache;
-   private RemoteCache<Object, Object> aliasCache;
 
    public AddressBookManager() throws Exception {
       final String host = jdgProperty(SERVER_HOST);
       final int hotrodPort = Integer.parseInt(jdgProperty(HOTROD_PORT));
       final String cacheName = jdgProperty(CACHE_NAME);  // The name of the address book  cache, as defined in your server config.
-     final String cacheMatName = jdgProperty(CACHE_MAT_NAME);  // The name of the address book  cache, as defined in your server config.
-     final String cacheAliasName = jdgProperty(CACHE_ALIAS_NAME);  // The name of the address book  cache, as defined in your server config.
 
       ConfigurationBuilder builder = new ConfigurationBuilder();
       builder.addServer()
@@ -103,15 +97,7 @@ public class AddressBookManager {
       if (addressbookCache == null) {
          throw new RuntimeException("Cache '" + cacheName + "' not found. Please make sure the server is properly configured");
       }
-      addressbookMatCache = cacheManager.getCache(cacheMatName);
-      if (addressbookMatCache == null) {
-         throw new RuntimeException("Cache '" + cacheMatName + "' not found. Please make sure the server is properly configured");
-      }
-      aliasCache = cacheManager.getCache(cacheAliasName);
-      if (aliasCache == null) {
-         throw new RuntimeException("Cache '" + cacheAliasName + "' not found. Please make sure the server is properly configured");
-      }
-      
+     
 
       registerSchemasAndMarshallers();
    }
