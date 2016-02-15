@@ -28,7 +28,7 @@
  	<global>
         <globalJmxStatistics enabled="false" allowDuplicateDomains="true"/>
     </global>
-      <namedCache name="Trades">
+      <namedCache name="local-quickstart-cache">
         <eviction
                 strategy="LIRS"
                 maxEntries="1000"/>
@@ -39,7 +39,7 @@
                     ignoreModifications="false"
                     purgeOnStartup="true"
                     preload="false"
-                    location="./target/localcache/indexing/trades">
+                    location="./target/localcache/indexing/local_quickstart">
             </singleFile>
         </persistence>
     </namedCache> 

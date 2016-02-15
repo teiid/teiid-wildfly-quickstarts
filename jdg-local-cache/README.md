@@ -2,7 +2,7 @@
 Level: Intermediate
 Technologies: Teiid, Infinispan Library Mode
 Target Product: DV, JDG
-Product Versions: DV 6.1+, JDG 6.5
+Product Versions: DV 6.1+, JDG 6.5+
 Source: https://github.com/teiid/teiid-quickstarts
 ---
 
@@ -24,7 +24,7 @@ If you have not done so, please review the System Requirements [../README.md](..
 
 * JBoss application server to run Teiid
 * The Teiid Jboss distribution kit
-* JDG 6.5 eap modules kit 
+* JDG 6.5+ eap modules kit 
 	> NOTE: can obtain JDG kit distributions on Red Hat's Customer Portal at https://access.redhat.com/jbossnetwork/restricted/listSoftware.html
 
 # JDG Setup
@@ -46,12 +46,12 @@ This will build jdg-quickstart-jboss-as7-dist.zip in the target directory.
 
 3)  Deploy the distribution kit
 
--  Unzip the jdg-quickstart-jboss-as7-dist.zip at the root of the JBOSS_HOME directory.
+-  Unzip the target/jdg-quickstart-jboss-as7-dist.zip at the root of the JBOSS_HOME directory.
 -  This will deploy the pojo module and the cache configuration file.
 
 4) Update module dependencies
 
-*  [Required] the org.infinispan.commons (slot="jdg-6.5" or slot for version installed) module needs to have 
+*  [Required] the org.infinispan.commons (slot="${jdg.slot}" or slot for version installed) module needs to have 
 the pojo dependency added:
 
     <module name="com.client.quickstart.pojos"   export="true" />
