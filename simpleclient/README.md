@@ -47,9 +47,9 @@ First, build the project by running
 
 To execute a sql query using the simpleclient, use the following format:
 
-		   mvn install -Dvdb="<vdb>" -Dsql="<sql>"
+		   mvn exec:java -Dvdb="<vdb>" -Dsql="<sql>"
 
-Example:   mvn install -Dvdb="twitter" -Dsql="select * from tweet where query= 'jboss'" -Dusername="teiidUser" -Dpassword="pwd"
+Example:   mvn exec:java -Dvdb="twitter" -Dsql="select * from tweet where query= 'jboss'" -Dusername="teiidUser" -Dpassword="pwd"
 
 Note that the query is in quotes so that it is understood as a single argument.
 

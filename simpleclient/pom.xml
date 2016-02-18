@@ -39,28 +39,28 @@
             </activation>                     
             <build>
                 <plugins>
-                    <plugin>
-                        <groupId>org.codehaus.mojo</groupId>
-                        <artifactId>exec-maven-plugin</artifactId>
-                        <version>${version.org.codehaus.mojo.exec.plugin}</version>
-                        <executions>
-                            <execution>
-                                <phase>test</phase>
-                                <goals>
-                                    <goal>java</goal>
-                                </goals>
-                                <configuration>
-                                    <mainClass>JDBCClient</mainClass>
+           <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>${version.org.codehaus.mojo.exec.plugin}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>java</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <classpathScope>test</classpathScope>
+                    <mainClass>JDBCClient</mainClass>
                                     <arguments>
                                         <argument>localhost</argument>
                                         <argument>31000</argument>
                                         <argument>${vdb}</argument>
                                         <argument>${sql}</argument>
-                                    </arguments>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>                
+                                    </arguments>                   
+                </configuration>
+            </plugin>                              
                 </plugins>
             </build>
         </profile>         
