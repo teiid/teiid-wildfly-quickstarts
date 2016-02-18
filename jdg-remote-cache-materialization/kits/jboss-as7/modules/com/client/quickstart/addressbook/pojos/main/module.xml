@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module xmlns="urn:jboss:module:1.0" name="com.client.quickstart.addressbook.pojos">
     <resources>
-        <resource-root path="jdg-remote-cache-pojos.jar" />
+        <resource-root path="jdg-remote-cache-materialization-pojos.jar" />
         <!-- Insert resources here -->
     </resources>
 
