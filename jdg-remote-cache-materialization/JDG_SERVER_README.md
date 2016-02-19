@@ -60,7 +60,7 @@ Configure JDG
 
 This subsytem  will completely replace what's currently defined in the standalone.xml.
 
-        <subsystem xmlns="urn:infinispan:server:core:6.2" default-cache-container="local">
+        <subsystem xmlns="urn:infinispan:server:core:6.4" default-cache-container="local">
             <cache-container name="local" default-cache="default" statistics="true">
                 <local-cache name="default" start="EAGER">
                     <locking isolation="NONE" acquire-timeout="30000" concurrency-level="1000" striping="false"/>
@@ -159,6 +159,8 @@ This subsytem  will completely replace what's currently defined in the standalon
                 <!-- End of 'addressbook' cache definition -->
 
             </cache-container>
+            <cache-container name="security"/>
+
         </subsystem>
 
 Start JDG

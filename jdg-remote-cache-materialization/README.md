@@ -2,7 +2,7 @@
 Level: Intermediate
 Technologies: Teiid, Infinispan, Hot Rod, Remote Query, Materialization
 Target Product: DV
-Product Versions: DV 6.1+
+Product Versions: DV 6.1+, JDG 6.5+
 Source: https://github.com/teiid/teiid-quickstarts
 ---
 
@@ -24,12 +24,11 @@ This quickstart demonstrates how Teiid can connect to a remote JBoss Data Grid (
 * JBoss application server to run Teiid
 * The Teiid Jboss distribution kit
 * The dynamicvdb-datafederation quickstart [../../dynamicvdb-datafederation/README.md] needs to be installed.
-* JDG 6.5 eap modules kit (used by Teiid to access the remote cache)
-	> NOTE: You can obtain JDG kit distributions on Red Hat's Customer Portal at https://access.redhat.com/jbossnetwork/restricted/listSoftware.html
 
 2.  JDG Server Prerequistes
 
 * JDG 6.5 server kit installed (used as the remote server)
+* JDG 6.5 eap modules kit (used by Teiid to access the remote cache)
 	> NOTE: You can obtain JDG kit distributions on Red Hat's Customer Portal at https://access.redhat.com/jbossnetwork/restricted/listSoftware.html
 
 
@@ -51,14 +50,18 @@ Example:   ./standalone.sh -Djboss.socket.binding.port-offset=100
 For the purpose of this quick start, it assumes running both servers on the same machine and is expecting the JDG server to have its ports incremented.  The
 port adjustment has been made in the jdg.properties on the client side to match the above offset.
 
+#  [PreRequistes] Dynamicvdb-datafederation quickstart
 
-# Teiid Quickstart Setup
+*  Install dynamicvdb-datafederation quickstart [../../dynamicvdb-datafederation/README.md]
 
-1.  build the jdg-remote-cache quickstart
+
+# Teiid jdg-remote-cache-materialization quickstart Setup
+
+1.  build the jdg-remote-cache-materialization quickstart
 
 -  run  mvn -s ./settings.xml clean install
 
--  After building the quickstart, the jdg-remote-cache-pojos-jboss-as7-dist.zip should be found in the target directory.
+-  After building the quickstart, the jdg-remote-cache-materialization-pojos-jboss-as7-dist.zip should be found in the target directory.
 -  This zip will be used later, where it is deployed to the Teiid server.
 
 
@@ -100,7 +103,7 @@ port adjustment has been made in the jdg.properties on the client side to match 
 6. Install the infinispan-cache-dsl translator
 
 	-	cd to the ${JBOSS_HOME}/bin directory
-	-	execute:  ./jboss-cli.sh --connect --file={jbossas.server.dir}/docs/teiid/datasources/infinispan/add-infinispan-cache-dsl-translator.cli 
+	-	execute:  ./jboss-cli.sh --connect --file=../docs/teiid/datasources/infinispan/add-infinispan-cache-dsl-translator.cli 
 	
 	
 7. deploy the VDB
@@ -111,14 +114,34 @@ port adjustment has been made in the jdg.properties on the client side to match 
 
 # Query Demonstrations
 
+==== Using the simpleclient example ====
+
+1) Change your working directory to "${quickstart.install.dir}/simpleclient"
+
+2) Use the simpleclient example to run the following queries:
+
+Example:   mvn exec:java -Dvdb="PeopleMat" -Dsql="select name, id, email from PersonMatModel.PersonMatView"  -Dusername="teiidUser" -Dpassword="pwd"
+
+
+or 
+
+
 Use a sql tool, like SQuirreL, to connect and issue following example query:
 
-1.  Query for reading from the materialized cache
-
 -  connect:  jdbc:teiid:PeopleMat@mm://localhost:31000
+
+1.  Query for reading from the materialized cache
 
 *  select name, id, email from PersonMatModel.PersonMatView
 
 
-       
+2.  To test the materialization process, do the following:
+
+*  perform a delete from the Customer table 
+	-	delete from Customer where SSN = 'CST01002'
+	
+	Customer:  Joseph Smith,19980002,Joseph.Smith@email.com  is removed
+
+*  wait 2 min's because the refresh rate is set at 1 min.
+*  perform query from #1 above, and should see row missing for SSN = CST01002
 

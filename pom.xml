@@ -64,9 +64,9 @@
         <!--version.net.jcip>1.0</version.net.jcip-->
         <version.org.codehaus.mojo.exec.plugin>1.2.1</version.org.codehaus.mojo.exec.plugin>
         <!--version.org.hibernate.search>4.5.0.Final</version.org.hibernate.search-->
-        <version.org.infinispan.6>6.3.0.Final-redhat-5</version.org.infinispan.6>  
+        <version.org.infinispan.6>6.4.0.Final-redhat-4</version.org.infinispan.6>  
         <!-- JDG module slot to use  -->
-        <jdg.slot>jdg-6.5</jdg.slot>  
+        <jdg.slot>jdg-6.6</jdg.slot>  
   		<version.net.jcip>1.0</version.net.jcip>
         <version.resteasy.client>3.0.12.Final</version.resteasy.client>
                 
