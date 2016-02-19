@@ -24,7 +24,7 @@
         <outputDirectory>com/client/quickstart/addressbook/pojos/main/</outputDirectory>     
         <filtered>false</filtered> 
         <includes>
-          <include>jdg-remote-cache-pojos.jar</include>
+          <include>jdg-remote-cache-materialization-pojos.jar</include>
         </includes>   
     </fileSet>        
   </fileSets>
