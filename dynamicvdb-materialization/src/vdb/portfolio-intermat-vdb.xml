@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<vdb name="PortfolioInterMaterialize" version="1">
+
+    <description>The Portfolio Dynamic VDB that performs internal materialization</description>
+    
+    <!-- 
+      Setting to use connector supplied metadata. Can be "true" or "cached".  
+      "true" will obtain metadata once for every launch of Teiid. 
+      "cached" will save a file containing the metadata into 
+      the deploy/<vdb name>/<vdb version/META-INF directory
+    -->
+    <property name="UseConnectorMetadata" value="true" />
+    
+    <import-vdb name="Portfolio" version="1" import-data-policies="true"/>
+    
+                                              
+	<model name="StocksMatModel" type="VIRTUAL">
+		<metadata type="DDL"><![CDATA[
+	CREATE view stockPricesInterMatView
+		(
+            product_id integer,
+            symbol string,
+            price bigdecimal,
+            company_name   varchar(256)
+ 		) OPTIONS (materialized true,         
+               "teiid_rel:MATVIEW_TTL" 60000,
+               "teiid_rel:ALLOW_MATVIEW_MANAGEMENT" 'true', 
+	       "teiid_rel:MATVIEW_PREFER_MEMEORY" 'true',
+	       "teiid_rel:MATVIEW_UPDATABLE" 'true', 
+               "teiid_rel:MATVIEW_SCOPE" 'VDB')
+               AS SELECT  A.ID, S.symbol, S.price, A.COMPANY_NAME
+                    FROM Stocks.StockPrices AS S, Accounts.PRODUCT AS A
+                    WHERE S.symbol = A.SYMBOL;
+    	]]>
+   		</metadata>
+	</model>  
+	
+</vdb>
