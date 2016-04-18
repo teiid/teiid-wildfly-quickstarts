@@ -2,11 +2,11 @@
 Level: Intermediate
 Technologies: Teiid, Infinispan Library Mode, Materialization
 Target Product: DV, JDG
-Product Versions: DV 6.1+, JDG 6.5
+Product Versions: DV 6.1+, JDG 6.5+
 Source: https://github.com/teiid/teiid-quickstarts
 ---
 
-JDG Local-Cache (Library Mode) Quickstart
+JDG Local-Cache (Library Mode) Materialization Quickstart
 ================================
 
 # What is it?
@@ -22,16 +22,21 @@ Assumptions:
 
 If you have not done so, please review the System Requirements [../README.md](../README.md)
 
-# PREREQUISTES
+
+1.  Teiid Server Prerequistes
 
 * JBoss application server to run Teiid
 * The Teiid Jboss distribution kit
-* JDG 6.5 eap modules kit 
+* The dynamicvdb-datafederation quickstart [../../dynamicvdb-datafederation/README.md] needs to be installed.
 
-* If you plan to use the external materialization example, then the dynamicvdb-datafederation example data (datafiles and resource adapters) must first be installed
-  Read the dynamicvdb-datafederation's README.md and follow its directions before continuing.
+2.  JDG Prerequistes
 
-> NOTE: can obtain JDG kit distributions on Red Hat's Customer Portal at https://access.redhat.com/jbossnetwork/restricted/listSoftware.html
+* JDG eap modules kit (used by Teiid to access the remote cache)
+	> NOTE: You can obtain JDG kit distributions on Red Hat's Customer Portal at https://access.redhat.com/jbossnetwork/restricted/listSoftware.html
+
+#  [PreRequistes] Dynamicvdb-datafederation quickstart
+
+*  Install dynamicvdb-datafederation quickstart [../../dynamicvdb-datafederation/README.md]
 
 # JDG Setup
 
