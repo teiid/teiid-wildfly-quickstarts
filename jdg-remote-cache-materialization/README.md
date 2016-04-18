@@ -28,7 +28,7 @@ This quickstart demonstrates how Teiid can connect to a remote JBoss Data Grid (
 2.  JDG Server Prerequistes
 
 * JDG 6.5 server kit installed (used as the remote server)
-* JDG 6.5 eap modules kit (used by Teiid to access the remote cache)
+* JDG 6.5 HotRod modules kit (used by Teiid to access the remote cache)
 	> NOTE: You can obtain JDG kit distributions on Red Hat's Customer Portal at https://access.redhat.com/jbossnetwork/restricted/listSoftware.html
 
 
