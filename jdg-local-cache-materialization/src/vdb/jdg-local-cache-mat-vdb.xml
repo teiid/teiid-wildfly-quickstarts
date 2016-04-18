@@ -6,48 +6,8 @@
     <property name="UseConnectorMetadata" value="cached" />
     
     <property name ="lib" value ="com.client.quickstart.pojos"></property>
-    
-    <model name="Accounts">
-        <!-- 
-          JDBC Import settings 
-          
-          importer.useFullSchemaName directs the importer to drop the source 
-          schema from the Teiid object name, so that the Teiid fully qualified name
-          will be in the form of <model name>.<table name>
-        -->
-        <property name="importer.useFullSchemaName" value="false"/>
-           
-         <!--
-            This connector is defined to reference the H2 localDS" 
-          -->
-        <source name="h2-connector" translator-name="translator-h2" connection-jndi-name="java:/accounts-ds"/>
-    </model>    
- 
-     <model name="MarketData">
-        <!-- 
-            Each source represents a translator and data source. There are 
-            pre-defined translators, or you can create one.
-        -->
-        <source name="text-connector" translator-name="file" connection-jndi-name="java:/marketdata-file"/>
-    </model>
- 
-    <model name="Stocks" type="VIRTUAL">
-        <metadata type="DDL"><![CDATA[
-                
-        CREATE VIEW StockPrices (
-            symbol string,
-            price bigdecimal
-            )
-            AS  
-               SELECT SP.symbol, SP.price
-                FROM (EXEC MarketData.getTextFiles('*.txt')) AS f, 
-                    TEXTTABLE(f.file COLUMNS symbol string, price bigdecimal HEADER) AS SP;
-        
-
-                 
-        ]]> </metadata>
-    </model>       
-    
+        <import-vdb name="Portfolio" version="1" import-data-policies="true"/>
+      
     <model name="StockMatCache" type="Physical">
         <property name="importer.useFullSchemaName" value="false"/>
            
@@ -95,8 +55,5 @@
 -->
 
     </translator>
-        
-    <translator name="translator-h2" type="h2">
-        <property name="SupportsNativeQueries" value="true"/>
-    </translator>
+       
 </vdb>
