@@ -62,7 +62,7 @@ public class Stock implements java.io.Serializable {
 	
 	public Stock(int id, double price, String symbol, String name) {
 		setProductId(id);
-		setPrice(price);
+		setPrice(new BigDecimal(price));
 		setSymbol(symbol);
 		setCompanyName(name);
 	}
@@ -87,10 +87,11 @@ public class Stock implements java.io.Serializable {
 	public void setPrice(BigDecimal price) {
 		this.price = price;
 	}
+/*
 	public void setPrice(double price) {
 		this.price = new BigDecimal(price);
 	}
-
+*/
 	public String getSymbol() {
 		return this.symbol;
 	}

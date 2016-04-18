@@ -70,6 +70,7 @@ the pojo dependency added:
         <subsystem xmlns="urn:jboss:domain:resource-adapters:1.1">
             <resource-adapters>
 
+Note:  the Infinispan cache will be configured using the infinispan.xml configuration file that's defined in the resource-adapter.  Make sure the file name and the "ConfigurationFilenamForLocalCache" property match.
 
 6) Start the server
 
@@ -90,22 +91,8 @@ the pojo dependency added:
 	-	execute:  ./jboss-cli.sh --connect --file=../docs/teiid/datasources/infinispan/add-infinispan-cache-translator.cli
 
 
-8) deploy the sample application war (target/jdg-quickstart.war) that will configure the JDG cache from a file
-
-	* use the management console at http://localhost:9990 to deploy target/jdg-quickstart.war from the target directory
-		or
-    * copy the file:  target/jdg-quickstart.war to the deployments folder in the server
 	
-    
-    Make sure the following is seen in the server log before trying to execute any sql:
-    
-21:19:26,900 INFO  [stdout] (ServerService Thread Pool -- 65)  ******* Loaded local-quickstart-cache with number of objects 200
-21:19:28,511 INFO  [stdout] (ServerService Thread Pool -- 65)  *******local-quickstart-cache is setup and tested
-
-	This means the JDG cache was configured and registered via JNDI, which will make it available to Teiid resoure-adapter.
-	
-	
-9) deploy the VDB
+8) deploy the VDB
 
 *  deploy VDB for reading the cache from directory  src/vdb
 	- copy files jdg-local-cache-vdb.xml and jdg-local-cache-vdb.xml.dodeploy to {jbossas.server.dir}/standalone/deployments	
