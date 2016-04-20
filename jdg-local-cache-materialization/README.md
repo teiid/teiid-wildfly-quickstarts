@@ -25,7 +25,7 @@ If you have not done so, please review the System Requirements [../README.md](..
 
 1.  Teiid Server Prerequistes
 
-* JBoss application server to run Teiid
+* JBoss application server to run Teiidexpand
 * The Teiid Jboss distribution kit
 * The dynamicvdb-datafederation quickstart [../../dynamicvdb-datafederation/README.md] needs to be installed.
 
@@ -45,7 +45,7 @@ If you have not done so, please review the System Requirements [../README.md](..
 2) Install the JBoss Data Grid eap modules kit into the modules location for your JBoss AS - Teiid instance.
    See Red Hat:   http://access.redhat.com  to obtain the kit.
 
-# Teiid Server Setup
+# Teiid Server Setupexpand
 
 1) shutdown jbossas server
 
@@ -62,7 +62,7 @@ This will build jdg-quickstart-jboss-as7-dist.zip in the target directory.
 
 4) Update module dependencies
 
-*  [Required] the org.infinispan.commons (slot="jdg-6.5" or slot for version installed) module needs to have 
+*  [Required] the org.infinispan.commons (slot="jexpanddg-6.5" or slot for version installed) module needs to have 
 the pojo dependency added:
 
     <module name="com.client.quickstart.pojos"   export="true" />

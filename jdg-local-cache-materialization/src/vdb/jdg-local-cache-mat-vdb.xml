@@ -2,16 +2,16 @@
 <vdb name="StocksMat" version="1">
 
     <description>Shows how to call an Infinispan local cache</description>
-    
+
     <property name="UseConnectorMetadata" value="cached" />
     
-    <property name ="lib" value ="com.client.quickstart.pojos"></property>
-        <import-vdb name="Portfolio" version="1" import-data-policies="true"/>
+    <property name ="lib" value ="com.client.quickstart.pojos" />
+    <import-vdb name="Portfolio" version="1" import-data-policies="true"/>
       
     <model name="StockMatCache" type="Physical">
         <property name="importer.useFullSchemaName" value="false"/>
            
-       <source name="StockMatSource1" translator-name="infinispan1" connection-jndi-name="java:/infinispanLocalMat" />  
+        <source name="StockMatSource1" translator-name="infinispan1" connection-jndi-name="java:/infinispanLocalMat" />  
 
     </model>            
     
@@ -24,7 +24,7 @@
             price bigdecimal,
             companyName   varchar(256)
             
- 		) OPTIONS (MATERIALIZED 'TRUE', UPDATABLE 'TRUE',         
+ 		) OPTIONS (MATERIALIZED 'TRUE', UPDATABLEexpand 'TRUE',         
                MATERIALIZED_TABLE 'StockMatCache.Stock', 
                "teiid_rel:MATVIEW_TTL" 60000,
                "teiid_rel:MATVIEW_BEFORE_LOAD_SCRIPT" 'execute StockMatCache.native(''truncate cache'');',

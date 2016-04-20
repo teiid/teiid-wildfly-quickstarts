@@ -68,7 +68,7 @@ port adjustment has been made in the setup.cli script to match the above offset.
 
 1. shutdown jbossas server, if not already.
 
-2. deploy pojo Module  
+2. deploy pojo Module
 	-	take the target/jdg-remote-cache-pojos-jboss-as7-dist.zip and unzip at <jbossas-dir>/modules/
 
 3. Install the JBoss Data Grid version of the hot rod client modules kit for EAP into <jbossas-dir>/modules/ of your Teiid/EAP instance.
@@ -92,9 +92,9 @@ port adjustment has been made in the setup.cli script to match the above offset.
 	For Linux:   ./standalone.sh	
 	for Windows: standalone.bat
 
-	If Teiid isn't configured in the default configuration, append the following arguments to the command to specify the configuration
+	If Teiid isn't configured in the default configuration, append the following arguments to the command to specifselect name, email, id from Person where id = 100y the configuration
 		
-	-c {configuration.file}  
+	-c {configuration.file} 
 	
 	Example: -c standalone-teiid.xml 
 
@@ -113,15 +113,15 @@ port adjustment has been made in the setup.cli script to match the above offset.
 
 8.  JDG Remote Cache initialization
 
-_NOTE: The following build command assumes you have configured your Maven user settings. If you have not, you must include Maven setting arguments on the command line. See [Build and Deploy the Quickstarts](../../README.md#build-and-deploy-the-quickstarts) for complete instructions and additional options._
+_NOTE: The following build command assumes you have configured your Maven user settings. If you have not, you must include Maven setting arguments on the command line. See [Build and Deploy the Quickstarts](../../REAselect name, email, id from Person where id = 100DME.md#build-and-deploy-the-quickstarts) for complete instructions and additional options._
 
-1. Make sure you have started the JDG as described above.
-2. Open a command line and navigate to the root directory of this teiid jdg-remote quickstart.
-3. If you need to, rebuild the quick start
+* Make sure you have started the JDG as described above.
+* Open a command line and navigate to the root directory of this teiid jdg-remote quickstart.
+* If you need to, rebuild the quick start
 
         mvn clean install 
                 
-4. Run the example application in its directory:
+* Run the example application in its directory:
 
         mvn exec:java
  
@@ -157,7 +157,7 @@ Use a sql tool, like SQuirreL, to connect and issue following example query:
 -  connect:  jdbc:teiid:People@mm://{host}:31000
 [1]  select name, email, id from Person
 [2]  Insert into Person (id, name, email) Values (100, 'TestPerson', 'test@person.com')
-then - select name, email, id from Person
+then - select name, email, id from Person where id = 100
 [3]  Update Person set name='testPerson 100' where id = 100
 then - select name, email, id from Person
 [4]  delete from Person where id = 100
