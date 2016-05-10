@@ -106,7 +106,7 @@ Note:  the Infinispan cache will be configured using the infinispan.xml configur
 
 2) Use the simpleclient example to run the following queries:
 
-Example:   mvn install -Dvdb="Stocks" -Dsql="Insert into Stock (productId, symbol, price, companyname) Values (99, 'WMT', 45.35, 'Walmart')"  -Dusername="teiidUser" -Dpassword="pwd"
+Example:   mvn exec:java -Dvdb="Stocks" -Dsql="Insert into Stock (productId, symbol, price, companyname) Values (99, 'WMT', 45.35, 'Walmart')"  -Dusername="teiidUser" -Dpassword="pwd"
 
 
 or 

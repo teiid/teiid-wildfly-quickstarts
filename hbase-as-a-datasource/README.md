@@ -97,7 +97,7 @@ Copy the following files to the "<jboss.home>/standalone/deployments" directory
 
 2) Use the simpleclient example to run the following queries:
 
-Example:   mvn install -Dvdb="hbasevdb" -Dsql="SELECT * FROM Customer"
+Example:   mvn exec:java -Dvdb="hbasevdb" -Dsql="SELECT * FROM Customer"
 
 The following sql can be used with -Dsql:
 
