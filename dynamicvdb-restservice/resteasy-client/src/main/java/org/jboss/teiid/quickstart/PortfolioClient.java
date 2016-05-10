@@ -54,10 +54,10 @@ public class PortfolioClient {
 	static String USERNAME = "testUser";
 	static String PASSWORD = "password1!";
 	
-	String[] apis = {"http://localhost:8080/portfoliorest_1/rest/foo/1", 
-	                 "http://localhost:8080/portfoliorest_1/rest/getAllStocks", 
-	                 "http://localhost:8080/portfoliorest_1/rest/getAllStockById/1007",
-	                 "http://localhost:8080/portfoliorest_1/rest/getAllStockBySymbol/IBM"}; 
+	String[] apis = {"http://localhost:8080/PortfolioRest_1/Rest/foo/1", 
+	                 "http://localhost:8080/PortfolioRest_1/Rest/getAllStocks", 
+	                 "http://localhost:8080/PortfolioRest_1/Rest/getAllStockById/1007",
+	                 "http://localhost:8080/PortfolioRest_1/Rest/getAllStockBySymbol/IBM"}; 
 	
 	/**
 	 * JAX-RS 2.0 Client API

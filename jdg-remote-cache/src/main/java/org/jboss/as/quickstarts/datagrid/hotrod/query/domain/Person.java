@@ -17,16 +17,21 @@
 package org.jboss.as.quickstarts.datagrid.hotrod.query.domain;
 
 import java.util.List;
+import org.infinispan.protostream.annotations.ProtoField;
+
 
 /**
  * @author Adrian Nistor
  */
 public class Person {
 
-   private String name;
-   private int id;
-   private String email;
-   private List<PhoneNumber> phones;
+   @ProtoField(number = 2, required = true)
+   public String name;
+   @ProtoField(number = 1, required = true)
+   public int id;
+   @ProtoField(number = 3)
+   public String email;
+ 
 
    public String getName() {
       return name;
@@ -52,13 +57,7 @@ public class Person {
       this.email = email;
    }
 
-   public List<PhoneNumber> getPhones() {
-      return phones;
-   }
-
-   public void setPhones(List<PhoneNumber> phones) {
-      this.phones = phones;
-   }
+  
 
    @Override
    public String toString() {
@@ -66,7 +65,6 @@ public class Person {
             "id=" + id +
             ", name='" + name +
             "', email='" + email + '\'' +
-            ", phones=" + phones +
             '}';
    }
 }

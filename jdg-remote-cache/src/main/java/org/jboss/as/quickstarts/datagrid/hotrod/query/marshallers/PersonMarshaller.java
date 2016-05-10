@@ -18,7 +18,6 @@ package org.jboss.as.quickstarts.datagrid.hotrod.query.marshallers;
 
 import org.infinispan.protostream.MessageMarshaller;
 import org.jboss.as.quickstarts.datagrid.hotrod.query.domain.Person;
-import org.jboss.as.quickstarts.datagrid.hotrod.query.domain.PhoneNumber;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -44,13 +43,11 @@ public class PersonMarshaller implements MessageMarshaller<Person> {
       String name = reader.readString("name");
       int id = reader.readInt("id");
       String email = reader.readString("email");
-      List<PhoneNumber> phones = reader.readCollection("phone", new ArrayList<PhoneNumber>(), PhoneNumber.class);
-
+ 
       Person person = new Person();
       person.setName(name);
       person.setId(id);
       person.setEmail(email);
-      person.setPhones(phones);
       return person;
    }
 
@@ -59,6 +56,5 @@ public class PersonMarshaller implements MessageMarshaller<Person> {
       writer.writeString("name", person.getName());
       writer.writeInt("id", person.getId());
       writer.writeString("email", person.getEmail());
-      writer.writeCollection("phone", person.getPhones(), PhoneNumber.class);
    }
 }

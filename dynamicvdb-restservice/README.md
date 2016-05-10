@@ -55,10 +55,10 @@ You should see the server log indicate the VDB is active with a message like:  T
 
 The following Rest API will extract data from the VDB:
 
-* http://localhost:8080/portfoliorest_1/rest/foo/1
-* http://localhost:8080/portfoliorest_1/rest/getAllStocks
-* http://localhost:8080/portfoliorest_1/rest/getAllStockById/1007
-* http://localhost:8080/portfoliorest_1/rest/getAllStockBySymbol/IBM
+* http://localhost:8080/PortfolioRest_1/Rest/foo/1
+* http://localhost:8080/PortfolioRest_1/Rest/getAllStocks
+* http://localhost:8080/PortfolioRest_1/Rest/getAllStockById/1007
+* http://localhost:8080/PortfolioRest_1/Rest/getAllStockBySymbol/IBM
 
 > NOTE: Above Query Demonstrations assuming DV server run on localhost.
 
