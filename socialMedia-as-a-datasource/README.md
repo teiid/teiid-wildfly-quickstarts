@@ -71,7 +71,7 @@ Using the simpleclient example
 
 2) Use the simpleclient example to run the following queries:
 
-Example:   mvn install -Dvdb="webservice" -Dsql="select * from CustomersView" -Dusername="xx" -Dpassword="xx"
+Example:   mvn exec:java -Dvdb="webservice" -Dsql="select * from CustomersView" -Dusername="xx" -Dpassword="xx"
 
 > NOTE - depending on your OS/Shell the quoting/escaping required to run the example can be
 complicated.  It would be better to install a Java client, such as SQuirreL, to run the 
