@@ -28,13 +28,13 @@ import org.infinispan.protostream.annotations.ProtoSchemaBuilder;
 import org.infinispan.query.dsl.Query;
 import org.infinispan.query.dsl.QueryFactory;
 import org.infinispan.query.remote.client.ProtobufMetadataManagerConstants;
-import org.jboss.as.quickstarts.datagrid.hotrod.query.domain.Memo;
+//import org.jboss.as.quickstarts.datagrid.hotrod.query.domain.Memo;
 import org.jboss.as.quickstarts.datagrid.hotrod.query.domain.Person;
-import org.jboss.as.quickstarts.datagrid.hotrod.query.domain.PhoneNumber;
-import org.jboss.as.quickstarts.datagrid.hotrod.query.domain.PhoneType;
+//import org.jboss.as.quickstarts.datagrid.hotrod.query.domain.PhoneNumber;
+//import org.jboss.as.quickstarts.datagrid.hotrod.query.domain.PhoneType;
 import org.jboss.as.quickstarts.datagrid.hotrod.query.marshallers.PersonMarshaller;
-import org.jboss.as.quickstarts.datagrid.hotrod.query.marshallers.PhoneNumberMarshaller;
-import org.jboss.as.quickstarts.datagrid.hotrod.query.marshallers.PhoneTypeMarshaller;
+//import org.jboss.as.quickstarts.datagrid.hotrod.query.marshallers.PhoneNumberMarshaller;
+//import org.jboss.as.quickstarts.datagrid.hotrod.query.marshallers.PhoneTypeMarshaller;
 
 import java.io.BufferedReader;
 import java.io.Console;
@@ -110,8 +110,8 @@ public class AddressBookManager {
       SerializationContext ctx = ProtoStreamMarshaller.getSerializationContext(cacheManager);
       ctx.registerProtoFiles(FileDescriptorSource.fromResources(PROTOBUF_DEFINITION_RESOURCE));
       ctx.registerMarshaller(new PersonMarshaller());
-      ctx.registerMarshaller(new PhoneNumberMarshaller());
-      ctx.registerMarshaller(new PhoneTypeMarshaller());
+  //    ctx.registerMarshaller(new PhoneNumberMarshaller());
+  //    ctx.registerMarshaller(new PhoneTypeMarshaller());
 
       // generate the 'memo.proto' schema file based on the annotations on Memo class and register it with the SerializationContext of the client
  //      ProtoSchemaBuilder protoSchemaBuilder = new ProtoSchemaBuilder();
@@ -182,56 +182,6 @@ public class AddressBookManager {
       System.out.println("Removed: " + prevValue);
    }
 
-   private void addPhone() {
-      System.out.println("Adding a phone number to a person");
-      int id = Integer.parseInt(readConsole("Enter person id (int): "));
-      Person person = (Person) addressbookCache.get(id);
-      if (person == null) {
-         System.out.println("Person not found");
-         return;
-      }
-      System.out.println("> " + person);
-
-      String number = readConsole("Enter phone number (string): ");
-      PhoneType type = PhoneType.valueOf(readConsole("Enter phone type " + EnumSet.allOf(PhoneType.class) + ": ").toUpperCase());
-      List<PhoneNumber> phones = person.getPhones();
-      if (phones == null) {
-         phones = new ArrayList<PhoneNumber>();
-      }
-      PhoneNumber phoneNumber = new PhoneNumber();
-      phoneNumber.setNumber(number);
-      phoneNumber.setType(type);
-      phones.add(phoneNumber);
-      person.setPhones(phones);
-
-      // update the Person in cache
-      addressbookCache.put(person.getId(), person);
-   }
-
-   private void removePhone() {
-      System.out.println("Removing a phone number from a person");
-      int id = Integer.parseInt(readConsole("Enter person id (int): "));
-      Person person = (Person) addressbookCache.get(id);
-      if (person == null) {
-         System.out.println("Person not found");
-         return;
-      }
-      System.out.println("> " + person);
-
-      if (person.getPhones() != null && !person.getPhones().isEmpty()) {
-         int idx = Integer.parseInt(readConsole("Enter phone index [0.." + (person.getPhones().size() - 1) + "]: "));
-         if (idx < 0 || idx >= person.getPhones().size()) {
-            System.out.println("Index out of range");
-            return;
-         }
-         person.getPhones().remove(idx);
-
-         // update the Person in cache
-         addressbookCache.put(person.getId(), person);
-      } else {
-         System.out.println("The person does not have any phones");
-      }
-   }
 
    private void printAllEntries() {
       for (int id : addressbookCache.keySet()) {
@@ -240,44 +190,7 @@ public class AddressBookManager {
       }
    }
 
-   private void addMemo() {
-      int id = Integer.parseInt(readConsole("Enter memo id (int): "));
-      String text = readConsole("Enter memo text (string): ");
-      Memo.Priority priority = Memo.Priority.valueOf(readConsole("Enter priority " + EnumSet.allOf(Memo.Priority.class) + ": ").toUpperCase());
-
-      int authorId = Integer.parseInt(readConsole("Enter author id (int): "));
-      Person author = (Person) addressbookCache.get(authorId);
-      if (author == null) {
-         System.out.println("Person not found");
-         return;
-      }
-      System.out.println("> " + author);
-
-      Memo memo = new Memo();
-      memo.setId(id);
-      memo.setText(text);
-      memo.setPriority(priority);
-      memo.setAuthor(author);
-
-      // put the Memo in cache
-      addressbookCache.put(memo.getId(), memo);
-   }
-
-   private void queryMemoByAuthor() {
-      String namePattern = readConsole("Enter person name pattern: ");
-
-      QueryFactory qf = Search.getQueryFactory(addressbookCache);
-      Query query = qf.from(Memo.class)
-            .having("author.name").like(namePattern).toBuilder()
-            .build();
-
-      List<Memo> results = query.list();
-      System.out.println("Found " + results.size() + " matches:");
-      for (Memo p : results) {
-         System.out.println(">> " + p);
-      }
-   }
-
+ 
    private void stop() {
       cacheManager.stop();
    }
@@ -303,16 +216,10 @@ public class AddressBookManager {
                manager.addPerson();
             } else if ("2".equals(action)) {
                manager.removePerson();
-            } else if ("3".equals(action)) {
-               manager.addPhone();
-            } else if ("4".equals(action)) {
-               manager.removePhone();
             } else if ("5".equals(action)) {
                manager.queryPersonByName();
             } else if ("6".equals(action)) {
                manager.queryPersonByPhone();
-            } else if ("7".equals(action)) {
-               manager.queryMemoByAuthor();
             } else if ("8".equals(action)) {
                manager.printAllEntries();
             } else if ("9".equals(action)) {

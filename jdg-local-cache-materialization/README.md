@@ -92,7 +92,7 @@ the pojo dependency added:
 
 	If Teiid isn't configured in the default configuration, append the following arguments to the command to specify the configuration
 		
-	-c {configuration.file}  
+	-c {configuration.file}
 	
 	Example: -c standalone-teiid.xml 
 	
