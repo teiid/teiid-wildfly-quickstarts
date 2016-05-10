@@ -100,7 +100,7 @@ If you have not done so, please review the System Requirements [../README.md](..
 
 2. Use the simpleclient example to run the following queries:
 
-Example:   mvn install -Dvdb="portfolio" -Dsql="example query"
+Example:   mvn exec:java -Dvdb="portfolio" -Dsql="example query"
 
 example queries:
 

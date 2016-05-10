@@ -6,7 +6,7 @@ Product Versions: DV 6.0+
 Source: https://github.com/teiid/teiid-quickstarts
 ---
 
-Dynamicvdb-dataroles Quickstart
+Dynamicvdb-materialization Quickstart
 ================================
 
 ## What is it?
@@ -66,7 +66,7 @@ If you have not done so, please review the System Requirements [../README.md](..
 
 2. Use the simpleclient example to run the following queries:
 
-Example:   mvn install -Dvdb="PortfolioMaterialize" -Dsql="example query"
+Example:   mvn exec:java -Dvdb="PortfolioMaterialize" -Dsql="example query"
 
 
 

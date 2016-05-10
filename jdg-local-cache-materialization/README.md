@@ -116,7 +116,7 @@ the pojo dependency added:
 
 2) Use the simpleclient example to run the following queries:
 
-Example:   mvn install -Dvdb="StocksMat" -Dsql="examplequery"  -Dusername="teiidUser" -Dpassword="pwd"
+Example:   mvn exec:java -Dvdb="StocksMat" -Dsql="examplequery"  -Dusername="teiidUser" -Dpassword="pwd"
 
 
 or 

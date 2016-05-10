@@ -95,7 +95,7 @@ You should see the server log indicate the VDB is active with a message like:  T
 
 2) Use the simpleclient example to run the following queries:
 
-Example:   mvn install -Dvdb="portfolio" -Dsql="example query" -Dusername="xx" -Dpassword="xx"
+Example:   mvn exec:java -Dvdb="portfolio" -Dsql="example query" -Dusername="xx" -Dpassword="xx"
 
 ## Examples:
 
