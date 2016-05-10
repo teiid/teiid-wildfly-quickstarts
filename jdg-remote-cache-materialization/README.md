@@ -79,14 +79,17 @@ port adjustment has been made in the jdg.properties on the client side to match 
 4. setup the infinispan resource adapter 
            
 *  configure for materialization
-	-	open the file: {jbossas.server.dir}/docs/teiid/datasources/infinispan/infinispan-remote-query-materialize-dsl-ds.xml
+	-	open the file: {jbossas.server.dir}/docs/teiid/datasources/infinispan/infinispan-remote-query-materialize-annotations-dsl-ds.xml
 	-	copy and paste the resource-adapter section it into the server configuration, under the section:
 
         <subsystem xmlns="urn:jboss:domain:resource-adapters:1.1">
             <resource-adapters>
 
+5.  Edit the module.xml for org.jboss.teiid.resource-adapter.infinispan.dsl resource adapter to add the pojo dependency
 
-5. Start the server
+example:  <module name="com.client.quickstart.addressbook.pojos"  optional="true"  export="true" />
+
+6. Start the server
 
 	To start the server, open a command line and navigate to the "bin" directory under the root directory of the JBoss server and run:
 	
@@ -100,17 +103,16 @@ port adjustment has been made in the jdg.properties on the client side to match 
 	Example: -c standalone-teiid.xml 
 
 
-6. Install the infinispan-cache-dsl translator
+7. Install the infinispan-cache-dsl translator
 
 	-	cd to the ${JBOSS_HOME}/bin directory
 	-	execute:  ./jboss-cli.sh --connect --file=../docs/teiid/datasources/infinispan/add-infinispan-cache-dsl-translator.cli 
 	
 	
-7. deploy the VDB
+8. deploy the VDB
 
 	- copy files jdg-remote-cache-mat-vdb.xml and jdg-remote-cache-mat-vdb.xml.dodeploy to {jbossas.server.dir}/standalone/deployments	
 
-	>>NOTE:   the "lib" property should reference the pojo module 
 
 # Query Demonstrations
 
