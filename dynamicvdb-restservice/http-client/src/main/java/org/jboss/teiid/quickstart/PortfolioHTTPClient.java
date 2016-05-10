@@ -61,10 +61,10 @@ public class PortfolioHTTPClient {
         builder.setDefaultCredentialsProvider(credsProvider);
         HttpClient client = builder.build();
                         
-        execute(client, new HttpGet("http://localhost:8080/Portfoliorest_1/Rest/foo/1"));
-        execute(client, new HttpGet("http://localhost:8080/Portfoliorest_1/Rest/getAllStocks"));
-        execute(client, new HttpGet("http://localhost:8080/Portfoliorest_1/Rest/getAllStockById/1007"));
-        execute(client, new HttpGet("http://localhost:8080/Portfoliorest_1/Rest/getAllStockBySymbol/IBM"));
+        execute(client, new HttpGet("http://localhost:8080/PortfolioRest_1/Rest/foo/1"));
+        execute(client, new HttpGet("http://localhost:8080/PortfolioRest_1/Rest/getAllStocks"));
+        execute(client, new HttpGet("http://localhost:8080/PortfolioRest_1/Rest/getAllStockById/1007"));
+        execute(client, new HttpGet("http://localhost:8080/PortfolioRest_1/Rest/getAllStockBySymbol/IBM"));
      
     }
 
