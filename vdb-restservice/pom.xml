@@ -8,11 +8,11 @@
 	</parent>
 
 	<modelVersion>4.0.0</modelVersion>
-	<artifactId>dynamicvdb-restservice</artifactId>
+	<artifactId>vdb-restservice</artifactId>
 	<packaging>pom</packaging>
 
-	<name>REST Service Through Portfolio Dynamic VDB</name>
-	<description>This quickstart demonstrates how to enable REST Service Through Portfolio Dynamic VDB</description>
+	<name>REST Service Through Portfolio VDB</name>
+	<description>This quickstart demonstrates how to enable REST Service Through Portfolio VDB</description>
 
 	<modules>
 		<module>http-client</module>

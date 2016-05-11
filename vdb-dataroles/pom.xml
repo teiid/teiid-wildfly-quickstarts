@@ -8,10 +8,10 @@
 	</parent>
 
 	<modelVersion>4.0.0</modelVersion>
-	<artifactId>dynamicvdb-materialization</artifactId>
+	<artifactId>vdb-dataroles</artifactId>
 	<packaging>pom</packaging>
 
-	<name>DynamicVDB Materialization Quickstart</name>
-	<description>This quickstart demonstrates how configure external materialization to use as caching.</description>
+	<name>VDB Data Roles Quickstart</name>
+	<description>This quickstart demonstrates how data roles can be used to control access to the data.</description>
 
 </project>

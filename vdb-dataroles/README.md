@@ -6,12 +6,12 @@ Product Versions: DV 6.0+
 Source: https://github.com/teiid/teiid-quickstarts
 ---
 
-Dynamicvdb-dataroles Quickstart
-================================
+vdb-dataroles Quickstart
+========================
 
 ## What is it?
 
-Dynamicvdb-dataroles demonstrates how to use data roles to control access to data.  This
+vdb-dataroles demonstrates how to use data roles to control access to data.  This
 includes read-only and read-write access as well as the use of row-based filters and column masking.
 
 In this example, the vdb is defined with three different data access rules. 
@@ -36,12 +36,12 @@ If you have not done so, please review the System Requirements [../README.md](..
 
 # PREREQUISTES
 
-* NOTE: This example relies upon the dynamicvdb-datafederation example and that it needs to be deployed prior to running this example. Therefore, read the dynamicvdb-datafederation's README.md and follow its directions before continuing.
+* NOTE: This example relies upon the vdb-datafederation example and that it needs to be deployed prior to running this example. Therefore, read the vdb-datafederation's README.md and follow its directions before continuing.
 
 ## Setup
 
 
-1) Run the setup in dynamicvdb-datafederation quick start
+1) Run the setup in vdb-datafederation quick start
 
 2) shutdown the jbossas server
 

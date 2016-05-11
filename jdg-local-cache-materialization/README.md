@@ -28,8 +28,8 @@ If you have not done so, please review the System Requirements [../README.md](..
 * The Teiid Jboss distribution kit
 * JDG 6.5 eap modules kit 
 
-* If you plan to use the external materialization example, then the dynamicvdb-datafederation example data (datafiles and resource adapters) must first be installed
-  Read the dynamicvdb-datafederation's README.md and follow its directions before continuing.
+* If you plan to use the external materialization example, then the vdb-datafederation example data (datafiles and resource adapters) must first be installed
+  Read the vdb-datafederation's README.md and follow its directions before continuing.
 
 > NOTE: can obtain JDG kit distributions on Red Hat's Customer Portal at https://access.redhat.com/jbossnetwork/restricted/listSoftware.html
 
