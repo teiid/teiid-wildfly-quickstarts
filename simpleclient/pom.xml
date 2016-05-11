@@ -14,19 +14,10 @@
 	<description>The simpleclient demonstrates making connections to Teiid through both, a Driver and a DataSource</description>
 
 	<dependencies>
-		<dependency>
-            <groupId>org.jboss.teiid</groupId>
-            <artifactId>teiid</artifactId>
-            <classifier>jdbc</classifier>
-		</dependency>
-		<dependency>
-            <groupId>org.jboss.teiid</groupId>
-            <artifactId>teiid-common-core</artifactId>
- 		</dependency>
-		<dependency>
-            <groupId>org.jboss.teiid</groupId>
-            <artifactId>teiid-client</artifactId>
- 		</dependency>
+	        <dependency>
+                        <groupId>org.jboss.teiid</groupId>
+                        <artifactId>teiid-jdbc</artifactId>
+	        </dependency>
 	</dependencies>
 
     <profiles>
