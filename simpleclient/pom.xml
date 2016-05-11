@@ -59,6 +59,7 @@
                                         <argument>${vdb}</argument>
                                         <argument>${sql}</argument>
                                     </arguments>                   
+                    <cleanupDaemonThreads>false</cleanupDaemonThreads>
                 </configuration>
             </plugin>                              
                 </plugins>
