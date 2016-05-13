@@ -12,7 +12,7 @@
 	<groupId>org.jboss.teiid.quickstart</groupId>
 	<artifactId>teiid-quickstart-parent</artifactId>
 	<packaging>pom</packaging>
-	<version>3.0.0</version>
+	<version>4.0.0</version>
 	<name>Teiid Quickstart Parent</name>
 	<description>Quickstarts for the Teiid project</description>
 
