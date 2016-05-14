@@ -27,16 +27,12 @@ If you have not done so, please review the System Requirements [../README.md](..
 
 * JBoss application server to run Teiid
 * The Teiid Jboss distribution kit
-* The dynamicvdb-datafederation quickstart [../../dynamicvdb-datafederation/README.md] needs to be installed.
+* The vdb-datafederation quickstart [../../vdb-datafederation/README.md] needs to be installed.
 
 2.  JDG Prerequistes
 
 * JDG eap modules kit (used by Teiid to access the remote cache)
 	> NOTE: You can obtain JDG kit distributions on Red Hat's Customer Portal at https://access.redhat.com/jbossnetwork/restricted/listSoftware.html
-
-#  [PreRequistes] Dynamicvdb-datafederation quickstart
-
-*  Install dynamicvdb-datafederation quickstart [../../dynamicvdb-datafederation/README.md]
 
 # JDG Setup
 

@@ -13,14 +13,14 @@ Hibernate-on-top-of-teiid Quickstart
 
 Hibernate-on-top-of-teiid demonstrates how a hibernate4 application can take advantage of multiple data sources through
 a single Java Object by using the data federation capabilities of Teiid.  This example will extend the Portfolio VDB, which
-is deployed by the dynamicvdb-datafederation quickstart, and create a view that will be mapped to a single 
+is deployed by the vdb-datafederation quickstart, and create a view that will be mapped to a single 
 relationally mapped object in Hibernate.
 
 Hibernate is normally a 1 object to 1 data source mapping.  By using Teiid as the data source, the integration is no longer
 approached from integrating at the application layer, but done at the data layer.  Making it easier to join together related information to be exposed
 through Hibernate, rather than writing application code to merge related data.
 
-> NOTE: This example relies upon the dynamicvdb-datafederation example and that it needs to be deployed prior to running this example. Therefore, read the dynamicvdb-datafederation's README.md and follow its directions before continuing.
+> NOTE: This example relies upon the vdb-datafederation example and that it needs to be deployed prior to running this example. Therefore, read the vdb-datafederation's README.md and follow its directions before continuing.
 
 ## System requirements
 
@@ -38,7 +38,7 @@ This example produces a WAR that is designed to be run on JBoss Enterprise Appli
 
 ## Setup
 
-1) Run the setup in dynamicvdb-datafederation quick start
+1) Run the setup in vdb-datafederation quick start
 
 2) Make sure to start the server, if not already
 

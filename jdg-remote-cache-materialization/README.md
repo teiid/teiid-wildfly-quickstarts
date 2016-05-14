@@ -23,7 +23,7 @@ This quickstart demonstrates how Teiid can connect to a remote JBoss Data Grid (
 
 * JBoss application server to run Teiid
 * The Teiid Jboss distribution kit
-* The dynamicvdb-datafederation quickstart [../../dynamicvdb-datafederation/README.md] needs to be installed.
+* The vdb-datafederation quickstart [../../vdb-datafederation/README.md] needs to be installed.
 
 2.  JDG Server Prerequistes
 
@@ -50,9 +50,9 @@ Example:   ./standalone.sh -Djboss.socket.binding.port-offset=100
 For the purpose of this quick start, it assumes running both servers on the same machine and is expecting the JDG server to have its ports incremented.  The
 port adjustment has been made in the jdg.properties on the client side to match the above offset.
 
-#  [PreRequistes] Dynamicvdb-datafederation quickstart
+#  [PreRequistes] vdb-datafederation quickstart
 
-*  Install dynamicvdb-datafederation quickstart [../../dynamicvdb-datafederation/README.md]
+*  Install vdb-datafederation quickstart [../../vdb-datafederation/README.md]
 
 
 # Teiid jdg-remote-cache-materialization quickstart Setup

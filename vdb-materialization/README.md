@@ -6,12 +6,12 @@ Product Versions: DV 6.0+
 Source: https://github.com/teiid/teiid-quickstarts
 ---
 
-Dynamicvdb-materialization Quickstart
+vdb-materialization Quickstart
 ================================
 
 ## What is it?
 
-Dynamicvdb-materialization demonstrates how to configure external materialization to so that caching can be used to improve query performance. 
+vdb-materialization demonstrates how to configure external materialization to so that caching can be used to improve query performance. 
 
 *  VDB:   PortfolioMaterialize  
  
@@ -23,14 +23,14 @@ If you have not done so, please review the System Requirements [../README.md](..
 
 # PREREQUISTES
 
-* NOTE: This example relies upon the dynamicvdb-datafederation example and that it needs to be deployed prior to running this example. 
-	Therefore, read the dynamicvdb-datafederation's README.md and follow its directions before continuing.
+* NOTE: This example relies upon the vdb-datafederation example and that it needs to be deployed prior to running this example. 
+	Therefore, read the vdb-datafederation's README.md and follow its directions before continuing.
 
 
 ## Setup
 
 
-1) Run the setup in dynamicvdb-datafederation quick start
+1) Run the setup in vdb-datafederation quick start
 
 2)  Start the server, if not already started
 

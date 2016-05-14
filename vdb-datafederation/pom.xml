@@ -4,15 +4,15 @@
 	<parent>
 		<groupId>org.jboss.teiid.quickstart</groupId>
 		<artifactId>teiid-quickstart-parent</artifactId>
-		<version>3.0.0</version>
+		<version>4.0.0</version>
 	</parent>
 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.jboss.teiid.quickstart</groupId>
-	<artifactId>dynamicvdb-datafederation</artifactId>
+	<artifactId>vdb-datafederation</artifactId>
 	<packaging>pom</packaging>
 
-	<name>DynamicVDB Data Federation Quickstart</name>
+	<name>VDB Data Federation Quickstart</name>
 	<description>This quickstart demonstrates how to federate data from a relational data source with a text file-based data source.</description>
 
 </project>

@@ -1,12 +1,12 @@
 ---
 Level: Basic
-Technologies: Teiid, Dynamic VDB, Native Queries, VDB reuse, reading data from JDBC, delimited file and Excel File
+Technologies: Teiid, VDB, Native Queries, VDB reuse, reading data from JDBC, delimited file and Excel File
 Target Product: DV
 Product Versions: DV 6.0+
 Source: https://github.com/teiid/teiid-quickstarts
 ---
 
-Dynamicvdb-datafederation is the 'Hello World' example for Teiid.
+vdb-datafederation is the 'Hello World' example for Teiid.
 ================================
 
 ## VDB: 
@@ -16,7 +16,7 @@ Dynamicvdb-datafederation is the 'Hello World' example for Teiid.
 
 ## What is it?
 
-This quickstart demonstrates how to define a dynamic vdb to enable data federation across
+This quickstart demonstrates how to define a vdb to enable data federation across
 multiple data sources (i.e., relational and text file).   This will demonstrate the
 following: 
 
@@ -68,7 +68,7 @@ when complete, you should see $JBOSS_HOME/teiidfiles
 -  run the following CLI script
 
 	-	cd to the $JBOSS_HOME/bin directory
-	-	execute:  ./jboss-cli.sh --connect --file={path}/dynamicvdb-datafederation/src/scripts/setup.cli 
+	-	execute:  ./jboss-cli.sh --connect --file={path}/vdb-datafederation/src/scripts/setup.cli 
 
 4)  Teiid Deployment:
 

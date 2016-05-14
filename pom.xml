@@ -12,7 +12,7 @@
 	<groupId>org.jboss.teiid.quickstart</groupId>
 	<artifactId>teiid-quickstart-parent</artifactId>
 	<packaging>pom</packaging>
-	<version>3.0.0</version>
+	<version>4.0.0</version>
 	<name>Teiid Quickstart Parent</name>
 	<description>Quickstarts for the Teiid project</description>
 
@@ -27,22 +27,22 @@
 	</licenses>
 
 	<modules>
-        <module>dynamicvdb-datafederation</module>
-        <module>dynamicvdb-dataroles</module>
-	    <module>dynamicvdb-restservice</module>
-	    <module>dynamicvdb-materialization</module>
-        <module>hibernate-on-top-of-teiid</module>
-        <module>webservices-as-a-datasource</module>
-		<module>jdg-local-cache</module>
-		<module>jdg-local-cache-materialization</module>
-        <module>jdg-remote-cache</module>
-        <module>jdg-remote-cache-materialization</module>
-        <module>mongodb-as-a-datasource</module>
-        <module>ldap-as-a-datasource</module>
-		<module>hbase-as-a-datasource</module>
-		<module>drools-integration</module>
-        <module>simpleclient</module>
-		<module>socialMedia-as-a-datasource</module>
+            <module>vdb-datafederation</module>
+            <module>vdb-dataroles</module>
+	    <module>vdb-restservice</module>
+	    <module>vdb-materialization</module>
+            <module>hibernate-on-top-of-teiid</module>
+            <module>webservices-as-a-datasource</module>
+	    <module>jdg-local-cache</module>
+	    <module>jdg-local-cache-materialization</module>
+            <module>jdg-remote-cache</module>
+            <module>jdg-remote-cache-materialization</module>
+            <module>mongodb-as-a-datasource</module>
+            <module>ldap-as-a-datasource</module>
+	    <module>hbase-as-a-datasource</module>
+	    <module>drools-integration</module>
+            <module>simpleclient</module>
+	    <module>socialMedia-as-a-datasource</module>
 	</modules>
 
 	<properties>

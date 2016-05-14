@@ -3,14 +3,14 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <parent>
         <groupId>org.jboss.teiid.quickstart</groupId>
-        <artifactId>dynamicvdb-restservice</artifactId>
-        <version>3.0.0</version>
+        <artifactId>vdb-restservice</artifactId>
+        <version>4.0.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>dynamicvdb-restservice-client</artifactId>
+    <artifactId>vdb-restservice-client</artifactId>
 
-    <name>REST Service Through Portfolio Dynamic VDB HTTP Client</name>
-    <description>This quickstart demonstrates how to enable REST Service Through Portfolio Dynamic VDB HTTP Client</description>
+    <name>REST Service Through Portfolio VDB HTTP Client</name>
+    <description>This quickstart demonstrates how to enable REST Service Through Portfolio VDB HTTP Client</description>
 
     <dependencies>
         <dependency>
