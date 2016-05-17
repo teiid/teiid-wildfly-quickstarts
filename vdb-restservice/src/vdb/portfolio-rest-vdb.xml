@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <vdb name="PortfolioRest" version="1">
 
-    <description>The REST Service Through Portfolio Dynamic VDB</description>
+    <description>The REST Service Through Portfolio VDB</description>
     
     <!-- 
       Setting to use connector supplied metadata. Can be "true" or "cached".  
