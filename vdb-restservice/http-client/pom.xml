@@ -40,7 +40,7 @@
                     <arguments>
                         <argument>localhost</argument>
                         <argument>8080</argument>
-                        <argument>testUser</argument>
+                        <argument>restUser</argument>
                         <argument>password1!</argument>       
                     </arguments>
                 </configuration>

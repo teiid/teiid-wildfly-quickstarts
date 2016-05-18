@@ -51,20 +51,23 @@ import org.jboss.resteasy.client.jaxrs.engines.ApacheHttpClient4Engine;
 
 public class PortfolioClient {
 	
-	static String USERNAME = "testUser";
+    static String HOSTNAME = "localhost";
+    static String HOSTPORT = "8080";
+	static String USERNAME = "restUser";
 	static String PASSWORD = "password1!";
 	
-	String[] apis = {"http://localhost:8080/PortfolioRest_1/Rest/foo/1", 
-	                 "http://localhost:8080/PortfolioRest_1/Rest/getAllStocks", 
-	                 "http://localhost:8080/PortfolioRest_1/Rest/getAllStockById/1007",
-	                 "http://localhost:8080/PortfolioRest_1/Rest/getAllStockBySymbol/IBM"}; 
+	static String[] apilist = {"http://${hostname}:${port}/PortfolioRest_1/Rest/foo/1", 
+	                 "http://${hostname}:${port}/PortfolioRest_1/Rest/getAllStocks", 
+	                 "http://${hostname}:${port}/PortfolioRest_1/Rest/getAllStockById/1007",
+	                 "http://${hostname}:${port}/PortfolioRest_1/Rest/getAllStockBySymbol/IBM"}; 
+	static String[] apis = new String[apilist.length];
 	
 	/**
 	 * JAX-RS 2.0 Client API
 	 */
 	public void jaxrsClient() {
 		
-		System.out.println("JAX-RS 2.0 Client API\n");
+		System.out.println("JAX-RS 2.0 Client API");
 		
 		Client client = ClientBuilder.newBuilder().build();
 		String authString = getBasicAuthentication();
@@ -75,19 +78,29 @@ public class PortfolioClient {
 			                        .header(HttpHeaders.ACCEPT, MediaType.APPLICATION_XML)
 			                        .header(HttpHeaders.AUTHORIZATION, authString)
 			                        .get();
-			String value = response.readEntity(String.class);
-			System.out.println(value);
-			response.close();
+			if(response.getStatus() == 200){
+			    String value = response.readEntity(String.class);
+	            System.out.println(value);
+	            response.close();
+			} else {
+			    handleError(response);
+			}
+			
 		}
 		
 	}
 	
-	/**
+	private void handleError(Response response) {
+        System.out.println(response.getStatus() + ", " + response.getStatusInfo());
+        response.close();
+    }
+
+    /**
 	 * Resteasy Client API with JAX-RS 2.0 Client API
 	 */
 	public void resteasyClient(){
 		
-		System.out.println("\nResteasy Client API with JAX-RS 2.0 Client API\n");
+		System.out.println("\nResteasy Client API with JAX-RS 2.0 Client API");
 		
 		ResteasyClient client = new ResteasyClientBuilder().build();
 		String authString = getBasicAuthentication();
@@ -98,15 +111,19 @@ public class PortfolioClient {
                                     .header(HttpHeaders.ACCEPT, MediaType.APPLICATION_XML)
                                     .header(HttpHeaders.AUTHORIZATION, authString)
                                     .get();
-			String value = response.readEntity(String.class);
-			System.out.println(value);
-			response.close();
+			if(response.getStatus() == 200){
+                String value = response.readEntity(String.class);
+                System.out.println(value);
+                response.close();
+            } else {
+                handleError(response);
+            }
 		}
 	}
 	
 	public void resteasyHttpBackendClient() {
 		
-		System.out.println("\nResteasy Client API with HTTP client as engine\n");
+		System.out.println("\nResteasy Client API with HTTP client as engine");
 		
 		HttpHost targetHost = new HttpHost("localhost", 8080, "http");
 		
@@ -142,9 +159,13 @@ public class PortfolioClient {
                                     .header(HttpHeaders.ACCEPT, MediaType.APPLICATION_XML)
                                     .header(HttpHeaders.AUTHORIZATION, authString)
                                     .get();
-			String value = response.readEntity(String.class);
-			System.out.println(value);
-			response.close();
+			if(response.getStatus() == 200){
+                String value = response.readEntity(String.class);
+                System.out.println(value);
+                response.close();
+            } else {
+                handleError(response);
+            }
 		}
 	}
 	
@@ -153,18 +174,27 @@ public class PortfolioClient {
 		
 		String token = USERNAME + ":" + PASSWORD ;
 		String base64encoded = Base64.encodeBase64String(token.getBytes());
-		return "BASIC " + base64encoded ;
+		return "Basic " + base64encoded ;
 	}
 
     public static void main(String[] args) throws URISyntaxException, UnsupportedEncodingException {
         
-        if(args.length == 2) {
-        	USERNAME = args[0];
-        	PASSWORD = args[1];
+        if(args.length == 4) {
+            HOSTNAME = args[0];
+            HOSTPORT = args[1];
+        	USERNAME = args[2];
+        	PASSWORD = args[3];
+        }
+        
+        for(int i = 0 ; i <  apilist.length ; i ++){
+            String api = apilist[i];
+            api = api.replace("${hostname}", HOSTNAME);
+            api = api.replace("${port}", HOSTPORT);
+            apis[i] = api;
         }
         
         PortfolioClient client = new PortfolioClient();
-        
+                
         client.jaxrsClient();
         
         client.resteasyClient();
