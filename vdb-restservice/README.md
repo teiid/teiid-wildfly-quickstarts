@@ -12,9 +12,8 @@ This quickstart demonstrates:
 
 * how to define a vdb to enable a [REST Service Through VDB](https://docs.jboss.org/author/display/TEIID/REST+Service+Through+VDB).
 * how to use the httpclient api to integrate VDB data via REST
-* how to use the JAX-RS 2.0 Client API to integrate VDB data via REST with security authentication
-* how to use the Resteasy Client API with JAX-RS 2.0 Client API to integrate VDB data via REST
-* how to use the Resteasy Client API with HTTP client as engine to integrate VDB data via REST with security authentication
+* how to use the Resteasy Client to integrate VDB data via REST
+* how to use the Apache CXF WebClient to integrate VDB data via REST
 * how to use Swagger API Doc Page test all Rest API.
 
 This quickstart depends upon the [vdb-datafederation](../vdb-datafederation) quickstart.  It needs to be deployed prior to running this example.
@@ -83,3 +82,11 @@ $ mvn package exec:java
 
 > NOTE: If your teiid Server not run on localhost:8080, edit [resteasy-client/pom.xml](resteasy-client/pom.xml), to make sure arguments point to a correct hostname and port.
 
+### Run CXF Client
+
+~~~
+$ cd cxf-client/
+$ mvn package exec:java
+~~~
+
+> NOTE: If your teiid Server not run on localhost:8080, edit [cxf-client/pom.xml](cxf-client/pom.xml), to make sure arguments point to a correct hostname and port.
