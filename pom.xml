@@ -33,8 +33,6 @@
 	    <module>dynamicvdb-materialization</module>
         <module>hibernate-on-top-of-teiid</module>
         <module>webservices-as-a-datasource</module>
-		<module>jdg-local-cache</module>
-		<module>jdg-local-cache-materialization</module>
         <module>jdg-remote-cache</module>
         <module>jdg-remote-cache-materialization</module>
         <module>mongodb-as-a-datasource</module>
