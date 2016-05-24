@@ -43,7 +43,7 @@ public class PortfolioHTTPClient {
         
         String hostname = "localhost";
         int port = 8080;
-        String username = "testUser";
+        String username = "restUser";
         String password = "password1!";
         if(args.length == 4) {
             hostname = args[0];
