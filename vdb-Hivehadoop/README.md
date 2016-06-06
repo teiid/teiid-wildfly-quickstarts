@@ -4,7 +4,7 @@
 
 ## What's this
 
-This example demonstrates using the JNDI to access data in Hive. Dynamic VDB [hive-vdb.xml](src/main/resources/hive-vdb.xml) be used to define View within DDL metadata.
+This example demonstrates using the JNDI to access data in Hive. Dynamic VDB [hive-vdb.xml](src/vdb/hive-vdb.xml) be used to define View within DDL metadata.
 
 The examples use `java:/hiveDS` referenced with Hive data source, which will be setup by running [setup.cli](src/scripts/setup.cli)
 
@@ -14,12 +14,12 @@ The examples use `java:/hiveDS` referenced with Hive data source, which will be 
 
 **1.** Hadoop Services
 
-Refer to [../README.md](../README.md) **Prerequisites** section to install Hadoop and start Hadoop Services
+Refer to [teiid-embedded-examples/README.md](https://github.com/teiid/teiid-embedded-examples/blob/master/bigdata-integration/README.md) **Prerequisites** section to install Hadoop and start Hadoop Services
 
 
 **2.** Hive Services 
 
-Refer to [../README.md](../README.md) **Prerequisites** section to install Hive and start HiveServer2
+Refer to [teiid-embedded-examples/README.md](https://github.com/teiid/teiid-embedded-examples/blob/master/bigdata-integration/README.md) **Prerequisites** section to install Hive and start HiveServer2
 
  
 **3.** Create Hive Table 
