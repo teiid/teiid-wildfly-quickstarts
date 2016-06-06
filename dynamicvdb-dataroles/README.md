@@ -116,7 +116,7 @@ example queries:
 Since this simpleclient example defaults user and password to user/user, modify the call to include the user name and password on the command line 
 where user name "portfolio" and password "portfolio" and re-execute the above:
 
-Example:   mvn install -Dvdb="portfolio" -Dusername="portfolio" -Dpassword="portfolio" -Dsql="example query"
+Example:   mvn exec:java -Dvdb="portfolio" -Dusername="portfolio" -Dpassword="portfolio" -Dsql="example query"
 
 1.	should be the same result as above
 
