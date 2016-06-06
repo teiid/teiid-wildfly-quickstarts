@@ -1,10 +1,10 @@
 | **Datasource** | **Level** | **Technologies** | **Prerequisites** | **Description** |
 |:---------|:----------|:-----------------|:------------------|:----------------|
-|Hadoop, Hive |Beginner |Teiid, Dynamic VDB, View, Hive Translator |Hadoop Services, HiveServer2 |Demonstrates using JNDI to access data in Hadoop | Hive
+|Hadoop, Hive |Beginner |Teiid, Dynamic VDB, View, Hive Translator |Hadoop Services, HiveServer2 |Demonstrates using Hive translator to access data in Hadoop | Hive
 
 ## What's this
 
-This example demonstrates using the JNDI to access data in Hive. Dynamic VDB [hive-vdb.xml](src/vdb/hive-vdb.xml) be used to define View within DDL metadata.
+This example demonstrates using the Hive translator with HiveServer2 JDBC Driver to access data in Hadoop HDFS. Dynamic VDB [hive-vdb.xml](src/vdb/hive-vdb.xml) be used to define View within DDL metadata.
 
 The examples use `java:/HiveDS` referenced with Hive data source, which will be setup by running [setup.cli](src/scripts/setup.cli)
 
@@ -14,12 +14,12 @@ The examples use `java:/HiveDS` referenced with Hive data source, which will be 
 
 **1.** Hadoop Services
 
-Refer to [teiid-embedded-examples/README.md](https://github.com/teiid/teiid-embedded-examples/blob/master/bigdata-integration/README.md) **Prerequisites** section to install Hadoop and start Hadoop Services
+Refer to [teiid-embedded-examples/README.md](../../teiid-embedded-examples/blob/master/bigdata-integration/README.md) **Prerequisites** section to install Hadoop and start Hadoop Services
 
 
 **2.** Hive Services 
 
-Refer to [teiid-embedded-examples/README.md](https://github.com/teiid/teiid-embedded-examples/blob/master/bigdata-integration/README.md) **Prerequisites** section to install Hive and start HiveServer2
+Refer to [teiid-embedded-examples/README.md](../../teiid-embedded-examples/blob/master/bigdata-integration/README.md) **Prerequisites** section to install Hive and start HiveServer2
 
  
 **3.** Create Hive Table 
@@ -59,7 +59,7 @@ To start the server, open a command line and navigate to the "bin" directory und
 	for Windows: standalone.bat
 
  
-**3.** Setup the hive datasource and file resource adapter
+**3.** Setup the hive datasource adapter
 
 -  run the following CLI script
 
@@ -76,6 +76,7 @@ Copy (deploy) the following VDB related files to the $JBOSS_HOME/standalone/depl
 
 	* hive VDB
     	- src/vdb/hive-vdb.xml
+    	- src/vdb/hive-vdb.xml.dodeploy
    
 
  
