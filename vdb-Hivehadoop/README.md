@@ -1,115 +1,100 @@
 | **Datasource** | **Level** | **Technologies** | **Prerequisites** | **Description** |
 |:---------|:----------|:-----------------|:------------------|:----------------|
-|Hadoop, Hive |Beginner |Teiid, Dynamic VDB, View, Hive Translator |Hadoop Services, HiveServer2 |Demonstrates using the Hive Translator with HiveServer2 JDBC Driver to access data in Hadoop HDFS |
+|Hadoop, Hive |Beginner |Teiid, Dynamic VDB, View, Hive Translator |Hadoop Services, HiveServer2 |Demonstrates using JNDI to access data in Hadoop | Hive
 
 ## What's this
 
-This example demonstrates using the Hive Translator with HiveServer2 JDBC Driver to access data in Hadoop HDFS. Dynamic VDB [hive-vdb.xml](src/main/resources/hive-vdb.xml) be used to define View within DDL metadata.
+This example demonstrates using the JNDI to access data in Hive. Dynamic VDB [hive-vdb.xml](src/main/resources/hive-vdb.xml) be used to define View within DDL metadata.
 
-The examples use `java:/hiveDS` referenced with HiveServer2 data source, which will be setup automatically while the examples start running.
+The examples use `java:/hiveDS` referenced with Hive data source, which will be setup by running [setup.cli](src/scripts/setup.cli)
 
 ## Prerequisites
+
+###1.Setup Hadoop/Hive
 
 **1.** Hadoop Services
 
 Refer to [../README.md](../README.md) **Prerequisites** section to install Hadoop and start Hadoop Services
 
 
-**2.** HiveServer2 
+**2.** Hive Services 
 
 Refer to [../README.md](../README.md) **Prerequisites** section to install Hive and start HiveServer2
 
-**3.** Load Sample Data
-
+ 
+**3.** Create Hive Table 
 With above 2 setps use the following commands to load [hive-sample.txt](src/main/resources/hive-sample.txt):
 
 ~~~
 $ ./bin/hive
 hive> CREATE TABLE IF NOT EXISTS employee (eid int, name String, salary String, destination String);
-hive> LOAD DATA LOCAL INPATH '/path/to/hive-sample.txt' OVERWRITE INTO TABLE employee;
+hive> LOAD DATA LOCAL INPATH '{path}/vdb-Hivehadoop/src/data/hive-sample.txt' OVERWRITE INTO TABLE employee;
+~~~
+ 
+
+
+###2. Setup Teiid Server
+  Assumed that you have already installed Teiid,and added users. If not, you can use
+  
+~~~
+  $ ./bin/add-user.sh -a -u teiidUser -p password1! -g user  
+  $ ./bin/add-user.sh admin password1!  
 ~~~
 
-**4.** Edit JDBC Parameters
 
-Edit [hive.properties](src/main/resources/hive.properties) make sure it point to a running HiveServer2.
+**1.** Hive driver
 
-## Dependencies
+Install Hive driver module. Download TeiidModule-Hive12.zip and copy it into your server installation in the /jboss-eap-6.1/modules folder. unzip it. That's all. Do not modify the $JBOSS_HOME/standlone/configuration/standlone.xml. 
 
-To add Teiid runtime, admin
+Refer to [ConnectToAHadoopSourceUsingHive2](https://developer.jboss.org/wiki/ConnectToAHadoopSourceUsingHive2)
 
-~~~
-<dependency>
-    <groupId>org.jboss.teiid</groupId>
-    <artifactId>teiid-runtime</artifactId>
-    <version>${version.teiid}</version>
-</dependency>
-<dependency>
-    <groupId>org.jboss.teiid</groupId>
-    <artifactId>teiid-admin</artifactId>
-    <version>${version.teiid}</version>
-</dependency>
-~~~
 
-To add Translators and Resource Adapters
 
-~~~
-<dependency>
-    <groupId>org.jboss.teiid.connectors</groupId>
-    <artifactId>translator-hive</artifactId>
-    <version>${version.teiid}</version>
-</dependency>
-<dependency>
-    <groupId>org.jboss.teiid.connectors</groupId>
-    <artifactId>translator-jdbc</artifactId>
-    <version>${version.teiid}</version>
-</dependency>
-<dependency>
-    <groupId>org.jboss.narayana.jta</groupId>
-    <artifactId>narayana-jta</artifactId>
-    <version>${version.narayana}</version>
-</dependency>
-<dependency>
-    <groupId>org.jboss.ironjacamar</groupId>
-    <artifactId>ironjacamar-jdbc</artifactId>
-    <version>${version.ironjacamar}</version>
-</dependency>
-<dependency>
-    <groupId>org.jboss.ironjacamar</groupId>
-    <artifactId>ironjacamar-core-api</artifactId>
-    <version>${version.ironjacamar}</version>
-</dependency>
-<dependency>
-    <groupId>org.jboss.ironjacamar</groupId>
-    <artifactId>ironjacamar-core-impl</artifactId>
-    <version>${version.ironjacamar}</version>
-</dependency>
+
+**2.**  Start the server
+
+To start the server, open a command line and navigate to the "bin" directory under the root directory of the JBoss server and run:
+	
+	For Linux:   ./standalone.sh	
+	for Windows: standalone.bat
+
+ 
+**3.** Setup the hive datasource and file resource adapter
+
+-  run the following CLI script
+
+	-	cd to the $JBOSS_HOME/bin directory
+	-	execute:  ./jboss-cli.sh --connect --file={path}/vdb-Hivehadoop/src/scripts/setup.cli 
+	
+	Maybe you need modify the connection-url=jdbc:hive2://{host-name}:10000/default to your URL
+	
+	 Example : connection-url=jdbc:hive2://127.0.0.1:10000/default
+
+**4.**  Teiid Deployment:
+
+Copy (deploy) the following VDB related files to the $JBOSS_HOME/standalone/deployments directory
+
+	* hive VDB
+    	- src/vdb/hive-vdb.xml
+   
+
+ 
+## Query Demonstrations
+
+==== Using the simpleclient example ====
+
+1) Change your working directory to "${quickstart.install.dir}/simpleclient"
+
+2) Use the simpleclient example to run the following queries:
+
+Example:   
 ~~~
 
-To add thirdpart dependency
+mvn clean install
 
-~~~
-<dependency>
-    <groupId>org.apache.hive</groupId>
-    <artifactId>hive-jdbc</artifactId>
-    <version>${version.apache.hive}</version>
-</dependency>		
-<dependency>
-    <groupId>org.apache.hadoop</groupId>
-    <artifactId>hadoop-core</artifactId>
-    <version>${version.apache.hadoop}</version>
-</dependency>
-~~~
+mvn exec:java -Dvdb="hadoop" -Dsql="SELECT * FROM EMPLOYEEVIEW" -Dusername="teiidUser" -Dpassword="password1!"
+~~~ 
 
-## Run
 
-* Run from Source code
 
-Import source code to a IDE(Eclipse), run TeiidEmbeddedHadoopDataSource as Java Application.
-
-* Run from mvn
-
-~~~
-$ cd teiid-embedded-examples/bigdata-integration/hadoop-integration-hive
-$ mvn clean install
-$ mvn exec:java
-~~~
+ 

@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<vdb name="hivevdb" version="1">
+<vdb name="hadoop" version="1">
 
-	<property name="UseConnectorMetadata" value="true" />
-
-   <model name="HiveServer2Source">
-        <property name="importer.useFullSchemaName" value="false"/>
-        <source name="hive-connector" translator-name="translator-hive" connection-jndi-name="java:/hive-ds"/>
-    </model>
+    <description>Shows how to query Hadoop using Hive</description>
     
+    <property name="UseConnectorMetadata" value="cached"/>
+    
+    <model name="Hadoop">
+	<source name="Hive connector" translator-name="hive" connection-jndi-name="java:/HiveDS"/>
+    </model>
+	 
     <model name="EmployeeModel" type="VIRTUAL">
         
         <metadata type="DDL"><![CDATA[
@@ -19,11 +20,11 @@
         	destination string
         )
         AS
-        SELECT E.eid, E.name, E.salary, E.destination FROM employee AS E;
+        SELECT E.eid, E.name, E.salary, E.destination FROM Testemployee AS E;
          ]]> </metadata>
     </model>
     
-     <translator name="translator-hive" type="hive">
+     <translator name="hive" type="hive">
         <property name="SupportsNativeQueries" value="true"/>
     </translator>
     
