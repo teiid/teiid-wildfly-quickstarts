@@ -80,5 +80,5 @@ queries below.
 ### Twitter Data Source
 
 ~~~s
-mvn install -Dvdb="twitter" -Dsql="select * from TwitterUserTimelineView" -Dusername="xx" -Dpassword="xx"
+mvn exec:java -Dvdb="twitter" -Dsql="select * from TwitterUserTimelineView" -Dusername="xx" -Dpassword="xx"
 ~~~
