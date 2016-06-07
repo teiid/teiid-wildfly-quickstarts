@@ -1,0 +1,5 @@
+/subsystem=datasources/jdbc-driver=hive:add(driver-name=hive,driver-module-name=org.apache.hadoop.hive12,driver-class-name=org.apache.hive.jdbc.HiveDriver)
+/subsystem=datasources/data-source=hive:add(jndi-name=java:/HiveDS,driver-name=hive,connection-url=jdbc:hive2://{host-name}:10000/default,user-name={user},password={password})
+
+/:reload
+ 
