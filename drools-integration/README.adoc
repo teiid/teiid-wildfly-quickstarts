@@ -1,0 +1,111 @@
+
+|===
+|Level |Technologies |Target Product |Product Versions |Source
+
+|Intermediate
+|Teiid, BRMS, Drools, User Defined Function
+|DV, BRMS
+|DV 6.1
+|https://github.com/teiid/teiid-quickstarts
+|===
+
+== What is it?
+
+*drools-integration* demonstrates how a business rule can be triggered via a User Defined Function (UDF).
+
+== System requirements
+
+* link:../README.adoc#_downloading_and_installing_java[Java]
+* link:../README.adoc#_downloading_and_installing_maven[Maven]
+* link:../README.adoc#_downloading_and_installing_teiid[Teiid Server]
+* link:../simpleclient/README.adoc[Simple Client]
+
+== Setup and Deployment
+
+=== 1. Setup the server
+
+* Generate UDF jar and dependencies jars
+
+Using the Maven build and copy dependencies:
+
+[source,xml]
+----
+$ cd teiid-quickstarts/drools-integration/
+$ mvn clean install dependency:copy-dependencies -s ../settings.xml
+----
+
+NOTE - This will generate `drools-integration.jar` and `dependency` under target folder.
+
+* Install drools as a module
+
+Copy src/modules/org to $JBOSS_HOME
+
+[source,xml]
+----
+$ cp -r src/modules/org/ $JBOSS_HOME/modules
+----
+
+Copy all dependency jars to drools module
+
+[source,xml]
+----
+$ cp target/dependency/*.jar $JBOSS_HOME/modules/org/drools/main
+----
+
+NOTE: If you want get a Supported version of Drools libraries, please Download `Red Hat JBoss BRMS 6 Maven Repository` from https://access.redhat.com/jbossnetwork/restricted/listSoftware.html product=brms&downloadType=distributions[Red Hat Customer Portal] and Install Red Hat support libraries as drools module.
+
+* Install drools-integration module
+
+Execute CLI command to install drools-integration module
+
+[source,xml]
+----
+module add --name=org.jboss.teiid.drools --resources=/path/to/drools-integration.jar --dependencies=javax.api,org.slf4j,org.drools,org.jboss.teiid.api
+----
+
+* Start the server
+
+To start the server, open a command line and navigate to the "bin" directory under the root directory of the Teiid server and run:
+
+[source,xml]
+----
+./standalone.sh //For Linux
+standalone.bat //for Windows
+----
+
+If Teiid isn't configured in the default configuration, append the following arguments to the command to specify the configuration `-c {configuration.file}`
+
+[source,xml]
+.*Example*
+----
+./standalone.sh -c standalone-teiid.xml
+----
+
+=== 2. Teiid Deployment
+
+Copy the following files to the "/standalone/deployments" directory
+
+[source,xml]
+----
+src/vdb/drools-vdb.xml
+src/vdb/drools-vdb.xml.dodeploy
+----
+
+Open the admin console(http://localhost:9990/console) to make sure the VDB is deployed. See <<Query Demonstrations, Query Demonstrations>> below to demonstrate query User Defined Function.
+
+== Query Demonstrations
+
+=== Using the simpleclient
+
+1.  Change your working directory to "${quickstart.install.dir}/simpleclient"
+2.  Use the simpleclient example to run the following queries:
+
+Example: mvn exec:java -Dvdb="portfolio" -Dsql="example query" -Dusername="xx" -Dpassword="xx"
+
+[source,sql]
+.*Example of query User Defined Function*
+----
+SELECT performRuleOnData('org.jboss.teiid.drools.Message', 'Hello World', 0) FROM FOO
+----
+
+NOTE: depending on your OS/Shell the quoting/escaping required to run the example can be complicated. It would be better to install a Java client, such as SQuirreL, to run the queries.

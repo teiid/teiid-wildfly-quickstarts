@@ -42,7 +42,7 @@
 	    <module>hbase-as-a-datasource</module>
 	    <module>drools-integration</module>
             <module>simpleclient</module>
-	    <module>socialMedia-as-a-datasource</module>
+	    <module>twitter-as-a-datasource</module>
 	    <module>hive-as-a-datasource</module>
 	</modules>
 

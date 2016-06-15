@@ -1,0 +1,99 @@
+
+= Hibernate-on-top-of-teiid Quickstart
+
+|===
+|Level |Technologies |Target Product |Product Versions |Source
+
+|Intermmediate
+|Teiid, Hibernate
+|DV
+|DV 6.0+
+|https://github.com/teiid/teiid-quickstarts
+|===
+
+== What is it?
+
+Hibernate-on-top-of-teiid demonstrates how a hibernate4 application can take advantage of multiple data sources through a single Java Object by using the data federation capabilities of Teiid. This example will extend the Portfolio VDB, which is deployed by the vdb-datafederation quickstart, and create a view that will be mapped to a single relationally mapped object in Hibernate.
+
+Hibernate is normally a 1 object to 1 data source mapping. By using Teiid as the data source, the integration is no longer approached from integrating at the application layer, but done at the data layer. Making it easier to join together related information to be exposed through Hibernate, rather than writing application code to merge related data.
+
+NOTE: This example relies upon the vdb-datafederation example and that it needs to be deployed prior to running this example. Therefore, read the vdb-datafederation’s README.md and follow its directions before continuing.
+
+== System requirements
+
+* link:../README.adoc#_downloading_and_installing_java[Java]
+* link:../README.adoc#_downloading_and_installing_maven[Maven]
+* link:../README.adoc#_downloading_and_installing_teiid[Teiid Server]
+
+This example produces a WAR that is designed to be run on JBoss Enterprise Application Platform 6 or {{ book.asName }}.
+
+NOTE: Correct Dependencies - Please note this example does not support working with Hibernate 3.
+
+NOTE: This example relies upon the vdb-datafederation example and that it needs to be deployed prior to running this example. Therefore, read the vdb-datafederation's README and follow its directions before continuing.
+
+== Setup
+
+=== 1. Build the project
+
+Open a command line and navigate to the root directory of this quickstart
+
+----
+mvn clean install
+----
+
+=== 2. Run vdb-datafederation
+
+Refer to link:../vdb-datafederation/README.adoc[vdb-datafederation/README.adoc] to run vdb-datafederation.
+
+=== 3. Start the server
+
+To start the server, open a command line and navigate to the "bin" directory under the root directory of the Teiid server and run:
+
+[source,xml]
+----
+./standalone.sh //For Linux
+standalone.bat //for Windows
+----
+
+If Teiid isn't configured in the default configuration, append the following arguments to the command to specify the configuration `-c {configuration.file}`
+
+[source,xml]
+.*Example*
+----
+./standalone.sh -c standalone-teiid.xml
+----
+
+=== 4. VDB Deployment
+
+Copy the following files to the "/standalone/deployments" directory
+
+----
+src/main/vdb/hibernate-portfolio-vdb.xml
+src/main/vdb/hibernate-portfolio-vdb.xml.dodeploy
+-----
+
+=== 5. Application Deployment
+
+4.  Deploy the web application buy running the following command:
+
+-----
+mvn package jboss-as:deploy
+-----
+
+NOTE:  To undeploy the web application run the following command via executing `mvn package jboss-as:undeploy`, to undeploy the Teiid VDB, delete the hibernate-portfolio-vdb.xml, from the directory "/standalone/deployments".
+
+Open the admin console(http://localhost:9990/console) to make sure the VDB is deployed. See <<Query Demonstrations, Query Demonstrations>> below to demonstrate query.
+
+== Query Demonstrations
+
+=== Access the application
+
+The application will be running at the following URL: http://localhost:8080/hibernate-on-top-of-teiid/.
+
+The page should display a list of products. To add (Register) a new product, enter the following:
+
+* Product ID (must be unique)
+* Company Name
+* Stock Symbol
+
+NOTE: the Stock Symbol entered must exist in the marketdata-price.txt file. For convenience, RHT has already been added to the file that doesn't currently exist in the Products table.

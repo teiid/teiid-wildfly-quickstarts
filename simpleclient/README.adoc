@@ -1,0 +1,63 @@
+
+= Simpleclient Quickstart
+
+|===
+|Level |Technologies |Target Product |Product Versions |Source
+
+|Beginners
+|Teiid, JDBC
+|DV
+|DV 6.1
+|https://github.com/teiid/teiid-quickstarts
+|===
+
+== What is it?
+
+Simpleclient quickstart demonstrates how to make a connection to Teiid using both a Driver and a DataSource.
+
+The link:src/main/java/JDBCClient.java[JDBCClient.java] is the example code that shows a developer the basic connection logic that can be used to connect to a Teiid instance running in a {{ book.asName }}.
+
+The program expects four arguments . The pom.xml defines these arguments in the pom.xml:
+
+[source,xml]
+----
+<mainClass>JDBCClient</mainClass>
+<arguments>
+    <argument>localhost</argument>  <!-- host -->
+    <argument>31000</argument>   <!--  port -->
+    <argument>${vdb}</argument>
+    <argument>${sql}</argument>
+</arguments>
+----
+
+NOTE: Notice that the and are preset. To point to a different server and/or port, change "localhost" and/or "31000" arguments, respectively, in the pom.xml.
+
+== System requirements
+
+* link:../README.adoc#_downloading_and_installing_java[Java]
+* link:../README.adoc#_downloading_and_installing_maven[Maven]
+* link:../README.adoc#_downloading_and_installing_teiid[Teiid Server]
+
+== Build
+
+First, build the project by running
+
+[source,xml]
+----
+mvn clean install
+----
+
+== Execution
+
+To execute a sql query using the simpleclient, use the following format:
+
+[source,xml]
+----
+mvn exec:java -Dvdb="<vdb>" -Dsql="<sql>"
+----
+
+Example: mvn exec:java -Dvdb="twitter" -Dsql="select * from tweet where query= 'jboss'" -Dusername="teiidUser" -Dpassword="pwd"
+
+Note that the query is in quotes so that it is understood as a single argument.
+
+NOTE: To run more advanced queries, it would be better a fully featured Java client, such as SQuirreL [http://www.squirrelsql.org/].
