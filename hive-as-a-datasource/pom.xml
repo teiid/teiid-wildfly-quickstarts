@@ -9,10 +9,10 @@
 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.jboss.teiid.quickstart</groupId>
-	<artifactId>vdb-HiveHadoop</artifactId>
+	<artifactId>hive-as-a-datasource</artifactId>
 	<packaging>pom</packaging>
 
-	<name>VDB Data Using Hadoop/Hive Quickstart</name>
-	<description>This quickstart demonstrates how to federate data from Hive data source.</description>
+	<name>VDB Using Hadoop/Hive Quickstart</name>
+	<description>This quickstart demonstrates using Hive translator to access data in Hadoop/Hive</description>
 
 </project>
