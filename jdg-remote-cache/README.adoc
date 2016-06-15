@@ -27,10 +27,9 @@ This quickstart demonstrates how Teiid can connect to a remote JBoss Data Grid (
 
 NOTE: You can obtain JDG kit distributions on Red Hat's Customer Portal at https://access.redhat.com/jbossnetwork/restricted/listSoftware.html
 
+== Setup
 
-[[jdg-setup]]
-JDG setup
----------
+===JDG setup
 
 1.  Setup JDG Server
 
