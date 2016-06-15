@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<vdb name="hadoop" version="1">
+
+    <description>Shows how to query Hadoop using Hive</description>
+    
+    <property name="UseConnectorMetadata" value="cached"/>
+    
+    <model name="Hadoop">
+	<source name="Hive connector" translator-name="hive" connection-jndi-name="java:/HiveDS"/>
+    </model>
+	 
+    <model name="EmployeeModel" type="VIRTUAL">
+        
+        <metadata type="DDL"><![CDATA[
+
+		CREATE VIEW EMPLOYEEVIEW (
+        	id integer,
+        	name string,
+        	salary string,
+        	destination string
+        )
+        AS
+        SELECT E.eid, E.name, E.salary, E.destination FROM Testemployee AS E;
+         ]]> </metadata>
+    </model>
+    
+     <translator name="hive" type="hive">
+        <property name="SupportsNativeQueries" value="true"/>
+    </translator>
+    
+</vdb>
