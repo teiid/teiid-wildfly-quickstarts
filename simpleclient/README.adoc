@@ -1,5 +1,5 @@
 
-= Simpleclient Quickstart
+= Simple Java Client
 
 |===
 |Level |Technologies |Target Product |Product Versions |Source
@@ -13,7 +13,7 @@
 
 == What is it?
 
-Simpleclient quickstart demonstrates how to make a connection to Teiid using both a Driver and a DataSource.
+The sample client example can be used to test your sql queries against any server running a compatible Teiid Runtime and has an active VDB. This example will also be referenced by many of the other quick starts as a means to test suggested queries. Be sure to read the README for that quick start in order to setup the environment correctly before executing a test query. 
 
 The link:src/main/java/JDBCClient.java[JDBCClient.java] is the example code that shows a developer the basic connection logic that can be used to connect to a Teiid instance running in a {{ book.asName }}.
 
@@ -32,7 +32,7 @@ The program expects four arguments . The pom.xml defines these arguments in the 
 
 NOTE: Notice that the and are preset. To point to a different server and/or port, change "localhost" and/or "31000" arguments, respectively, in the pom.xml.
 
-== System requirements
+== Prerequisites
 
 * link:../README.adoc#_downloading_and_installing_java[Java]
 * link:../README.adoc#_downloading_and_installing_maven[Maven]
@@ -40,7 +40,7 @@ NOTE: Notice that the and are preset. To point to a different server and/or port
 
 == Build
 
-First, build the project by running
+Build the project by running
 
 [source,xml]
 ----
@@ -53,11 +53,15 @@ To execute a sql query using the simpleclient, use the following format:
 
 [source,xml]
 ----
-mvn exec:java -Dvdb="<vdb>" -Dsql="<sql>"
+mvn exec:java -Dvdb="<vdb>" -Dsql="<sql>" -Dusername="<username>" -Dpassword="<password>"
 ----
 
-Example: mvn exec:java -Dvdb="twitter" -Dsql="select * from tweet where query= 'jboss'" -Dusername="teiidUser" -Dpassword="pwd"
+[source,java]
+.*A Example Executions*
+----
+mvn exec:java -Dvdb="twitter" -Dsql="select * from tweet where query= 'jboss'"
+mvn exec:java -Dvdb="Portfolio" -Dsql="select * from Stock"
+mvn exec:java -Dvdb="ExcelVDB" -Dsql="select * from PersonalHoldings"
+----
 
-Note that the query is in quotes so that it is understood as a single argument.
-
-NOTE: To run more advanced queries, it would be better a fully featured Java client, such as SQuirreL [http://www.squirrelsql.org/].
+NOTE: The query is in quotes so that it is understood as a single argument. To run more advanced queries, it would be better a fully featured Java client, such as link:./SQuirreL.adoc[SQuirreL Client].

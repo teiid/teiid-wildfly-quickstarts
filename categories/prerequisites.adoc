@@ -1,0 +1,378 @@
+
+= Prerequisites
+:toc: manual
+:toc-placement: preamble
+
+This page including instructions for installing or set up Quickstarts prerequisites.
+
+== Downloading and installing Java
+
+First things first, Teiid Server and Teiid Quick Starts needs at least a Java Runtime Environment (aka JRE) version 1.7, but as we will also develop some applications, we will need a Java Development Kit(aka JDK).
+
+Downloading Java 7 or later version:
+
+* http://openjdk.java.net/install/[OpenJDK]
+* http://www.oracle.com/technetwork/java/javase/index-137561.html[Oracle]
+
+[source,java]
+.*Example of Install OpenJDK on Fedora*
+----
+$ tar zxvf jdk-8u25-linux-x64.tar.gz -C ~/jdk8
+
+$ export JAVA_HOME=~/jdk8
+$ export PATH=$JAVA_HOME/bin:$PATH
+
+$ java -version
+java version "1.8.0_25"
+Java(TM) SE Runtime Environment (build 1.8.0_25-b17)
+Java HotSpot(TM) 64-Bit Server VM (build 25.25-b02, mixed mode)
+----
+
+NOTE: If you are a system administrator you might want to download and install only the JRE package.
+
+== Downloading and installing Maven
+
+To run Teiid Quick Starts needs Maven 3. Download Maven from http://maven.apache.org/. Follow the official Maven installation guide if you don't already have Maven 3 installed. 
+
+[source,java]
+.*Example of install Maven on Fedora*
+----
+$ unzip apache-maven-3.2.5-bin.zip
+
+$ export M3_HOME="/usr/maven/apache-maven-3.2.5"  
+$ export PATH="$M3_HOME/bin:$PATH"  
+$ export MAVEN_OPTS="-Xms256m -Xmx1024m -XX:MaxPermSize=512m"  
+
+$ mvn --version
+Apache Maven 3.2.5
+----
+
+NOTE: In Linux Server(Fedora/Red Hat Linux), edit .bash_profile add `mvn` to path. 
+
+== Downloading and installing Teiid
+
+To run the Teiid Quick Starts needs Teiid Server. You can either download Teiid Server(Teiid Runtime) from http://teiid.jboss.org/downloads/, or install from Teiid Source Code https://github.com/teiid/teiid.
+
+=== Installing Teiid from distribution
+
+* unzip the downloaded file into directory. Do NOT choose a directory with SPACES in them. So, do not install into "Program Files" on windows, choose something like "c:\dv"
+
+[source,java]
+.*Example of install Teiid on Fedora*
+----
+$ unzip teiid-9.0.0.Final-wildfly-server.zip
+----
+
+* change directory into the installed directory. Like "cd c:\dv\teiid-9.0.0.Final". Below in the script this is represented as "<wildfly>" whenever this directory is referenced.
+
+* We need al lease create "two" different users to work with, an "admin" user and a "application" user. Admin user for any management purposes, Application user for the applications. Refer to <<Create users, Create users>> for details.
+
+Refer to https://teiid.gitbooks.io/documents/content/admin/Installation_Guide.html[Teiid Installation] for a completed Teiid Server installation guide.
+
+=== Installing Teiid from souce code
+
+Alternatively, you can install Teiid Server from https://github.com/teiid/teiid[source code].
+
+After <<Downloading and installing Java, Downloading and installing Java>>, <<Downloading and installing Maven, Downloading and installing Maven>> and https://help.github.com/articles/set-up-git/[Set Up Git], clone https://github.com/teiid/teiid[source code], build Teiid Server dist:
+
+[source,java]
+----
+$ git clone https://github.com/<yourname>/teiid.git
+$ cd teiid
+$ mvn clean install -P release -Dmaven.javadoc.skip=true -s settings.xml
+----
+
+To install Teiid Server in Standalone Mode:
+
+[source,java]
+----
+$ unzip build/target/teiid-VERSION-SNAPSHOT-wildfly-server.zip
+$ cd teiid-VERSION/
+$ ./bin/standalone.sh  
+$ ./bin/jboss-cli.sh --connect --file=bin/scripts/teiid-standalone-mode-install.cli 
+---- 
+
+To install Teiid Server in Domain Mode:
+
+[source,java]
+----
+$ unzip build/target/teiid-VERSION-SNAPSHOT-wildfly-server.zip
+$ cd teiid-VERSION/
+$ ./bin/domain.sh
+$ ./bin/jboss-cli.sh --connect --file=bin/scripts/teiid-domain-mode-install.cli 
+----
+
+=== Create users
+
+The Users used in Teiid Server/Quickstarts including dashboardUser, teiidUser, restUser, odataUser, ManagementUser are necessary for running Teiid Quick Starts, to create user, execute following and follow the instructions 
+
+[source,java]
+----
+bin\add-user.sh
+----
+
+[source,java]
+.*Example of creating Admin user*
+----
+What type of user do you wish to add?
+ a) Management User (mgmt-users.properties)
+ b) Application User (application-users.properties)
+(a): a
+ 
+Enter the details of the new user to add.
+Using realm 'ManagementRealm' as discovered from the existing property files.
+Username : admin
+The username 'admin' is easy to guess
+Are you sure you want to add user 'admin' yes/no? yes
+Password :
+Re-enter Password :
+What groups do you want this user to belong to? (Please enter a comma separated list, or leave blank for none)[  ]:
+About to add user 'admin' for realm 'ManagementRealm'
+Is this correct yes/no? yes
+Is this new user going to be used for one AS process to connect to another AS process?
+yes/no? no
+----
+
+[source,java]
+.*Example of creating Application user*
+----
+What type of user do you wish to add?
+ a) Management User (mgmt-users.properties)
+ b) Application User (application-users.properties)
+(a): b
+ 
+Enter the details of the new user to add.
+Using realm 'ApplicationRealm' as discovered from the existing property files.
+Username : user
+Password :
+Re-enter Password :
+What groups do you want this user to belong to? (Please enter a comma separated list, or leave blank for none)[  ]: odata
+About to add user 'user' for realm 'ApplicationRealm'
+Is this correct yes/no? yes
+Is this new user going to be used for one AS process to connect to another AS process?
+yes/no? no
+----
+
+Alternatively you can use a quick way to create:
+
+[source,java]
+----
+$ ./bin/add-user.sh -a -u dashboardAdmin -p password1! -g admin  
+$ ./bin/add-user.sh -a -u teiidUser -p password1! -g user  
+$ ./bin/add-user.sh -a -u restUser -p password1! -g rest  
+$ ./bin/add-user.sh -a -u odataUser -p password1! -g odata  
+$ ./bin/add-user.sh admin password1!
+----
+
+=== Start the server
+
+To start the server, open a command line and navigate to the "bin" directory under the root directory of the Teiid server and run:
+
+[source,xml]
+----
+./standalone.sh //For Linux 
+standalone.bat //for Windows
+----
+
+If Teiid isn't configured in the default configuration, append the following arguments to the command to specify the configuration `-c {configuration.file}`
+
+[source,xml]
+.*Example*
+----
+./standalone.sh -c standalone-teiid.xml
+----
+
+== Downloading and installing Hadoop 
+
+=== Installing Hadoop 1.x to Red Hat Linux
+
+This section including step by step procedures for installing `Hadoop 1.2.1` to RHEL 6, and configuring a Single Node Setup.
+
+==== Step.1 Prerequisites
+
+----
+$ uname -a
+Linux kylin.xx.com 2.6.32-431.20.3.el6.x86_64 #1 SMP Fri Jun 6 18:30:54 EDT 2014 x86_64 x86_64 x86_64 GNU/Linux
+
+$ java -version
+java version "1.7.0_60"
+Java(TM) SE Runtime Environment (build 1.7.0_60-b19)
+Java HotSpot(TM) 64-Bit Server VM (build 24.60-b09, mixed mode)
+----
+
+==== Step.2 Download and Install
+
+----
+$ wget http://apache.mesi.com.ar/hadoop/common/hadoop-1.2.1/hadoop-1.2.1.tar.gz
+$ tar -xvf hadoop-1.2.1.tar.gz
+$ cd hadoop-1.2.1
+----
+
+==== Step.3 Configure
+
+Edit `conf/hadoop-env.sh`, comment out JAVA_HOME, make sure it point to a valid Java Home:
+
+----
+export JAVA_HOME=/usr/java/jdk1.7.0_60
+----
+
+NOTE: Hadoop 1.2.1 need Java 1.6 or higher
+
+Edit `conf/core-site.xml`, add the following properties in :
+
+[source,xml]
+----
+<property>
+     <name>hadoop.tmp.dir</name>
+      <value>/home/kylin/tmp/hadoop</value>
+</property>
+<property>
+     <name>dfs.name.dir</name>
+     <value>/home/kylin/tmp/hadoop/name</value>
+</property>
+<property>
+     <name>fs.default.name</name>
+     <value>hdfs://localhost:9000</value>
+</property>
+<property>
+    <name>dfs.permissions</name>
+    <value>false</value>
+</property>
+----
+
+NOTE: the property’s value should match to your’s setting.
+
+Edit `conf/hdfs-site.xml`, add the following 2 property in:
+[source,xml]
+----
+<property>
+    <name>mapred.job.tracker</name>
+    <value>localhost:9001</value>
+</property>
+----
+
+Format a new distributed-filesystem via execute
+
+----
+hadoop-1.2.1/bin/hadoop namenode -format
+----
+
+==== Step.4 Start
+
+Start all hadoop services via execute
+
+----
+$ ./bin/start-all.sh
+----
+
+NOTE: there are 5 java processes which represent 5 services be started: `NameNode`, `SecondaryNameNode`, `DataNode`, `JobTracker`, `TaskTracker`. Execute `jps -l' to check the java processes:
+
+----
+$ jps -l
+4056 org.apache.hadoop.hdfs.server.namenode.NameNode
+4271 org.apache.hadoop.hdfs.server.datanode.DataNode
+4483 org.apache.hadoop.hdfs.server.namenode.SecondaryNameNode
+4568 org.apache.hadoop.mapred.JobTracker
+4796 org.apache.hadoop.mapred.TaskTracker
+----
+
+NOTE: `NameNode`, `JobTracker`, `TaskTracker` has relevant Web Consoles for View and Monitor the serivces. Web Access URLs for Services:
+
+----
+http://localhost:50030/   for the Jobtracker
+http://localhost:50070/   for the Namenode
+http://localhost:50060/   for the Tasktracker
+----
+
+==== Step.5 Stop
+
+Stop all hadoop services via execute
+
+----
+# bin/stop-all.sh
+----
+
+== Downloading and installing Apache Hive
+
+This section including step by step procedures for installing Apache Hive and set up HiveServer2.
+ 
+**Step.1 Prerequisites**
+
+Hadoop is the prerequisite, refer to above steps to install and start Hadoop.
+
+**Step.2 Install**
+
+----
+$ tar -xvf apache-hive-1.2.1-bin.tar.gz
+$ cd apache-hive-1.2.1-bin
+----
+
+**Step.3 Configure**
+
+Create a `hive-env.sh` under `conf`
+
+----
+$ cd conf/
+$ cp hive-env.sh.template hive-env.sh
+$ vim hive-env.sh
+----
+
+comment out HADOOP_HOME and make sure point to a valid Hadoop home, for example:
+
+----
+HADOOP_HOME=/home/kylin/server/hadoop-1.2.1
+----
+
+Navigate to Hadoop Home, create '/tmp' and '/user/hive/warehouse' and chmod g+w in HDFS before running Hive:
+
+----
+$ ./bin/hadoop fs -mkdir /tmp
+$ ./bin/hadoop fs -mkdir /user/hive/warehouse
+$ ./bin/hadoop fs -chmod g+w /tmp
+$ ./bin/hadoop fs -chmod g+w /user/hive/warehouse
+$ ./bin/hadoop fs -chmod 777 /tmp/hive
+----
+
+NOTE: Restart Hadoop services is needed, this for avoid `java.io.IOException: Filesystem closed` in DFSClient check Open.
+
+Create a `hive-site.xml` file under conf folder
+
+----
+$ cd apache-hive-1.2.1-bin/conf/
+$ touch hive-site.xml
+----
+
+Edit the `hive-site.xml`, add the following content:
+
+[source,xml]
+----
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<configuration>
+    <property>
+        <name>hive.server2.thrift.min.worker.threads</name>
+        <value>5</value>
+    </property>
+    <property>
+        <name>hive.server2.thrift.max.worker.threads</name>
+        <value>500</value>
+    </property>
+    <property>
+        <name>hive.server2.thrift.port</name>
+        <value>10000</value>
+    </property>
+    <property>
+        <name>hive.server2.thrift.bind.host</name>
+        <value>0.0.0.0</value>
+    </property>
+</configuration>
+----
+
+NOTE: there are other Optional properties, more refer to https://cwiki.apache.org/confluence/display/Hive/Setting+Up+HiveServer2[Setting+Up+HiveServer2]
+
+**Step.4 Start HiveServer2**
+
+----
+$ ./bin/hiveserver2
+----
+

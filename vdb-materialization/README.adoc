@@ -13,9 +13,7 @@
 
 == What is it?
 
-vdb-materialization demonstrates how to configure external/internal materialization, so that caching can be used to improve query performance.
-
-* VDB: PortfolioMaterialize
+vdb-materialization demonstrates how to configure external/internal materialization(https://teiid.gitbooks.io/documents/content/caching/Materialized_Views.html[document external/internal materialization]), so that caching can be used to improve query performance.
 
 == System requirements
 
@@ -34,21 +32,7 @@ Refer to link:../vdb-datafederation/README.adoc[vdb-datafederation/README.adoc] 
 
 === 2. Setup the server
 
-To start the server, open a command line and navigate to the "bin" directory under the root directory of the Teiid server and run:
-
-[source,xml]
-----
-./standalone.sh //For Linux
-standalone.bat //for Windows
-----
-
-If Teiid isn't configured in the default configuration, append the following arguments to the command to specify the configuration `-c {configuration.file}`
-
-[source,xml]
-.*Example*
-----
-./standalone.sh -c standalone-teiid.xml
-----
+Refer to link:../categories/prerequisites.adoc#_start_the_server[Prerequisites] to start the Server.
 
 === 3. VDB Deployment
 
@@ -57,44 +41,68 @@ Copy the following files to the "/standalone/deployments" directory
 ----
 src/vdb/portfolio-mat-vdb.xml
 src/vdb/portfolio-mat-vdb.xml.dodeploy
+src/vdb/portfolio-intermat-vdb.xml
+src/vdb/portfolio-intermat-vdb.xml.dodeploy
 ----
 
-Open the admin console(http://localhost:9990/console) to make sure the VDB is deployed. See <<Query Demonstrations, Query Demonstrations>> below to demonstrate data materialization.
+You should see the server log indicate the VDB is active with a message like: `TEIID40003 VDB PortfolioMaterialize.1 is set to ACTIVE` and `TEIID40003 VDB PortfolioInterMaterialize.1 is set to ACTIVE`. See <<Query Demonstrations, Query Demonstrations>> below to demonstrate data materialization.
 
 == Query Demonstrations
 
-=== Using the simpleclient
-
-1.  Change your working directory to "${quickstart.install.dir}/simpleclient"
-2.  Use the simpleclient example to run the following queries:
-
-Example: mvn exec:java -Dvdb="portfolio" -Dsql="example query" -Dusername="xx" -Dpassword="xx"
-
-NOTE: For the following examples, use the vdb: PortfolioMaterialize
-
-* Example a - Query the materialized View
+link:../simpleclient/README.adoc#_execution[Simple Java Client] for sample SQL Queries, link:../simpleclient/SQuirreL.adoc[SQuirreL Client] for a fully featured SQL Queries.
 
 [source,sql]
+.*Example - Query the external materialized View*
 ----
-select * from StocksMatModel.stockPricesMatView (should get 18 rows)
+mvn exec:java -Dvdb="PortfolioMaterialize" -Dsql="select * from StocksMatModel.stockPricesMatView"
 ----
-
-* Example b - Add a row to the product table, so that when the materialized view is updated, the new row will be picked
-
-First, insert a new row into Products table:
 
 [source,sql]
+.*Example - Query the internal materialized View*
 ----
+mvn exec:java -Dvdb="PortfolioInterMaterialize" -Dsql="select * from StocksMatModel.stockPricesInterMatView"
+----
+
+[source,sql]
+.*Example - Query external materialization*
+----
+mvn exec:java -Dvdb="PortfolioMaterialize" -Dsql="select * from StocksMatModel.stockPricesMatView"
+mvn exec:java -Dvdb="PortfolioMaterialize" -Dsql="INSERT INTO PRODUCT (ID,SYMBOL,COMPANY_NAME) VALUES(2000,'RHT','Red Hat Inc')"
+mvn exec:java -Dvdb="PortfolioMaterialize" -Dsql="select * from StocksMatModel.stockPricesMatView"
+----
+
+NOTE: First, execute `select * from StocksMatModel.stockPricesMatView` will get 18 rows, insert a new row into Product table(`INSERT INTO PRODUCT (ID,SYMBOL,COMPANY_NAME) VALUES(2000,'RHT','Red Hat Inc')`), wait 1 minute, as defined by: "teiid_rel:MATVIEW_TTL" 60000 in the portfolio-vdb.xml, re-execute `select * from StocksMatModel.stockPricesMatView` will get 19 rows,
+
+
+[source,sql]
+.*Example - Query the original source*
+----
+mvn exec:java -Dvdb="PortfolioMaterialize" -Dsql="select * from StocksMatModel.stockPricesMatView option nocache"
+----
+
+[source,sql]
+.*Example - Query Materialized view status*
+----
+mvn exec:java -Dvdb="PortfolioMaterialize" -Dsql="EXEC SYSADMIN.matViewStatus('StocksMatModel', 'stockPricesMatView')"
+mvn exec:java -Dvdb="PortfolioInterMaterialize" -Dsql="EXEC SYSADMIN.matViewStatus('StocksMatModel', 'stockPricesInterMatView')"
+----
+
+[source,sql]
+.*Example - Perform a complete refresh*
+----
+mvn exec:java -Dvdb="PortfolioMaterialize" -Dsql="EXEC SYSADMIN.loadMatView('StocksMatModel', 'stockPricesMatView')"
+mvn exec:java -Dvdb="PortfolioInterMaterialize" -Dsql="EXEC SYSADMIN.loadMatView('StocksMatModel', 'stockPricesInterMatView')"
+----
+
+[source,sql]
+.*Example - SQL*
+----
+select * from StocksMatModel.stockPricesMatView 
+select * from StocksMatModel.stockPricesInterMatView
 INSERT INTO PRODUCT (ID,SYMBOL,COMPANY_NAME) VALUES(2000,'RHT','Red Hat Inc')
-----
-
-wait 1 minute, as defined by: "teiid_rel:MATVIEW_TTL" 60000, in the portfolio-vdb.xml
-
-then re-issue query in "a" and should now see 19 rows
-
-* Example c - Issue a query that bypasses the cached data, and queries the original source
-
-[source,sql]
-----
-select * from StocksMatModel.stockPricesMatView option nocache (should be the same as "b")
+select * from StocksMatModel.stockPricesMatView option nocache
+EXEC SYSADMIN.matViewStatus('StocksMatModel', 'stockPricesMatView')
+EXEC SYSADMIN.loadMatView('StocksMatModel', 'stockPricesInterMatView')
+EXEC SYSADMIN.loadMatView('StocksMatModel', 'stockPricesMatView')
+EXEC SYSADMIN.loadMatView('StocksMatModel', 'stockPricesInterMatView')
 ----

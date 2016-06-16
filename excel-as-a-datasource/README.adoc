@@ -1,0 +1,81 @@
+
+= Excel as a DataSource Example
+
+|===
+|Level |Technologies |Target Product |Product Versions |Source
+
+|Basic
+|Teiid, VDB, Native Queries, Excel Translator
+|DV
+|DV 6.0+
+|https://github.com/teiid/teiid-quickstarts
+|===
+
+
+== What is it?
+
+This quickstart demonstrates how to use Excel Translator and a File Resource Adapter to transfer excel sheet data to a relational data sets.
+
+== Prerequisites
+
+* link:../README.adoc#_downloading_and_installing_java[Java]
+* link:../README.adoc#_downloading_and_installing_maven[Maven]
+* link:../README.adoc#_downloading_and_installing_teiid[Teiid Server]
+* link:../simpleclient/README.adoc[Simple Client]
+
+== Setup
+
+=== 1. Start the server
+
+Refer to link:../categories/prerequisites.adoc#_start_the_server[Prerequisites] to start the Server.
+
+=== 2. Copy teiid support files
+
+Copy the "teiidfiles" directory to the $JBOSS_HOME/ directory, the src/teiidfiles directory should contain:
+
+----
+excelFiles/otherholdings.xls
+----
+
+when complete, you should see $JBOSS_HOME/teiidfiles.
+
+=== 3. Setup the file resource adapter
+
+Run the following CLI script
+
+----
+cd $JBOSS_HOME/bin
+./jboss-cli.sh --connect --file={path}/vdb-datafederation/src/scripts/setup.cli
+----
+
+=== 4. VDB Deployment:
+
+Copy (deploy) the Excel VDB related files to the $JBOSS_HOME/standalone/deployments directory
+
+----
+src/vdb/excel-vdb.xml
+src/vdb/excel-vdb.xml.dodeploy
+----
+
+You should see the server log indicate the VDB is active with a message like: `TEIID40003 VDB ExcelVDB.1 is set to ACTIVE`. See <<Query Demonstrations, Query Demonstrations>> below to demonstrate data federation.
+
+== Query Demonstrations
+
+link:../simpleclient/README.adoc#_execution[Simple Java Client] for sample SQL Queries, link:../simpleclient/SQuirreL.adoc[SQuirreL Client] for a fully featured SQL Queries.
+
+* Example - queries the EXCEL file to retrieve other personal holdings valuations. 
+
+[source,sql]
+.*Example - Simple Java Client*
+----
+mvn exec:java -Dvdb="ExcelVDB" -Dsql="select * from OtherHoldings.PersonalHoldings"
+mvn exec:java -Dvdb="ExcelVDB" -Dsql="select * from Sheet1"
+----
+
+[source,sql]
+.*Example - SQL*
+----
+select * from OtherHoldings.PersonalHoldings
+select * from Sheet1
+----
+

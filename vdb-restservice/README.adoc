@@ -38,29 +38,9 @@ Refer to link:../vdb-datafederation/README.adoc[vdb-datafederation/README.adoc] 
 
 === 2. Setup the server
 
-Create a Application User under group `rest`, Navigate to JBOSS_HOME, execute below command will create user `restUser` under group `rest`:
+Refer to link:../categories/prerequisites.adoc#_create_users[Create users] create a Application User 'restUser'. By default, REST services through a VDB are secured with security domain "teiid-security" and with security role "rest".
 
-----
-$ ./bin/add-user.sh -a -u restUser -p password1! -g rest
-----
-
-NOTE: By default, REST services through a VDB are secured with security domain "teiid-security" and with security role "rest".
-
-To start the server, open a command line and navigate to the "bin" directory under the root directory of the Teiid server and run:
-
-[source,xml]
-----
-./standalone.sh //For Linux
-standalone.bat //for Windows
-----
-
-If Teiid isn't configured in the default configuration, append the following arguments to the command to specify the configuration `-c {configuration.file}`
-
-[source,xml]
-.*Example*
-----
-./standalone.sh -c standalone-teiid.xml
-----
+Refer to link:../categories/prerequisites.adoc#_start_the_server[Prerequisites] to start the Server.
 
 === 3. Deploy VDB
 
@@ -71,7 +51,7 @@ src/vdb/portfolio-rest-vdb.xml
 src/vdb/portfolio-rest-vdb.xml.dodeploy
 ----
 
-You should see the server log indicate the VDB is active with a message like: TEIID40003 VDB PortfolioRest.1 is set to ACTIVE. Open the admin console(http://localhost:9990/console) to make sure the VDB is deployed. See <<Query Demonstrations, Query Demonstrations>> below to demonstrate REST Service Through VDB.
+You should see the server log indicate the VDB is active with a message like: TEIID40003 VDB PortfolioRest.1 is set to ACTIVE. See <<Query Demonstrations, Query Demonstrations>> below to demonstrate REST Service Through VDB.
 
 == Query Demonstrations
 
@@ -82,9 +62,7 @@ The following Rest API will extract data from the VDB:
 * http://localhost:8080/PortfolioRest_1/Rest/getAllStockById/1007
 * http://localhost:8080/PortfolioRest_1/Rest/getAllStockBySymbol/IBM
 
-NOTE: Above Query Demonstrations assuming DV server run on localhost.
-
-NOTE: http://localhost:8080/PortfolioRest_1/api will list all API.
+NOTE: Above Query Demonstrations assuming DV server run on localhost. http://localhost:8080/PortfolioRest_1/api will list all API.
 
 === Run http client
 

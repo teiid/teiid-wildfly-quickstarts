@@ -56,7 +56,7 @@ Some quickstarts are designed to enhance or extend other quickstarts. These are 
 |Demonstrates reading reading a JDG cache running in library mode 
 |None
 
-|link:jdg-remote-cache/README_JDG_REMOTE_QUERY_DSL.md[jdg remote cache using dsl] 
+|link:jdg-remote-cache/README_JDG_REMOTE_QUERY_DSL.adoc[jdg remote cache using dsl] 
 |'infinispan' DSL Translator 
 |Demonstrates reading from a remote JDG cache using hot rod client that’s configured using protobuffers 
 |None

@@ -11,7 +11,7 @@
 	<artifactId>hibernate-on-top-of-teiid</artifactId>
 	<packaging>war</packaging>
 
-	<name>Hibernate Quickstart Using Teiid to Federate Data Sources</name>
+	<name>Hibernate on top of VDB</name>
 	<description>hibernate4: This quickstart demonstrates how hibernate can federate data through a single relationally mapped object.</description>
 
 	<dependencies>

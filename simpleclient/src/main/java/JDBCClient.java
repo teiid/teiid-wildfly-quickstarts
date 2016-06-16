@@ -35,8 +35,8 @@ public class JDBCClient {
 	public static final String USERNAME = "username";
 	public static final String PASSWORD = "password";
 	
-	public static final String USERNAME_DEFAULT = "user";
-	public static final String PASSWORD_DEFAULT = "user";
+	public static final String USERNAME_DEFAULT = "teiidUser";
+	public static final String PASSWORD_DEFAULT = "password1!";
 	
 	public static void main(String[] args) throws Exception {
 		if (args.length < 4) {
