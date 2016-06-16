@@ -35,7 +35,7 @@
          <directory>${project.basedir}/src/main/assembly</directory>
          <outputDirectory>/</outputDirectory>
          <includes>
-            <include>README.md</include>
+            <include>README.adoc</include>
          </includes>
       </fileSet>
       <fileSet>

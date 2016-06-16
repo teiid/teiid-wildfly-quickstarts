@@ -44,6 +44,7 @@
             <module>simpleclient</module>
 	    <module>twitter-as-a-datasource</module>
 	    <module>hive-as-a-datasource</module>
+	    <module>excel-as-a-datasource</module>
 	</modules>
 
 	<properties>

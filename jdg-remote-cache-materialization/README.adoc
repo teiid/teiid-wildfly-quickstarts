@@ -15,150 +15,120 @@
 
 This quickstart demonstrates how Teiid can connect to a remote JBoss Data Grid (JDG) to use as a caching data source to improve query performance.
 
-[[quick-start-requirements]]
-Quick Start requirements
-------------------------
+== System requirements
 
-* If you have not done so, please review the System Requirements
-../README.md
+* link:../README.adoc#_downloading_and_installing_java[Java]
+* link:../README.adoc#_downloading_and_installing_maven[Maven]
+* link:../README.adoc#_downloading_and_installing_teiid[Teiid Server]
+* link:../simpleclient/README.adoc[Simple Client]
+* link:../vdb-datafederation/README.adoc[vdb-datafederation]
+* JDG 6.5 eap modules kit (used by Teiid to access the remote cache)
+* JDG 6.5 server kit (used as the remote server)
+* JDG 6.5 quickstart kit (used to configure remote cache and initialize data)
 
-1.  Teiid Server Prerequistes
+NOTE: You can obtain JDG kit distributions on Red Hat's Customer Portal at https://access.redhat.com/jbossnetwork/restricted/listSoftware.html
 
-* JBoss application server to run Teiid
-* The Teiid Jboss distribution kit
-* The vdb-datafederation quickstart [../../vdb-datafederation/README.md]
-needs to be installed.
+== Setup
 
-1.  JDG Server Prerequistes
-
-* JDG 6.5 server kit installed (used as the remote server)
-* JDG 6.5 HotRod modules kit (used by Teiid to access the remote cache)
-> NOTE: You can obtain JDG kit distributions on Red Hat’s Customer
-Portal at
-https://access.redhat.com/jbossnetwork/restricted/listSoftware.html
-
-[[jdg-setup]]
-JDG setup
----------
-
-1.  Setup JDG Server
+=== 1. JDG setup
 
 * Install the JDG server
-* Configure caches based on the [./JDG_SERVER_README.md]
+* Configure caches based on the link:./JDG_SERVER_README.adoc[JDG_SERVER_README.adoc]
+* It is assumed that you will be running both servers on the same box, there start the JDG server by adding the following command line argument: -Djboss.socket.binding.port-offset=100
 
-1.  Starting JDG Server
+[source,xml]
+.*Example*
+----
+./standalone.sh -Djboss.socket.binding.port-offset=100
+----
 
-* It is assumed that you will be running both servers on the same box,
-there start the JDG server by adding the following command line
-argument:
-** -Djboss.socket.binding.port-offset=100
+For the purpose of this quick start, it assumes running both servers on the same machine and is expecting the JDG server to have its ports incremented. The port adjustment has been made in the setup.cli script to match the above offset.
 
-Example: ./standalone.sh -Djboss.socket.binding.port-offset=100
+=== 2. db-datafederation quickstart
 
-For the purpose of this quick start, it assumes running both servers on
-the same machine and is expecting the JDG server to have its ports
-incremented. The port adjustment has been made in the jdg.properties on
-the client side to match the above offset.
+Refer to link:../vdb-datafederation/README.adoc[vdb-datafederation] for installing db-datafederation quickstart.
 
-[[prerequistes-vdb-datafederation-quickstart]]
-[PreRequistes] vdb-datafederation quickstart
---------------------------------------------
+=== 3. Teiid jdg-remote-cache-materialization quickstart Setup
 
-* Install vdb-datafederation quickstart
-[../../vdb-datafederation/README.md]
+build the jdg-remote-cache-materialization quickstart
 
-[[teiid-jdg-remote-cache-materialization-quickstart-setup]]
-Teiid jdg-remote-cache-materialization quickstart Setup
--------------------------------------------------------
+----
+mvn -s ./settings.xml clean install
+----
 
-1.  build the jdg-remote-cache-materialization quickstart
+After building the quickstart, the `jdg-remote-cache-materialization-pojos-jboss-as7-dist.zip` should be found in the target directory. This zip will be used later, where it is deployed to the Teiid server.
 
-* run mvn -s ./settings.xml clean install
-* After building the quickstart, the
-jdg-remote-cache-materialization-pojos-jboss-as7-dist.zip should be
-found in the target directory.
-* This zip will be used later, where it is deployed to the Teiid server.
+=== 4. Setup Teiid Server
 
-[[setup-teiid-server]]
-Setup Teiid Server
-------------------
+* Deploy pojo Module
 
-1.  shutdown jbossas server, if not already.
-2.  deploy pojo Module
-* take the jdg-remote-cache-pojos-jboss-as7-dist.zip and unzip at
-/modules/
-3.  Install the JBoss Data Grid version of the hot rod client modules
-kit for EAP into /modules/ of your Teiid/EAP instance. See Red Hat:
-http://access.redhat.com to obtain the kit.
-4.  setup the infinispan resource adapter
+a. Shutdown Teiid server, if not already. 
 
-* configure for materialization
-** open the file:
-\{jbossas.server.dir}/docs/teiid/datasources/infinispan/infinispan-remote-query-materialize-annotations-dsl-ds.xml
-** copy and paste the resource-adapter section it into the server
-configuration, under the section:
-+
+b. Take the target/jdg-remote-cache-pojos-jboss-as7-dist.zip and unzip at /modules/
 
-1.  Edit the module.xml for
-org.jboss.teiid.resource-adapter.infinispan.dsl resource adapter to add
-the pojo dependency
+c. Install the JBoss Data Grid version of the hot rod client modules kit for EAP into /modules/ of your Teiid/EAP instance. See Red Hat: http://access.redhat.com to obtain the kit.
 
-example:
+* Setup the infinispan resource adapter
 
-1.  Start the server
-+
-To start the server, open a command line and navigate to the ``bin''
-directory under the root directory of the JBoss server and run:
-+
-For Linux: ./standalone.sh +
-for Windows: standalone.bat
-+
-If Teiid isn’t configured in the default configuration, append the
-following arguments to the command to specify the configuration
-+
--c \{configuration.file}
-+
-Example: -c standalone-teiid.xml
-2.  Install the infinispan-cache-dsl translator
-* cd to the $\{JBOSS_HOME}/bin directory
-* execute: ./jboss-cli.sh –connect
-–file=../docs/teiid/datasources/infinispan/add-infinispan-cache-dsl-translator.cli
-3.  deploy the VDB
-* copy files jdg-remote-cache-mat-vdb.xml and
-jdg-remote-cache-mat-vdb.xml.dodeploy to
-\{jbossas.server.dir}/standalone/deployments
+a. Configure for reading and writing to a remote cache, open the file: {jbossas.server.dir}/docs/teiid/datasources/infinispan/infinispan-remote-query-materialize-annotations-dsl-ds.xml
 
-[[query-demonstrations]]
-Query Demonstrations
---------------------
+b. Copy and paste the resource-adapter section it into the server configuration, under the section.
 
-==== Using the simpleclient example ====
+* Start the server
 
-1.  Change your working directory to
-``$\{quickstart.install.dir}/simpleclient''
+To start the server, open a command line and navigate to the "bin" directory under the root directory of the Teiid server and run:
+
+[source,xml]
+----
+./standalone.sh //For Linux
+standalone.bat //for Windows
+----
+
+If Teiid isn't configured in the default configuration, append the following arguments to the command to specify the configuration `-c {configuration.file}`
+
+[source,xml]
+.*Example*
+----
+./standalone.sh -c standalone-teiid.xml
+----
+
+* Install the infinispan-cache-dsl translator
+
+----
+cd $\{JBOSS_HOME}/bin
+./jboss-cli.sh --connect --file={jbossas.server.dir}/docs/teiid/datasources/infinispan/add-infinispan-cache-dsl-translator.cli
+----
+
+=== 4. deploy the VDB
+
+Deploy for reading/writing to a remote cache, copy files jdg-remote-cache-mat-vdb.xml and jdg-remote-cache-mat-vdb.xml.dodeploy to {jbossas.server.dir}/standalone/deployments
+
+== Query Demonstrations
+
+1.  Change your working directory to "${quickstart.install.dir}/simpleclient"
 2.  Use the simpleclient example to run the following queries:
 
-Example: mvn exec:java -Dvdb=``PeopleMat'' -Dsql=``select name, id,
-email from PersonMatModel.PersonMatView'' -Dusername=``teiidUser''
--Dpassword=``pwd''
+Example: mvn exec:java -Dvdb="PeopleMat" -Dsql="select name, id, email from PersonMatModel.PersonMatView" -Dusername="teiidUser" -Dpassword="pwd"
 
 or
 
-Use a sql tool, like SQuirreL, to connect and issue following example
-query:
+Use a sql tool, like SQuirreL(connect url: jdbc:teiid:PeopleMat@mm://localhost:31000), to connect and issue following example query:
 
-* connect: jdbc:teiid:PeopleMat@mm://localhost:31000
+ 
+* Query for reading from the materialized cache
 
-1.  Query for reading from the materialized cache
+[source,sql]
+----
+select name, id, email from PersonMatModel.PersonMatView
+----
 
-* select name, id, email from PersonMatModel.PersonMatView
+* To test the materialization process, do the following:
 
-1.  To test the materialization process, do the following:
+perform a delete from the Customer table
 
-* perform a delete from the Customer table
-** delete from Customer where SSN = `CST01002'
-+
-Customer: Joseph Smith,19980002,Joseph.Smith@email.com is removed
-* wait 2 min’s because the refresh rate is set at 1 min.
-* perform query from #1 above, and should see row missing for SSN =
-CST01002
+[source,sql]
+----
+delete from Customer where SSN = 'CST01002'
+----
+
+Customer: Joseph Smith,19980002,Joseph.Smith@email.com is removed, wait 2 min’s because the refresh rate is set at 1 min. perform query above, and should see row missing for SSN = CST01002
