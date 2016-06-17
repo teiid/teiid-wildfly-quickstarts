@@ -7,7 +7,7 @@
 |DV
 |DV 6.1
 |https://github.com/teiid/teiid-quickstarts
-|====================================================
+|===
 
 == What is it?
 
