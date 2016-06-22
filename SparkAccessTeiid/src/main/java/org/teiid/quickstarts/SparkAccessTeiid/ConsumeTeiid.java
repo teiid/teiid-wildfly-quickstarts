@@ -35,10 +35,10 @@ public class ConsumeTeiid {
 		DataFrame jdbcDF = sqlContext.read().jdbc(TEIID_CONNECTION_URL,
 				"product", properties);
 
-		List<Row> employeeFullNameRows = jdbcDF.collectAsList();
+		List<Row> productsInfo = jdbcDF.collectAsList();
 
-		for (Row employeeFullNameRow : employeeFullNameRows) {
-			LOGGER.info(employeeFullNameRow.toString());
+		for (Row productInf : productsInfo) {
+			LOGGER.info(productInf.toString());
 		}
 	}
 
