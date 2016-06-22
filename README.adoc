@@ -84,6 +84,11 @@ performance using TPC-H benchmark against two running Postgresql servers
 |Demonstrates using the Hbase Translator via the Pheonix driver 
 |Hbase be installed
 
+|link:SparkAccessTeiid/README.adoc[SparkAccessTeiid] 
+|Teiid JDBC Connection 
+|Demonstrates Spark using the Teiid JDBC to connect to Teiid 
+|Spark be installed
+
 |link:drools-integration/README.adoc[drools-integration] 
 |Drools integration, UDF, FOREIGN Function DDL 
 |Demonstrates using a simple rules invocation via a Function
