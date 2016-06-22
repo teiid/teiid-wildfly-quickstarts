@@ -28,4 +28,5 @@
 .. link:ldap-as-a-datasource/README.adoc[Ldap as a Data Source Example]
 . link:categories/Client.adoc[Connecting to Teiid]
 .. link:simpleclient/README.adoc[Simple Java Client]
+.. link:sparksqlclient/README.adoc[Spark SQL Client]
 .. link:simpleclient/SQuirreL.adoc[SQuirreL Client]

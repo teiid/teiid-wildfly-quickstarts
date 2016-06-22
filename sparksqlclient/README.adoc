@@ -1,0 +1,64 @@
+
+= Spark SQL Client
+
+|===
+|Level |Technologies |Target Product |Product Versions |Source
+
+|Beginners
+|Teiid, JDBC, Spark SQL
+|DV
+|DV 6.1
+|https://github.com/teiid/teiid-quickstarts
+|===
+
+== What is it?
+
+http://spark.apache.org/docs/latest/sql-programming-guide.html#jdbc-to-other-databases[Spark SQL] can read data from other databases using JDBC. The `Spark SQL Client` demonstrates how to use Spark SQL to read data from VDB. 
+
+The program expects four arguments . The pom.xml defines these arguments in the pom.xml:
+
+[source,xml]
+----
+<mainClass>JDBCClient</mainClass>
+<arguments>
+    <argument>localhost</argument>  <!-- host -->
+    <argument>31000</argument>   <!--  port -->
+    <argument>${vdb}</argument>
+    <argument>${table}</argument> <!-- table or view defined in VDB -->
+</arguments>
+----
+
+NOTE: Notice that the and are preset. To point to a different server and/or port, change "localhost" and/or "31000" arguments, respectively, in the pom.xml.
+
+== Prerequisites
+
+* link:../README.adoc#_downloading_and_installing_java[Java]
+* link:../README.adoc#_downloading_and_installing_maven[Maven]
+* link:../README.adoc#_downloading_and_installing_teiid[Teiid Server]
+
+== Build
+
+Build the project by running
+
+[source,xml]
+----
+mvn clean install
+----
+
+== Execution
+
+To execute a sql query using the simpleclient, use the following format:
+
+[source,xml]
+----
+mvn exec:java -Dvdb="<vdb>" -Dtable="<table>" -Dusername="<username>" -Dpassword="<password>"
+----
+
+[source,java]
+.*A Example Executions*
+----
+mvn exec:java -Dvdb="twitter" -Dtable="tweet"
+mvn exec:java -Dvdb="Portfolio" -Dtable="Stock"
+mvn exec:java -Dvdb="ExcelVDB" -Dtable="PersonalHoldings"
+----
+
