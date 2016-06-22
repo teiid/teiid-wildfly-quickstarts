@@ -42,6 +42,7 @@
 	    <module>hbase-as-a-datasource</module>
 	    <module>drools-integration</module>
             <module>simpleclient</module>
+	    <module>sparksqlclient</module>
 	    <module>twitter-as-a-datasource</module>
 	    <module>hive-as-a-datasource</module>
 	    <module>excel-as-a-datasource</module>
@@ -71,7 +72,8 @@
         <jdg.slot>jdg-6.6</jdg.slot>  
   		<version.net.jcip>1.0</version.net.jcip>
         <version.resteasy.client>3.0.16.Final</version.resteasy.client>
-                
+        <version.org.apache.spark>1.6.1</version.org.apache.spark>        
+        
         <version.org.jboss.bom.jboss-javaee-6.0-with-tools>6.4.4.GA</version.org.jboss.bom.jboss-javaee-6.0-with-tools>
 		<version.org.drools>6.1.0.Final</version.org.drools>
 		<!--version.resteasy>3.0.12.Final</version.resteasy-->
@@ -199,7 +201,12 @@
 				<groupId>commons-httpclient</groupId> 
 				<artifactId>commons-httpclient</artifactId>
 				<version>${version.commons-httpclient}</version>
-			   </dependency>			
+			   </dependency>
+	    <dependency>
+    		<groupId>org.apache.spark</groupId>
+    		<artifactId>spark-sql_2.11</artifactId>
+    		<version>${version.org.apache.spark}</version>
+	    </dependency>			
          </dependencies>      
     </dependencyManagement>	
 
