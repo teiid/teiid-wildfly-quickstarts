@@ -1,44 +1,49 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-	<parent>
-		<artifactId>teiid-quickstart-parent</artifactId>
-		<groupId>org.jboss.teiid.quickstart</groupId>
-		<version>4.0.0</version>
-	</parent>
-
 	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.jboss.teiid.quickstart</groupId>
 	<artifactId>sparksqlclient</artifactId>
+	<version>4.0.0</version>
 
 	<name>SparkSQLClient</name>
 	<description>The sparksqlclient demonstrates reading data from Teiid VDB</description>
 
-	<dependencies>
-		<dependency>
+    <properties>
+	<version.teiid>9.0.0.Final</version.teiid>
+	<version.spark>1.6.1</version.spark>
+    </properties>
+
+    <dependencies>
+        <dependency>
             <groupId>org.jboss.teiid</groupId>
             <artifactId>teiid</artifactId>
             <classifier>jdbc</classifier>
-		</dependency>
-		<dependency>
-		    <groupId>org.apache.spark</groupId>
-		    <artifactId>spark-sql_2.11</artifactId>
-		</dependency>
-	</dependencies>
+	    <version>${version.teiid}</version>
+	</dependency>
+	<dependency>
+	    <groupId>org.apache.spark</groupId>
+	    <artifactId>spark-sql_2.11</artifactId>
+	    <version>${version.spark}</version>
+	</dependency>
+    </dependencies>
 
-    <profiles>
-        <profile>
-            <id>defaultuser</id>
-            <activation>
-                <property>
-                    <name>vdb</name>
-                </property>
-            </activation>                     
-            <build>
-                <plugins>
-           <plugin>
+    <build>
+        <finalName>${project.artifactId}</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.7</source>
+                    <target>1.7</target>
+                    <showDeprecation>false</showDeprecation>
+                    <showWarnings>false</showWarnings>
+                </configuration>
+            </plugin>
+            <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>
-                <version>${version.org.codehaus.mojo.exec.plugin}</version>
                 <executions>
                     <execution>
                         <goals>
@@ -47,19 +52,15 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <classpathScope>test</classpathScope>
                     <mainClass>SparkSQLClient</mainClass>
                     <arguments>
                         <argument>localhost</argument>
                         <argument>31000</argument>
                         <argument>${vdb}</argument>
                         <argument>${table}</argument>
-                    </arguments>                   
-                    <cleanupDaemonThreads>false</cleanupDaemonThreads>
+                    </arguments>
                 </configuration>
-            </plugin>                              
-                </plugins>
-            </build>
-        </profile>         
-    </profiles>
+            </plugin>
+        </plugins>
+    </build>
 </project>

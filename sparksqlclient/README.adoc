@@ -19,7 +19,7 @@ The program expects four arguments . The pom.xml defines these arguments in the 
 
 [source,xml]
 ----
-<mainClass>JDBCClient</mainClass>
+<mainClass>SparkSQLClient</mainClass>
 <arguments>
     <argument>localhost</argument>  <!-- host -->
     <argument>31000</argument>   <!--  port -->
@@ -58,7 +58,7 @@ mvn exec:java -Dvdb="<vdb>" -Dtable="<table>" -Dusername="<username>" -Dpassword
 .*A Example Executions*
 ----
 mvn exec:java -Dvdb="twitter" -Dtable="tweet"
-mvn exec:java -Dvdb="Portfolio" -Dtable="Stock"
+mvn exec:java -Dvdb="Portfolio" -Dtable="product"
 mvn exec:java -Dvdb="ExcelVDB" -Dtable="PersonalHoldings"
 ----
 
