@@ -13,7 +13,6 @@
 
 == Spark-Access-Teiid Quickstart
 ================================
-
 == What is it?
 
 Spark-Access-Teiid demonstrates that how to use teiid-jdbc to connect teiid server, so that teiid can as data source for spark.
@@ -21,14 +20,12 @@ Spark-Access-Teiid demonstrates that how to use teiid-jdbc to connect teiid serv
 
 *  VDB:   PortfolioMaterialize  
  
-
 == System requirements
 
 If you have not done so, please review the System Requirements link:../README.adoc[../README.md]
 
 
 == PREREQUISTES
-
 === NOTE: 
 
 * This example relies upon the vdb-datafederation example and that it needs to be deployed prior to running this example. Therefore, read the vdb-datafederation's README.md and follow its directions before continuing.
@@ -39,9 +36,7 @@ If you have not done so, please review the System Requirements link:../README.ad
 
  Install Spark Pre-build for Hadoop 2.6. If you have aready install Hadoop with other version, you need install appropriate version of Spark.
 
-
 == 2.VDB Deployment
-
 
 1) Run the setup in vdb-datafederation quick start
 
