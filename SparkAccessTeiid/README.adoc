@@ -68,7 +68,7 @@ Copy the following files to the "<jboss.home>/standalone/deployments" directory
 === 1.Build Profile
 
 ----
- mvn clean package
+ mvn clean install
 ----
 
 === 2.submit to spark
