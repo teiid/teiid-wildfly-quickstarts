@@ -1,0 +1,105 @@
+
+|===
+|Level |Technologies |Target Product |Product Versions |Source
+
+|Beginner 
+|Teiid, VDB, Sqoop, Hadoop
+|DV
+|DV 6.0+
+|https://github.com/teiid/teiid-quickstarts
+|===
+
+== What’s this
+
+This quickstart demonstrates how to import data from teiid to HDFS by Sqoop.
+
+*  VDB:   PortfolioMaterialize  
+
+
+== System requirements
+
+* link:../README.adoc#_downloading_and_installing_java[Java]
+* link:../README.adoc#_downloading_and_installing_teiid[Teiid Server]
+* Hadoop, Sqoop
+
+
+=== NOTE: 
+
+* This example relies upon the vdb-datafederation example and that it needs to be deployed prior to running this example. Therefore, read the vdb-datafederation's README.md and follow its directions before continuing.
+
+== Setup
+
+=== 1.Setup Hadoop
+
+Refer to link:../categories/prerequisites.adoc#_installing_hadoop_2_x_to_red_hat_linux[Installing Hadoop 2.x to Red Hat Linux] to finished Hadoop setup.
+
+=== 2. Set up Sqoop
+
+1) Download Sqoop
+
+----
+$ wget http://apache.fayea.com/sqoop/1.4.6
+$ tar -zxvf  sqoop-1.4.6.bin__hadoop-2.0.4-alpha.tar.gz
+----
+
+2)Configure
+
+Edit `/etc/profile`,add the following content:
+
+----
+#set Sqoop
+export SQOOP_HOME=/home/renjie/workFor4230/sqoop-1.4.6.bin__hadoop-2.0.4-alpha
+export PATH=$PATH:$SQOOP_HOME/bin
+----
+
+After edit
+
+----
+source /etc/profile
+----
+
+
+=== 3. Setup Teiid Server
+
+Install Hive driver module. Download TeiidModule-Hive12.zip and copy it into your server installation in the /jboss-eap-6.1/modules folder. unzip it. That's all. Do not modify the $JBOSS_HOME/standlone/configuration/standlone.xml.
+
+Refer to https://developer.jboss.org/wiki/ConnectToAHadoopSourceUsingHive2[ConnectToAHadoopSourceUsingHive2]
+
+Refer to link:../categories/prerequisites.adoc#_start_the_server[Prerequisites] to start the Server.
+
+
+== Sqoop Demonstrations	
+
+=== 1. Copy teiid-jdbc to $SQOOP_HOME/lib
+
+You need download Teiid JDBC Driver from http://teiid.jboss.org/downloads/ and copy it to $SQOOP_HOME/lib
+
+----
+cp teiid-9.0.0.Final-jdbc.jar $SQOOP_HOME/lib
+----
+
+
+=== 2. Import data to HDFS
+
+----
+$ sqoop import --connect jdbc:teiid:Portfolio@mm://127.0.0.1:31000 --driver org.teiid.jdbc.TeiidDriver --username odataUser --password password1! --table product 
+----
+
+=== 3. Check HDFS
+
+Now, you can verify that whether the data from VDB is imported to HDFS.
+
+* Verify HDFS
+
+----
+$ hadoop dfs -ls /user/username/product
+----
+
+* Verify Data
+
+----
+$ hadoop dfs -get /user/username/product ./result
+$ cat result/part-m-*
+----
+
+ 
