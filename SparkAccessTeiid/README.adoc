@@ -12,6 +12,7 @@
  
 
 = Spark-Access-Teiid Quickstart
+
 ================================
 
 == What is it?
@@ -25,6 +26,7 @@ Spark-Access-Teiid demonstrates that how to use teiid-jdbc to connect teiid serv
 If you have not done so, please review the System Requirements link:../README.adoc[../README.md]
 
 == PREREQUISTES
+
 === NOTE: 
 
 * This example relies upon the vdb-datafederation example and that it needs to be deployed prior to running this example. Therefore, read the vdb-datafederation's README.md and follow its directions before continuing.
@@ -73,9 +75,7 @@ copy $SPARK_HOME/lib/spark-assembly-1.6.1-hadoop2.6.0 to ./lib/
 cp $SPARK_HOME/lib/spark-assembly-1.6.1-hadoop2.6.0 ./lib/
 ----
 
-
 === 2.Build Profile
-
 
 ----
  mvn clean package
