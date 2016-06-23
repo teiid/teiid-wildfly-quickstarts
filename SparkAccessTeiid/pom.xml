@@ -31,12 +31,10 @@
 		</dependency>
 
 		<dependency>
-			<groupId>org.apache.spark</groupId>
-			<artifactId>spark-assembly</artifactId>
-			<version>1.6.1-hadoop2.6.0</version>
-			<scope>system</scope>
-			<systemPath>${project.basedir}/lib/spark-assembly-1.6.1-hadoop2.6.0.jar </systemPath>
-		</dependency>
+                        <groupId>org.apache.spark</groupId>
+                        <artifactId>spark-sql_2.11</artifactId>
+                        <version>1.6.1</version>
+                </dependency>
 
 
 	</dependencies>
