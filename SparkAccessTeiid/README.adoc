@@ -13,8 +13,6 @@
 
 = Spark-Access-Teiid Quickstart
 
-================================
-
 == What is it?
 
 Spark-Access-Teiid demonstrates that how to use teiid-jdbc to connect teiid server, so that teiid can as data source for spark.
