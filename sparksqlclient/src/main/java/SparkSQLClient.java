@@ -40,7 +40,7 @@ public class SparkSQLClient {
 	
 	public static void main(String[] args) throws Exception {
 		if (args.length < 4) {
-			System.out.println("usage: JDBCClient <host> <port> <vdb> <table>");
+			System.out.println("usage: SparkSQLClient <host> <port> <vdb> <table>");
 			System.exit(-1);
 		}
 
