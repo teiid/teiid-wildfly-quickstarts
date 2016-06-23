@@ -13,7 +13,7 @@
 
 This quickstart demonstrates how to import data from teiid to HDFS by Sqoop.
 
-*  VDB:   PortfolioMaterialize  
+*  VDB:   Portfolio 
 
 
 == System requirements
@@ -57,7 +57,6 @@ After edit
 ----
 source /etc/profile
 ----
-
 
 === 3. Setup Teiid Server
 
