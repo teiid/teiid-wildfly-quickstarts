@@ -37,7 +37,8 @@ If you have not done so, please review the System Requirements link:../README.ad
 
 == 1.Spark Installation
 
- Install Spark Pre-build for Hadoop 2.6. If you have aready install Hadoop with other version, you need install appropriate version of Spark.
+
+Install Spark Pre-build for Hadoop 2.6. If you have aready install Hadoop with other version, you need install appropriate version of Spark.
 
 
 == 2.VDB Deployment
@@ -47,20 +48,20 @@ If you have not done so, please review the System Requirements link:../README.ad
 
 2)  Start the server, if not already started
 
-	To start the server, open a command line and navigate to the "bin" directory under the root directory of the JBoss server and run:
+To start the server, open a command line and navigate to the "bin" directory under the root directory of the JBoss server and run:
 	
-	For Linux:   ./standalone.sh	
-	for Windows: standalone.bat
+For Linux:   ./standalone.sh	
+for Windows: standalone.bat
 
-	If Teiid isn't configured in the default configuration, append the following arguments to the command to specify the configuration
-		
-	-c {configuration.file}  
+If Teiid isn't configured in the default configuration, append the following arguments to the command to specify the configuration
+
+-c {configuration.file}  
 	
-	Example: -c standalone-teiid.xml 
+Example: -c standalone-teiid.xml 
 
 3) VDB Deployment:
 
-    Copy the following files to the "<jboss.home>/standalone/deployments" directory
+Copy the following files to the "<jboss.home>/standalone/deployments" directory
 
      * src/vdb/portfolio-mat-vdb.xml
      * src/vdb/portfolio-mat-vdb.xml.dodeploy
