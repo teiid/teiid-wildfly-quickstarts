@@ -19,6 +19,7 @@
 .. link:hive-as-a-datasource/README.adoc[Hive/Hadoop as a Data Source Example]
 .. link:hbase-as-a-datasource/README.adoc[HBase as a Data Source Example]
 .. link:mongodb-as-a-datasource/README.adoc[MonfoDB as a Data Source Example]
+.. link:SparkAccessTeiid/README.adoc[Spark consume Teiid]
 . link:categories/datagrid.adoc[JBoss Data Grid]
 .. link:jdg-local-cache/README.adoc[JDG Library Mode as a Data Source Example]
 .. link:jdg-remote-cache/README.adoc[JDG Remote Cache as a Data Source Example]
