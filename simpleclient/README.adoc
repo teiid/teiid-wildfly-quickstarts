@@ -13,7 +13,7 @@
 
 == What is it?
 
-The sample client example can be used to test your sql queries against any server running a compatible Teiid Runtime and has an active VDB. This example will also be referenced by many of the other quick starts as a means to test suggested queries. Be sure to read the README for that quick start in order to setup the environment correctly before executing a test query. 
+The sample client example can be used to test your sql queries against any server running a compatible Teiid Runtime and has an active VDB. This example will also be referenced by many of the other quick starts as a means to test suggested queries.
 
 The link:src/main/java/JDBCClient.java[JDBCClient.java] is the example code that shows a developer the basic connection logic that can be used to connect to a Teiid instance running in a {{ book.asName }}.
 
@@ -23,14 +23,23 @@ The program expects four arguments . The pom.xml defines these arguments in the 
 ----
 <mainClass>JDBCClient</mainClass>
 <arguments>
-    <argument>localhost</argument>  <!-- host -->
-    <argument>31000</argument>   <!--  port -->
     <argument>${vdb}</argument>
     <argument>${sql}</argument>
 </arguments>
 ----
 
 NOTE: Notice that the and are preset. To point to a different server and/or port, change "localhost" and/or "31000" arguments, respectively, in the pom.xml.
+
+In addition to above 6 parameter, the Simple client dependent on the following 4 system properties optionally:
+
+* host - define the host name of Teiid Server, default is `localhost`
+* port - define the port number of Teiid Server, dfault is `31000`
+* username - define the username to connect to Teiid Server, default is `teiidUser`
+* password - define the password to connect to Teiid Server, default is `password1!`
+* showplan - whether show execution plan in sql execution, default is `false`
+* usedatasource = whether use `org.teiid.jdbc.TeiidDataSource` to create Connection, default if `false`
+
+NOTE: If username, password not same as default, or want use TeiidDataSource to create Connection, showplan, use the system properties: `-Dusedatasource=true -Dshowplan=true -Dusername=<username> -Dpassword=<password>`
 
 == Prerequisites
 
@@ -53,15 +62,28 @@ To execute a sql query using the simpleclient, use the following format:
 
 [source,xml]
 ----
-mvn exec:java -Dvdb="<vdb>" -Dsql="<sql>" -Dusername="<username>" -Dpassword="<password>"
+mvn exec:java -Dvdb="<vdb>" -Dsql="<sql>" -Dusername="<username>" -Dpassword="<password> -Dusedatasource=true -Dshowplan=true"
 ----
+
+NOTE: username, password, showplan, usedatasource are optional due to their default value.
 
 [source,java]
 .*A Example Executions*
 ----
-mvn exec:java -Dvdb="twitter" -Dsql="select * from tweet where query= 'jboss'"
 mvn exec:java -Dvdb="Portfolio" -Dsql="select * from Stock"
-mvn exec:java -Dvdb="ExcelVDB" -Dsql="select * from PersonalHoldings"
 ----
 
 NOTE: The query is in quotes so that it is understood as a single argument. To run more advanced queries, it would be better a fully featured Java client, such as link:./SQuirreL.adoc[SQuirreL Client].
+
+[source,java]
+.*A Example of use TeiidDataSource*
+----
+mvn exec:java -Dvdb="Portfolio" -Dsql="select * from Stock" -Dusedatasource=true
+----
+
+[source,java]
+.*A Example of show execution plan*
+----
+mvn exec:java -Dvdb="Portfolio" -Dsql="select * from Stock" -Dshowplan=true
+----
+
