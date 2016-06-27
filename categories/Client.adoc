@@ -43,50 +43,25 @@ jdbc:teiid:<VDB-Name>@mm(s)://<host name>:<port>;user=user;password=user
 Check out https://teiid.gitbooks.io/documents/content/client-dev/Client_Developers_Guide.html[Client Developer's Guide] for all the optional connection properties in your URL. Here is sample code showing how to make JDBC connection.
 
 [source,java]
-.*Sample JAVA Code*
+.*Sample JAVA Code - Create Driver Connection*
 ----
-public void execute() throws SQLException {
-    String url = "jdbc:teiid:DynamicPortfolio@mm://localhost:31000";
-    String sql = "select firstname, lastname from customer";
- 
-    Class.forName("org.teiid.jdbc.TeiidDriver");
- 
-    Connection connection;
-    try{
-        connection = DriverManager.getConnection(url, "user", "user");
-        Statement statement = connection.createStatement();
-        ResultSet results = statement.executeQuery(sql);
-        while(results.next()) {
-          System.out.println(results.getString(1));
-          System.out.println(results.getString(2));
-          ...
-        }
-        results.close();
-        statement.close();
-    } catch (SQLException e){
-        e.printStackTrace();
-        throw e;
-    } finally {
-        try{
-          connection.close();
-        }catch(SQLException e1){
-          // ignore
-        }
-    }
-}
+String url = "jdbc:teiid:DynamicPortfolio@mm://localhost:31000";
+Class.forName("org.teiid.jdbc.TeiidDriver");
+Connection conn = DriverManager.getConnection(url, "user", "password");
 ----
 
 You can also use `org.teiid.jdbc.TeiidDataSource` to make connection in your Java application. For example, you can use following code fragment to make a connection to the VDB and issuing the query exactly the same as in the above example:
 
 [source,java]
+.*Sample JAVA Code - Create DataSource Connection*
 ----
 TeiidDataSource ds = new TeiidDataSource();
 ds.setDatabaseName("DynamicPortfolio");
 ds.setUser("user");
 ds.setPassword("user");
- 
+ds.setServerName("host");
+ds.setPortNumber("port");
 Connection connection = ds.getConnection();
-...
 ----
 
 The TeiidDataSource also provides an option to set optional parameters using the "set" methods on the data source. For all the allowable data source properties, check out https://teiid.gitbooks.io/documents/content/client-dev/Client_Developers_Guide.html[Client Developer's Guide].
