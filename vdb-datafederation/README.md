@@ -1,6 +1,6 @@
 ---
 Level: Basic
-Technologies: Teiid, VDB, Native Queries, VDB reuse, reading data from JDBC, delimited file and Excel File
+Technologies: Teiid, VDB, Native Queries, VDB reuse, reading data from JDBC, and a delimited text file
 Target Product: DV
 Product Versions: DV 6.0+
 Source: https://github.com/teiid/teiid-quickstarts
@@ -20,7 +20,7 @@ This quickstart demonstrates how to define a vdb to enable data federation acros
 multiple data sources (i.e., relational and text file).   This will demonstrate the
 following: 
 
--  how to federate data from a relational data source, a text file-based data source and an EXCEL File
+-  how to federate data from a relational data source and a text file-based data source
 -  how to define a view using DDL
 -  how to define a translator override to support native queries
 -  how to define a second vdb that reuses (extends) another vdb
@@ -119,10 +119,6 @@ text file with a HEADER containing entries for at least symbol and price columns
 
 	select product.symbol, stock.price, company_name from product, (call MarketData.getTextFiles('*.txt')) f, TEXTTABLE(f.file COLUMNS symbol string, price bigdecimal HEADER) stock where product.symbol=stock.symbol
 
-
-*  Example d  -  queries the EXCEL file to retrieve other personal holdings valuations
-
-	select * from OtherHoldings.PersonalHoldings
 
 ### Native Query
 

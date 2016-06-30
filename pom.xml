@@ -41,6 +41,7 @@
             <module>ldap-as-a-datasource</module>
 	    <module>hbase-as-a-datasource</module>
 	    <module>drools-integration</module>
+	    <module>excel-as-a-datasource</module>
             <module>simpleclient</module>
 	    <module>socialMedia-as-a-datasource</module>
 	</modules>
