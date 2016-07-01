@@ -55,30 +55,30 @@
 			resources, i.e. build is platform dependent! -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		
-	    <illegaltransitivereportonly>false</illegaltransitivereportonly>
+	        <illegaltransitivereportonly>false</illegaltransitivereportonly>
 			
 		<version.org.jboss.integration-platform>6.0.0.CR30</version.org.jboss.integration-platform>
 
-		<version.teiid>8.12.0.Final</version.teiid>
-     	<jbossas-module-root>modules/system/layers/dv</jbossas-module-root>
+		<version.teiid>9.0.0.Final</version.teiid>
+     	        <jbossas-module-root>modules/system/layers/dv</jbossas-module-root>
 
-        <version.javax.annotation>${version.org.jboss.spec.javax.annotation.jboss-annotations-api_1.1_spec}</version.javax.annotation>
-        <version.jboss.as.plugin>${version.org.jboss.as}</version.jboss.as.plugin>       
+                <version.javax.annotation>${version.org.jboss.spec.javax.annotation.jboss-annotations-api_1.1_spec}</version.javax.annotation>
+                <version.jboss.as.plugin>${version.org.jboss.as}</version.jboss.as.plugin>       
         <!--version.net.jcip>1.0</version.net.jcip-->
-        <version.org.codehaus.mojo.exec.plugin>1.2.1</version.org.codehaus.mojo.exec.plugin>
+                <version.org.codehaus.mojo.exec.plugin>1.2.1</version.org.codehaus.mojo.exec.plugin>
         <!--version.org.hibernate.search>4.5.0.Final</version.org.hibernate.search-->
-        <version.org.infinispan.6>6.4.0.Final-redhat-4</version.org.infinispan.6>  
+                <version.org.infinispan.6>7.2.3.Final</version.org.infinispan.6>  
         <!-- JDG module slot to use  -->
-        <jdg.slot>jdg-6.6</jdg.slot>  
+                <jdg.slot>jdg-7.2</jdg.slot>  
   		<version.net.jcip>1.0</version.net.jcip>
-        <version.resteasy.client>3.0.16.Final</version.resteasy.client>
+                <version.resteasy.client>3.0.16.Final</version.resteasy.client>
         
-        <version.org.jboss.bom.jboss-javaee-6.0-with-tools>6.4.4.GA</version.org.jboss.bom.jboss-javaee-6.0-with-tools>
+                <version.org.jboss.bom.jboss-javaee-6.0-with-tools>6.4.4.GA</version.org.jboss.bom.jboss-javaee-6.0-with-tools>
 		<version.org.drools>6.1.0.Final</version.org.drools>
 		<!--version.resteasy>3.0.12.Final</version.resteasy-->
         <!--version.commons-codec>1.10</version.commons-codec-->
         
-         <version.commons-httpclient>3.1</version.commons-httpclient>
+                <version.commons-httpclient>3.1</version.commons-httpclient>
 
 	</properties>
 	
