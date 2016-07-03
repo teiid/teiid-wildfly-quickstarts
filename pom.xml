@@ -69,7 +69,7 @@
         <!--version.org.hibernate.search>4.5.0.Final</version.org.hibernate.search-->
                 <version.org.infinispan.6>7.2.3.Final</version.org.infinispan.6>  
         <!-- JDG module slot to use  -->
-                <jdg.slot>jdg-7.2</jdg.slot>  
+                <jdg.slot>jdg-7.0</jdg.slot>  
   		<version.net.jcip>1.0</version.net.jcip>
                 <version.resteasy.client>3.0.16.Final</version.resteasy.client>
         
