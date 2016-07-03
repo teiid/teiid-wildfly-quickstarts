@@ -31,7 +31,7 @@ NOTE: can obtain JDG kit distributions on Red Hat's Customer Portal at https://a
 
 === 1. JDG Setup
 
-Install the JBoss Data Grid eap modules kit into the modules location for your JBoss AS - Teiid instance. See Red Hat: http://access.redhat.com to obtain the kit.
+Install the JBoss Data Grid eap modules kit into the modules location for your wildfly server - Teiid instance. See Red Hat: http://access.redhat.com to obtain the kit.
 
 === 2. Teiid Server Setup
 
@@ -41,26 +41,26 @@ Install the JBoss Data Grid eap modules kit into the modules location for your J
 mvn clean install
 ----
 
-This will build jdg-quickstart-jboss-as7-dist.zip in the target directory.
+This will build jdg-quickstart-wildfly-dist.zip in the target directory.
 
 * Deploy the distribution kit
 
-Unzip the target/jdg-quickstart-jboss-as7-dist.zip at the root of the JBOSS_HOME directory. This will deploy the pojo module and the cache configuration file.
+Unzip the target/jdg-quickstart-wildfly-dist.zip at the root of the JBOSS_HOME directory. This will deploy the pojo module and the cache configuration file.
 
 * Update module dependencies
 
-[Required] The org.infinispan.commons (slot="${jdg.slot}" or slot for version installed) module needs to have the pojo dependency added
+[Required] The org.infinispan.commons (slot="jdg-7.0" or slot for version installed) module needs to have the pojo dependency added
 
-[Optional] If the version of JDG modules you installed was not ${jdg.slot}, then update the following modules:
+[Optional] If the version of JDG modules you installed was not jdg-7.0, then update the following modules:
 
 ----
-org.jboss.teiid.translator.infinispan.cache
-org.jboss.teiid.resource-adapter.infinispan" slot="6"
+org.jboss.teiid.translator.infinispan.libmode
+org.jboss.teiid.resource-adapter.infinispan.libmode
 ----
 
 * Configure resource-adapter
 
-Open the file: {jbossas.server.dir}/docs/teiid/datasources/infinispan/infinispan-ds.xml, copy and paste the resource-adapter section it into the server configuration, under the section:
+Open the file: {jbossas.server.dir}/docs/teiid/datasources/infinispan-library-mode/infinispan-lib-mode-ds.xml, copy and paste the resource-adapter section it into the server configuration, under the section:
 
 NOTE: the Infinispan cache will be configured using the infinispan.xml configuration file that's defined in the resource-adapter. Make sure the file name and the "ConfigurationFilenamForLocalCache" property match.
 
@@ -86,7 +86,7 @@ If Teiid isn't configured in the default configuration, append the following arg
 
 ----
 cd ${JBOSS_HOME}/bin
-./jboss-cli.sh --connect --file=../docs/teiid/datasources/infinispan/add-infinispan-cache-translator.cli
+./jboss-cli.sh --connect --file=../docs/teiid/datasources/infinispan-library-mode/add-ispn-lib-mode-translator.cli
 ----
 
 === 4. deploy the VDB
