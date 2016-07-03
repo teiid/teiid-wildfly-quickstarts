@@ -56,7 +56,7 @@
 	</model>               
          
   
-    <translator name="infinispan1" type="infinispan-cache-dsl">
+    <translator name="infinispan1" type="ispn-hotrod">
 
        <property name="SupportsDirectQueryProcedure" value="true"/>
        <property name="SupportsNativeQueries" value="true"/>
