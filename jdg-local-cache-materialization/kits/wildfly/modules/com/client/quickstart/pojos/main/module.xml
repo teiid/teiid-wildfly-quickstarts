@@ -6,6 +6,6 @@
     </resources>
     
     <dependencies>
-        <module name="org.jboss.teiid.resource-adapter.infinispan" slot="6" />
+        <module name="org.jboss.teiid.resource-adapter.infinispan.libmode" />
     </dependencies>
 </module>
