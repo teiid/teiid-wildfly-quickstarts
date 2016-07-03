@@ -41,7 +41,7 @@
    		</metadata>
 	</model>             
   
-    <translator name="infinispan1" type="infinispan-cache">
+    <translator name="infinispan1" type="ispn-lib-mode">
 
         <property name="SupportsDSLSearching" value="true"/>
        <property name="SupportsDirectQueryProcedure" value="true"/>
