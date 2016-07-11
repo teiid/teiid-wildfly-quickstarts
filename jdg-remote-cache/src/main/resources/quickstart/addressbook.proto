@@ -12,5 +12,14 @@ message Person {
    /* @IndexedField */
    optional string email = 3;
 
+   /* @Indexed */
+   message PhoneNumber {
+
+      /* @IndexedField */
+      required string number = 1;
+   }
+
+   /* @IndexedField(index=true, store=false) */
+   repeated PhoneNumber phoneNumber = 4;
 
 }

@@ -48,78 +48,106 @@ This subsytem will completely replace what’s currently defined in the standalo
 
 [source,xml]
 ----
-   <subsystem xmlns="urn:infinispan:server:core:6.4" default-cache-container="local">
-        <cache-container name="local" default-cache="default" statistics="true">
-            <local-cache name="default" start="EAGER">
-                <locking isolation="NONE" acquire-timeout="30000" concurrency-level="1000" striping="false"/>
-                <transaction mode="NONE"/>
-            </local-cache>
-            <local-cache name="memcachedCache" start="EAGER">
-                <locking isolation="NONE" acquire-timeout="30000" concurrency-level="1000" striping="false"/>
-                <transaction mode="NONE"/>
-            </local-cache>
-            <local-cache name="namedCache" start="EAGER"/>
-            
-            <!-- Add a local cache named 'addressbook_indexed' -->
-            <local-cache name="addressbook_indexed" start="EAGER">
-
-                <!-- Define the locking isolation of this cache -->
-                <locking
-                    acquire-timeout="20000"
-                    concurrency-level="500"
-                    striping="false" />
-                    
-                <!-- Enable indexing using the RAM Lucene directory provider -->
-                <indexing index="ALL">
-                    <property name="default.directory_provider">ram</property>
-                </indexing>
+   <subsystem xmlns="urn:infinispan:server:core:8.0" default-cache-container="local">
+            <cache-container name="local" default-cache="default" statistics="true">
+                <local-cache name="default" start="EAGER">
+                    <locking isolation="NONE" acquire-timeout="30000" concurrency-level="1000" striping="false"/>
+                    <transaction mode="NONE"/>
+                </local-cache>
+                <local-cache name="memcachedCache" start="EAGER">
+                    <locking isolation="NONE" acquire-timeout="30000" concurrency-level="1000" striping="false"/>
+                    <transaction mode="NONE"/>
+                </local-cache>
+                <local-cache name="namedCache" start="EAGER"/>
                 
-                <!-- Define the JdbcBinaryCacheStores to point to the ExampleDS previously defined -->
-                <string-keyed-jdbc-store datasource="java:jboss/datasources/ExampleDS" passivation="false" preload="false" purge="false">
+                <!-- Add a local cache named 'addressbook_indexed' -->
+                <local-cache name="addressbook_indexed" start="EAGER">
 
-                    <!-- specifies information about database table/column names and data types -->
-                    <string-keyed-table prefix="JDG">
-                        <id-column name="id" type="VARCHAR"/>
-                        <data-column name="datum" type="BINARY"/>
-                        <timestamp-column name="version" type="BIGINT"/>
-                    </string-keyed-table>
-                </string-keyed-jdbc-store>
-            </local-cache>           
-            <!-- End of 'addressbook_indexed' cache definition -->
+                    <!-- Define the locking isolation of this cache -->
+                    <locking
+                        acquire-timeout="20000"
+                        concurrency-level="500"
+                        striping="false" />
+                        
+                    <!-- Enable indexing using the RAM Lucene directory provider -->
+                    <indexing index="ALL">
+                        <property name="default.directory_provider">ram</property>
+                    </indexing>
+                    
+                    <!-- Define the JdbcBinaryCacheStores to point to the ExampleDS previously defined -->
+                    <string-keyed-jdbc-store datasource="java:jboss/datasources/ExampleDS" passivation="false" preload="false" purge="false">
 
-            <!-- Add a local cache named 'addressbook' which is not indexed -->
-            <local-cache name="addressbook" start="EAGER">
+                        <!-- specifies information about database table/column names and data types -->
+                        <string-keyed-table prefix="JDG">
+                            <id-column name="id" type="VARCHAR"/>
+                            <data-column name="datum" type="BINARY"/>
+                            <timestamp-column name="version" type="BIGINT"/>
+                        </string-keyed-table>
+                    </string-keyed-jdbc-store>
+                </local-cache>
+                <!-- End of 'addressbook_indexed' cache definition -->
 
-                <!-- Define the locking isolation of this cache -->
-                <locking
-                    acquire-timeout="20000"
-                    concurrency-level="500"
-                    striping="false" />
+                <!-- Add a local cache named 'addressbook' which is not indexed -->
+                <local-cache name="addressbook" start="EAGER">
 
-                <!-- Define the JdbcBinaryCacheStores to point to the ExampleDS previously defined -->
-                <string-keyed-jdbc-store datasource="java:jboss/datasources/ExampleDS" passivation="false" preload="false" purge="false">
+                    <!-- Define the locking isolation of this cache -->
+                    <locking
+                        acquire-timeout="20000"
+                        concurrency-level="500"
+                        striping="false" />
 
-                    <!-- specifies information about database table/column names and data types -->
-                    <string-keyed-table prefix="JDG">
-                        <id-column name="id" type="VARCHAR"/>
-                        <data-column name="datum" type="BINARY"/>
-                        <timestamp-column name="version" type="BIGINT"/>
-                    </string-keyed-table>
-                </string-keyed-jdbc-store>
-            </local-cache>
-            <!-- End of 'addressbook' cache definition -->
+                    <!-- Define the JdbcBinaryCacheStores to point to the ExampleDS previously defined -->
+                    <string-keyed-jdbc-store datasource="java:jboss/datasources/ExampleDS" passivation="false" preload="false" purge="false">
 
-        </cache-container>
-        <cache-container name="security"/>
+                        <!-- specifies information about database table/column names and data types -->
+                        <string-keyed-table prefix="JDG">
+                            <id-column name="id" type="VARCHAR"/>
+                            <data-column name="datum" type="BINARY"/>
+                            <timestamp-column name="version" type="BIGINT"/>
+                        </string-keyed-table>
+                    </string-keyed-jdbc-store>
+                </local-cache>
+               <local-cache name="addressbook_indexed_mat" start="EAGER">
+
+                    <!-- Define the locking isolation of this cache -->
+                    <locking
+                        acquire-timeout="20000"
+                        concurrency-level="500"
+                        striping="false" />
+                        
+                    <!-- Enable indexing using the RAM Lucene directory provider -->
+                    <indexing index="ALL">
+                        <property name="default.directory_provider">ram</property>
+                    </indexing>
+                    
+                    <!-- Define the JdbcBinaryCacheStores to point to the ExampleDS previously defined -->
+                    <string-keyed-jdbc-store datasource="java:jboss/datasources/ExampleDS" passivation="false" preload="false" purge="false">
+
+                        <!-- specifies information about database table/column names and data types -->
+                        <string-keyed-table prefix="JDG">
+                            <id-column name="id" type="VARCHAR"/>
+                            <data-column name="datum" type="BINARY"/>
+                            <timestamp-column name="version" type="BIGINT"/>
+                        </string-keyed-table>
+                    </string-keyed-jdbc-store>
+                </local-cache>   
+              <local-cache name="aliasCache" start="EAGER">
+
+                    <!-- Define the locking isolation of this cache -->
+                    <locking
+                        acquire-timeout="20000"
+                        concurrency-level="500"
+                        striping="false" />
+
+                    <!-- Define the JdbcBinaryCacheStores to point to the ExampleDS previously defined -->
+                    <string-keyed-jdbc-store datasource="java:jboss/datasources/ExampleDS" passivation="false" preload="false" purge="false">
+
+                    </string-keyed-jdbc-store>
+                </local-cache>                                    
+                <!-- End of 'addressbook' cache definition -->
+
+            </cache-container>
+            <cache-container name="security"/>
     </subsystem>
 ----
 
-== Start JDG
-
-1. Open a command line and navigate to the root of the JDG directory.
-2. The following shows the command line to start the server with the web profile:
-
-----
-$JDG_HOME/bin/standalone.sh //For Linux
-%JDG_HOME%\bin\standalone.bat //For Windows
-----

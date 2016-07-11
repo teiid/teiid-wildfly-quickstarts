@@ -48,7 +48,7 @@ This subsytem will completely replace what’s currently defined in the standalo
 
 [source,xml]
 ----
-   <subsystem xmlns="urn:infinispan:server:core:6.4" default-cache-container="local">
+   <subsystem xmlns="urn:infinispan:server:core:8.3" default-cache-container="local">
         <cache-container name="local" default-cache="default" statistics="true">
             <local-cache name="default" start="EAGER">
                 <locking isolation="NONE" acquire-timeout="30000" concurrency-level="1000" striping="false"/>
@@ -114,12 +114,3 @@ This subsytem will completely replace what’s currently defined in the standalo
     </subsystem>
 ----
 
-== Start JDG
-
-1. Open a command line and navigate to the root of the JDG directory.
-2. The following shows the command line to start the server with the web profile:
-
-----
-$JDG_HOME/bin/standalone.sh //For Linux
-%JDG_HOME%\bin\standalone.bat //For Windows
-----
