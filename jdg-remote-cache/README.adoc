@@ -1,5 +1,5 @@
 
-= JDG Remote-Cache Quickstart using JDG Hot Rod that supports Google Protocol Buffers for Serialization
+= JDG Remote-Cache Quickstart using JDG Hot Rod client that supports Google Protocol Buffers for Serialization
 
 |===
 |Level |Technologies |Target Product |Product Versions |Source
@@ -13,7 +13,7 @@
 
 == What is it?
 
-This quickstart demonstrates how Teiid can connect to a remote JBoss Data Grid (JDG) as a data source, to query and update data in cache using the Hot Rod protocol.
+This quickstart demonstrates how Teiid can connect to a remote JBoss Data Grid (JDG) as a data source, to query and update data in cache using the Hot Rod client protocol.
 
 This example is using the protobuf annotations feature of JDG for configuring the protobuf definition file and the marshaller. 
 
@@ -69,10 +69,16 @@ c. Install the JBoss Data Grid version of the hot rod client eap modules kit for
 
 * Setup the infinispan hotrod client resource adapter
 
-a. Configure for reading and writing to a remote cache, open the file: {jbossas.server.dir}/docs/teiid/datasources/infinispan-hotrod/infinispan-hotrod-annotations-ds.xml
+a. Configure for reading and writing to a remote cache, open the file: {JBOSS_HOME}/docs/teiid/datasources/infinispan-hotrod/infinispan-hotrod-annotations-ds.xml
 
 b. Copy and paste the resource-adapter section it into the server configuration, under the section.
 
+NOTE:  see  {JBOSS_HOME}/docs/teiid/datasources/infinispan-hotrod/readme.txt for all the options for configuring the resource-adapter.
+
+c. Edit the module.xml for org.jboss.teiid.resource-adapter.infinispan.hotrod resource adapter to add the pojo dependency
+
+example:  <module name="com.client.quickstart.addressbook.pojos"  optional="true"  export="true" />
+ 
 * Start the server
 
 To start the server, open a command line and navigate to the "bin" directory under the root directory of the Teiid server and run:
@@ -100,48 +106,17 @@ cd $\{JBOSS_HOME}/bin
 
 === 4. deploy the VDB
 
-Deploy for reading/writing to a remote cache, copy files infinispan-dsl-cache-vdb.xml and infinispan-dsl-cache-vdb.xml.dodeploy to {JBOSS_HOME}/standalone/deployments
+Deploy for reading/writing to a remote cache, copy files jdg-remote-cache-vdb.xml and jdg-remote-cache-vdb.xml.dodeploy to {JBOSS_HOME}/standalone/deployments
 
-=== 5. JDG Remote Cache initialization
-
-NOTE: The following build command assumes you have configured your Maven user settings. If you have not, you must include Maven setting arguments on the command line. See link:../README.adoc#_downloading_and_installing_maven[Maven] for complete instructions and additional options.
-
-a. Make sure you have started the JDG as described above.
-
-b. Open a command line and navigate to the root directory of this teiid jdg-remote-cache quickstart.
-
-c. If you need to, rebuild the quick start
-
-----
-mvn clean install 
-----
-
-d. Run the example application in its directory:
-
-----
-mvn exec:java
-----
-
-== Using the application
-
-Basic usage scenarios can look like this (keyboard shortcuts will be shown to you upon start):
-
-----
-Available actions:
-0. Display available actions
-1. Add person
-2. Remove person
-3. Add phone to person
-4. Remove phone from person
-5. Display all persons
-6. Query persons by name
-7. Query persons by phone
-8. Quit
-----
-
-Type `8` to exit the application.
 
 == Query Demonstrations
+
+1. Change your working directory to "${quickstart.install.dir}/simpleclient"
+2. Use the simpleclient example to run the following queries:
+
+Example: mvn exec:java -Dvdb="People" -Dsql="Insert into Person (id, name, email) Values (100, 'TestPerson', 'test@person.com')" -Dusername="teiidUser" -Dpassword="pwd"
+
+or
 
 Use a sql tool, like SQuirreL, to connect and issue following example query:
 

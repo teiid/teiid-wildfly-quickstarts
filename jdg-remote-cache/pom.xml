@@ -16,7 +16,7 @@
 
         <!-- Defines the main class to be execute when running java -jar 
             command -->
-         <main.class.remote-query>org.jboss.as.quickstarts.datagrid.hotrod.query.AddressBookManager</main.class.remote-query>
+         <main.class.remote-query>com.client.quickstart.addressbook.pojos.AddressBookManager</main.class.remote-query>
 
     </properties>
     

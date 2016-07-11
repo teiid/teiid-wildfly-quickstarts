@@ -4,7 +4,7 @@
     <description>Shows how to materialize into an Infinispan remote cache</description>
     
     <property name="UseConnectorMetadata" value="cached" />   
-    <property name ="lib" value ="com.client.quickstart.addressbook.pojos" />
+    <property name ="lib" value ="com.client.quickstart.addressbook.remotecache.pojos" />
     
     <import-vdb name="Portfolio" version="1" import-data-policies="true"/>
     
@@ -28,7 +28,7 @@
     <model name="PersonMatCache" type="Physical">
         <property name="importer.useFullSchemaName" value="false"/>
            
-        <source name="PersonMatSource1" translator-name="infinispan1" connection-jndi-name="java:/infinispanRemoteDSL" />
+        <source name="PersonMatSource1" translator-name="infinispan1" connection-jndi-name="java:/infinispanRemoteMat" />
 
     </model>      
     
