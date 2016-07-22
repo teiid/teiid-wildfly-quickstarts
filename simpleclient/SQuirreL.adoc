@@ -16,7 +16,7 @@ Example URL: jdbc:teiid:<vdb-name>@mm[s]://<host>:<port>
 Website URL: http://teiid.org
 ----
 
-NOTE: you need to add the JDBC driver download above in the "Extra Class Path" tab, and select "Class Name" at the bottom as "org.teiid.jdbc.TeiidDriver"
+NOTE: you need to add the JDBC driver download above in the "Extra Class Path" tab, click "List Drivers" and select "Class Name" at the bottom as "org.teiid.jdbc.TeiidDriver"
     
 * Click on Alias tab, and create an alias, using the driver created above. use the following settings
 
