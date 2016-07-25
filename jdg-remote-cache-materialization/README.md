@@ -66,11 +66,11 @@ port adjustment has been made in the jdg.properties on the client side to match 
 
 
 # Setup Teiid Server
-
+AliasCacheName
 1. shutdown jbossas server, if not already.
 
 2. deploy pojo Module  
-	-	take the jdg-remote-cache-pojos-jboss-as7-dist.zip and unzip at <jbossas-dir>/modules/
+	-	take the jdg-remote-cache-pojos-jboss-as7-dist.zip and unzip at <jbossas-dir>
 
 3. Install the JBoss Data Grid version of the hot rod client modules kit for EAP into <jbossas-dir>/modules/ of your Teiid/EAP instance.
    See Red Hat:   http://access.redhat.com  to obtain the kit.
@@ -98,7 +98,7 @@ example:  <module name="com.client.quickstart.addressbook.pojos"  optional="true
 
 	If Teiid isn't configured in the default configuration, append the following arguments to the command to specify the configuration
 		
-	-c {configuration.file}  
+	-c {configuration.file} 
 	
 	Example: -c standalone-teiid.xml 
 
