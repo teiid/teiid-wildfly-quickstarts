@@ -7,6 +7,13 @@ Source: https://github.com/teiid/teiid-quickstarts
 ---
 
 JDG Remote-Cache Materialization Quickstart using JDG Hot Rod that supports Google Protocol Buffers for Serialization
+
+There are 2 options for configuring the JDG schema in DV, using protobuf (.proto) file and marshaller(s) or using the JDG 6.6 
+feature of using protobuf annotations defined in the pojo.   This example is using the later and therefore, requires
+that you use JDG 6.6.
+
+NOTE:  The JDG 6.6.1 patch must be applied to the JDG 6.6 Hot Rod client EAP module kit, that is installed in DV server.
+
 ================================
 
 # What is it?
@@ -27,9 +34,11 @@ This quickstart demonstrates how Teiid can connect to a remote JBoss Data Grid (
 
 2.  JDG Server Prerequistes
 
-* JDG 6.5 server kit installed (used as the remote server)
-* JDG 6.5 HotRod modules kit (used by Teiid to access the remote cache)
+* JDG 6.6 server kit installed (used as the remote server)
+* JDG 6.6 HotRod modules kit (used by Teiid to access the remote cache)
 	> NOTE: You can obtain JDG kit distributions on Red Hat's Customer Portal at https://access.redhat.com/jbossnetwork/restricted/listSoftware.html
+
+NOTE:  The JDG 6.6.1 patch must be applied to the JDG 6.6 Hot Rod client EAP module kit, that is installed in DV server.
 
 
 # JDG setup
