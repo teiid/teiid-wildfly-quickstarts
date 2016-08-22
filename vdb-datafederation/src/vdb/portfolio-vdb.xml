@@ -49,7 +49,8 @@
                 
         CREATE VIEW StockPrices (
             symbol string,
-            price bigdecimal
+            price bigdecimal,
+            PRIMARY KEY (symbol)
             )
             AS  
                SELECT SP.symbol, SP.price
@@ -61,7 +62,8 @@
             product_id integer,
             symbol string,
             price bigdecimal,
-            company_name   varchar(256)
+            company_name   varchar(256),
+            PRIMARY KEY (product_id)
             )
             AS
                 SELECT  A.ID, S.symbol, S.price, A.COMPANY_NAME
