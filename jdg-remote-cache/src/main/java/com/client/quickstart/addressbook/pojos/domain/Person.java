@@ -34,6 +34,8 @@ public class Person {
    public String email;
    @ProtoField(number = 4, collectionImplementation = ArrayList.class)
    public List<PhoneNumber> phones;
+   @ProtoField(number=5)
+   public Address address;
 
    public String getName() {
       return name;
@@ -63,8 +65,16 @@ public class Person {
       return phones;
    }
 
-   public void setPhoneNumbers(List<PhoneNumber> phones) {
+   public void setPhones(List<PhoneNumber> phones) {
       this.phones = phones;
+   }
+
+   public Address getAddress() {
+	   return this.address;
+   }
+   
+   public void setAddress(Address address) {
+	   this.address = address;
    }
 
    @Override

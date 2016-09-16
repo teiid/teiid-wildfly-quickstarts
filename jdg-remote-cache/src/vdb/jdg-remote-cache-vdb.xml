@@ -9,7 +9,7 @@
     <model name="People" type="Physical">
         <property name="importer.useFullSchemaName" value="false"/>
            
-        <source name="infinispan-cache-dsl-connector" translator-name="ispn-hotrod" connection-jndi-name="java:/infinispanRemote" />
+        <source name="infinispan-cache-dsl-connector" translator-name="ispn-hotrod" connection-jndi-name="java:/infinispanRemoteHotRod" />
     </model>
 
 
