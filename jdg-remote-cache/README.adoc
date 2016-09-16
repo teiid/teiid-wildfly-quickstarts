@@ -101,7 +101,7 @@ If Teiid isn't configured in the default configuration, append the following arg
 
 ----
 cd $\{JBOSS_HOME}/bin
-./jboss-cli.sh --connect --file={JBOSS_HOME}/docs/teiid/datasources/infinispan/add-ispn-hotrod-translator.cli
+./jboss-cli.sh --connect --file=../docs/teiid/datasources/infinispan-hotrod/add-ispn-hotrod-translator.cli
 ----
 
 === 4. deploy the VDB
@@ -130,9 +130,24 @@ NOTE: do not do a `SELECT * FROM Person`, because you will get a serialization e
 .*Example Query SQL*
 ----
 select name, email, id from Person 
-Insert into Person (id, name, email) Values (100, 'TestPerson', 'test@person.com')
+Insert into Person (id, name, email) Values (100, 'TestPerson', 'test@person.com');
+Insert into Person (id, name, email) Values (200, 'TestPerson2', 'test2@person.com');
+
 select name, email, id from Person where id = 100
 Update Person set name='testPerson 100' where id = 100 then - select name, email, id from Person 
+
+
+Insert into Address (id, Address, City, State) Values (200, '1212 Stratford', 'Williamsburg', 'VA')
+
+select a.id, a.name, b.Address, b.City, b.State from Person as a, Address as b WHERE a.id = b.id
+
+
+Insert into PhoneNumber (id, number) Values (200, '603-351-3022');
+
+select a.id, a.name, b.number from Person as a, PhoneNumber as b WHERE a.id = b.id
+
+
+
 delete from Person where id = 100
 select name, email, id from Person
 ----

@@ -18,6 +18,8 @@ package com.client.quickstart.addressbook.pojos.marshallers;
 
 import org.infinispan.protostream.MessageMarshaller;
 import com.client.quickstart.addressbook.pojos.domain.Person;
+import com.client.quickstart.addressbook.pojos.domain.Address;
+import com.client.quickstart.addressbook.pojos.domain.PhoneNumber;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -43,11 +45,15 @@ public class PersonMarshaller implements MessageMarshaller<Person> {
       String name = reader.readString("name");
       int id = reader.readInt("id");
       String email = reader.readString("email");
- 
+      List<PhoneNumber> phones = reader.readCollection("phoneNumber", new ArrayList<PhoneNumber>(), PhoneNumber.class);
+      Address address = reader.readObject("address", Address.class);
+
       Person person = new Person();
       person.setName(name);
       person.setId(id);
       person.setEmail(email);
+      person.setPhones(phones);
+      person.setAddress(address);
       return person;
    }
 
@@ -56,5 +62,7 @@ public class PersonMarshaller implements MessageMarshaller<Person> {
       writer.writeString("name", person.getName());
       writer.writeInt("id", person.getId());
       writer.writeString("email", person.getEmail());
+      writer.writeCollection("phoneNumber", person.getPhones(), PhoneNumber.class);
+      writer.writeObject("address", person.getAddress(), Address.class);
    }
 }
