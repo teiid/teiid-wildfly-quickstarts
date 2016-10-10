@@ -4,14 +4,6 @@
     <description>The Portfolio Dynamic VDB</description>
     
     <!-- 
-      Setting to use connector supplied metadata. Can be "true" or "cached".  
-      "true" will obtain metadata once for every launch of Teiid. 
-      "cached" will save a file containing the metadata into 
-      the deploy/<vdb name>/<vdb version/META-INF directory
-    -->
-    <property name="UseConnectorMetadata" value="true" />
-
-    <!-- 
       Each model represents a access to one or more sources.
       The name of the model will be used as a top level schema name
       for all of the metadata imported from the connector.

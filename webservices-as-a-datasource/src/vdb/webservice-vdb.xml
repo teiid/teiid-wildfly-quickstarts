@@ -3,7 +3,6 @@
 
     <description>Shows how to call Web Services</description>
     
-    <property name="UseConnectorMetadata" value="true" />
     <!--property name="{http://teiid.org/rest}auto-generate" value="true"/-->
 
     <model name="CustomerSource">

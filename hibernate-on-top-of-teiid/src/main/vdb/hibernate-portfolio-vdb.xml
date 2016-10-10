@@ -3,8 +3,6 @@
 
     <description>This VDB is utilized by Hibernate on top</description>
 
-    <property name="UseConnectorMetadata" value="true" />
-    
     <import-vdb name="Portfolio" version="1" import-data-policies="true"/>
 
 

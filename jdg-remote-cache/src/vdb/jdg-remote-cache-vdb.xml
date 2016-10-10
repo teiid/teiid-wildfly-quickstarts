@@ -3,9 +3,6 @@
 
     <description>People Object Cache VDB</description>
 
-    <property name="UseConnectorMetadata" value="true" />
-
-
     <model name="People" type="Physical">
         <property name="importer.useFullSchemaName" value="false"/>
            

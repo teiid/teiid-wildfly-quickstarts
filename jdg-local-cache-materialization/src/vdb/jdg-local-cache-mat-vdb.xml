@@ -3,7 +3,7 @@
 
     <description>Shows how to call an Infinispan local cache</description>
 
-    <property name="UseConnectorMetadata" value="cached" />
+    <property name="cache-metadata" value="true" />
     
     <property name ="lib" value ="com.client.quickstart.pojos" />
     <import-vdb name="Portfolio" version="1" import-data-policies="true"/>

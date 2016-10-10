@@ -3,14 +3,6 @@
 
     <description>The Excel VDB</description>
     
-    <!-- 
-      Setting to use connector supplied metadata. Can be "true" or "cached".  
-      "true" will obtain metadata once for every launch of Teiid. 
-      "cached" will save a file containing the metadata into 
-      the deploy/<vdb name>/<vdb version/META-INF directory
-    -->
-    <property name="UseConnectorMetadata" value="true" />
-    
    <model name="PersonalValuations">
         <property name="importer.headerRowNumber" value="1"/>
         <property name="importer.ExcelFileName" value="otherholdings.xls"/>

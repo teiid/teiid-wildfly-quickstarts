@@ -3,7 +3,7 @@
 
     <description>Shows how to query Hadoop using Hive</description>
     
-    <property name="UseConnectorMetadata" value="cached"/>
+    <property name="cache-metadata" value="true"/>
     
     <model name="Hadoop">
 	<source name="Hive connector" translator-name="hive" connection-jndi-name="java:/HiveDS"/>
