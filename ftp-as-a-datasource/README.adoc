@@ -1,0 +1,118 @@
+
+= Excel as a DataSource Example
+
+|===
+|Level |Technologies |Target Product |Product Versions |Source
+
+|Basic
+|Teiid, VDB, Native Queries, File Translator
+|DV
+|DV 6.3+
+|https://github.com/teiid/teiid-quickstarts
+|===
+
+
+== What is it?
+
+This quickstart demonstrates how to use File Translator and a FTP Resource Adapter to transfer remote file data to a relational data sets.
+
+== Prerequisites
+
+* link:../README.adoc#_downloading_and_installing_java[Java]
+* link:../README.adoc#_downloading_and_installing_maven[Maven]
+* link:../README.adoc#_downloading_and_installing_teiid[Teiid Server]
+* link:../simpleclient/README.adoc[Simple Client]
+
+=== Set up vsftpd server
+
+* Verify that the vsftpd package is installed.
+
+[source,shell]
+----
+rpm -qa | grep vsftpd
+---- 
+
+* If it is not installed, please install it as follows:
+
+[source,shell]
+----
+yum install vsftpd
+----
+
+* Using an editor, open the file ‘/etc/vsftpd/vsftpd.conf’.
+
+If you would like the FTP server to be accessed by anonymous, make sure the following lines are uncommented:
+
+[source,xml]
+----
+anonymous_enable=YES
+----
+
+If you would like the FTP server to be accessed by local user, make sure the following lines are uncommented:
+
+[source,xml]
+----
+local_enable=YES
+----
+
+* To start the vsftpd service in the current session, type the following at a shell prompt as root:
+
+[source,shell]
+----
+systemctl start vsftpd.service
+----
+
+== Setup
+
+=== 1. Start the server
+
+Refer to link:../categories/prerequisites.adoc#_start_the_server[Prerequisites] to start the Server.
+
+=== 2. Prepare data
+
+Copy link:./teiidfiles/marketdata-price.txt[marketdata-price.txt] to remote ftp server
+
+[source,shell]
+----
+scp marketdata-price.txt kylin@10.66.192.120:/home/kylin/vsftpd
+----
+
+=== 3. Setup the ftp resource adapter
+
+Run the following CLI script
+
+----
+cd $JBOSS_HOME/bin
+./jboss-cli.sh --connect --file={path}/ftp-as-a-datasource/src/scripts/setup.cli
+----
+
+NOTE: make sure the configuration properties `ParentDirectory`, `Host`, `Port`, `Username` and `Password` match your environment.
+
+=== 4. VDB Deployment:
+
+Copy (deploy) the FTP VDB related files to the $JBOSS_HOME/standalone/deployments directory
+
+----
+src/vdb/ftp-vdb.xml
+----
+
+You should see the server log indicate the VDB is active with a message like: `TEIID40003 VDB ftpVDB.1 is set to ACTIVE`. See <<Query Demonstrations, Query Demonstrations>> below to demonstrate data federation.
+
+== Query Demonstrations
+
+link:../simpleclient/README.adoc#_execution[Simple Java Client] for sample SQL Queries, link:../simpleclient/SQuirreL.adoc[SQuirreL Client] for a fully featured SQL Queries.
+
+* Example - queries the EXCEL file to retrieve other personal holdings valuations. 
+
+[source,sql]
+.*Example - Simple Java Client*
+----
+mvn exec:java -Dvdb="ftpVDB" -Dsql="SELECT * FROM StockPrices"
+----
+
+[source,sql]
+.*Example - SQL*
+----
+SELECT * FROM StockPrices
+----
+
