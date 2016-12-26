@@ -1,0 +1,9 @@
+/subsystem=resource-adapters/resource-adapter=ftpQS:add(module=org.jboss.teiid.resource-adapter.ftp)
+/subsystem=resource-adapters/resource-adapter=ftpQS/connection-definitions=ftpDS:add(jndi-name=java:/ftpDS, class-name=org.teiid.resource.adapter.ftp.FtpManagedConnectionFactory, enabled=true, use-java-context=true)
+/subsystem=resource-adapters/resource-adapter=ftpQS/connection-definitions=ftpDS/config-properties=ParentDirectory:add(value=/home/kylin/vsftpd)
+/subsystem=resource-adapters/resource-adapter=ftpQS/connection-definitions=ftpDS/config-properties=Host:add(value=10.66.192.120)
+/subsystem=resource-adapters/resource-adapter=ftpQS/connection-definitions=ftpDS/config-properties=Port:add(value=21)
+/subsystem=resource-adapters/resource-adapter=ftpQS/connection-definitions=ftpDS/config-properties=Username:add(value=kylin)
+/subsystem=resource-adapters/resource-adapter=ftpQS/connection-definitions=ftpDS/config-properties=Password:add(value=redhat)
+/subsystem=resource-adapters/resource-adapter=ftpQS:activate()
+:reload

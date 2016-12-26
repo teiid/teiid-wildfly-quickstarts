@@ -4,6 +4,7 @@
 . link:categories/prerequisites.adoc[Prerequisites]
 . link:categories/files.adoc[Flat/XML/JSON Files]
 .. link:excel-as-a-datasource/README.adoc[Excel as a DataSource Example]
+.. link:ftp-as-a-datasource/README.adoc[Ftp/Ftps as a DataSource Example]
 . link:categories/general.adoc[General]
 .. link:vdb-datafederation/README.adoc[Data Federation Example]
 .. link:vdb-dataroles/README.adoc[Data Roles Example]
