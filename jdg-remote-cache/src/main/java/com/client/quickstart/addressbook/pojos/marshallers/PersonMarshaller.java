@@ -52,7 +52,7 @@ public class PersonMarshaller implements MessageMarshaller<Person> {
       person.setName(name);
       person.setId(id);
       person.setEmail(email);
-      person.setPhones(phones);
+      person.setPhoneNumbers(phones);
       person.setAddress(address);
       return person;
    }
@@ -62,7 +62,7 @@ public class PersonMarshaller implements MessageMarshaller<Person> {
       writer.writeString("name", person.getName());
       writer.writeInt("id", person.getId());
       writer.writeString("email", person.getEmail());
-      writer.writeCollection("phoneNumber", person.getPhones(), PhoneNumber.class);
+      writer.writeCollection("phoneNumber", person.getPhoneNumbers(), PhoneNumber.class);
       writer.writeObject("address", person.getAddress(), Address.class);
    }
 }

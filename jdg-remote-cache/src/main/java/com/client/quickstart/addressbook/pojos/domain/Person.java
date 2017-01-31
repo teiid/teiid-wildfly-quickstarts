@@ -33,7 +33,7 @@ public class Person {
    @ProtoField(number = 3)
    public String email;
    @ProtoField(number = 4, collectionImplementation = ArrayList.class)
-   public List<PhoneNumber> phones;
+   public List<PhoneNumber> phoneNumbers;
    @ProtoField(number=5)
    public Address address;
 
@@ -61,12 +61,12 @@ public class Person {
       this.email = email;
    }
 
-    public List<PhoneNumber> getPhones() {
-      return phones;
+    public List<PhoneNumber> getPhoneNumbers() {
+      return phoneNumbers;
    }
 
-   public void setPhones(List<PhoneNumber> phones) {
-      this.phones = phones;
+   public void setPhoneNumbers(List<PhoneNumber> phones) {
+      this.phoneNumbers = phones;
    }
 
    public Address getAddress() {
@@ -83,7 +83,7 @@ public class Person {
             "id=" + id +
             ", name='" + name +
             "', email='" + email + '\'' +
-            ", phones=" + phones +
+            ", phones=" + phoneNumbers +
             '}';
    }
 }
