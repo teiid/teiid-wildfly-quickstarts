@@ -9,10 +9,10 @@
 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.jboss.teiid.quickstart</groupId>
-	<artifactId>excel-as-a-datasource</artifactId>
+	<artifactId>ftp-as-a-datasource</artifactId>
 	<packaging>pom</packaging>
 
-	<name>Excel as a DataSource</name>
-	<description>This quickstart demonstrates how to use excel translator transfer excel data to a relational data sets</description>
+	<name>FTP as a DataSource</name>
+	<description>This quickstart demonstrates how to use ftp translator transfer data to a relational data sets</description>
 
 </project>
