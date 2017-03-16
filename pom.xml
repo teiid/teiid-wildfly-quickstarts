@@ -12,7 +12,7 @@
 	<groupId>org.jboss.teiid.quickstart</groupId>
 	<artifactId>teiid-quickstart-parent</artifactId>
 	<packaging>pom</packaging>
-	<version>3.0.0</version>
+	<version>3.1.0</version>
 	<name>Teiid Quickstart Parent</name>
 	<description>Quickstarts for the Teiid project</description>
 
@@ -54,7 +54,7 @@
 			
 		<version.org.jboss.integration-platform>6.0.0.CR30</version.org.jboss.integration-platform>
 
-		<version.teiid>8.12.5</version.teiid>
+		<version.teiid>8.12.11.6_4</version.teiid>
      	<jbossas-module-root>modules/system/layers/dv</jbossas-module-root>
 
         <version.javax.annotation>${version.org.jboss.spec.javax.annotation.jboss-annotations-api_1.1_spec}</version.javax.annotation>
