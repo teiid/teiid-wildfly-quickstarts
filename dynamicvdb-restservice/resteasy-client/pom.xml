@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-    <parent>
-        <groupId>org.jboss.teiid.quickstart</groupId>
-        <artifactId>dynamicvdb-restservice</artifactId>
-        <version>3.0.0</version>
-    </parent>
+
     <modelVersion>4.0.0</modelVersion>
+    <groupId>org.jboss.teiid.quickstart</groupId>
     <artifactId>dynamicvdb-resteasy-client</artifactId>
+    <version>3.0.0</version>
 
     <name>REST Service Through Portfolio Dynamic VDB RestEasy Client</name>
     <description>This quickstart demonstrates how to enable REST Service Through Portfolio Dynamic VDB RestEasy Client</description>
+
+     <properties>
+        <version.resteasy.client>3.0.16.Final</version.resteasy.client>
+        <version.commons-codec>1.10</version.commons-codec>
+    </properties>
 
 	<dependencyManagement>
 	<!--   
@@ -29,9 +32,9 @@
 				<version>${version.resteasy.client}</version>
 		 	</dependency>  
 			<dependency>
-				<groupId>org.jboss.resteasy</groupId>
-				<artifactId>jaxrs-api</artifactId>
-				<version>${version.resteasy.client}</version>
+				<groupId>commons-codec</groupId>
+				<artifactId>commons-codec</artifactId>
+				<version>${version.commons-codec}</version>
 			</dependency>			 	 		
 		</dependencies>
 	</dependencyManagement>
@@ -43,19 +46,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.jboss.resteasy</groupId>
-			<artifactId>jaxrs-api</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.jboss.resteasy</groupId>
 			<artifactId>resteasy-jaxrs</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.httpcomponents</groupId>
-			<artifactId>httpclient</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.httpcomponents</groupId>
-			<artifactId>httpcore</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>commons-codec</groupId>
@@ -66,5 +57,35 @@
     
     <build>
     	<finalName>${project.artifactId}</finalName>
+    	<plugins>
+    	    <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <showDeprecation>false</showDeprecation>
+                    <showWarnings>false</showWarnings>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>java</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <mainClass>org.jboss.teiid.quickstart.PortfolioClient</mainClass>
+                    <arguments>
+                        <argument>localhost</argument>
+                        <argument>8080</argument>
+                        <argument>restUser</argument>
+                        <argument>password1!</argument>
+                    </arguments>
+                </configuration>
+            </plugin>
+    	</plugins>
     </build>
 </project>

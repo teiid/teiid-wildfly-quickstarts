@@ -2,7 +2,7 @@
 Level: Basic
 Technologies: Teiid, Dynamic VDB, Native Queries, VDB reuse, reading data from JDBC, delimited file, REST Service Through VDB
 Target Product: DV
-Product Versions: DV 6.1, DV 6.2
+Product Versions: DV 6.1+
 Source: https://github.com/teiid/teiid-quickstarts
 ---
 
@@ -14,7 +14,8 @@ This quickstart demonstrates:
 * how to use the httpclient api to integrate VDB data via REST
 * how to use the JAX-RS 2.0 Client API to integrate VDB data via REST with security authentication
 * how to use the Resteasy Client API with JAX-RS 2.0 Client API to integrate VDB data via REST
-* how to use the esteasy Client API with HTTP client as engine to integrate VDB data via REST with security authentication
+* how to use the Resteasy Client API with HTTP client as engine to integrate VDB data via REST with security authentication
+* how to use Swagger API Doc Page test all Rest API.
 
 This quickstart depends upon the [dynamicvdb-datafederation](../dynamicvdb-datafederation) quickstart.  It needs to be deployed prior to running this example.
 
@@ -30,10 +31,10 @@ Refer to [dynamicvdb-datafederation's README.md](../dynamicvdb-datafederation/RE
 
 2) Create a Application User under group `rest`
 
-Navigate to JBOSS_HOME, execute below command will create user `testUser` under group `rest`:
+Navigate to JBOSS_HOME, execute below command will create user `restUser` under group `rest`:
 
 ~~~
-$ ./bin/add-user.sh -a -u testUser -p password1! -g rest
+$ ./bin/add-user.sh -a -u restUser -p password1! -g rest
 ~~~ 
 
 > NOTE: By default, REST services through a VDB are secured with security domain "teiid-security" and with security role "rest".
@@ -62,16 +63,18 @@ The following Rest API will extract data from the VDB:
 
 > NOTE: Above Query Demonstrations assuming DV server run on localhost.
 
+NOTE: [http://localhost:8080/PortfolioRest_1/api](http://localhost:8080/PortfolioRest_1/api) will list all API.
+
 ### Run http client
 
 ~~~
 $ cd http-client/
-$ mvn exec:java
+$ mvn package exec:java
 ~~~
 
 ### Run resteasy client
 
 ~~~
-$ mvn clean install dependency:copy-dependencies
-$ java -cp target/dependency/*:target/dynamicvdb-resteasy-client.jar org.jboss.teiid.quickstart.PortfolioClient
+$ cd resteasy-client/
+$ mvn package exec:java
 ~~~

@@ -33,8 +33,6 @@
 	    <module>dynamicvdb-materialization</module>
         <module>hibernate-on-top-of-teiid</module>
         <module>webservices-as-a-datasource</module>
-		<module>jdg-local-cache</module>
-		<module>jdg-local-cache-materialization</module>
         <module>jdg-remote-cache</module>
         <module>jdg-remote-cache-materialization</module>
         <module>mongodb-as-a-datasource</module>
@@ -68,7 +66,8 @@
         <!-- JDG module slot to use  -->
         <jdg.slot>jdg-6.6</jdg.slot>  
   		<version.net.jcip>1.0</version.net.jcip>
-        <version.resteasy.client>3.0.12.Final</version.resteasy.client>
+        <version.resteasy.client>3.0.16.Final</version.resteasy.client>
+        <version.commons-codec>1.10</version.commons-codec>
                 
         <version.org.jboss.bom.jboss-javaee-6.0-with-tools>6.4.4.GA</version.org.jboss.bom.jboss-javaee-6.0-with-tools>
 		<version.org.drools>6.1.0.Final</version.org.drools>

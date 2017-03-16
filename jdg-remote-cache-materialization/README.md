@@ -7,6 +7,13 @@ Source: https://github.com/teiid/teiid-quickstarts
 ---
 
 JDG Remote-Cache Materialization Quickstart using JDG Hot Rod that supports Google Protocol Buffers for Serialization
+
+There are 2 options for configuring the JDG schema in DV, using protobuf (.proto) file and marshaller(s) or using the JDG 6.6 
+feature of using protobuf annotations defined in the pojo.   This example is using the later and therefore, requires
+that you use JDG 6.6.
+
+NOTE:  The JDG 6.6.1 patch must be applied to the JDG 6.6 Hot Rod client EAP module kit, that is installed in DV server.
+
 ================================
 
 # What is it?
@@ -27,9 +34,11 @@ This quickstart demonstrates how Teiid can connect to a remote JBoss Data Grid (
 
 2.  JDG Server Prerequistes
 
-* JDG 6.5 server kit installed (used as the remote server)
-* JDG 6.5 HotRod modules kit (used by Teiid to access the remote cache)
+* JDG 6.6 server kit installed (used as the remote server)
+* JDG 6.6 HotRod modules kit (used by Teiid to access the remote cache)
 	> NOTE: You can obtain JDG kit distributions on Red Hat's Customer Portal at https://access.redhat.com/jbossnetwork/restricted/listSoftware.html
+
+NOTE:  The JDG 6.6.1 patch must be applied to the JDG 6.6 Hot Rod client EAP module kit, that is installed in DV server.
 
 
 # JDG setup
@@ -66,11 +75,11 @@ port adjustment has been made in the jdg.properties on the client side to match 
 
 
 # Setup Teiid Server
-
+AliasCacheName
 1. shutdown jbossas server, if not already.
 
 2. deploy pojo Module  
-	-	take the jdg-remote-cache-pojos-jboss-as7-dist.zip and unzip at <jbossas-dir>/modules/
+	-	take the jdg-remote-cache-pojos-jboss-as7-dist.zip and unzip at <jbossas-dir>
 
 3. Install the JBoss Data Grid version of the hot rod client modules kit for EAP into <jbossas-dir>/modules/ of your Teiid/EAP instance.
    See Red Hat:   http://access.redhat.com  to obtain the kit.
@@ -98,7 +107,7 @@ example:  <module name="com.client.quickstart.addressbook.pojos"  optional="true
 
 	If Teiid isn't configured in the default configuration, append the following arguments to the command to specify the configuration
 		
-	-c {configuration.file}  
+	-c {configuration.file} 
 	
 	Example: -c standalone-teiid.xml 
 
