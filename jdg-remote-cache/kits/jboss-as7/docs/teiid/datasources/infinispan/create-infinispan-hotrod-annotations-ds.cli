@@ -1,0 +1,13 @@
+# configure infinispan RA when POJO has protobuf annotations for configuring the JDG schema
+# substitute your values for the following:
+#  - jndi-name
+#  - CacheTypeMap
+#  - Module
+#  - RemoteServerList
+
+/subsystem=resource-adapters/resource-adapter=ispnHotrodAnnot:add(module=org.jboss.teiid.resource-adapter.infinispan.dsl)
+/subsystem=resource-adapters/resource-adapter=ispnHotrodAnnot/connection-definitions=infinispanHotRodDS:add(jndi-name="java:/infinispanRemoteAnnot", class-name=org.teiid.resource.adapter.infinispan.hotrod.InfinispanManagedConnectionFactory, enabled=true, use-java-context=true)
+/subsystem=resource-adapters/resource-adapter=ispnHotrodAnnot/connection-definitions=infinispanHotRodDS/config-properties=CacheTypeMap:add(value="datasourceCache:com.client.quickstart.addressbook.pojos.domain.Person;id")
+/subsystem=resource-adapters/resource-adapter=ispnHotrodAnnot/connection-definitions=infinispanHotRodDS/config-properties=Module:add(value="com.client.quickstart.addressbook.pojos")
+/subsystem=resource-adapters/resource-adapter=ispnHotrodAnnot/connection-definitions=infinispanHotRodDS/config-properties=RemoteServerList:add(value="127.0.0.1:11322")
+/subsystem=resource-adapters/resource-adapter=ispnHotrodAnnot:activate

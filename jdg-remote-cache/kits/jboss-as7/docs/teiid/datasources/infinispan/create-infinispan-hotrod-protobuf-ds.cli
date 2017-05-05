@@ -1,0 +1,20 @@
+#  configure infinispan RA whe protobuf defn file, descriptor and marshallers are used for configuring the JDG schema
+# substitute your values for the following:
+#  - jndi-name
+#  - CacheTypeMap
+#  - Module
+#  - RemoteServerList
+#  - ProtobufDefinitionFile
+#  - MessageDescriptor
+#  - MessageMarshallers
+
+/subsystem=resource-adapters/resource-adapter=ispnHotrodPB:add(module=org.jboss.teiid.resource-adapter.infinispan.dsl)
+/subsystem=resource-adapters/resource-adapter=ispnHotrodPB/connection-definitions=infinispanHotRodDS:add(jndi-name="java:/infinispanRemoteDSL", class-name=org.teiid.resource.adapter.infinispan.dsl.InfinispanManagedConnectionFactory, enabled=true, use-java-context=true)
+/subsystem=resource-adapters/resource-adapter=ispnHotrodPB/connection-definitions=infinispanHotRodDS/config-properties=CacheTypeMap:add(value="datasourceCache:com.client.quickstart.addressbook.pojos.domain.Person;id")
+/subsystem=resource-adapters/resource-adapter=ispnHotrodPB/connection-definitions=infinispanHotRodDS/config-properties=Module:add(value="com.client.quickstart.addressbook.pojos")
+/subsystem=resource-adapters/resource-adapter=ispnHotrodPB/connection-definitions=infinispanHotRodDS/config-properties=RemoteServerList:add(value="127.0.0.1:11322")
+/subsystem=resource-adapters/resource-adapter=ispnHotrodPB/connection-definitions=infinispanHotRodDS/config-properties=ProtobufDefinitionFile:add(value="/quickstart/addressbook.proto")
+/subsystem=resource-adapters/resource-adapter=ispnHotrodPB/connection-definitions=infinispanHotRodDS/config-properties=MessageDescriptor:add(value="quickstart.Person")
+/subsystem=resource-adapters/resource-adapter=ispnHotrodPB/connection-definitions=infinispanHotRodDS/config-properties=MessageMarshallers:add(value="com.client.quickstart.addressbook.pojos.domain.Person:com.client.quickstart.addressbook.pojos.marshallers.PersonMarshaller,com.client.quickstart.addressbook.pojos.domain.PhoneNumber:com.client.quickstart.addressbook.pojos.marshallers.PhoneNumberMarshaller,com.client.quickstart.addressbook.pojos.domain.Address:com.client.quickstart.addressbook.pojos.marshallers.AddressMarshaller")
+
+/subsystem=resource-adapters/resource-adapter=ispnHotrodPB:activate
