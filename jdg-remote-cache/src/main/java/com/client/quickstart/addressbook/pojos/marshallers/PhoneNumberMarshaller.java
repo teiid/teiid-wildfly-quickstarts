@@ -14,47 +14,39 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.as.quickstarts.datagrid.hotrod.query.marshallers;
+package com.client.quickstart.addressbook.pojos.marshallers;
 
 import org.infinispan.protostream.MessageMarshaller;
-import org.jboss.as.quickstarts.datagrid.hotrod.query.domain.Person;
+import com.client.quickstart.addressbook.pojos.domain.PhoneNumber;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author Adrian Nistor
  */
-public class PersonMarshaller implements MessageMarshaller<Person> {
+public class PhoneNumberMarshaller implements MessageMarshaller<PhoneNumber> {
 
    @Override
    public String getTypeName() {
-      return "quickstart.Person";
+      return "quickstart.Person.PhoneNumber";
    }
 
    @Override
-   public Class<Person> getJavaClass() {
-      return Person.class;
+   public Class<PhoneNumber> getJavaClass() {
+      return PhoneNumber.class;
    }
 
    @Override
-   public Person readFrom(ProtoStreamReader reader) throws IOException {
-      String name = reader.readString("name");
-      int id = reader.readInt("id");
-      String email = reader.readString("email");
- 
-      Person person = new Person();
-      person.setName(name);
-      person.setId(id);
-      person.setEmail(email);
-      return person;
+   public PhoneNumber readFrom(ProtoStreamReader reader) throws IOException {
+      String number = reader.readString("number");
+
+      PhoneNumber phoneNumber = new PhoneNumber();
+      phoneNumber.setNumber(number);
+      return phoneNumber;
    }
 
    @Override
-   public void writeTo(ProtoStreamWriter writer, Person person) throws IOException {
-      writer.writeString("name", person.getName());
-      writer.writeInt("id", person.getId());
-      writer.writeString("email", person.getEmail());
+   public void writeTo(ProtoStreamWriter writer, PhoneNumber phoneNumber) throws IOException {
+      writer.writeString("number", phoneNumber.getNumber());
    }
 }

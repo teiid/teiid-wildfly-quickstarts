@@ -14,9 +14,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.as.quickstarts.datagrid.hotrod.query.domain;
+package com.client.quickstart.addressbook.pojos.domain;
 
 import java.util.List;
+import java.util.ArrayList;
 import org.infinispan.protostream.annotations.ProtoField;
 
 
@@ -31,7 +32,10 @@ public class Person {
    public int id;
    @ProtoField(number = 3)
    public String email;
- 
+   @ProtoField(number = 4, collectionImplementation = ArrayList.class)
+   public List<PhoneNumber> phoneNumbers;
+   @ProtoField(number=5)
+   public Address address;
 
    public String getName() {
       return name;
@@ -57,7 +61,21 @@ public class Person {
       this.email = email;
    }
 
-  
+    public List<PhoneNumber> getPhoneNumbers() {
+      return phoneNumbers;
+   }
+
+   public void setPhoneNumbers(List<PhoneNumber> phones) {
+      this.phoneNumbers = phones;
+   }
+
+   public Address getAddress() {
+	   return this.address;
+   }
+   
+   public void setAddress(Address address) {
+	   this.address = address;
+   }
 
    @Override
    public String toString() {
@@ -65,6 +83,9 @@ public class Person {
             "id=" + id +
             ", name='" + name +
             "', email='" + email + '\'' +
+            ", phones=" + phoneNumbers +
             '}';
    }
 }
+
+

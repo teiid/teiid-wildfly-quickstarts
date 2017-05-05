@@ -1,0 +1,4 @@
+connect
+
+/subsystem="infinispan"/cache-container="local"/local-cache="datasourceCache":add(indexing="ALL",indexing-properties={"default.directory_provider" => "ram"},start="EAGER")
+/subsystem="infinispan"/cache-container="local"/local-cache="datasourceCache"/locking="LOCKING":add(acquire-timeout="30000",concurrency-level="1000",striping="false")
