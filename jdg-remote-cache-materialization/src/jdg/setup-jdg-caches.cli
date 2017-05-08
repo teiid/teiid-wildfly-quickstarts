@@ -1,0 +1,10 @@
+connect
+
+/subsystem="infinispan"/cache-container="local"/local-cache="primaryCache":add(indexing="ALL",indexing-properties={"default.directory_provider" => "ram"},start="EAGER")
+/subsystem="infinispan"/cache-container="local"/local-cache="primaryCache"/locking="LOCKING":add(acquire-timeout="30000",concurrency-level="1000",striping="false")
+
+/subsystem="infinispan"/cache-container="local"/local-cache="stagingCache":add(indexing="ALL",indexing-properties={"default.directory_provider" => "ram"},start="EAGER")
+/subsystem="infinispan"/cache-container="local"/local-cache="stagingCache"/locking="LOCKING":add(acquire-timeout="30000",concurrency-level="1000",striping="false")
+
+/subsystem="infinispan"/cache-container="local"/local-cache="aliasCache":add(indexing="ALL",indexing-properties={"default.directory_provider" => "ram"},start="EAGER")
+/subsystem="infinispan"/cache-container="local"/local-cache="aliasCache"/locking="LOCKING":add(acquire-timeout="30000",concurrency-level="1000",striping="false")

@@ -21,7 +21,7 @@
     </fileSet>     
    <fileSet>
         <directory>target</directory>
-        <outputDirectory>modules/com/client/quickstart/addressbook/pojos/main/</outputDirectory>     
+        <outputDirectory>modules/com/client/quickstart/remotecache/pojos/main/</outputDirectory>     
         <filtered>false</filtered> 
         <includes>
           <include>jdg-remote-cache-materialization-pojos.jar</include>
