@@ -9,6 +9,11 @@ Source: https://github.com/teiid/teiid-quickstarts
 JDG Remote-Cache Quickstart using JDG Hot Rod that supports Google Protocol Buffers for Serialization
 ================================
 
+There are 2 options for configuring the JDG schema in DV, using protobuf (.proto) file and marshaller(s) or using the JDG 6.6 
+feature of using protobuf annotations defined in the pojo.   This example is demonstrating using protobuf and marhsallers to define
+the JDG schema.
+
+
 # What is it?
 
 This quickstart demonstrates how Teiid can connect to a remote JBoss Data Grid (JDG) as a data source, to query and update data in cache using the Hot Rod client protocol.
@@ -16,7 +21,7 @@ This quickstart demonstrates how Teiid can connect to a remote JBoss Data Grid (
 # Quick Start requirements
 
 -  If you have not done so, please review the System Requirements [../README.md](../README.md) 
--  For needed kits, will need to access Red Hat's Customer Portal at https://access.redhat.com/jbossnetwork/restricted/listSoftware.html
+-  For Red Hat product related kits, will need to access Red Hat's Customer Portal at https://access.redhat.com/jbossnetwork/restricted/listSoftware.html
 
 
 # PREREQUISTES
@@ -71,12 +76,14 @@ b) Perform the following steps to configure the cache by running the CLI script 
 
 -   locate the ./src/jdg/setup-jdg-cache.cli script in the quickstart
 -	cd to the ${JDG_HOME}/bin directory
--	execute the setup-jdg-cache.cli script by running the following:  
+-   execute the setup-jdg-cache.cli script by running the following:  
 
 	./cli.sh  --file={path.to.cli.script}/setup-jdg-cache.cli
 
+Since the server is running with the offset, use the -c option:
 
-
+	 ./cli.sh -c 127.0.0.1:10099 --file=./setup-jdg-cache.cli
+	 
 Note the name of the cache: _datasourceCache_
 
 This cache name will be needed when configuring the JDG connector in Teiid.
@@ -137,7 +144,7 @@ To start the server, open a command line and navigate to the "bin" directory und
 	
 * install the infinispan-dsl translator 
 
-The infinispan translators are installed by default because the dependent JDG related modules may not have been installed. To install do the following steps:
+The infinispan translators are not installed by default because the dependent JDG related modules may not have been installed. To install do the following steps:
 
 -	cd to the ${JBOSS_HOME}/bin directory
 -	execute the add-infinispan-cache-dsl-translator.cli script by running the following:  
@@ -149,7 +156,7 @@ The infinispan translators are installed by default because the dependent JDG re
 
 The following steps will configure the infinispan resource-adapater to communicate for reading and writing to a remote cache.
 
->Note:  this cli script was copied from the quickstart to the server when the pojo module was deployed
+>Note:  this cli script was copied from the quickstart to the server when the pojo module kit was deployed
 
 -	cd to the ${JBOSS_HOME}/bin directory
 -   excute the create-infinispan-hotrod-protobuf-ds.cli script by running the following:

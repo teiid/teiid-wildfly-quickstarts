@@ -85,7 +85,7 @@ b) Perform the following steps to configure the 3 caches by running the CLI scri
 
 -  locate the ./src/jdg/setup-jdg-cache.cli script in the quickstart
 -  cd to the ${JDG_HOME}/bin directory
--  execute the setup-jdg-cache.cli script by running the following:  
+-  execute the setup-jdg-caches.cli script by running the following:  
 
 	./cli.sh  --file={path.to.cli.script}/setup-jdg-caches.cli
 
