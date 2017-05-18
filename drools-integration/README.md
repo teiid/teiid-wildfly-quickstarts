@@ -43,13 +43,13 @@ $ mvn clean install dependency:copy-dependencies -s ../settings.xml
 
 * Install drools as a module
 
-Copy src/modules/org to $JBOSS_HOME
+Copy src/modules/org to $JBOSS_HOME by executing following:
 
 ~~~
 $ cp -r src/modules/org/ $JBOSS_HOME/modules
 ~~~
 
-Copy all dependency jars to drools module
+Copy all dependency jars to drools module by executing the following:
 
 ~~~
 $ cp target/dependency/*.jar $JBOSS_HOME/modules/org/drools/main
