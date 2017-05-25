@@ -2,6 +2,10 @@ module add --name=org.apache.phoenix --resources=phoenix-4.2.1-client.jar --depe
 
 /subsystem=datasources/jdbc-driver=phoenix:add(driver-name=phoenix,driver-module-name=org.apache.phoenix,driver-class-name=org.apache.phoenix.jdbc.PhoenixDriver)
 
-/subsystem=datasources/data-source=QSPhoenixDS:add(jndi-name="java:/QSPhoenixDS",driver-name=phoenix,connection-url=jdbc:phoenix:127.0.0.1:2181,user-name=sa,password=sa,enabled=true,use-java-context=true)
+/subsystem=datasources/data-source=QSPhoenixDS:add(jndi-name="java:/QSPhoenixDS",driver-name=phoenix,connection-url=jdbc:phoenix:127.0.0.1:2181,user-name=sa,password=sa,use-java-context=true)
+/subsystem=datasources/data-source=QSPhoenixDS:enable
 
 :reload()
+
+
+
