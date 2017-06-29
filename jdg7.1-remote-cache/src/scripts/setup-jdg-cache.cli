@@ -1,0 +1,5 @@
+connect
+
+/subsystem=datagrid-infinispan/cache-container=local/configurations=CONFIGURATIONS/local-cache-configuration=templatePersonCache:add(start=EAGER)
+
+/subsystem=datagrid-infinispan/cache-container=local/local-cache=personCache:add(configuration=templatePersonCache)
