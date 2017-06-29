@@ -12,5 +12,33 @@ message Person {
    /* @IndexedField */
    optional string email = 3;
 
+   /* @Indexed */
+   message PhoneNumber {
+
+      /* @IndexedField */
+      required string number = 1;
+   }
+
+   /* @IndexedField(index=true, store=false) */
+   repeated PhoneNumber phoneNumber = 4;
+
+  /* @Indexed */
+   message Address {
+
+      /* @IndexedField */
+      required string Address = 1;
+
+      /* @IndexedField(index=true, store=false) */
+      required string City = 2;
+      
+      /* @IndexedField(index=true, store=false) */
+      required string State = 3;
+     
+   }
+
+   /* @IndexedField(index=true, store=false) */
+   optional Address address = 5;
 
 }
+
+

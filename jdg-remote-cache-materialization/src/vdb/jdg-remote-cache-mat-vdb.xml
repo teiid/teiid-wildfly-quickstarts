@@ -1,59 +1,43 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<vdb name="PeopleMat" version="1">
+<vdb name="StockMat" version="1">
 
     <description>Shows how to materialize into an Infinispan remote cache</description>
     
     <property name="UseConnectorMetadata" value="cached" />   
-    <property name ="lib" value ="com.client.quickstart.addressbook.pojos" />
     
     <import-vdb name="Portfolio" version="1" import-data-policies="true"/>
     
- 
-    <model name="PersonInfoModel" type="VIRTUAL">
-        <metadata type="DDL"><![CDATA[   
-                
-        CREATE VIEW PersonInfo (
-            name string,
-            id integer,
-            email string
-            )
-            AS  
-              select FIRSTNAME || ' ' || LASTNAME as name, a.ACCOUNT_ID as "id",
-                  FIRSTNAME || '.' || LASTNAME || '@email.com' as email 
-                   from ACCOUNTS.CUSTOMER c, ACCOUNTS.ACCOUNT a WHERE a.SSN = c.SSN;
-                 
-        ]]> </metadata>
-    </model>       
-    
-    <model name="PersonMatCache" type="Physical">
+    <model name="StockJDGSource" type="Physical">
         <property name="importer.useFullSchemaName" value="false"/>
            
-        <source name="PersonMatSource1" translator-name="infinispan1" connection-jndi-name="java:/infinispanRemoteDSL" />
-
+        <source name="StockJDGSource" translator-name="infinispan1" connection-jndi-name="java:/infinispanRemoteMat" />
     </model>      
     
-	<model name="PersonMatModel" type="VIRTUAL">
-		<metadata type="DDL"><![CDATA[
-	CREATE view PersonMatView
-		(
-            name string,
-            id integer,
-            email string
-            
- 		) OPTIONS (MATERIALIZED 'TRUE', UPDATABLE 'TRUE',         
-               MATERIALIZED_TABLE 'PersonMatCache.Person', 
-               "teiid_rel:MATVIEW_TTL" 10000,
-               "teiid_rel:MATVIEW_BEFORE_LOAD_SCRIPT" 'execute PersonMatCache.native(''truncate cache'');',
-   		       "teiid_rel:MATVIEW_LOAD_SCRIPT" 'insert into PersonMatCache.ST_Person (name, id, email) SELECT  name, id, email from PersonInfoModel.PersonInfo',
-               "teiid_rel:MATVIEW_AFTER_LOAD_SCRIPT"  'execute PersonMatCache.native(''swap cache names'');', 
-               "teiid_rel:MATVIEW_SHARE_SCOPE" 'NONE',
-               "teiid_rel:ALLOW_MATVIEW_MANAGEMENT" 'true', 
-               "teiid_rel:MATVIEW_STATUS_TABLE" 'Accounts.status',                
-               "teiid_rel:MATVIEW_ONERROR_ACTION" 'WAIT')
- 		AS SELECT  name, id, email from PersonInfoModel.PersonInfo;
-    	]]>
-   		</metadata>
-	</model>               
+        <model name="StocksMatView" type="VIRTUAL">
+                <property name="imports" value="StockJDGSource"/>
+                <metadata type="DDL"><![CDATA[
+CREATE VIEW Stock (
+	product_id integer OPTIONS(NAMEINSOURCE '"product_id"', NATIVE_TYPE 'integer', UPDATABLE 'FALSE', FIXED_LENGTH 'TRUE'),
+	symbol string(4000) OPTIONS(NAMEINSOURCE '"symbol"', NATIVE_TYPE 'string', UPDATABLE 'FALSE'),
+	price string(50) OPTIONS(NAMEINSOURCE '"price"', NATIVE_TYPE 'String', UPDATABLE 'FALSE', SIGNED 'FALSE', FIXED_LENGTH 'TRUE'),
+	company_name string(256) OPTIONS(NAMEINSOURCE '"company_name"', NATIVE_TYPE 'string', UPDATABLE 'FALSE'),
+	CONSTRAINT PK_prodid PRIMARY KEY(product_id)
+) OPTIONS(MATERIALIZED 'TRUE', MATERIALIZED_TABLE 'StockJDGSource.Stock',
+"teiid_rel:ALLOW_MATVIEW_MANAGEMENT" 'TRUE',
+"teiid_rel:MATVIEW_AFTER_LOAD_SCRIPT" 'execute StockJDGSource.native(''swap cache names'');',
+"teiid_rel:MATVIEW_BEFORE_LOAD_SCRIPT" 'execute StockJDGSource.native(''truncate cache'');',
+"teiid_rel:MATVIEW_STATUS_TABLE" 'Accounts.status',
+"teiid_rel:MATVIEW_TTL" 5000,
+"teiid_rel:MATERIALIZED_STAGE_TABLE" 'StockJDGSource.ST_Stock',
+"teiid_rel:MATVIEW_ONERROR_ACTION" 'THROW_EXCEPTION')
+AS
+	SELECT
+		Stocks.Stock.product_id, Stocks.Stock.symbol, CAST(Stocks.Stock.price AS String) AS price, Stocks.Stock.company_name
+	FROM
+		Stocks.Stock;
+
+        ]]></metadata>
+        </model>
          
   
     <translator name="infinispan1" type="infinispan-cache-dsl">

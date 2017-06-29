@@ -56,6 +56,8 @@ hbase(main):003:0> put 'Customer', '101', 'customer:name', 'John White'
 
 3) Setup Phoenix Data Source
 
+NOTE:   The folowing referenced setup.cli script is configured to use the phoenix-4.2.1-client.jar.  If the version you are using is different, the setup.cli script will need to be udpated.
+
 * Copy phoenix-[version]-client.jar to $JBOSS_HOME, copy [setup.cli](src/scripts/setup.cli)to $JBOSS_HOME, for example
 
 ~~~

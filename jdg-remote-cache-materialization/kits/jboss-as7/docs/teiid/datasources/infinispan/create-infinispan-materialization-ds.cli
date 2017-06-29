@@ -1,0 +1,15 @@
+connect
+
+
+/subsystem=resource-adapters/resource-adapter=ispnHotrod:add(module=org.jboss.teiid.resource-adapter.infinispan.dsl)
+/subsystem=resource-adapters/resource-adapter=ispnHotrod/connection-definitions=infinispanHotRodDS:add(jndi-name="java:/infinispanRemoteMat", class-name=org.teiid.resource.adapter.infinispan.dsl.InfinispanManagedConnectionFactory, enabled=true, use-java-context=true)
+/subsystem=resource-adapters/resource-adapter=ispnHotrod/connection-definitions=infinispanHotRodDS/config-properties=CacheTypeMap:add(value="primaryCache:com.client.quickstart.remotecache.pojos.Stock;symbol")
+/subsystem=resource-adapters/resource-adapter=ispnHotrod/connection-definitions=infinispanHotRodDS/config-properties=Module:add(value="com.client.quickstart.remotecache.pojos")
+/subsystem=resource-adapters/resource-adapter=ispnHotrod/connection-definitions=infinispanHotRodDS/config-properties=RemoteServerList:add(value="127.0.0.1:11322")
+/subsystem=resource-adapters/resource-adapter=ispnHotrod/connection-definitions=infinispanHotRodDS/config-properties=StagingCacheName:add(value="stagingCache")
+/subsystem=resource-adapters/resource-adapter=ispnHotrod/connection-definitions=infinispanHotRodDS/config-properties=AliasCacheName:add(value="aliasCache")
+/subsystem=resource-adapters/resource-adapter=ispnHotrod:activate
+
+
+
+

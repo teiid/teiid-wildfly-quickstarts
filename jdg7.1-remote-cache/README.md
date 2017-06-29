@@ -17,6 +17,7 @@ This quickstart demonstrates how Teiid can connect to a remote Infinispan cache 
 
 -  If you have not done so, please review the System Requirements [../README.md](../README.md) 
 -  For Red Hat product related kits, will need to access Red Hat's Customer Portal at https://access.redhat.com/jbossnetwork/restricted/listSoftware.html
+=======
 
 # 1. JDG setup
 
@@ -25,7 +26,6 @@ This quickstart demonstrates how Teiid can connect to a remote Infinispan cache 
 * Configure JDG Cache
 
 You have 2 options for configuring the cache: a) editing standalone configuration or b) running CLI script to configure cache
-
 
 a) Edit the standalone.xml configuration at ${JDG_HOME}/standalone/configuration.   Copy into the "local" section into the configuration  within the infinispan:server subsystem.
 
@@ -44,10 +44,13 @@ a) Edit the standalone.xml configuration at ${JDG_HOME}/standalone/configuration
         </subsystem>
 ----
 
-
 b) Perform the following steps to configure the cache by running the CLI script against the JDG server
 
 -  Start the JDG servr by performing the step after this.
+
+b) Perform the following steps to configure the 3 caches by running the CLI script against the JDG server
+
+-  perform the below step, to start the JDG server.
 
 -  locate the ./src/scripts/setup-jdg-cache.cli script in the quickstart
 -  cd to the ${JDG_HOME}/bin directory
@@ -59,7 +62,7 @@ Since the server is running with the offset, use the -c option:
 
 	 ./cli.sh -c 127.0.0.1:10099 --file=./setup-jdg-caches.cli
 	 
-
+   
 Note the name of the cache - _datasourceCache_  as it will used when defining the cache for the model in the VDB.
 
 This configuration is not persisting the data, so when the JDG server is restarted the data will be lost.  See the JDG documentation on configuring a persistent cache.
@@ -109,6 +112,7 @@ If Teiid isn't configured in the default configuration, append the following arg
 
 ----
 cd $\{JBOSS_HOME}/bin
+
 ./jboss-cli.sh --connect --file=../docs/teiid/datasources/infinispan-hotrod-7.1/add-infinispan-hotrod-translator.cli
 ----
 
@@ -121,6 +125,7 @@ The quickstart has a CLI script that can be used to configure the resource adapt
 .*Setup JDG Data Source*
 ----
 cd $\{JDG_HOME}/bin
+
 ./jboss-cli.sh --connect --file=${PATH}/teiid-quickstarts/jdg7.1-remote-cache/src/scripts/create-infinispan-hotrod-protobuf-ds.cli
 ----
  
