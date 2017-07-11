@@ -99,7 +99,7 @@ performance using TPC-H benchmark against two running Postgresql servers
 
 To run these quickstarts with the provided build scripts, you need the following:
 
-1.  Java 1.7 or latter, to run {{ book.asName }} and Maven. You can choose from the following:
+1.  Java 1.8 or later, to run {{ book.asName }} and Maven. You can choose from the following:
 * OpenJDK
 * Oracle Java SE
 * Oracle JRockit
