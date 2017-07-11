@@ -58,7 +58,7 @@
 			
 		<version.org.jboss.integration-platform>6.0.0.CR30</version.org.jboss.integration-platform>
 
-		<version.teiid>9.0.0.Final</version.teiid>
+		<version.teiid>9.3.0.Final</version.teiid>
      	        <jbossas-module-root>modules/system/layers/dv</jbossas-module-root>
 
                 <version.javax.annotation>${version.org.jboss.spec.javax.annotation.jboss-annotations-api_1.1_spec}</version.javax.annotation>
@@ -105,11 +105,6 @@
                 <artifactId>mockito-all</artifactId>
                 <version>${version.org.mockito}</version>
             </dependency>           
-			<dependency>
-				<groupId>org.jboss.teiid.connectors</groupId>
-				<artifactId>translator-object</artifactId>
-				<version>${version.teiid}</version>
-			</dependency>                              
 			<dependency>
 				<groupId>org.jboss.teiid</groupId>
 				<artifactId>teiid-common-core</artifactId>
