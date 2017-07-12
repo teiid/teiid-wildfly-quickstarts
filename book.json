@@ -2,7 +2,7 @@
     "variables" : {
         "asName" :  "WildFly",
         "copyrightYear" :  "2016",
-        "copyrightHolder" :  "Red Hat, Inc.",
+        "copyrightHolder" :  "Red Hat, Inc."
     },
     "plugins": ["collapsible-menu"]
 }
