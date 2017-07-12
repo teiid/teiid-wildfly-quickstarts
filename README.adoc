@@ -51,14 +51,14 @@ Some quickstarts are designed to enhance or extend other quickstarts. These are 
 |Demonstrates how a Hibernate application can add data federation capabilities at the data layer 
 |datafederation
 
-|link:jdg-local-cache/README.adoc[jdg local cache] 
-|'infinispan' Object Translator, OBJECTTABLE 
-|Demonstrates reading reading a JDG cache running in library mode 
+|link:infinispan-hotrod-as-a-datasource/README.adoc[infinispan hotrod cache] 
+|'infinispan-hotrod' translator 
+|Demonstrates reading reading a remote infinispan cache using hotrod client 
 |None
 
-|link:jdg-remote-cache/README.adoc[jdg remote cache using dsl] 
-|'infinispan' DSL Translator 
-|Demonstrates reading from a remote JDG cache using hot rod client that’s configured using protobuffers 
+|link:infinispan-hotrod-as-mat-cache/README.adoc[infinispan remote materialize cache] 
+|'infinispan-hotrod' translator 
+|Demonstrates using a remote infinispan server as a materialization cache using hot rod client 
 |None
 
 |link:simpleclient/README.adoc[simpleclient] |Teiid JDBC Connection
