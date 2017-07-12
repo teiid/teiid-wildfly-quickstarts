@@ -1,0 +1,11 @@
+connect
+
+/subsystem=datagrid-infinispan/cache-container=clustered/configurations=CONFIGURATIONS/distributed-cache-configuration=templateMatCache:add(start=EAGER)
+
+/subsystem=datagrid-infinispan/cache-container=clustered/distributed-cache=stockCache:add(configuration=templateMatCache)
+
+/subsystem=datagrid-infinispan/cache-container=clustered/distributed-cache=st_stockCache:add(configuration=templateMatCache)
+
+# in a cluster, this should be a replicated cache
+/subsystem=datagrid-infinispan/cache-container=clustered/replicated-cache=teiid-alias-naming-cache:add(configuration=replicated)
+
