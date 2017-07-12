@@ -1,0 +1,15 @@
+#  configure infinispan resource adapter
+#  substitute your values for the following:
+#  - jndi-name:  java:/name
+#  - RemoteServerList: host:port
+
+##  infininspan port is based on using 100 offset, so its reflected here
+
+
+/subsystem=resource-adapters/resource-adapter=ispnPerson:add(module=org.jboss.teiid.resource-adapter.infinispan.hotrod)
+/subsystem=resource-adapters/resource-adapter=ispnPerson/connection-definitions=infinispanPerson:add(jndi-name="java:/infinispanPerson", class-name=org.teiid.resource.adapter.infinispan.hotrod.InfinispanManagedConnectionFactory, enabled=true, use-java-context=true)
+/subsystem=resource-adapters/resource-adapter=ispnPerson/connection-definitions=infinispanPerson/config-properties=RemoteServerList:add(value="127.0.0.1:11322")
+
+/subsystem=resource-adapters/resource-adapter=ispnPerson:activate
+
+/:reload
