@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<vdb name="StockMat" version="1">
+
+
+    <import-vdb name="Portfolio" version="1" import-data-policies="true"/>
+    
+ 
+ <model name="StockJDGSource" type="Physical">
+	<source connection-jndi-name="java:/infinispanStockMat" name="infinispan" translator-name="infinispan-hotrod"/>
+
+     <metadata type = "DDL"><![CDATA[
+            CREATE FOREIGN TABLE StockCache (product_id integer PRIMARY KEY, symbol string(10), price double, company_name string(100) ) OPTIONS(UPDATABLE true, "teiid_ispn:cache" 'stockCache');
+        ]]>
+       </metadata>
+       <metadata type = "NATIVE"/>	
+
+    </model>
+    
+
+        <model name="StocksMatView" type="VIRTUAL">
+                <metadata type="DDL"><![CDATA[
+
+CREATE VIEW Stock (
+	product_id integer,
+	symbol string,
+	price double,
+	company_name string) OPTIONS (MATERIALIZED 'TRUE', UPDATABLE 'TRUE',     
+MATERIALIZED_TABLE 'StockJDGSource.StockCache',
+"teiid_rel:ALLOW_MATVIEW_MANAGEMENT" 'TRUE',
+"teiid_rel:MATVIEW_BEFORE_LOAD_SCRIPT" 'execute StockJDGSource.native(''truncate StockJDGSource.ST_StockCache'');',
+"teiid_rel:MATVIEW_LOAD_SCRIPT" 'Merge into StockJDGSource.StockCache (product_id, symbol, price, company_name) SELECT  product_id, symbol, CAST(Stocks.Stock.price AS double) AS price, company_name from Stocks.Stock OPTION NOCACHE',
+"teiid_rel:MATVIEW_AFTER_LOAD_SCRIPT" 'execute StockJDGSource.native(''rename  StockJDGSource.ST_StockCache StockJDGSource.StockCache'');',
+"teiid_rel:MATVIEW_STATUS_TABLE" 'Accounts.status',
+"teiid_rel:MATVIEW_TTL" 10000,
+"teiid_rel:MATVIEW_ONERROR_ACTION" 'WAIT')
+AS
+	SELECT
+		Stocks.Stock.product_id, Stocks.Stock.symbol, CAST(Stocks.Stock.price AS double) AS price, Stocks.Stock.company_name
+	FROM
+		Stocks.Stock;
+
+
+        ]]></metadata>
+        </model>
+            
+</vdb>
+

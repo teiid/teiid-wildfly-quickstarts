@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<vdb name="PersonVDB" version="1">
+    <!-- this vdb demonstrates configuring a pojo by defining its metadata using DDL.  The protobuf will be registered as  ispn.proto -->
+    <model name="People">
+	<source connection-jndi-name="java:/infinispanPerson" name="infinispan" translator-name="infinispan-hotrod"/>
+
+     <metadata type = "DDL"><![CDATA[
+            CREATE FOREIGN TABLE Person (id integer PRIMARY KEY, name varchar(100), salary double) OPTIONS(UPDATABLE true, "teiid_ispn:cache" 'personCache');
+        ]]>
+       </metadata>
+	<metadata type = "NATIVE"/>
+
+    </model>
+</vdb>
+

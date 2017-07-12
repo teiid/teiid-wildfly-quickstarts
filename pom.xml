@@ -33,10 +33,8 @@
 	    <module>vdb-materialization</module>
             <module>hibernate-on-top-of-teiid</module>
             <module>webservices-as-a-datasource</module>
-	    <module>jdg-local-cache</module>
-	    <module>jdg-local-cache-materialization</module>
-            <module>jdg-remote-cache</module>
-            <module>jdg-remote-cache-materialization</module>
+	    <module>infinispan-hotrod-as-a-datasource</module>
+	    <module>infinispan-hotrod-as-mat-cache</module>
             <module>mongodb-as-a-datasource</module>
             <module>ldap-as-a-datasource</module>
 	    <module>hbase-as-a-datasource</module>
@@ -67,10 +65,7 @@
                 <version.jboss.as.plugin>${version.org.jboss.as}</version.jboss.as.plugin>       
         <!--version.net.jcip>1.0</version.net.jcip-->
                 <version.org.codehaus.mojo.exec.plugin>1.2.1</version.org.codehaus.mojo.exec.plugin>
-        <!--version.org.hibernate.search>4.5.0.Final</version.org.hibernate.search-->
-                <version.org.infinispan.6>7.2.3.Final</version.org.infinispan.6>  
-        <!-- JDG module slot to use  -->
-                <jdg.slot>jdg-7.0</jdg.slot>  
+ 
   		<version.net.jcip>1.0</version.net.jcip>
                 <version.resteasy.client>3.0.16.Final</version.resteasy.client>
         

@@ -1,0 +1,6 @@
+connect
+
+/subsystem=datagrid-infinispan/cache-container=clustered/configurations=CONFIGURATIONS/distributed-cache-configuration=templateTeiidCache:add(start=EAGER)
+
+/subsystem=datagrid-infinispan/cache-container=clustered/distributed-cache=personCache:add(configuration=templateTeiidCache)
+
