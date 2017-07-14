@@ -29,67 +29,69 @@ There are 2 examples in this quickstart that demonstrate the following materiali
 
 1.  Setup JDG Server
 	
--  Install the JDG server
+*  Install the JDG server
+
+*  Start JDG Server
+
+Assumptions:
+- It is assumed that you will be running both servers on the same box, therefore, start the JDG server by using the port offset argument:  -Djboss.socket.binding.port-offset=
+- That majority of usecases will be using the cache in a distributed fashion, so the clustered configuration will be used
+
+
+[source,xml]
+.*Example*
+----
+./standalone.sh -c clustered.xml -Djboss.socket.binding.port-offset=100
+----
+
+The following shows the command line to start the JDG server with the port offset:
+
+        For Linux:   $JDG_HOME/bin/standalone.sh -c clustered.xml -Djboss.socket.binding.port-offset=100
+        For Windows: %JDG_HOME%\bin\standalone.bat -c clustered.xml -Djboss.socket.binding.port-offset=100
+
+
 *  Configure JDG Cache
 
-You have 2 options for configuring the cache: a) editing standalone configuration or b) running CLI script to configure cache
+You have 2 options for configuring the cache: a) running CLI script to configure cache or b) editing standalone configuration
 
 
-a) Edit the standalone.xml configuration at ${JDG_HOME}/standalone/configuration.   Copy in the "local-cache" section into the configuration  within the infinispan:server subsystem.
+a) Perform the following steps to configure the cache by running the CLI script against the JDG server
+
+-  locate the {JBOSS_HOME}/quickstarts/jdg7.1-remote-cache-materialization/src/scripts/setup-jdg-caches.cli  script in the quickstart
+-  cd to the ${ISPN_HOME}/bin directory
+-  execute the setup-jdg-cache.cli script by running the following:
+
+	./cli.sh  --file={path.to.cli.script}/setup-jdg-caches.cli
+
+Since the server is running with the port offset, use the --controller option:
+
+	 ./cli.sh --controller=localhost:10090  --file={path.to.cli.script}/setup-jdg-caches.cli
+	 
+
+Note the name of the caches - stockCache and st_stockCache,  as they need to match the teiid-ispn extension property Option for each table in the source model of the vdb
+
+This configuration is not persisting the data, so when the JDG server is restarted the data will be lost.  See the JDG documentation on configuring a persistent cache.
+
+
+b) Edit the standalone.xml configuration at ${JDG_HOME}/standalone/configuration.   Copy into the "clustered" section into the configuration  within the infinispan:server subsystem.
+
 
 [source,xml]
 ----
         <subsystem xmlns="urn:infinispan:server:core:8.3">
-            <cache-container name="local" default-cache="default" statistics="true">
+            <cache-container name="clustered" default-cache="default" statistics="true">
                 .... 
-                <local-cache name="stockCache" start="EAGER">
-                    <locking striping="false" acquire-timeout="30000" concurrency-level="1000"/>
-                    <transaction mode="NONE"/>
-                </local-cache>
+                <replicated-cache name="teiid-alias-naming-cache" configuration="replicated"/>
+
+                <distributed-cache-configuration name="templateMatCache" start="EAGER"/>
+                <distributed-cache name="stockCache" configuration="templateMatCache"/>
+                <distributed-cache name="st_stockCache" configuration="templateMatCache"/>
                  ....
             </cache-container>
         </subsystem>
 ----
 
-
-b) Perform the following steps to configure the cache by running the CLI script against the JDG server
-
--  Start the JDG servr by performing the step after this.
-
--  locate the ./src/jdg/setup-jdg-cache.cli script in the quickstart
--  cd to the ${JDG_HOME}/bin directory
--  execute the setup-jdg-caches.cli script by running the following:  
-
-	./cli.sh  --file={path.to.cli.script}/setup-jdg-caches.cli
-
-Since the server is running with the offset, use the -c option:
-
-	 ./cli.sh -c 127.0.0.1:10099 --file=./setup-jdg-caches.cli
-	 
-
-Note the name of the cache - stockCache  as it will used when defining the cache for the model in the VDB.
-
-This configuration is not persisting the data, so when the JDG server is restarted the data will be lost.  See the JDG documentation on configuring a persistent cache.
-
-
-2.  Starting JDG Server
-
-It is assumed that you will be running both servers on the same box, therefore, start the JDG server by adding the following command line argument: 
-
--Djboss.socket.binding.port-offset=100
-
-[source,xml]
-.*Example*
-----
-./standalone.sh -Djboss.socket.binding.port-offset=100
-----
-
-* The following shows the command line to start the JDG server with the port offset:
-
-        For Linux:   $JDG_HOME/bin/standalone.sh -Djboss.socket.binding.port-offset=100
-        For Windows: %JDG_HOME%\bin\standalone.bat -Djboss.socket.binding.port-offset=100
-
-For the purpose of this quick start, it assumes running both servers on the same machine and is expecting the JDG server to have its ports incremented. The port adjustment has been made in the _Setup JDG Data Source_ step to match the above offset.
+-  (re)start the JDG server if configuration was edited
 
 
 #  [PreRequistes] Dynamicvdb-datafederation quickstart
@@ -100,7 +102,6 @@ This quickstart is utilized for 2 purposes:
 -  to provide the data that will be used to materialize
 -  extends the VDB to create the view that will be materialized.
  
-
 
 # Start Teiid Server
 
@@ -122,15 +123,7 @@ If Teiid isn't configured in the default configuration, append the following arg
 ----
 
 
-* Install the infinispan-hotrod translator
-
-----
-cd $\{JBOSS_HOME}/bin
-./jboss-cli.sh --connect --file=../docs/teiid/datasources/infinispan-hotrod-7.1/add-infinispan-hotrod-translator.cli
-----
-
-
-* Setup the JDG Cache to be accessed as a data source
+* Configure resource adapter to access JDG Cache
 
 The quickstart has a CLI script that can be used to configure the resource adapter. 
 
@@ -138,11 +131,12 @@ The quickstart has a CLI script that can be used to configure the resource adapt
 .*Setup JDG Data Source*
 ----
 cd $\{JDG_HOME}/bin
-./jboss-cli.sh --connect --file=${PATH}/teiid-quickstarts/jdg7.1-remote-cache-materialization/src/scripts/create-infinispan-hotrod-protobuf-ds.cli
+./jboss-cli.sh --connect --file=../quickstarts/jdg7.1-remote-cache-materialization/src/scripts/create-infinispan-hotrod-protobuf-ds.cli
+
 ----
 
 
-* deploy the VDB
+* Deploy the VDB
 
 Option 1: using Delete before
 

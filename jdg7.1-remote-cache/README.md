@@ -54,21 +54,20 @@ a) running CLI script to configure cache
 b) editing standalone configuration(requires restarting the JDG server)
 
 
+a) Perform the following steps to configure the cache by running the CLI script against the JDG server
 
-a) Perform the following steps to configure the cache by running the CLI script against the infinispan server
-
--  locate the ./src/jdg/setup-infinispan-cache.cli script in the quickstart
--  cd to the ${JDG_HOME}/bin directory
+-  locate the {JBOSS_HOME}/quickstarts/jdg7.1-remote-cache/src/scripts/setup-jdg-cache.cli  script in the quickstart
+-  cd to the ${ISPN_HOME}/bin directory
 -  execute the setup-jdg-cache.cli script by running the following:
 
 	./cli.sh  --file={path.to.cli.script}/setup-jdg-cache.cli
 
-Since the server is running with the offset, use the -c option:
+Since the server is running with the port offset, use the --controller option:
 
-	 ./cli.sh -c 127.0.0.1:10099 --file=./setup-jdg-cache.cli
-	 
+	 ./cli.sh --controller=localhost:10090  --file={path.to.cli.script}/setup-jdg-cache.cli
 
-Note the name of the cache - _personCache_ , as it needs to match the teiid-ispn Option property in the source model of the vdb..
+
+Note the name of the cache - _personCache_ , as it needs to match the teiid-ispn extension property Option in the table for source model of the vdb.
 
 
 b) Edit the standalone.xml configuration at ${JDG_HOME}/standalone/configuration
@@ -89,7 +88,7 @@ Copy into the "clustered" section into the configuration  within the infinispan:
         </subsystem>
 ----
 
--  start the JDG server
+-  (re)start the JDG server if configuration was edited
 
 
 # 2. Setup Teiid Server
@@ -106,22 +105,14 @@ standalone.bat //for Windows
 
 If Teiid isn't configured in the default configuration, append the following arguments to the command to specify the configuration `-c {configuration.file}`
 
-[source,xml]
+[source,xml] and slides
 .*Example*
 ----
 ./standalone.sh -c standalone-teiid.xml
 ----
 
-* Install the infinispan-hotrod translator
 
-----
-cd $\{JBOSS_HOME}/bin
-
-./jboss-cli.sh --connect --file=../docs/teiid/datasources/infinispan-hotrod-7.1/add-infinispan-hotrod-translator.cli
-----
-
-
-* Setup the JDG Cache to be accessed as a data source
+* Configure the resource adapter for the JDG Cache to be accessed as a data source
 
 The quickstart has a CLI script that can be used to configure the resource adapter. 
 
@@ -130,13 +121,14 @@ The quickstart has a CLI script that can be used to configure the resource adapt
 ----
 cd $\{JDG_HOME}/bin
 
-./jboss-cli.sh --connect --file=${PATH}/teiid-quickstarts/jdg7.1-remote-cache/src/scripts/create-infinispan-hotrod-protobuf-ds.cli
+./jboss-cli.sh --connect --file=../quickstarts/jdg7.1-remote-cache/src/scripts/create-infinispan-hotrod-protobuf-ds.cli
+
 ----
  
 
 * Deploy the VDB
 
-Deploy for reading/writing to a remote cache, by copying files jdg-person-cache-vdb.xml and jdg-person-cache-vdb.xml.dodeploy to {JBOSS_HOME}/standalone/deployments
+Deploy for reading/writing to a remote cache, by copying both files, jdg-person-cache-vdb.xml and jdg-person-cache-vdb.xml.dodeploy to {JBOSS_HOME}/standalone/deployments
 
 
 # 3. Query Demonstrations
