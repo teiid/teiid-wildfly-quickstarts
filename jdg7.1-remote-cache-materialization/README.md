@@ -14,10 +14,6 @@ JDG Remote-Cache Materialization Quickstart using JDG Hot Rod that supports Goog
 
 This quickstart demonstrates how to use the Infinispan-Hotrod translator and resource-adapter for materialization. 
 
-There are 2 examples in this quickstart that demonstrate the following materialization options:
-*  Delete before - where the cache is cleared out and then written to, which will block all reads while this is being performed
-*  Merge - where the cache will be inserted or updated, but no deletes are performed on the cache
-
 
 # Quick Start requirements
 
@@ -138,16 +134,13 @@ cd $\{JDG_HOME}/bin
 
 * Deploy the VDB
 
-Option 1: using Delete before
+-  run the following CLI script
 
-	- copy both files, jdg-mat-deletebefore-vdb.xml and jdg-mat-deletebefore-vdb.xml.dodeploy to {jbossas.server.dir}/standalone/deployments	
-
-Option 2: using Merge
-
-	- copy both files, jdg-mat-merge-vdb.xml and jdg-mat-merge-vdb.xml.dodeploy to {jbossas.server.dir}/standalone/deployments	
+	-	cd to the $JBOSS_HOME/bin directory
+	-	execute:  ./jboss-cli.sh --connect --file=../quickstarts/jdg7.1-remote-cache-materialization/src/scripts/deploy_mat-cache-vdb.cli
 
 
-The materialization process should begin immediately and the refresh of the cache will be done on 5 second intervals.
+The materialization process should begin immediately and the refresh of the cache will be done based on the TTL time intervals set in the vdb.
 	
 
 

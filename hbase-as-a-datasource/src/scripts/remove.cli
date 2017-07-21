@@ -1,3 +1,8 @@
 /subsystem=datasources/data-source=QSPhoenixDS:remove()
 /subsystem=datasources/jdbc-driver=phoenix:remove()
 module remove --name=org.apache.phoenix
+
+undeploy hbase-vdb.xml
+
+
+/:reload

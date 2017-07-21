@@ -1,0 +1,8 @@
+
+undeploy jdg-person-cache-vdb.xml
+
+/subsystem=resource-adapters/resource-adapter=ispnPerson:remove()
+
+
+/:reload
+

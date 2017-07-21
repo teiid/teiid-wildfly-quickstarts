@@ -1,0 +1,2 @@
+
+deploy ../quickstarts/ldap-as-a-datasource/src/vdb/ldap-vdb.xml

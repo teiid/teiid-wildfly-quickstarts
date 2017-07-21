@@ -43,7 +43,19 @@ If you have not done so, please review the System Requirements [../README.md](..
 
 1) Run the setup in dynamicvdb-datafederation quick start
 
-2) shutdown the jbossas server
+2) If server not started, then start the server
+
+	To start the server, open a command line and navigate to the "bin" directory under the root directory of the JBoss server and run:
+	
+	For Linux:   ./standalone.sh	
+	for Windows: standalone.bat
+
+	If Teiid isn't configured in the default configuration, append the following arguments to the command to specify the configuration
+		
+	-c {configuration.file} 
+	
+	Example: -c standalone-teiid.xml 
+
 
 3) Security setup
 
@@ -65,32 +77,18 @@ If you have not done so, please review the System Requirements [../README.md](..
 	d.  roles (comma seperated)
 
 
-4)  Start the server
+4)  Teiid VDB Deployment:
 
-	To start the server, open a command line and navigate to the "bin" directory under the root directory of the JBoss server and run:
-	
-	For Linux:   ./standalone.sh	
-	for Windows: standalone.bat
+-  run the following CLI script
 
-	If Teiid isn't configured in the default configuration, append the following arguments to the command to specify the configuration
-		
-	-c {configuration.file}  
-	
-	Example: -c standalone-teiid.xml 
-
-5) VDB Deployment:
-
-    Copy the following files to the "<jboss.home>/standalone/deployments" directory
-
-     * src/vdb/portfolio-vdb.xml
-     * src/vdb/portfolio-vdb.xml.dodeploy
+	-	cd to the $JBOSS_HOME/bin directory
+	-	execute:  ./jboss-cli.sh --connect --file=../quickstarts/dynamicvdb-dataroles/src/scripts/deploy_vdb.cli 
 
 
 6)  Open the admin console to make sure the VDB is deployed
 
-	*  open a brower to http://localhost:9990/console 	
+	*  open a brower to http://localhost:9990/console 
 
-7)  See "Query Demonstrations" below to demonstrate data federation.
 
 ## Query Demonstrations
 

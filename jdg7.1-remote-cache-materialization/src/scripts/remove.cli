@@ -1,0 +1,8 @@
+
+undeploy jdg-mat-cache-vdb.xml
+
+/subsystem=resource-adapters/resource-adapter=ispnStockMat:remove()
+
+
+/:reload
+

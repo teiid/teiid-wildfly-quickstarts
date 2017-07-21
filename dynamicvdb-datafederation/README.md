@@ -51,41 +51,28 @@ If you have not done so, please review the System Requirements [../README.md](..
 	
 	Example: -c standalone-teiid.xml 
 		
-2)  Copy teiid support files
-	
-- Copy the "teiidfiles" directory to the $JBOSS_HOME/ directory
 
-	The src/teiidfiles directory should contain:
-	(1) customer-schema.sql
-	(2) customer-schema-drop.sql
-	(3) data/marketdata-price.txt
-	(4) data/marketdata-price1.txt
-	
-when complete, you should see $JBOSS_HOME/teiidfiles
-
-3) Setup the h2 datasource and file resource adapter
+2) Setup the h2 datasource and file resource adapter
 
 -  run the following CLI script
 
 	-	cd to the $JBOSS_HOME/bin directory
-	-	execute:  ./jboss-cli.sh --connect --file={path}/dynamicvdb-datafederation/src/scripts/setup.cli 
+	-	execute:  ./jboss-cli.sh --connect --file=../quickstarts/dynamicvdb-datafederation/src/scripts/setup.cli 
 
-4)  Teiid Deployment:
+3)  Teiid VDB Deployment:
 
-Copy (deploy) the following VDB related files to the $JBOSS_HOME/standalone/deployments directory
+-  run the following CLI script
 
-	* Portfolio VDB
-    	- src/vdb/portfolio-vdb.xml
-     	- src/vdb/portfolio-vdb.xml.dodeploy
+	-	cd to the $JBOSS_HOME/bin directory
+	-	execute:  ./jboss-cli.sh --connect --file=../quickstarts/dynamicvdb-datafederation/src/scripts/deploy_vdb.cli 
 
 
 You should see the server log indicate the VDB is active with a message like:  TEIID40003 VDB Portfolio.1 is set to ACTIVE
 
-5)  Open the admin console to make sure the VDB is deployed
+4)  Open the admin console to make sure the VDB is deployed
 
 	*  open a brower to http://localhost:9990/console 	
 
-6)  See "Query Demonstrations" below to demonstrate data federation.
 
 ## Query Demonstrations
 
