@@ -1,0 +1,2 @@
+
+deploy ../quickstarts/socialMedia-as-a-datasource/src/vdb/twitter-vdb.xml

@@ -124,11 +124,14 @@ cd $\{JDG_HOME}/bin
 ./jboss-cli.sh --connect --file=../quickstarts/jdg7.1-remote-cache/src/scripts/create-infinispan-hotrod-protobuf-ds.cli
 
 ----
- 
 
-* Deploy the VDB
+*  Teiid VDB Deployment:
 
-Deploy for reading/writing to a remote cache, by copying both files, jdg-person-cache-vdb.xml and jdg-person-cache-vdb.xml.dodeploy to {JBOSS_HOME}/standalone/deployments
+-  run the following CLI script
+
+	-	cd to the $JBOSS_HOME/bin directory
+	-	execute:  ./jboss-cli.sh --connect --file=../quickstarts/jdg7.1-remote-cache/src/scripts/deploy_vdb.cli 
+
 
 
 # 3. Query Demonstrations

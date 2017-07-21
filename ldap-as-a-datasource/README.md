@@ -31,16 +31,18 @@ For installing OpenLDAP on Red Hat Linux 6.x please refer to above **System requ
 -  run the following CLI script
 
 	-	cd to the ${JBOSS_HOME}/bin directory
-	-	execute:  ./jboss-cli.sh --connect file={path}/ldap-as-a-datasource/src/scripts/setup.cli 
+	-	execute:  ./jboss-cli.sh --connect file=../quickstarts/ldap-as-a-datasource/src/scripts/setup.cli 
 
 > NOTE - Before executing `setup.cli`, either modify `setup.cli` change ${ldap.url} to LDAP url, ${ldap.rootdn} to LDAP root Distinguished Name and ${ldap.rootpw} to LDAP root password, or set System Properties `ldap.url` point to LDAP url, `ldap.rootdn` point to LDAP root Distinguished Name and `ldap.rootpw` to LDAP root password. For example, `ldap://10.66.218.46:389` is a sample LDAP URL, `cn=Manager,dc=example,dc=com` is a sample root Distinguished Name and `red` is a sample root password.
 
-4)  Teiid ldapDB VDB Deployment:
 
-Copy the following files to the "<jboss.home>/standalone/deployments" directory
+4)  Teiid VDB Deployment:
 
-     (1) src/vdb/ldap-vdb.xml
-     (2) src/vdb/ldap-vdb.xml.dodeploy
+-  run the following CLI script
+
+	-	cd to the $JBOSS_HOME/bin directory
+	-	execute:  ./jboss-cli.sh --connect --file=../quickstarts/ldap-as-a-datasource/src/scripts/deploy_vdb.cli 
+
 
 5)  See "Query Demonstrations" below to demonstrate data query.
 

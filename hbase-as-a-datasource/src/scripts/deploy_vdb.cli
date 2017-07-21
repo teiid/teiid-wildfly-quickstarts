@@ -1,0 +1,2 @@
+
+deploy ../quickstarts/hbase-as-a-datasource/src/vdb/hbase-vdb.xml

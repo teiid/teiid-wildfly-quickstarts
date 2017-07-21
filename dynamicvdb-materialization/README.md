@@ -41,21 +41,22 @@ If you have not done so, please review the System Requirements [../README.md](..
 
 	If Teiid isn't configured in the default configuration, append the following arguments to the command to specify the configuration
 		
-	-c {configuration.file}  
+	-c {configuration.file} 
 	
 	Example: -c standalone-teiid.xml 
 
-3) VDB Deployment:
 
-    Copy the following files to the "<jboss.home>/standalone/deployments" directory
+3)  Teiid VDB Deployment:
 
-     * src/vdb/portfolio-mat-vdb.xml
-     * src/vdb/portfolio-mat-vdb.xml.dodeploy
+-  run the following CLI script
+
+	-	cd to the $JBOSS_HOME/bin directory
+	-	execute:  ./jboss-cli.sh --connect --file=../quickstarts/dynamicvdb-materialization/src/scripts/deploy_vdb.cli 
 
 
 4)  Open the admin console to make sure the VDB is deployed
 
-	*  open a brower to http://localhost:9990/console 	
+	*  open a brower to http://localhost:9990/console
 
 
 ## Query Demonstrations

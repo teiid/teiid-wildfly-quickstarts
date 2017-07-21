@@ -1,0 +1,11 @@
+
+undeploy portfolio-vdb.xml
+
+/subsystem=resource-adapters/resource-adapter=fileQS:remove()
+
+/subsystem=resource-adapters/resource-adapter=fileQSExcel:remove()
+
+/subsystem=datasources/data-source=h2:remove()
+
+
+/:reload

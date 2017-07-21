@@ -1,0 +1,2 @@
+
+deploy ../quickstarts/webservices-as-a-datasource/src/vdb/webservice-vdb.xml

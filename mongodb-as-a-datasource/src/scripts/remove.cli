@@ -1,1 +1,7 @@
+undeploy mongodb-vdb.xml
+
 /subsystem=resource-adapters/resource-adapter=mongodbQS:remove()
+
+
+/:reload
+
