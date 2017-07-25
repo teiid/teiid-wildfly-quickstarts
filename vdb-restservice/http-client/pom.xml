@@ -2,7 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <parent>
-        <groupId>org.jboss.teiid.quickstart</groupId>
+        <groupId>org.teiid.quickstart</groupId>
         <artifactId>vdb-restservice</artifactId>
         <version>4.0.0</version>
     </parent>
@@ -36,7 +36,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <mainClass>org.jboss.teiid.quickstart.PortfolioHTTPClient</mainClass>
+                    <mainClass>org.teiid.quickstart.PortfolioHTTPClient</mainClass>
                     <arguments>
                         <argument>localhost</argument>
                         <argument>8080</argument>

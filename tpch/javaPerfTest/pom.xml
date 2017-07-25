@@ -33,12 +33,12 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>org.jboss.teiid</groupId>
+			<groupId>org.teiid</groupId>
 			<artifactId>teiid-common-core</artifactId>
 			<version>8.9.0.Final</version>
 		</dependency>
         <dependency>
-            <groupId>org.jboss.teiid</groupId>
+            <groupId>org.teiid</groupId>
             <artifactId>teiid-client</artifactId>
             <version>8.9.0.Final</version>
         </dependency>        

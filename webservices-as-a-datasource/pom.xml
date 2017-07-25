@@ -3,7 +3,7 @@
 
 	<parent>
 		<artifactId>teiid-quickstart-parent</artifactId>
-		<groupId>org.jboss.teiid.quickstart</groupId>
+		<groupId>org.teiid.quickstart</groupId>
 		<version>4.0.0</version>
 	</parent>
 
@@ -171,7 +171,7 @@
 									<address>resource-adapter=webservice</address>
 									<properties>
 										<enable-resource>true</enable-resource>
-										<module>org.jboss.teiid.resource-adapter.webservice</module>
+										<module>org.teiid.resource-adapter.webservice</module>
 										<transaction-support>NoTransaction</transaction-support>
 									</properties>
 								</resource>

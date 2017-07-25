@@ -3,7 +3,7 @@
 
 	<parent>
 		<artifactId>teiid-quickstart-parent</artifactId>
-		<groupId>org.jboss.teiid.quickstart</groupId>
+		<groupId>org.teiid.quickstart</groupId>
 		<version>4.0.0</version>
 	</parent>
 
@@ -15,47 +15,47 @@
 
 	<dependencies>
 		<dependency>
-            <groupId>org.jboss.teiid</groupId>
-            <artifactId>teiid</artifactId>
-            <classifier>jdbc</classifier>
+			<groupId>org.teiid</groupId>
+			<artifactId>teiid</artifactId>
+			<classifier>jdbc</classifier>
 		</dependency>
 	</dependencies>
 
-    <profiles>
-        <profile>
-            <id>defaultuser</id>
-            <activation>
-                <property>
-                    <name>vdb</name>
-                </property>
-            </activation>                     
-            <build>
-                <plugins>
-           <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>exec-maven-plugin</artifactId>
-                <version>${version.org.codehaus.mojo.exec.plugin}</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>java</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <classpathScope>test</classpathScope>
-                    <mainClass>JDBCClient</mainClass>
-                                    <arguments>
-                                        <argument>localhost</argument>
-                                        <argument>31000</argument>
-                                        <argument>${vdb}</argument>
-                                        <argument>${sql}</argument>
-                                    </arguments>                   
-                    <cleanupDaemonThreads>false</cleanupDaemonThreads>
-                </configuration>
-            </plugin>                              
-                </plugins>
-            </build>
-        </profile>         
-    </profiles>
+	<profiles>
+		<profile>
+			<id>defaultuser</id>
+			<activation>
+				<property>
+					<name>vdb</name>
+				</property>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>exec-maven-plugin</artifactId>
+						<version>${version.org.codehaus.mojo.exec.plugin}</version>
+						<executions>
+							<execution>
+								<goals>
+									<goal>java</goal>
+								</goals>
+							</execution>
+						</executions>
+						<configuration>
+							<classpathScope>test</classpathScope>
+							<mainClass>JDBCClient</mainClass>
+							<arguments>
+								<argument>localhost</argument>
+								<argument>31000</argument>
+								<argument>${vdb}</argument>
+								<argument>${sql}</argument>
+							</arguments>
+							<cleanupDaemonThreads>false</cleanupDaemonThreads>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 </project>
