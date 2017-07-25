@@ -4,11 +4,11 @@
 	
 	<parent>
 		<artifactId>teiid-quickstart-parent</artifactId>
-		<groupId>org.jboss.teiid.quickstart</groupId>
+		<groupId>org.teiid.quickstart</groupId>
 		<version>4.0.0</version>
 	</parent>
 	
-	<!-- <main-class name="org.jboss.teiid.drools.HelloWorldExample"/> -->
+	<!-- <main-class name="org.teiid.drools.HelloWorldExample"/> -->
 	
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>drools-integration</artifactId>

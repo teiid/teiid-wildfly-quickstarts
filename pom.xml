@@ -2,14 +2,14 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<parent>
-        <groupId>org.jboss.integration-platform</groupId>
-        <artifactId>jboss-integration-platform-parent</artifactId>
-        <version>6.0.0.CR30</version>
-        <relativePath></relativePath>		
-	</parent>	
-		
+		<groupId>org.jboss.integration-platform</groupId>
+		<artifactId>jboss-integration-platform-parent</artifactId>
+		<version>6.0.0.CR30</version>
+		<relativePath></relativePath>
+	</parent>
+
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>org.jboss.teiid.quickstart</groupId>
+	<groupId>org.teiid.quickstart</groupId>
 	<artifactId>teiid-quickstart-parent</artifactId>
 	<packaging>pom</packaging>
 	<version>4.0.0</version>
@@ -20,29 +20,29 @@
 	<licenses>
 		<license>
 			<name>Apache License, Version 2.0</name>
-            <url>https://www.apache.org/licenses/LICENSE-2.0</url>
+			<url>https://www.apache.org/licenses/LICENSE-2.0</url>
 		</license>
 	</licenses>
 
 	<modules>
-            <module>vdb-datafederation</module>
-            <module>vdb-dataroles</module>
-	    <module>vdb-restservice</module>
-	    <module>vdb-materialization</module>
-            <module>hibernate-on-top-of-teiid</module>
-            <module>webservices-as-a-datasource</module>
-	    <module>infinispan-hotrod-as-a-datasource</module>
-	    <module>infinispan-hotrod-as-mat-cache</module>
-            <module>mongodb-as-a-datasource</module>
-            <module>ldap-as-a-datasource</module>
-	    <module>hbase-as-a-datasource</module>
-	    <module>drools-integration</module>
-            <module>simpleclient</module>
-	    <module>sparksqlclient</module>
-	    <module>twitter-as-a-datasource</module>
-	    <module>hive-as-a-datasource</module>
-	    <module>excel-as-a-datasource</module>
-            <module>ftp-as-a-datasource</module>
+		<module>vdb-datafederation</module>
+		<module>vdb-dataroles</module>
+		<module>vdb-restservice</module>
+		<module>vdb-materialization</module>
+		<module>hibernate-on-top-of-teiid</module>
+		<module>webservices-as-a-datasource</module>
+		<module>infinispan-hotrod-as-a-datasource</module>
+		<module>infinispan-hotrod-as-mat-cache</module>
+		<module>mongodb-as-a-datasource</module>
+		<module>ldap-as-a-datasource</module>
+		<module>hbase-as-a-datasource</module>
+		<module>drools-integration</module>
+		<module>simpleclient</module>
+		<module>sparksqlclient</module>
+		<module>twitter-as-a-datasource</module>
+		<module>hive-as-a-datasource</module>
+		<module>excel-as-a-datasource</module>
+		<module>ftp-as-a-datasource</module>
 	</modules>
 
 	<properties>
@@ -51,110 +51,110 @@
 		<!-- [WARNING] Using platform encoding (UTF-8 actually) to copy filtered 
 			resources, i.e. build is platform dependent! -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		
-	        <illegaltransitivereportonly>false</illegaltransitivereportonly>
-			
+
+		<illegaltransitivereportonly>false</illegaltransitivereportonly>
+
 		<version.org.jboss.integration-platform>6.0.0.CR30</version.org.jboss.integration-platform>
 
-		<version.teiid>9.3.0.Final</version.teiid>
-     	        <jbossas-module-root>modules/system/layers/dv</jbossas-module-root>
+		<version.teiid>10.0.0.Alpha2</version.teiid>
+		<jbossas-module-root>modules/system/layers/dv</jbossas-module-root>
 
-                <version.javax.annotation>${version.org.jboss.spec.javax.annotation.jboss-annotations-api_1.1_spec}</version.javax.annotation>
-                <version.jboss.as.plugin>${version.org.jboss.as}</version.jboss.as.plugin>       
-        <!--version.net.jcip>1.0</version.net.jcip-->
-                <version.org.codehaus.mojo.exec.plugin>1.2.1</version.org.codehaus.mojo.exec.plugin>
- 
-  		<version.net.jcip>1.0</version.net.jcip>
-                <version.resteasy.client>3.0.16.Final</version.resteasy.client>
-        
-                <version.org.jboss.bom.jboss-javaee-6.0-with-tools>6.4.4.GA</version.org.jboss.bom.jboss-javaee-6.0-with-tools>
+		<version.javax.annotation>${version.org.jboss.spec.javax.annotation.jboss-annotations-api_1.1_spec}</version.javax.annotation>
+		<version.jboss.as.plugin>${version.org.jboss.as}</version.jboss.as.plugin>
+		<!--version.net.jcip>1.0</version.net.jcip -->
+		<version.org.codehaus.mojo.exec.plugin>1.2.1</version.org.codehaus.mojo.exec.plugin>
+
+		<version.net.jcip>1.0</version.net.jcip>
+		<version.resteasy.client>3.0.16.Final</version.resteasy.client>
+
+		<version.org.jboss.bom.jboss-javaee-6.0-with-tools>6.4.4.GA</version.org.jboss.bom.jboss-javaee-6.0-with-tools>
 		<version.org.drools>6.1.0.Final</version.org.drools>
-		<!--version.resteasy>3.0.12.Final</version.resteasy-->
-        <!--version.commons-codec>1.10</version.commons-codec-->
-        
-                <version.commons-httpclient>3.1</version.commons-httpclient>
+		<!--version.resteasy>3.0.12.Final</version.resteasy -->
+		<!--version.commons-codec>1.10</version.commons-codec -->
+
+		<version.commons-httpclient>3.1</version.commons-httpclient>
 
 	</properties>
-	
+
 	<dependencies>
 
-	
+
 	</dependencies>
-	
+
 	<dependencyManagement>
-		<dependencies>		
-           <dependency>
-            	<groupId>org.jboss.integration-platform</groupId>
-            	<artifactId>jboss-integration-platform-bom</artifactId>
-            	<version>${version.org.jboss.integration-platform}</version>
-            	<scope>import</scope>
-            	<type>pom</type>
-          </dependency> 		
-            <dependency>
-                <groupId>junit</groupId>
-                <artifactId>junit</artifactId>
-                <version>${version.junit}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.mockito</groupId>
-                <artifactId>mockito-all</artifactId>
-                <version>${version.org.mockito}</version>
-            </dependency>           
+		<dependencies>
 			<dependency>
-				<groupId>org.jboss.teiid</groupId>
+				<groupId>org.jboss.integration-platform</groupId>
+				<artifactId>jboss-integration-platform-bom</artifactId>
+				<version>${version.org.jboss.integration-platform}</version>
+				<scope>import</scope>
+				<type>pom</type>
+			</dependency>
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>${version.junit}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.mockito</groupId>
+				<artifactId>mockito-all</artifactId>
+				<version>${version.org.mockito}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.teiid</groupId>
 				<artifactId>teiid-common-core</artifactId>
 				<version>${version.teiid}</version>
 			</dependency>
 
 			<dependency>
-				<groupId>org.jboss.teiid</groupId>
+				<groupId>org.teiid</groupId>
 				<artifactId>teiid-api</artifactId>
 				<version>${version.teiid}</version>
 			</dependency>
 			<dependency>
-				<groupId>org.jboss.teiid</groupId>
+				<groupId>org.teiid</groupId>
 				<artifactId>teiid-client</artifactId>
 				<version>${version.teiid}</version>
 			</dependency>
 			<dependency>
-				<groupId>org.jboss.teiid</groupId>
+				<groupId>org.teiid</groupId>
 				<artifactId>teiid</artifactId>
 				<version>${version.teiid}</version>
 				<classifier>jdbc</classifier>
-			</dependency>			
-            <dependency>
-                <groupId>org.jboss.bom.eap</groupId>
-                <artifactId>jboss-javaee-6.0-with-tools</artifactId>
-                <version>${version.org.jboss.bom.jboss-javaee-6.0-with-tools}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>    
-			 <dependency>
+			</dependency>
+<!-- 			<dependency>
+				<groupId>org.jboss.bom.eap</groupId>
+				<artifactId>jboss-javaee-6.0-with-tools</artifactId>
+				<version>${version.org.jboss.bom.jboss-javaee-6.0-with-tools}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency> -->
+			<dependency>
 				<groupId>javax.enterprise</groupId>
 				<artifactId>cdi-api</artifactId>
 				<version>${version.javax.enterprise}</version>
-			 </dependency>
-			 <dependency>
+			</dependency>
+			<dependency>
 				<groupId>org.scannotation</groupId>
 				<artifactId>scannotation</artifactId>
 				<version>${version.org.scannotation}</version>
-			 </dependency>
-			 <dependency>
-            	<groupId>net.jcip</groupId>
-            	<artifactId>jcip-annotations</artifactId>
-            	<scope>provided</scope>
-            	<version>${version.net.jcip}</version>
-        	</dependency>   
-            <dependency>
-               <groupId>org.hibernate</groupId>
-               <artifactId>hibernate-search-engine</artifactId>
-               <version>${version.org.hibernate.search}</version>                      		           
-        	</dependency> 
+			</dependency>
 			<dependency>
-			  <groupId>org.jboss.spec.javax.annotation</groupId>
-			  <artifactId>jboss-annotations-api_1.1_spec</artifactId>
-               <version>${version.javax.annotation}</version>                      		           
-			</dependency> 
+				<groupId>net.jcip</groupId>
+				<artifactId>jcip-annotations</artifactId>
+				<scope>provided</scope>
+				<version>${version.net.jcip}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.hibernate</groupId>
+				<artifactId>hibernate-search-engine</artifactId>
+				<version>${version.org.hibernate.search}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.jboss.spec.javax.annotation</groupId>
+				<artifactId>jboss-annotations-api_1.1_spec</artifactId>
+				<version>${version.javax.annotation}</version>
+			</dependency>
 			<dependency>
 				<groupId>org.kie</groupId>
 				<artifactId>kie-api</artifactId>
@@ -169,33 +169,33 @@
 				<groupId>org.drools</groupId>
 				<artifactId>drools-compiler</artifactId>
 				<version>${version.org.drools}</version>
-			</dependency>     
+			</dependency>
 			<dependency>
 				<groupId>org.apache.httpcomponents</groupId>
 				<artifactId>httpclient</artifactId>
 				<version>${version.org.apache.httpcomponents.httpclient}</version>
-			</dependency>			
+			</dependency>
 			<dependency>
 				<groupId>org.apache.httpcomponents</groupId>
 				<artifactId>httpcore</artifactId>
 				<version>${version.org.apache.httpcomponents.httpcore}</version>
-			</dependency>							 
+			</dependency>
 			<dependency>
 				<groupId>commons-codec</groupId>
 				<artifactId>commons-codec</artifactId>
 				<version>${version.commons-codec}</version>
 			</dependency>
-		    <dependency>
-				<groupId>commons-httpclient</groupId> 
+			<dependency>
+				<groupId>commons-httpclient</groupId>
 				<artifactId>commons-httpclient</artifactId>
 				<version>${version.commons-httpclient}</version>
-			   </dependency>
-         </dependencies>      
-    </dependencyManagement>	
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 
-    <build>
-        <plugins>
-	  <!-- Specify the compiler options and settings -->
+	<build>
+		<plugins>
+			<!-- Specify the compiler options and settings -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -216,7 +216,8 @@
 					</includes>
 					<excludes>
 						<exclude>**/Abstract*TestCase.java</exclude>
-			<!-- hack to prevent anonymous inner classes in Tests from being run as tests -->
+						<!-- hack to prevent anonymous inner classes in Tests from being run 
+							as tests -->
 						<include>**/Test*$*.java</include>
 					</excludes>
 					<systemPropertyVariables>
@@ -225,10 +226,9 @@
 					</systemPropertyVariables>
 				</configuration>
 			</plugin>
-      <!-- 
-      Build a test-jar for each project, so that src/test/* resources and classes can be used
-      in other projects.  Also customize how the jar files are assembled.
-      -->
+			<!-- Build a test-jar for each project, so that src/test/* resources and 
+				classes can be used in other projects. Also customize how the jar files are 
+				assembled. -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
@@ -251,32 +251,32 @@
 					</archive>
 				</configuration>
 			</plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-source-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>attach-sources</id>
-                        <goals>
-                            <goal>jar-no-fork</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
- 		</plugins>            
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<goals>
+							<goal>jar-no-fork</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
 	</build>
 
-    <profiles>    
-        <profile>
-            <id>dist</id>
-            <activation>
-                <file>
-                    <exists>dist</exists>
-                </file>
-            </activation>
-            <modules>
-                <module>dist</module>
-            </modules>
-        </profile>
-    </profiles>
+	<profiles>
+		<profile>
+			<id>dist</id>
+			<activation>
+				<file>
+					<exists>dist</exists>
+				</file>
+			</activation>
+			<modules>
+				<module>dist</module>
+			</modules>
+		</profile>
+	</profiles>
 </project>

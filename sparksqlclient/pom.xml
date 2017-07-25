@@ -2,7 +2,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>org.jboss.teiid.quickstart</groupId>
+	<groupId>org.teiid.quickstart</groupId>
 	<artifactId>sparksqlclient</artifactId>
 	<version>4.0.0</version>
 
@@ -16,7 +16,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.jboss.teiid</groupId>
+            <groupId>org.teiid</groupId>
             <artifactId>teiid</artifactId>
             <classifier>jdbc</classifier>
 	    <version>${version.teiid}</version>

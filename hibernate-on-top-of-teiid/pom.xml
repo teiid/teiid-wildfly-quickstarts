@@ -3,7 +3,7 @@
 
 	<parent>
 		<artifactId>teiid-quickstart-parent</artifactId>
-		<groupId>org.jboss.teiid.quickstart</groupId>
+		<groupId>org.teiid.quickstart</groupId>
 		<version>4.0.0</version>
 	</parent>
 
@@ -95,14 +95,14 @@
 				<configuration>
 					<!-- Java EE 6 doesn't require web.xml, Maven needs to catch up! -->
 					<failOnMissingWebXml>false</failOnMissingWebXml>
-					<!-- org.jboss.teiid export, -->
+					<!-- org.teiid export, -->
 					<archive>
 						<manifestEntries>
 							<!-- The deployment.<vdb-filename> export is needed so that when the 
 								server is RESTARTED, the Hibernate persistence will be delayed until the 
 								VDB is deployed. Other, you will see login exceptions in the server log caused 
 								by the Hibernate persistance trying to validate the datasource. -->
-							<Dependencies>org.jboss.teiid.client export, deployment.hibernate-portfolio-vdb.xml export</Dependencies>
+							<Dependencies>org.teiid.client export, deployment.hibernate-portfolio-vdb.xml export</Dependencies>
 						</manifestEntries>
 					</archive>
 				</configuration>
