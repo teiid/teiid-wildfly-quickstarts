@@ -44,7 +44,7 @@ $ ./bin/standalone.sh -c=standalone-teiid.xml
 	
 4) Install web service datasource 
 
-Navigate to JBoss home, execute CLI command:
+Navigate to the ${JBOSS_HOME}/bin directory, execute CLI command:
 
 ~~~
 $ ./jboss-cli.sh --connect file={path}/socialMedia-as-a-datasource/src/scripts/setup-twitter.cli
@@ -71,7 +71,7 @@ Using the simpleclient example
 
 2) Use the simpleclient example to run the following queries:
 
-Example:   mvn exec:java -Dvdb="webservice" -Dsql="select * from CustomersView" -Dusername="xx" -Dpassword="xx"
+Example:   mvn exec:java -Dvdb="twitter" -Dsql="select * from TwitterUserTimelineView" -Dusername="xx" -Dpassword="xx"
 
 > NOTE - depending on your OS/Shell the quoting/escaping required to run the example can be
 complicated.  It would be better to install a Java client, such as SQuirreL, to run the 
