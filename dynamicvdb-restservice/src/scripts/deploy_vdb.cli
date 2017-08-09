@@ -1,0 +1,2 @@
+
+deploy ../quickstarts/dynamicvdb-materializaton/src/vdb/portfolio-rest-vdb.xml
