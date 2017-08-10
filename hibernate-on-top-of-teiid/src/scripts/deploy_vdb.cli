@@ -1,0 +1,2 @@
+
+deploy ../quickstarts/hibernate-on-top-of-teiid/src/main/vdb/hibernate-portfolio-vdb.xml

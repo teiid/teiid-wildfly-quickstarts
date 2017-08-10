@@ -32,6 +32,11 @@ This example produces a WAR that is designed to be run on JBoss Enterprise Appli
 
 ## Build the project
 
+- Before building, need to set the username/password in the hibernate config file
+
+The src/main/webapp/WEB-INF/hibernate4-teiid-quickstart-ds.xml file needs to have the user-name and password changed from user/user to the
+teiid user you wish to connect with.
+
 - Open a command line and navigate to the root directory of this quickstart
 
 	*   `mvn clean install`
@@ -56,33 +61,40 @@ This example produces a WAR that is designed to be run on JBoss Enterprise Appli
 	
 3) VDB Deployment:
 
-    Copy the following files to the "<jboss.home>/standalone/deployments" directory
+-  run the following CLI script
 
-     * src/main/vdb/hibernate-portfolio-vdb.xml
-     * src/main/vdb/hibernate-portfolio-vdb.xml.dodeploy
+	-	cd to the $JBOSS_HOME/bin directory
+	-	execute:  ./jboss-cli.sh --connect --file=../quickstarts/hibernate-on-top-of-teiid/src/scripts/deploy_vdb.cli 
 
-4) Deploy the web application buy running the following command:
 
-    	*   `mvn package jboss-as:deploy`
-    	
-5) RESTART the jboss as server.  Without using CLI to configure the resources, the resource isn't activated.  
-		Therefore, jboss-as requires a restart.	
+4) Deploy the web application
 
-6)  Open the admin console to make sure the VDB is deployed
+-  run the following CLI script
 
-	*  open a brower to http://localhost:9990/console 	
+	-	cd to the $JBOSS_HOME/bin directory
+	-	execute:  ./jboss-cli.sh --connect --file=../quickstarts/hibernate-on-top-of-teiid/src/scripts/deploy_war.cli 
 
-7)  See "Query Demonstrations" below to demonstrate data federation.
+
+5)  Open the admin console to make sure the VDB is deployed
+
+	*  open a brower to http://localhost:9990/console
+
+6)  See "Query Demonstrations" below to demonstrate data federation.
+
 
 ## Undeploy artifacts
 
 1)  To undeploy the web application run the following command:
 
-	*  mvn package jboss-as:undeploy
-	
-2)  To undeploy the Teiid VDB, delete the 
+	-	cd to the $JBOSS_HOME/bin directory
+	-	execute:  ./jboss-cli.sh --connect --file=../quickstarts/hibernate-on-top-of-teiid/src/scripts/remove_war.cli 
 
-	*  delete the vdb, hibernate-portfolio-vdb.xml, from the directory "<jboss.home>/standalone/deployments"
+	
+2)  To undeploy the Teiid VDB, run the following command:
+
+	-	cd to the $JBOSS_HOME/bin directory
+	-	execute:  ./jboss-cli.sh --connect --file=../quickstarts/hibernate-on-top-of-teiid/src/scripts/remove_vdb.cli 
+
 	
 ## Query Demonstrations
 

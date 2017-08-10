@@ -1,0 +1,8 @@
+
+undeploy hibernate-on-top-of-teiid.war
+
+
+/:reload
+
+
+
