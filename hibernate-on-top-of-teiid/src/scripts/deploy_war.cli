@@ -1,0 +1,2 @@
+/deployment=hibernate-on-top-of-teiid.war:add(runtime-name=hibernate-on-top-of-teiid.war,content=[{path=quickstarts/hibernate-on-top-of-teiid/target/hibernate-on-top-of-teiid.war/,archive=false,relative-to=jboss.home.dir}],enabled=true)
+
