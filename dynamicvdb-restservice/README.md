@@ -13,7 +13,6 @@ This quickstart demonstrates:
 * how to define a vdb to enable a https://teiid.gitbooks.io/documents/content/reference/REST_Service_Through_VDB.html[REST Service Through VDB].
 * how to use the httpclient api to integrate VDB data via REST
 * how to use the Resteasy Client to integrate VDB data via REST
-* how to use the Apache CXF WebClient to integrate VDB data via REST
 * how to use Swagger API Doc Page test all Rest API.
 
 
@@ -84,12 +83,3 @@ $ mvn package exec:java
 
 NOTE: If your teiid Server not run on localhost:8080, edit resteasy-client/pom.xml, to make sure arguments point to a correct hostname and port.
 
-
-### Run CXF Client
-
-----
-$ cd cxf-client/
-$ mvn package exec:java
-----
-
-NOTE: If your teiid Server not run on localhost:8080, edit cxf-client/pom.xml, to make sure arguments point to a correct hostname and port.
