@@ -6,10 +6,6 @@
   <property name ="lib" value ="org.jboss.teiid.drools"></property>
 
   <property name="UseConnectorMetadata" value="true" />
-  
-  <model name="FilesVDB">
-    <source name="text-connector" translator-name="file" connection-jndi-name="java:/marketdata-file"/>
-  </model>
 
   <model name="DroolsModel" type="VIRTUAL">
         <metadata type="DDL"><![CDATA[

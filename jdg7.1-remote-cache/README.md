@@ -56,15 +56,15 @@ b) editing standalone configuration(requires restarting the JDG server)
 
 a) Perform the following steps to configure the cache by running the CLI script against the JDG server
 
--  locate the {JBOSS_HOME}/quickstarts/jdg7.1-remote-cache/src/scripts/setup-jdg-cache.cli  script in the quickstart
+-  locate the ${JBOSS_HOME}/quickstarts/jdg7.1-remote-cache/src/scripts/setup-jdg-cache.cli  script in the quickstart
 -  cd to the ${ISPN_HOME}/bin directory
 -  execute the setup-jdg-cache.cli script by running the following:
 
-	./cli.sh  --file={path.to.cli.script}/setup-jdg-cache.cli
+	./cli.sh  --file=${JBOSS_HOME}/quickstarts/jdg7.1-remote-cache/src/scripts/setup-jdg-cache.cli
 
 Since the server is running with the port offset, use the --controller option:
 
-	 ./cli.sh --controller=localhost:10090  --file={path.to.cli.script}/setup-jdg-cache.cli
+	 ./cli.sh --controller=localhost:10090  --file=${JBOSS_HOME}/quickstarts/jdg7.1-remote-cache/src/scripts/setup-jdg-cache.cli
 
 
 Note the name of the cache - _personCache_ , as it needs to match the teiid-ispn extension property Option in the table for source model of the vdb.
@@ -103,16 +103,32 @@ To start the server, open a command line and navigate to the "bin" directory und
 standalone.bat //for Windows
 ----
 
-If Teiid isn't configured in the default configuration, append the following arguments to the command to specify the configuration `-c {configuration.file}`
+To use one of the high-available (ha) configurations for clustering, append the following arguments to the command to specify the configuration
+		
+	-c {configuration.file} 
 
-[source,xml] and slides
+[source,xml]
 .*Example*
 ----
-./standalone.sh -c standalone-teiid.xml
+./standalone.sh -c standalone-ha.xml
 ----
 
+* Install the infinispan-hotrod translator and related default resource-adapter
 
-* Configure the resource adapter for the JDG Cache to be accessed as a data source
+NOTE:  If already done, then skip to Setup JDG Data Source.
+
+The infinispan translator is not installed by default because the dependent JDG related modules may not have been installed. To install do the following steps:
+
+[source]
+.*Setup translator*
+---- 
+cd to the ${JBOSS_HOME}/bin directory
+execute the following:
+
+	./jboss-cli.sh --connect --file=../docs/teiid/datasources/infinispan-hotrod-7.1/add-infinispan-hotrod-translator.cli 
+----
+
+* Configure the resource adapter for accessing the JDG Cache as a data source
 
 The quickstart has a CLI script that can be used to configure the resource adapter. 
 
@@ -120,25 +136,28 @@ The quickstart has a CLI script that can be used to configure the resource adapt
 .*Setup JDG Data Source*
 ----
 cd $\{JDG_HOME}/bin
+execute the following CLI script:
 
-./jboss-cli.sh --connect --file=../quickstarts/jdg7.1-remote-cache/src/scripts/create-infinispan-hotrod-protobuf-ds.cli
-
+	./jboss-cli.sh --connect --file=../quickstarts/jdg7.1-remote-cache/src/scripts/create-infinispan-hotrod-protobuf-ds.cli
 ----
 
 *  Teiid VDB Deployment:
 
--  run the following CLI script
+[source]
+.*VDB deployment*
+----
+cd to the $JBOSS_HOME/bin directory
+execute the following CLI script:
 
-	-	cd to the $JBOSS_HOME/bin directory
-	-	execute:  ./jboss-cli.sh --connect --file=../quickstarts/jdg7.1-remote-cache/src/scripts/deploy_vdb.cli 
-
+	./jboss-cli.sh --connect --file=../quickstarts/jdg7.1-remote-cache/src/scripts/deploy_vdb.cli 
+----
 
 
 # 3. Query Demonstrations
 
 NOTE: before querying, if not already, will need to add user/pasword.
 
-1. Change your working directory to "${quickstart.install.dir}/simpleclient"
+1. Change your working directory to "${JBOSS_HOME}/quickstarts/simpleclient"
 2. Use the simpleclient example to run the following queries:
 
 Example: mvn exec:java -Dvdb="PersonVDB" -Dsql="Insert into Person (id, name, salary) Values (100, 'TestPerson', 25000.00)" -Dusername="teiidUser" -Dpassword="pwd"
