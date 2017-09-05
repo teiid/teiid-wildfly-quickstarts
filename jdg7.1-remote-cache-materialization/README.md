@@ -118,6 +118,21 @@ If Teiid isn't configured in the default configuration, append the following arg
 ./standalone.sh -c standalone-teiid.xml
 ----
 
+* Install the infinispan-hotrod translator and related default resource-adapter
+
+NOTE:  If already done, then skip to Setup JDG Data Source.
+
+The infinispan translator is not installed by default because the dependent JDG related modules may not have been installed. To install do the following steps:
+
+[source]
+.*Setup translator*
+---- 
+cd to the ${JBOSS_HOME}/bin directory
+execute the following:
+
+	./jboss-cli.sh --connect --file=../docs/teiid/datasources/infinispan-hotrod-7.1/add-infinispan-hotrod-translator.cli 
+----
+
 
 * Configure resource adapter to access JDG Cache
 
@@ -127,18 +142,22 @@ The quickstart has a CLI script that can be used to configure the resource adapt
 .*Setup JDG Data Source*
 ----
 cd $\{JDG_HOME}/bin
-./jboss-cli.sh --connect --file=../quickstarts/jdg7.1-remote-cache-materialization/src/scripts/create-infinispan-hotrod-protobuf-ds.cli
+execute the following:
+
+	./jboss-cli.sh --connect --file=../quickstarts/jdg7.1-remote-cache-materialization/src/scripts/create-infinispan-hotrod-protobuf-ds.cli
 
 ----
 
+*  Teiid VDB Deployment:
 
-* Deploy the VDB
+[source]
+.*VDB deployment*
+----
+cd to the $JBOSS_HOME/bin directory
+execute the following CLI script:
 
--  run the following CLI script
-
-	-	cd to the $JBOSS_HOME/bin directory
-	-	execute:  ./jboss-cli.sh --connect --file=../quickstarts/jdg7.1-remote-cache-materialization/src/scripts/deploy_mat-cache-vdb.cli
-
+	./jboss-cli.sh --connect --file=../quickstarts/jdg7.1-remote-cache-materialization/src/scripts/deploy_mat-cache-vdb.cli
+----
 
 The materialization process should begin immediately and the refresh of the cache will be done based on the TTL time intervals set in the vdb.
 	

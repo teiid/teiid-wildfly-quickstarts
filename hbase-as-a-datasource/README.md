@@ -2,7 +2,7 @@
 Level: Beginners
 Technologies: Teiid, HBase Translator, Foreign Table
 Target Product: DV
-Product Versions: DV 6.1
+Product Versions: DV 6.1+
 Source: https://github.com/teiid/teiid-quickstarts
 ---
 
@@ -12,7 +12,7 @@ Source: https://github.com/teiid/teiid-quickstarts
 
 ## System requirements
 
-If you have not done so, please review the System Requirements [../README.md](../README.md) in the root quick starts directory.
+If you have not done so, please review the System Requirements [../README.md](../README.md)
 
 
 ## Setup and Deployment
@@ -24,13 +24,15 @@ If you have not done so, please review the System Requirements [../README.md](..
 	For Linux:   ./standalone.sh	
 	for Windows: standalone.bat
 
-	append the following to the command to indicate which configuration to use if Teiid isn't configured in the default configuration
+	To use one of the high-available (ha) configurations for clustering, append the following arguments to the command to specify the configuration
 		
-	-c standalone-teiid.xml 
+	-c {configuration.file} 
+	
+	Example: -c standalone-ha.xml 
 
 2)  Setup HBase
 
-* Using [HBase quickstart steps](http://hbase.apache.org/book.html#quickstart) to install a single-node, standalone instance of HBase, for example
+* Use [HBase quickstart steps](http://hbase.apache.org/book.html#quickstart) to install a single-node, standalone instance of HBase, for example
 
 ~~~
 $ tar -xvf hbase-0.98.8-hadoop2-bin.tar.gz
@@ -44,7 +46,9 @@ $ tar -xvf phoenix-4.2.1-bin.tar.gz
 $ cp phoenix-4.2.1-bin/phoenix-core-4.2.1.jar hbase-0.98.8-hadoop2/lib/
 ~~~
 
-* Start HBase and connect to HBase via shell, create table and put sample data in [customer_sample_data.txt](src/scripts/customer_sample_data.txt), for example
+* Start HBase and connect to HBase via shell, create table and add (put) sample data.  See [customer_sample_data.txt](src/scripts/customer_sample_data.txt) for example data.  
+
+Example steps:
 
 ~~~
 $ ./bin/start-hbase.sh
@@ -56,34 +60,40 @@ hbase(main):003:0> put 'Customer', '101', 'customer:name', 'John White'
 
 3) Setup Phoenix Data Source
 
-NOTE:   The folowing referenced setup.cli script is configured to use the phoenix-4.2.1-client.jar.  If the version you are using is different, the setup.cli script will need to be udpated.
+NOTE:   The following referenced setup.cli script is configured to use the phoenix-4.2.1-client.jar.  If the version you are using is different, the setup.cli script will need to be updated.
 
-* Copy phoenix-[version]-client.jar to $JBOSS_HOME, copy [setup.cli](src/scripts/setup.cli)to $JBOSS_HOME, for example
+* Copy phoenix-[version]-client.jar to $JBOSS_HOME
+
+* Execute CLI command to setup Phoenix Data Source
 
 ~~~
 $ cd $JBOSS_HOME
-$ cp .../src/scripts/setup.cli ./
-$ cp .../phoenix-4.2.1-bin/phoenix-4.2.1-client.jar ./
-~~~
-
-* Execute CLI commands to setup Phoenix Data Source
-
-~~~
-$ ./bin/jboss-cli.sh --connect --file=setup.cli
+$ ./bin/jboss-cli.sh --connect --file=./quickstarts/hbase-as-a-datasource/setup.cli
 ~~~ 
 
-* Use Phoenix Command Line execute [customer-schema.sql](src/teiidfiles/customer-schema.sql) to map `Customer` table in HBase, for example
+* Use Phoenix Command Line to execute [customer-schema.sql]({$JBOSS_HOME}/quickstarts/hbase-as-a-datasource/src/teiidfiles/customer-schema.sql) to map `Customer` table in HBase, for example
 
 ~~~
-$ cd PHOENIX_HOME
-$ ./bin/sqlline.py localhost .../src/teiidfiles/customer-schema.sql
+$ cd $PHOENIX_HOME
+$ ./bin/sqlline.py localhost ${JBOSS_HOME}/quickstarts/hbase-as-a-datasource/src/teiidfiles/customer-schema.sql
 ~~~
 
-> NOTE - More details about Phoenix Data Sources and Mapping Phoenix table to an existing HBase table please refer to [Teiid Documents](https://docs.jboss.org/author/display/TEIID/Phoenix+Data+Sources).
+> NOTE - For more details about Phoenix Data Sources and Mapping Phoenix table to an existing HBase table please refer to [Teiid Documents](https://docs.jboss.org/author/display/TEIID/Phoenix+Data+Sources).
 
-4) Teiid Deployment
+4)  Teiid VDB Deployment:
 
-Copy the following files to the "<jboss.home>/standalone/deployments" directory
+[source]
+.*VDB deployment*
+----
+cd to the $JBOSS_HOME/bin directory
+execute the following CLI script:
+
+	./jboss-cli.sh --connect --file=../quickstarts/hbase-as-a-datasource/src/scripts/deploy_vdb.cli 
+----
+
+or can manually deploy the vdb by doing the following:
+
+Copy the following files to the "$JBOSS_HOME/standalone/deployments" directory
 
      (1) src/vdb/hbase-vdb.xml
      (2) src/vdb/hbase-vdb.xml.dodeploy
@@ -91,19 +101,29 @@ Copy the following files to the "<jboss.home>/standalone/deployments" directory
 5)  See "Query Demonstrations" below to demonstrate data query.
 
 
-## Query Demonstrations
+# 3. Query Demonstrations
 
-==== Using the simpleclient example ====
+NOTE: before querying, if not already, will need to add user/pasword.
 
-1) Change your working directory to "<quickstart.install.dir>/simpleclient"
+1. Change your working directory to "${JBOSS_HOME}/quickstarts/simpleclient"
+2. Use the simpleclient example to run the following queries:
 
-2) Use the simpleclient example to run the following queries:
+Example: mvn exec:java -Dvdb="hbasevdb" -Dsql="SELECT * FROM Customer" -Dusername="teiidUser" -Dpassword="pwd"
 
-Example:   mvn exec:java -Dvdb="hbasevdb" -Dsql="SELECT * FROM Customer"
+> NOTE - depending on your OS/Shell the quoting/escaping required to run the example can be complicated.  It would be better to install a Java client, such as SQuirreL, to run the queries.
 
-The following sql can be used with -Dsql:
+or
 
-~~~
+Use a sql tool, like SQuirreL, to connect and issue following example query:
+
+Queries for accessing hbasevdb
+
+URL connect: jdbc:teiid:hbasevdb@mm://{host}:31000 
+
+[source,sql]
+.*Example Query SQL*
+----
+
 SELECT city, amount FROM Customer
 SELECT DISTINCT city FROM Customer
 SELECT city, amount FROM Customer WHERE PK='105'
@@ -115,4 +135,3 @@ SELECT name, city, COUNT(PK) FROM Customer GROUP BY name, city
 SELECT name, city, COUNT(PK) FROM Customer GROUP BY name, city HAVING COUNT(PK) > 1
 ~~~
 
-> NOTE - depending on your OS/Shell the quoting/escaping required to run the example can be complicated.  It would be better to install a Java client, such as SQuirreL, to run the queries. 
