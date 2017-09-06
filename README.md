@@ -30,6 +30,7 @@ The following is a list of the currently available quick starts. The table lists
 
 Some quick starts are designed to enhance or extend other quick starts. These are noted in the **Prerequisites** column. If a quick start lists prerequisites, those must be installed or deployed before working with the quick start.
 
+|===
 | **Quick start Name** | **Features Demonstrated** | **Description** | **Prerequisites** |
 |:-----------|:-----------|:-----------|:-----------|:-----------|
 | [datafederation](dynamicvdb-datafederation/README.md "data-federation") | Data Federation, TEXTTABLE, Native Query, VDB Reuse, External Materialization, Excel File | Shows how to expose multiple data sources for data federation and externally materialize a view to improve performance | None |
@@ -46,6 +47,7 @@ Some quick starts are designed to enhance or extend other quick starts. These ar
 | [hbase-as-a-datasource](hbase-as-a-datasource/README.md) | 'hbase' Translator, FOREIGN TABLE DDL | Demonstrates using the Hbase Translator via the Pheonix driver | Hbase be installed |
 | [drools-integration](drools-integration/README.md) | Drools integration, UDF, FOREIGN Function DDL | Demonstrates using a simple rules invocation via a Function | |
 | [socialMedia-as-a-datasource](socialMedia-as-a-datasource/README.md) | 'ws' Translator, accessing security rest service | Demonstrates using the WS Translator to call secured rest services, including Social Media(Twitter, Facebook, Weibo, etc), and transform the web service results into relational results | |
+|===
 
 -------------------
 <a id="systemrequirements"></a>
