@@ -29,7 +29,7 @@ following:
 This example uses the H2 database, which is referenced as the "accounts-ds" data source in the server, 
 but the creation SQL can be adapted to another database if you choose.
 
-Note:  this example provides the base setup for which other quick starts depend upon.
+Note:  this example provides the base setup other quick starts depend upon.
 
 
 ## System requirements
@@ -71,14 +71,14 @@ You should see the server log indicate the VDB is active with a message like:  T
 
 4)  Open the admin console to make sure the VDB is deployed
 
-	*  open a brower to http://localhost:9990/console 	
+	*  open a brower to http://localhost:9990/console
 
 
 ## Query Demonstrations
 
 ==== Using the simpleclient example ====
 
-1) Change your working directory to "${quickstart.install.dir}/simpleclient"
+1) Change your working directory to ${JBOSS_HOME}/quickstarts/simpleclient"
 
 2) Use the simpleclient example to run the following queries:
 
