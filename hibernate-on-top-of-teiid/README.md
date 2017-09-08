@@ -39,7 +39,7 @@ teiid user you wish to connect with.
 
 - Open a command line and navigate to the root directory of this quickstart
 
-	*   `mvn clean install`
+	*   mvn -s ../settings.xml clean install
 
 ## Setup
 
@@ -52,11 +52,15 @@ teiid user you wish to connect with.
 	For Linux:   ./standalone.sh	
 	for Windows: standalone.bat
 
-	If Teiid isn't configured in the default configuration, append the following arguments to the command to specify the configuration
+	To use one of the high-available (ha) configurations for clustering, append the following arguments to the command to specify the configuration
 		
-	-c {configuration.file}  
-	
-	Example: -c standalone-teiid.xml 
+	-c {configuration.file} 
+
+[source,xml]
+.*Example*
+----
+./standalone.sh -c standalone-ha.xml
+----
 
 	
 3) VDB Deployment:
@@ -110,4 +114,6 @@ To add (Register) a new product, enter the following:
 -  Company Name
 -  Stock Symbol
 
-> NOTE: the Stock Symbol entered must exist in the marketdata-price.txt file. For convenience, RHT has already been added to the file that doesn't currently exist in the Products table.
+> NOTE: the Stock Symbol entered must exist in the marketdata-price.txt file.  The file can be found at ../dynamicvdb-datafederation/src/teiidfiles/data/marketdata-price.txt
+
+For convenience, RHT has already been added to the file that doesn't currently exist in the Products table.

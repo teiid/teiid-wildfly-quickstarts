@@ -2,7 +2,7 @@
 Level: Beginners
 Technologies: Teiid, JDBC
 Target Product: DV
-Product Versions: DV 6.1
+Product Versions: DV 6.1+
 Source: https://github.com/teiid/teiid-quickstarts
 ---
 
@@ -53,7 +53,7 @@ Example:   mvn exec:java -Dvdb="twitter" -Dsql="select * from tweet where query=
 
 Note that the query is in quotes so that it is understood as a single argument.
 
-> NOTE: To run more advanced queries, it would be better a fully featured Java client, such as SQuirreL [http://www.squirrelsql.org/].
+> NOTE: To run more advanced queries, it would be better to install a fully featured Java client, such as SQuirreL [http://www.squirrelsql.org/].
 
 
 
