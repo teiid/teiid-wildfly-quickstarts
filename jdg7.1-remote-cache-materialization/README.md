@@ -20,6 +20,24 @@ This quickstart demonstrates how to use the Infinispan-Hotrod translator and res
 -  If you have not done so, please review the System Requirements [../README.md](../README.md) 
 -  For Red Hat product related kits, will need to access Red Hat's Customer Portal at https://access.redhat.com/jbossnetwork/restricted/listSoftware.html
 
+# PREREQUISTES
+
+1.  Must be running JDK 1.8 or newer.
+
+2.  JDV Server Prerequistes
+
+* install JDV application server (download from the Red Hat Customer Portal)
+* install the Teiid Jboss distribution kit into the JBoss server (This will have already been done if JDV kit is being used).
+
+3.  JDG Server Prerequistes
+
+* install JDG 7.1 server kit (download from the Red Hat Customer Portal), used as the JDG data source
+* JDG 7.1.x JDG Hot Rod Client EAP modules kit (download from the Red Hat Customer Portal)
+
+>NOTE:  hot rod client will require the 7.1.1 patch level or newer.
+
+4.  Quick start dynamicvdb-datafederation [../../dynamicvdb-datafederation/README.md] must be installed into the JDV server.
+
 
 # JDG setup
 
@@ -100,6 +118,11 @@ This quickstart is utilized for 2 purposes:
  
 
 # Start Teiid Server
+
+*  Install JDG Hot Rod Client EAP module kit to the JDV server installation.
+
+- shutdown Jbossas server, if not already.
+- unzip the kit at the $JBOSS_HOME directory.  You should find a new "org" directory under modules (modules/org).
 
 
 To start the server, if not already, open a command line and navigate to the "bin" directory under the root directory of the Teiid server and run:

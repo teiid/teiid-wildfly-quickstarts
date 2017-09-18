@@ -1,2 +1,2 @@
 
-deploy ../quickstarts/dynamicvdb-datafederation/src/vdb/portfolio-vdb.xml
+deploy ../quickstarts/jdg7.1-remote-cache/src/vdb/jdg-person-cache-vdb.xml
