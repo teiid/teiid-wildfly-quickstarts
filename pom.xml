@@ -56,7 +56,7 @@
 
 		<version.org.jboss.integration-platform>6.0.0.CR30</version.org.jboss.integration-platform>
 
-		<version.teiid>10.0.0.Alpha2</version.teiid>
+		<version.teiid>10.0.0.Alpha3-SNAPSHOT</version.teiid>
 		<jbossas-module-root>modules/system/layers/dv</jbossas-module-root>
 
 		<version.javax.annotation>${version.org.jboss.spec.javax.annotation.jboss-annotations-api_1.1_spec}</version.javax.annotation>
@@ -74,6 +74,7 @@
 
 		<version.commons-httpclient>3.1</version.commons-httpclient>
 
+		<version.spark>1.6.1</version.spark>
 	</properties>
 
 	<dependencies>
@@ -121,6 +122,22 @@
 				<artifactId>teiid</artifactId>
 				<version>${version.teiid}</version>
 				<classifier>jdbc</classifier>
+			</dependency>
+			<dependency>
+	    			<groupId>org.apache.spark</groupId>
+	    			<artifactId>spark-sql_2.11</artifactId>
+	    			<version>${version.spark}</version>
+			</dependency>
+			<dependency>
+	    			<groupId>org.apache.spark</groupId>
+	    			<artifactId>spark-catalyst_2.11</artifactId>
+	    			<version>${version.spark}</version>
+			</dependency>
+
+			<dependency>
+	    			<groupId>org.apache.spark</groupId>
+	    			<artifactId>spark-core_2.11</artifactId>
+	    			<version>${version.spark}</version>
 			</dependency>
 <!-- 			<dependency>
 				<groupId>org.jboss.bom.eap</groupId>
