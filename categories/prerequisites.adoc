@@ -7,9 +7,9 @@ This page including instructions for installing or set up Quickstarts prerequisi
 
 == Downloading and installing Java
 
-First things first, Teiid Server and Teiid Quick Starts needs at least a Java Runtime Environment (aka JRE) version 1.7, but as we will also develop some applications, we will need a Java Development Kit(aka JDK).
+First things first, Teiid Server and Teiid Quick Starts needs at least a Java Runtime Environment (aka JRE) version 1.8, but as we will also develop some applications, we will need a Java Development Kit(aka JDK).
 
-Downloading Java 7 or later version:
+Downloading Java 8 or later version:
 
 * http://openjdk.java.net/install/[OpenJDK]
 * http://www.oracle.com/technetwork/java/javase/index-137561.html[Oracle]
@@ -195,9 +195,9 @@ $ uname -a
 Linux kylin.xx.com 2.6.32-431.20.3.el6.x86_64 #1 SMP Fri Jun 6 18:30:54 EDT 2014 x86_64 x86_64 x86_64 GNU/Linux
 
 $ java -version
-java version "1.7.0_60"
-Java(TM) SE Runtime Environment (build 1.7.0_60-b19)
-Java HotSpot(TM) 64-Bit Server VM (build 24.60-b09, mixed mode)
+openjdk version "1.8.0_144"
+OpenJDK Runtime Environment (build 1.8.0_144-b01)
+OpenJDK 64-Bit Server VM (build 25.144-b01, mixed mode)
 ----
 
 ==== Step.2 Download and Install
@@ -213,10 +213,8 @@ $ cd hadoop-1.2.1
 Edit `conf/hadoop-env.sh`, comment out JAVA_HOME, make sure it point to a valid Java Home:
 
 ----
-export JAVA_HOME=/usr/java/jdk1.7.0_60
+export JAVA_HOME=/usr/lib/jvm/java-1.8.0
 ----
-
-NOTE: Hadoop 1.2.1 need Java 1.6 or higher
 
 Edit `conf/core-site.xml`, add the following properties in :
 
@@ -305,9 +303,9 @@ Linux localhost 4.2.3-300.fc23.x86_64 #1 SMP Mon Oct 5 15:42:54 UTC 2015 x86_64 
 
 
 $ java -version
-java version "1.7.0_60"
-Java(TM) SE Runtime Environment (build 1.7.0_60-b19)
-Java HotSpot(TM) 64-Bit Server VM (build 24.60-b09, mixed mode)
+openjdk version "1.8.0_144"
+OpenJDK Runtime Environment (build 1.8.0_144-b01)
+OpenJDK 64-Bit Server VM (build 25.144-b01, mixed mode)
 
 ----
 
@@ -347,10 +345,8 @@ source /etc/profile
 Edit `etc/hadoop/hadoop-env.sh`, comment out JAVA_HOME, make sure it point to a valid Java Home:
 
 ----
-export JAVA_HOME=/usr/java/jdk1.7.0_60
+export JAVA_HOME=/usr/lib/jvm/java-1.8.0
 ----
-
-NOTE: Java 1.6 or higher is needed.
 
 Edit `etc/hadoop/core-site.xml`, add the following properties in :
 

@@ -99,12 +99,12 @@ performance using TPC-H benchmark against two running Postgresql servers
 
 To run these quickstarts with the provided build scripts, you need the following:
 
-1. Depending upon your Teiid version, use Java 1.7+ to run {{ book.asName }} 9 or 1.8+ to run {{ book.asName }} 10 and Maven. You can choose from the following:
+1. Use Java 1.8+ to run {{ book.asName }} and Maven. You can choose from the following:
 * OpenJDK
 * Oracle Java SE
 * Oracle JRockit
 
-2.  Maven 3.0.0 or newer, to build and deploy the examples
+2. Maven 3.0.0 or newer, to build and deploy the examples
 * If you have not yet installed Maven, see the http://maven.apache.org/guides/getting-started/index.html[Maven Getting Started Guide] for details.
 * If you have installed Maven, you can check the version by typing the following in a command line:
 
