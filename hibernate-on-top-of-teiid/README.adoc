@@ -42,9 +42,10 @@ teiid user you wish to connect with.
 
 
 - Open a command line and navigate to the root directory of this quickstart
+- Build a WAR archive which will be later deployed on the server
 
 ----
-mvn clean install
+mvn clean package
 ----
 
 === 2. Run vdb-datafederation
