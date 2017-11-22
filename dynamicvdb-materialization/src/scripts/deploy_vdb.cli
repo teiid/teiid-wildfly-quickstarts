@@ -1,2 +1,2 @@
 
-deploy ../quickstarts/dynamicvdb-materializaton/src/vdb/portfolio-mat-vdb.xml
+deploy ../quickstarts/dynamicvdb-materialization/src/vdb/portfolio-mat-vdb.xml
