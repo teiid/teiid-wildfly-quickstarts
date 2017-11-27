@@ -26,7 +26,7 @@ to users with the "superuser" JAAS role. (use user called "portfolio" to login w
 3) Prices access - this role is used to give access to price listings.  Its purpose is to demonstrate the use of a
 generic role (empty) for controlling access to information.
 
-See the portfolio-vdb.xml for extra xml elements defined for define the above roles. For more information check out
+See the portfolio-dataroles-vdb.xml for extra xml elements defined for define the above roles. For more information check out
 Reference Guide's Data Roles chapter.
 
 ## System requirements
@@ -98,7 +98,7 @@ If you have not done so, please review the System Requirements [../README.md](..
 
 2. Use the simpleclient example to run the following queries:
 
-Example:   mvn exec:java -Dvdb="portfolio" -Dsql="example query"
+Example:   mvn exec:java -Dvdb="Portfolio-dataroles" -Dsql="example query"
 
 example queries:
 
@@ -114,7 +114,7 @@ example queries:
 Since this simpleclient example defaults user and password to user/user, modify the call to include the user name and password on the command line 
 where user name "portfolio" and password "portfolio" and re-execute the above:
 
-Example:   mvn exec:java -Dvdb="portfolio" -Dusername="portfolio" -Dpassword="portfolio" -Dsql="example query"
+Example:   mvn exec:java -Dvdb="Portfolio-dataroles" -Dusername="portfolio" -Dpassword="portfolio" -Dsql="example query"
 
 1.	should be the same result as above
 
