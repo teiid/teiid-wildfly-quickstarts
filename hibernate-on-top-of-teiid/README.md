@@ -39,7 +39,7 @@ teiid user you wish to connect with.
 
 - Open a command line and navigate to the root directory of this quickstart
 
-	*   mvn -s ../settings.xml clean install
+	*   mvn -s ../settings.xml clean package
 
 ## Setup
 
