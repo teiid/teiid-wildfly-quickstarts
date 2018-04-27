@@ -13,7 +13,7 @@
 
 This quickstart demonstrates:
 
-* how to define a vdb to enable a https://teiid.gitbooks.io/documents/content/reference/REST_Service_Through_VDB.html[REST Service Through VDB].
+* how to define a vdb to enable a http://teiid.github.io/teiid-documents/master/content/reference/REST_Service_Through_VDB.html[REST Service Through VDB].
 * how to use the httpclient api to integrate VDB data via REST
 * how to use the Resteasy Client to integrate VDB data via REST
 * how to use the Apache CXF WebClient to integrate VDB data via REST

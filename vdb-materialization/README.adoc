@@ -13,7 +13,7 @@
 
 == What is it?
 
-vdb-materialization demonstrates how to configure external/internal materialization(https://teiid.gitbooks.io/documents/content/caching/Materialized_Views.html[document external/internal materialization]), so that caching can be used to improve query performance.
+vdb-materialization demonstrates how to configure external/internal materialization(http://teiid.github.io/teiid-documents/master/content/caching/Materialized_Views.html[document external/internal materialization]), so that caching can be used to improve query performance.
 
 == System requirements
 

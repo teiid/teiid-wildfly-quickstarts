@@ -93,7 +93,7 @@ $ cd PHOENIX_HOME
 $ ./bin/sqlline.py localhost .../src/teiidfiles/customer-schema.sql
 ----
 
-NOTE: More details about Phoenix Data Sources and Mapping Phoenix table to an existing HBase table please refer to https://teiid.gitbooks.io/documents/content/admin/Phoenix_Data_Sources.html[Teiid Documents].
+NOTE: More details about Phoenix Data Sources and Mapping Phoenix table to an existing HBase table please refer to http://teiid.github.io/teiid-documents/master/content/admin/Phoenix_Data_Sources.html[Teiid Documents].
 
 === 4. Teiid Deployment
 

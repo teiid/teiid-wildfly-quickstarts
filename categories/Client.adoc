@@ -5,9 +5,9 @@ The Connecting to Teiid will assist in demonstrating how to make a connection to
 
 Now that, there are many different ways to connect to Teiid:
 
-* Use JDBC, if you are writing a Java based application. See details here https://teiid.gitbooks.io/documents/content/client-dev/JDBC_Support.html
-* Use ODBC, if you are using C/C++/C#/Node.js type applications. See https://teiid.gitbooks.io/documents/content/client-dev/ODBC_Support.html
-* Use OData, if you want to REST based services. See https://teiid.gitbooks.io/documents/content/client-dev/OData_Support.html
+* Use JDBC, if you are writing a Java based application. See details here http://teiid.github.io/teiid-documents/master/content/client-dev/JDBC_Support.html
+* Use ODBC, if you are using C/C++/C#/Node.js type applications. See http://teiid.github.io/teiid-documents/master/content/client-dev/ODBC_Support.html
+* Use OData, if you want to REST based services. See http://teiid.github.io/teiid-documents/master/content/client-dev/OData_Support.html
 
 == Sample Client
 
@@ -15,7 +15,7 @@ Refer to link:../simpleclient/README.adoc[simpleclient/README.adoc] for details.
 
 NOTE: If you are using a graphical client, such as http://www.squirrelsql.org/[SQuirreL], have a look at the metadata tree to see not only what is exposed by your VDB, but also the SYS schema tables.
 
-If your application is Web based, you can create a data source for your VDB and treat it as any other JDBC source using org.teiid.jdbc.TeiidDataSource and assigning it a JNDI name. Refer to https://teiid.gitbooks.io/documents/content/client-dev/WildFly_DataSource.html[Client Developer's Guide - Datasource] for more information on creating a DataSource.
+If your application is Web based, you can create a data source for your VDB and treat it as any other JDBC source using org.teiid.jdbc.TeiidDataSource and assigning it a JNDI name. Refer to http://teiid.github.io/teiid-documents/master/content/client-dev/WildFly_DataSource.html[Client Developer's Guide - Datasource] for more information on creating a DataSource.
 
 == Standalone Java Application
 
@@ -40,7 +40,7 @@ You can add optional properties at the end of the URL using a semi-colon(;) name
 jdbc:teiid:<VDB-Name>@mm(s)://<host name>:<port>;user=user;password=user
 ----
 
-Check out https://teiid.gitbooks.io/documents/content/client-dev/Client_Developers_Guide.html[Client Developer's Guide] for all the optional connection properties in your URL. Here is sample code showing how to make JDBC connection.
+Check out http://teiid.github.io/teiid-documents/master/content/client-dev/Client_Developers_Guide.html[Client Developer's Guide] for all the optional connection properties in your URL. Here is sample code showing how to make JDBC connection.
 
 [source,java]
 .*Sample JAVA Code - Create Driver Connection*
@@ -64,6 +64,6 @@ ds.setPortNumber("port");
 Connection connection = ds.getConnection();
 ----
 
-The TeiidDataSource also provides an option to set optional parameters using the "set" methods on the data source. For all the allowable data source properties, check out https://teiid.gitbooks.io/documents/content/client-dev/Client_Developers_Guide.html[Client Developer's Guide].
+The TeiidDataSource also provides an option to set optional parameters using the "set" methods on the data source. For all the allowable data source properties, check out http://teiid.github.io/teiid-documents/master/content/client-dev/Client_Developers_Guide.html[Client Developer's Guide].
 
 NOTE: **Remote Server** - If your Teiid client and server are not installed on same machine, then you have to bind JBoss AS IP address on to something other than 127.0.0.1 Contact your system administrator for the IP address you can use for that machine so that it can be remotely accessible. Once you have IP address or hostname you can update the standalone-teiid.xml file under "interfaces" section. Once you restart the server, then you can specify the correct IP address or hostname in the Teiid client driver to make the remote connection to the VDB.

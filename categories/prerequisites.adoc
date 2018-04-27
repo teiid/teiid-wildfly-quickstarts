@@ -67,7 +67,7 @@ $ unzip teiid-9.0.0.Final-wildfly-server.zip
 
 * We need al lease create "two" different users to work with, an "admin" user and a "application" user. Admin user for any management purposes, Application user for the applications. Refer to <<Create users, Create users>> for details.
 
-Refer to https://teiid.gitbooks.io/documents/content/admin/Installation_Guide.html[Teiid Installation] for a completed Teiid Server installation guide.
+Refer to http://teiid.github.io/teiid-documents/master/content/admin/Installation_Guide.html[Teiid Installation] for a completed Teiid Server installation guide.
 
 === Installing Teiid from souce code
 

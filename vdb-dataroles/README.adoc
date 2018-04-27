@@ -21,7 +21,7 @@ In this example, the vdb is defined with three different data access rules.
 2. ReadWrite access - this role gives read access, and also adds write access. This access is given only to users with the "superuser" JAAS role. (use user called "portfolio" to login with password "portfolio")
 3. Prices access - this role is used to give access to price listings. Its purpose is to demonstrate the use of a generic role (empty) for controlling access to information.
 
-See the portfolio-vdb.xml for extra xml elements defined for define the above roles. For more information check out https://teiid.gitbooks.io/documents/content/reference/Data_Roles.html[Reference Guide's Data Roleschapter].
+See the portfolio-vdb.xml for extra xml elements defined for define the above roles. For more information check out http://teiid.github.io/teiid-documents/master/content/reference/Data_Roles.html[Reference Guide's Data Roleschapter].
 
 == System requirements
 
