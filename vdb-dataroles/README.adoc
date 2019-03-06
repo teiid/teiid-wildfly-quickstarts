@@ -21,7 +21,7 @@ In this example, the vdb is defined with three different data access rules.
 2. ReadWrite access - this role gives read access, and also adds write access. This access is given only to users with the "superuser" JAAS role. (use user called "portfolio" to login with password "portfolio")
 3. Prices access - this role is used to give access to price listings. Its purpose is to demonstrate the use of a generic role (empty) for controlling access to information.
 
-See the portfolio-vdb.xml for extra xml elements defined for define the above roles. For more information check out http://teiid.github.io/teiid-documents/master/content/reference/Data_Roles.html[Reference Guide's Data Roleschapter].
+See the portfolio-dataroles-vdb.xml for extra xml elements defined for define the above roles. For more information check out http://teiid.github.io/teiid-documents/master/content/reference/Data_Roles.html[Reference Guide's Data Roleschapter].
 
 == System requirements
 
@@ -88,8 +88,8 @@ If Teiid isn't configured in the default configuration, append the following arg
 Copy the following files to the "/standalone/deployments" directory
 
 ----
-src/vdb/portfolio-vdb.xml
-src/vdb/portfolio-vdb.xml.dodeploy
+src/vdb/portfolio-dataroles-vdb.xml
+src/vdb/portfolio-dataroles-vdb.xml.dodeploy
 ----
 
 Open the admin console(http://localhost:9990/console) to make sure the VDB is deployed. See <<Query Demonstrations, Query Demonstrations>> below to demonstrate data roles.
@@ -101,7 +101,7 @@ Open the admin console(http://localhost:9990/console) to make sure the VDB is de
 1.  Change your working directory to "${quickstart.install.dir}/simpleclient"
 2.  Use the simpleclient example to run the following queries:
 
-Example: mvn exec:java -Dvdb="portfolio" -Dsql="example query" -Dusername="xx" -Dpassword="xx"
+Example: mvn exec:java -Dvdb="Portfolio-dataroles" -Dsql="example query" -Dusername="xx" -Dpassword="xx"
 
 === Example queries:
 
@@ -135,7 +135,7 @@ Select * from StockPrices
 
 Since this simpleclient example defaults user and password to user/user, modify the call to include the user name and password on the command line where user name "portfolio" and password "portfolio" and re-execute the above:
 
-Example: mvn exec:java -Dvdb="portfolio" -Dusername="portfolio" -Dpassword="portfolio" -Dsql="example query"
+Example: mvn exec:java -Dvdb="Portfolio-dataroles" -Dusername="portfolio" -Dpassword="portfolio" -Dsql="example query"
 
 1.  should be the same result as above
 2.  should succeed, since allow create is true
