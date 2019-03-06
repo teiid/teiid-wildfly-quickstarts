@@ -25,7 +25,7 @@ NOTE: This example relies upon the vdb-datafederation example and that it needs 
 * link:../README.adoc#_downloading_and_installing_maven[Maven]
 * link:../README.adoc#_downloading_and_installing_teiid[Teiid Server]
 
-This example produces a WAR that is designed to be run on JBoss Enterprise Application Platform 6 or {{ book.asName }}.
+This example produces a WAR that is designed to be run on {{ book.asName }}.
 
 NOTE: Correct Dependencies - Please note this example does not support working with Hibernate 3.
 

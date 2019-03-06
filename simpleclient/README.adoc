@@ -15,7 +15,7 @@
 
 The sample client example can be used to test your sql queries against any server running a compatible Teiid Runtime and has an active VDB. This example will also be referenced by many of the other quick starts as a means to test suggested queries.
 
-The link:src/main/java/JDBCClient.java[JDBCClient.java] is the example code that shows a developer the basic connection logic that can be used to connect to a Teiid instance running in a {{ book.asName }}.
+The link:src/main/java/JDBCClient.java[JDBCClient.java] is the example code that shows a developer the basic connection logic that can be used to connect to a Teiid instance running in {{ book.asName }}.
 
 The program expects four arguments. The pom.xml defines these arguments in the pom.xml:
 
