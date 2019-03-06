@@ -29,12 +29,12 @@
             <artifactId>scannotation</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.jboss.resteasy</groupId>
-            <artifactId>jaxrs-api</artifactId>
+            <groupId>javax.ws.rs</groupId>
+            <artifactId>javax.ws.rs-api</artifactId>
         </dependency>
 		<dependency>
 			<groupId>org.jboss.spec.javax.annotation</groupId>
-			<artifactId>jboss-annotations-api_1.1_spec</artifactId>
+			<artifactId>jboss-annotations-api_1.2_spec</artifactId>
 	        <scope>provided</scope>
 		</dependency>        	
         <dependency>
@@ -95,11 +95,11 @@
         
             <!-- The JBoss AS plugin deploys your war to a local JBoss AS container -->
 			<!-- To use, set the JBOSS_HOME environment variable and run: mvn package 
-				jboss-as:deploy -->
+				wildfly:deploy -->
 			<plugin>
-				<groupId>org.jboss.as.plugins</groupId>
-				<artifactId>jboss-as-maven-plugin</artifactId>
-                <version>${version.jboss.as.plugin}</version>
+                <groupId>org.wildfly.plugins</groupId>
+                <artifactId>wildfly-maven-plugin</artifactId>
+                <version>2.0.1.Final</version>
 			</plugin>
  
        </plugins>
@@ -161,9 +161,9 @@
 			<build>
 				<plugins>
 					<plugin>
-						<groupId>org.jboss.as.plugins</groupId>
-						<artifactId>jboss-as-maven-plugin</artifactId>
-                        <version>${version.jboss.as.plugin}</version>
+                        <groupId>org.wildfly.plugins</groupId>
+                        <artifactId>wildfly-maven-plugin</artifactId>
+                        <version>2.0.1.Final</version>
 						<configuration>
 							<address>subsystem=resource-adapters</address>
 							<resources>

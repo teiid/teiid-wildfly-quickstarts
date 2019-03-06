@@ -54,7 +54,21 @@ If Teiid isn't configured in the default configuration, append the following arg
 
 Deploy the war file that will be used as the web service resource to be accessed as a data source by Teiid
 
+Execute the following to deploy the war to the running server:
+
+[source,xml]
+.*Deploy*
+----
+mvn wildfly:deploy
+----
+
+If you wish to manually deploy the war, do the following:
+
 * copy the target/CustomerRESTWebSvc.war to the /standalone/deployments directory
+
+
+==== Test the CustomerRESTWebSvc war
+
 * Test the war by opening a browser at the following URL:
 
 http://localhost:8080/CustomerRESTWebSvc/MyRESTApplication/customerList
@@ -88,4 +102,4 @@ Open the admin console(http://localhost:9990/console) to make sure the VDB is de
 
 mvn exec:java -Dvdb="webservice" -Dsql="select * from CustomersView" -Dusername="xx" -Dpassword="xx"
 
-NOTE: depending on your OS/Shell the quoting/escaping required to run the example can be complicated. It would be better to install a Java client, such as SQuirreL, to run the queries below.
+NOTE: depending on your OS/Shell the quoting/escaping required to run the example can be complicated. It would be better to install a Java client, such as SQuirreL, to run queries.

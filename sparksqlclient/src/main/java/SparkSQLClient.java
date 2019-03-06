@@ -21,7 +21,7 @@ import java.util.Map;
 
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaSparkContext;
-import org.apache.spark.sql.DataFrame;
+import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 import org.apache.spark.sql.SQLContext;
 
@@ -49,7 +49,7 @@ public class SparkSQLClient {
 		JavaSparkContext sc = new JavaSparkContext(new SparkConf().setAppName("SparkJdbcFromTeiid").setMaster("local[*]"));
 		SQLContext sqlContext = new SQLContext(sc);
 		
-		DataFrame jdbcDF = sqlContext.read().format("jdbc"). options(options).load();		
+		Dataset<Row> jdbcDF = sqlContext.read().format("jdbc"). options(options).load();
 		List<Row> rows = jdbcDF.collectAsList();
 		for (Row row : rows){
 		    System.out.println(row.toString());
